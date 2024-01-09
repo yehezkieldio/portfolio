@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -73,4 +81,23 @@
     body {
         @apply bg-background text-foreground;
     }
+}
+
+@keyframes flicker {
+    0% {
+        @apply bg-white;
+    }
+    50% {
+        @apply bg-slate-300;
+    }
+    75% {
+        @apply bg-slate-500;
+    }
+    100% {
+        @apply bg-slate-200;
+    }
+}
+
+.flickering-span {
+    animation: flicker 2s infinite;
 }
