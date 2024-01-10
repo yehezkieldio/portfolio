@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { cn } from "../lib/utils";
+import { cn, shimmer, toBase64 } from "../lib/utils";
 import { buttonVariants } from "./ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
@@ -46,10 +46,11 @@ const AccordionItem = ({
                             height={0}
                             sizes="100vw"
                             className="w-full h-[250px] lg:h-[450px] rounded-sm"
+                            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 450))}`}
                         />
                         <div className="flex flex-col lg:flex-row mt-8">
                             <h4 className="w-full lg:w-1/2 font-bold text-xl">{content.title}</h4>
-                            <p className="ml-0 mt-10 lg:ml-24 font-light text-sm">{content.description}</p>
+                            <p className="ml-0 mt-10 lg:mt-0 lg:ml-24 font-light text-sm">{content.description}</p>
                         </div>
                     </>
                 </div>

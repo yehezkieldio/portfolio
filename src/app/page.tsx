@@ -2,7 +2,7 @@ import Image from "next/image";
 import { MainNavigation } from "../components/main-navigation";
 import { buttonVariants } from "../components/ui/button";
 import Link from "next/link";
-import { cn } from "../lib/utils";
+import { cn, shimmer, toBase64 } from "../lib/utils";
 import { MainNavigationItem } from "../components/navigation-items";
 import Accordion from "../components/accordion";
 import { Testimonies } from "../components/testimonies";
@@ -113,6 +113,7 @@ export default function Home() {
                             height={0}
                             sizes="100vw"
                             className="w-full h-[250px] lg:h-[500px] rounded-sm"
+                            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 250))}`}
                         />
                     </div>
                     <div
@@ -167,6 +168,7 @@ export default function Home() {
                             height={0}
                             sizes="100vw"
                             className="flex-1 h-[250px] lg:h-[500px] rounded-sm max-w-full"
+                            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 500))}`}
                         />
                         <Image
                             src="/avatar-two.jpg"
@@ -175,6 +177,7 @@ export default function Home() {
                             height={0}
                             sizes="100vw"
                             className="flex-1 h-[250px] lg:h-[500px] rounded-sm max-w-full"
+                            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 500))}`}
                         />
                         <Image
                             src="/avatar-three.jpg"
@@ -183,6 +186,7 @@ export default function Home() {
                             height={0}
                             sizes="100vw"
                             className="flex-1 h-[250px] lg:h-[500px] rounded-sm max-w-full"
+                            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 500))}`}
                         />
                     </div>
                     <div className="container antialiased items-center justify-center relative overflow-hidden pt-12 pb-24">
@@ -235,6 +239,7 @@ export default function Home() {
                                             height={0}
                                             sizes="100vw"
                                             className="w-full h-[450px] rounded-sm transition-all duration-300 transform group-hover:brightness-50"
+                                            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 450))}`}
                                         />
                                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                             <Link
@@ -261,6 +266,7 @@ export default function Home() {
                                             height={0}
                                             sizes="100vw"
                                             className="w-full h-[450px] rounded-sm transition-all duration-300 transform group-hover:brightness-50"
+                                            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 450))}`}
                                         />
                                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                             <Link
@@ -286,9 +292,11 @@ export default function Home() {
                         id="contact"
                     >
                         <div className="mb-4">
-                            <h3 className="text-center font-semibold text-4xl lg:text-[10rem]">Get In Touch</h3>
+                            <h3 className="text-center font-semibold text-4xl lg:text-[10rem] pt-12 pb-12 mt-4">
+                                Get In Touch
+                            </h3>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-4 justify-between">
+                        <div className="flex flex-col lg:flex-row gap-4 justify-between mt-10">
                             <div className="w-full lg:w-1/2">
                                 <h4 className="font-medium">Let&apos;s build something together.</h4>
                                 <p className="text-sm">
@@ -297,7 +305,7 @@ export default function Home() {
                                     then get in touch.
                                 </p>
                             </div>
-                            <div className="mt-10 text-center">
+                            <div className="lg:mt-0 mt-10 lg:text-left text-center">
                                 <h5 className="font-medium text-muted-foreground">Sosials</h5>
                                 <p className="text-sm">
                                     <span className="flex flex-col">
@@ -316,7 +324,7 @@ export default function Home() {
                                     </span>
                                 </p>
                             </div>
-                            <div className="text-center">
+                            <div className="text-center lg:text-left">
                                 <h5 className="font-medium text-muted-foreground">Email</h5>
                                 <p className="text-sm">
                                     <Link href="mailto:yehezkieldio@proton.me" className="hover:underline">

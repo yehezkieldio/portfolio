@@ -45,7 +45,7 @@ const SearchProjects: React.FC<SearchProjectsProps> = ({ projects }) => {
             link: "https://github.com/astrantialabs/administrare",
         },
         {
-            title: "Rinance Recap",
+            title: "Finance Recap",
             description:
                 "Web application for the purpose of viewing an organization's Excel financial report on the web.",
             image: "/finance-recap.png",
