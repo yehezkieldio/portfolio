@@ -68,14 +68,10 @@ export default function Home() {
                         <Image
                             src="/header-background-image.jpg"
                             alt="pic"
-                            width={700}
-                            height={500}
+                            width={0}
+                            height={0}
                             sizes="100vw"
-                            className="rounded-sm"
-                            style={{
-                                width: "100%",
-                                height: "500px",
-                            }}
+                            className="w-full h-[500px] rounded-sm"
                         />
                     </div>
                     <div className="container pt-24 pb-16 flex flex-row gap-4 text-left" id="about-me">
@@ -112,42 +108,30 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                    <div className="container flex flex-row gap-4 pb-24">
+                    <div className="container flex flex-row w-full max-w-screen mx-auto gap-4 pb-24">
                         <Image
                             src="/avatar-one.jpg"
                             alt="pic"
-                            width={700}
-                            height={485}
+                            width={0}
+                            height={0}
                             sizes="100vw"
-                            className="rounded-sm"
-                            style={{
-                                width: "100%",
-                                height: "500px",
-                            }}
+                            className="flex-1 h-[500px] rounded-sm max-w-full"
                         />
                         <Image
                             src="/avatar-two.jpg"
                             alt="pic"
-                            width={700}
-                            height={485}
+                            width={0}
+                            height={0}
                             sizes="100vw"
-                            className="rounded-sm"
-                            style={{
-                                width: "100%",
-                                height: "500px",
-                            }}
+                            className="flex-1 h-[500px] rounded-sm max-w-full"
                         />
                         <Image
                             src="/avatar-three.jpg"
                             alt="pic"
-                            width={700}
-                            height={485}
+                            width={0}
+                            height={0}
                             sizes="100vw"
-                            className="rounded-sm"
-                            style={{
-                                width: "100%",
-                                height: "500px",
-                            }}
+                            className="flex-1 h-[500px] rounded-sm max-w-full"
                         />
                     </div>
                     <div className="container pt-24 pb-16 flex flex-row gap-4 text-left" id="services">
@@ -180,30 +164,58 @@ export default function Home() {
                         <div>
                             <h3 className="mt-10 text-2xl font-semibold md:text-4xl lg:text-6xl">My latest projects</h3>
                             <div className="flex flex-row gap-4 mt-12">
-                                <Image
-                                    src="/avatar-one.jpg"
-                                    alt="pic"
-                                    width={700}
-                                    height={485}
-                                    sizes="100vw"
-                                    className="rounded-sm"
-                                    style={{
-                                        width: "100%",
-                                        height: "500px",
-                                    }}
-                                />
-                                <Image
-                                    src="/avatar-two.jpg"
-                                    alt="pic"
-                                    width={700}
-                                    height={485}
-                                    sizes="100vw"
-                                    className="rounded-sm"
-                                    style={{
-                                        width: "100%",
-                                        height: "500px",
-                                    }}
-                                />
+                                <div>
+                                    <div className="relative group">
+                                        <Image
+                                            src="/avatar-one.jpg"
+                                            alt="pic"
+                                            width={0}
+                                            height={0}
+                                            sizes="100vw"
+                                            className="w-full h-auto rounded-sm transition-all duration-300 transform group-hover:brightness-50"
+                                        />
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <Link
+                                                href="/contact"
+                                                className={cn(
+                                                    buttonVariants({ variant: "secondary", size: "sm" }),
+                                                    "px-4 mt-8"
+                                                )}
+                                            >
+                                                Visit project
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div className="mt-8">
+                                        <h1 className="text-3xl font-semibold">Lorem.</h1>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="relative group">
+                                        <Image
+                                            src="/avatar-one.jpg"
+                                            alt="pic"
+                                            width={0}
+                                            height={0}
+                                            sizes="100vw"
+                                            className="w-full h-auto rounded-sm transition-all duration-300 transform group-hover:brightness-50"
+                                        />
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <Link
+                                                href="/contact"
+                                                className={cn(
+                                                    buttonVariants({ variant: "secondary", size: "sm" }),
+                                                    "px-4 mt-8"
+                                                )}
+                                            >
+                                                Visit project
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div className="mt-8">
+                                        <h1 className="text-3xl font-semibold">Lorem.</h1>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
