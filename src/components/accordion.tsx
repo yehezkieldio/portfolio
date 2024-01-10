@@ -4,18 +4,22 @@ import React, { useState } from "react";
 import { cn } from "../lib/utils";
 import { buttonVariants } from "./ui/button";
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
 const AccordionItem = ({
     title,
     content,
     isOpen,
+    image,
     onToggle,
 }: {
     title: string;
     content: {
+        title: string;
         description: string;
     };
     isOpen: boolean;
+    image: string;
     onToggle: () => void;
 }) => {
     return (
@@ -32,7 +36,24 @@ const AccordionItem = ({
                     {isOpen ? "View less" : "View more"}
                 </button>
             </div>
-            {isOpen && <div className="mt-12">{content.description}</div>}
+            {isOpen && (
+                <div className="mt-12">
+                    <>
+                        <Image
+                            src={image}
+                            alt="pic"
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                            className="w-full h-[450px] rounded-sm"
+                        />
+                        <div className="flex flex-row mt-8">
+                            <h4 className="w-1/2 font-bold text-xl">{content.title}</h4>
+                            <p className="ml-24 font-light text-sm">{content.description}</p>
+                        </div>
+                    </>
+                </div>
+            )}
         </div>
     );
 };
@@ -48,23 +69,29 @@ const Accordion = () => {
         {
             title: "Brand Identity",
             content: {
-                description: "n/a",
+                title: "Igniting brand recognition through identity.",
+                description:
+                    "Your brand is your voice, your face, your soul. I help you define it, refine it, and amplify it into an unforgettable impression that builds trust and loyalty.",
             },
-            image: "n/a",
+            image: "/brand-identity.jpg",
         },
         {
             title: "Visual Design",
             content: {
-                description: "n/a",
+                title: "Turning ideas into reality.",
+                description:
+                    "I weave magic with pixels, transforming raw ideas into captivating visuals that guide, inform, and inspire. From UI/UX to graphic design, I create experiences that are as beautiful as they are functional.",
             },
-            image: "n/a",
+            image: "/visual-design.jpg",
         },
         {
             title: "Development",
             content: {
-                description: "n/a",
+                title: "Transforming ideas into powerful digital experiences.",
+                description:
+                    "I write code that breathes life into your designs, building robust and scalable web experiences that not only look amazing but also perform flawlessly.",
             },
-            image: "n/a",
+            image: "/development.jpg",
         },
     ];
 
@@ -76,6 +103,7 @@ const Accordion = () => {
                         key={item.title}
                         title={item.title}
                         content={item.content}
+                        image={item.image}
                         isOpen={index === openIndex}
                         onToggle={() => handleToggle(index)}
                     />
