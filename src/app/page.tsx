@@ -93,8 +93,10 @@ export default function Home() {
                     <div className="container flex max-w-[64rem] flex-col gap-4 text-center">
                         <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
                         <h1 className="text-4xl font-semibold md:text-6xl lg:text-8xl">Software Developer</h1>
-                        <div className="flex max-w-[44rem] flex-col lg:flex-row items-start mt-4 ml-auto text-center lg:text-left">
-                            <h2 className="text-sm font-medium mr-24 whitespace-nowrap">Yehezkiel Dio Sinolungan</h2>
+                        <div className="flex max-w-[44rem] flex-col lg:flex-row items-center lg:items-start mt-4 ml-auto text-center lg:text-left">
+                            <h2 className="text-sm text-center font-medium mr-0 lg:mr-24 whitespace-nowrap">
+                                Yehezkiel Dio Sinolungan
+                            </h2>
                             <div className="flex flex-col">
                                 <p className="text-sm mb-6">
                                     A software developer with a passion for building digital experiences that are
@@ -110,25 +112,25 @@ export default function Home() {
                             width={0}
                             height={0}
                             sizes="100vw"
-                            className="w-full h-[500px] rounded-sm"
+                            className="w-full h-[250px] lg:h-[500px] rounded-sm"
                         />
                     </div>
                     <div
-                        className="container pt-24 pb-16 flex flex-row gap-4 text-left bg-gradient-to-l from-zinc-950"
+                        className="container pt-24 pb-16 flex flex-col lg:flex-row gap-4 text-left bg-gradient-to-l from-zinc-950"
                         id="about-me"
                     >
                         <div>
-                            <div className="flex flex-row gap-2 align-middle justify-center items-center">
+                            <div className="flex flex-row gap-2 align-middle justify-start items-center lg:justify-center">
                                 <div className="p-3 border border-white rounded-xl gap-2 inline-flex items-center">
                                     <span className="flickering-span inline-block rounded-full w-3 h-3"></span>
                                     <p className=" whitespace-nowrap">About me</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="ml-36 w-full">
+                        <div className="ml-0 lg:ml-36 w-full mt-10 lg:mt-0">
                             <h3 className="text-2xl font-semibold md:text-4xl lg:text-6xl">Full-stack Web Developer</h3>
-                            <div className="flex flex-row mt-12">
-                                <p className="text-sm font-medium mr-32">Based in Indonesia</p>
+                            <div className="flex flex-col lg:flex-row mt-12">
+                                <p className="text-sm font-medium mr-0 mb-10 lg:mb-0 lg:mr-32">Based in Indonesia</p>
                                 <div>
                                     <p className="text-sm max-w-[40rem]">
                                         Hello, and greetings! I am Yehezkiel Dio Sinolungan or Dio for short. I&apos;m a
@@ -164,7 +166,7 @@ export default function Home() {
                             width={0}
                             height={0}
                             sizes="100vw"
-                            className="flex-1 h-[500px] rounded-sm max-w-full"
+                            className="flex-1 h-[250px] lg:h-[500px] rounded-sm max-w-full"
                         />
                         <Image
                             src="/avatar-two.jpg"
@@ -172,7 +174,7 @@ export default function Home() {
                             width={0}
                             height={0}
                             sizes="100vw"
-                            className="flex-1 h-[500px] rounded-sm max-w-full"
+                            className="flex-1 h-[250px] lg:h-[500px] rounded-sm max-w-full"
                         />
                         <Image
                             src="/avatar-three.jpg"
@@ -180,7 +182,7 @@ export default function Home() {
                             width={0}
                             height={0}
                             sizes="100vw"
-                            className="flex-1 h-[500px] rounded-sm max-w-full"
+                            className="flex-1 h-[250px] lg:h-[500px] rounded-sm max-w-full"
                         />
                     </div>
                     <div className="container antialiased items-center justify-center relative overflow-hidden pt-12 pb-24">
@@ -190,18 +192,18 @@ export default function Home() {
                         <Testimonies speed="slow" direction="left" pauseOnHover items={testimoniesItem} />
                     </div>
                     <div
-                        className="container pt-24 pb-16 flex flex-row gap-4 text-left bg-gradient-to-r from-slate-950"
+                        className="container pt-24 pb-16 flex flex-col lg:flex-row gap-4 text-left bg-gradient-to-r from-slate-950"
                         id="services"
                     >
                         <div>
-                            <div className="flex flex-row gap-2 align-middle justify-center items-center">
+                            <div className="flex flex-row gap-2 align-middle justify-start lg:justify-center items-center">
                                 <div className="p-3 border border-white rounded-xl gap-2 inline-flex items-center">
                                     <span className="flickering-span inline-block rounded-full w-3 h-3"></span>
                                     <p className=" whitespace-nowrap">Expertise</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="ml-36 w-full">
+                        <div className="ml-0 lg:ml-36 w-full mt-10 lg:mt-0">
                             <h3 className="text-2xl leading-8 font-semibold md:text-4xl lg:text-6xl">
                                 I build things for the web and beyond
                             </h3>
@@ -223,7 +225,7 @@ export default function Home() {
                         </div>
                         <div>
                             <h3 className="mt-10 text-2xl font-semibold md:text-4xl lg:text-6xl">My latest projects</h3>
-                            <div className="flex flex-row gap-4 mt-12">
+                            <div className="flex flex-col lg:flex-row gap-4 mt-12">
                                 <div>
                                     <div className="relative group">
                                         <Image
@@ -284,10 +286,10 @@ export default function Home() {
                         id="contact"
                     >
                         <div className="mb-4">
-                            <h3 className="text-center font-semibold text-[10rem]">Get In Touch</h3>
+                            <h3 className="text-center font-semibold text-4xl lg:text-[10rem]">Get In Touch</h3>
                         </div>
-                        <div className="flex flex-row gap-4 justify-between">
-                            <div className="w-1/2">
+                        <div className="flex flex-col lg:flex-row gap-4 justify-between">
+                            <div className="w-full lg:w-1/2">
                                 <h4 className="font-medium">Let&apos;s build something together.</h4>
                                 <p className="text-sm">
                                     I&apos;m currently available for freelance work. If you have a project that you want
@@ -295,7 +297,7 @@ export default function Home() {
                                     then get in touch.
                                 </p>
                             </div>
-                            <div>
+                            <div className="mt-10 text-center">
                                 <h5 className="font-medium text-muted-foreground">Sosials</h5>
                                 <p className="text-sm">
                                     <span className="flex flex-col">
@@ -314,7 +316,7 @@ export default function Home() {
                                     </span>
                                 </p>
                             </div>
-                            <div>
+                            <div className="text-center">
                                 <h5 className="font-medium text-muted-foreground">Email</h5>
                                 <p className="text-sm">
                                     <Link href="mailto:yehezkieldio@proton.me" className="hover:underline">

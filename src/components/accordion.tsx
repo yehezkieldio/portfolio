@@ -45,11 +45,11 @@ const AccordionItem = ({
                             width={0}
                             height={0}
                             sizes="100vw"
-                            className="w-full h-[450px] rounded-sm"
+                            className="w-full h-[250px] lg:h-[450px] rounded-sm"
                         />
-                        <div className="flex flex-row mt-8">
-                            <h4 className="w-1/2 font-bold text-xl">{content.title}</h4>
-                            <p className="ml-24 font-light text-sm">{content.description}</p>
+                        <div className="flex flex-col lg:flex-row mt-8">
+                            <h4 className="w-full lg:w-1/2 font-bold text-xl">{content.title}</h4>
+                            <p className="ml-0 mt-10 lg:ml-24 font-light text-sm">{content.description}</p>
                         </div>
                     </>
                 </div>
