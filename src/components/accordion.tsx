@@ -22,6 +22,30 @@ const AccordionItem = ({
     image: string;
     onToggle: () => void;
 }) => {
+    const renderContent = () => {
+        if (!isOpen) return null;
+
+        return (
+            <div className="mt-12">
+                <Image
+                    src={image}
+                    alt="pic"
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    className="w-full h-[250px] lg:h-[450px] rounded-sm"
+                    placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 450))}`}
+                />
+                <div className="flex flex-col lg:flex-row mt-8">
+                    <h4 className="w-full lg:w-1/2 font-bold text-xl">{content.title}</h4>
+                    <p className="ml-0 mt-10 lg:mt-0 lg:ml-24 font-light text-sm">{content.description}</p>
+                </div>
+            </div>
+        );
+    };
+
+    const getButtonLabel = () => (isOpen ? "View less" : "View more");
+
     return (
         <div>
             <div className="flex flex-row align-middle items-center justify-between mt-8">
@@ -33,32 +57,15 @@ const AccordionItem = ({
                     )}
                     onClick={onToggle}
                 >
-                    {isOpen ? "View less" : "View more"}
+                    {getButtonLabel()}
                 </button>
             </div>
-            {isOpen && (
-                <div className="mt-12">
-                    <>
-                        <Image
-                            src={image}
-                            alt="pic"
-                            width={0}
-                            height={0}
-                            sizes="100vw"
-                            className="w-full h-[250px] lg:h-[450px] rounded-sm"
-                            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 450))}`}
-                        />
-                        <div className="flex flex-col lg:flex-row mt-8">
-                            <h4 className="w-full lg:w-1/2 font-bold text-xl">{content.title}</h4>
-                            <p className="ml-0 mt-10 lg:mt-0 lg:ml-24 font-light text-sm">{content.description}</p>
-                        </div>
-                    </>
-                </div>
-            )}
+            {renderContent()}
         </div>
     );
 };
 
+// million-ignore
 const Accordion = () => {
     const [openIndex, setOpenIndex] = useState(null);
 
@@ -97,9 +104,9 @@ const Accordion = () => {
     ];
 
     return (
-        <div>
+        <>
             {accordionData.map((item, index) => (
-                <>
+                <React.Fragment key={item.title}>
                     <AccordionItem
                         key={item.title}
                         title={item.title}
@@ -109,9 +116,9 @@ const Accordion = () => {
                         onToggle={() => handleToggle(index)}
                     />
                     {index !== accordionData.length - 1 && <Separator className="mt-10" />}
-                </>
+                </React.Fragment>
             ))}
-        </div>
+        </>
     );
 };
 
