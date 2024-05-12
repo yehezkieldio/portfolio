@@ -2960,6 +2960,13 @@ body.is-touch .tiles article .content {
   color: hsl(222.2 84% 4.9%);
 }
 
+/* breakpoint for mobile for .title */
+@media screen and (max-width: 480px) {
+  #header .logo .title {
+    font-size: 12px;
+  }
+}
+
 #header nav {
   position: fixed;
   right: 2em;
