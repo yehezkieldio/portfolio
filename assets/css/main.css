@@ -2963,7 +2963,7 @@ body.is-touch .tiles article .content {
 /* breakpoint for mobile for .title */
 @media screen and (max-width: 480px) {
   #header .logo .title {
-    font-size: 12px;
+    font-size: 8px;
   }
 }
 
