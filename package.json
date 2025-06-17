@@ -6,8 +6,8 @@
         "dev": "next dev --turbopack",
         "build": "next build",
         "start": "next start",
-        "lint": "next .",
-        "lint:fix": "next . --fix",
+        "lint": "next lint",
+        "lint:fix": "next lint --fix",
         "format": "prettier --write ."
     },
     "dependencies": {
