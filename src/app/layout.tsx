@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
@@ -14,9 +14,14 @@ const geistMono = Geist_Mono({
     subsets: ["latin"]
 });
 
+const bricolageGrotesque = Bricolage_Grotesque({
+    variable: "--font-bricolage-grotesque",
+    subsets: ["latin"]
+});
+
 export const metadata: Metadata = {
     title: "Yehezkiel Dio Sinolungan",
-    description: "Software Engineer. Web Developer. Open Source Enthusiast.",
+    description: "Software Engineer. Web Developer. Open Source Enthusiast."
 };
 
 export default function RootLayout({
@@ -26,7 +31,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+            <body className={`${geistSans.variable} ${geistMono.variable} ${bricolageGrotesque.variable} antialiased`}>
+                {children}
+            </body>
         </html>
     );
 }
