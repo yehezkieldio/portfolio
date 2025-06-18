@@ -1,7 +1,7 @@
 export interface Project {
     id?: string;
     title: string;
-    description: string;
+    desc: string;
     tags: string[];
     viewLink?: string;
     codeLink?: string;
@@ -9,59 +9,96 @@ export interface Project {
 
 export const _projects: Project[] = [
     {
-        title: "E-Commerce Platform",
-        description:
-            "Full-stack e-commerce solution with payment integration, inventory management, and real-time analytics.",
-        tags: ["React", "Node.js", "TypeScript"],
-        viewLink: "https://example.com",
-        codeLink: "https://github.com/example/ecommerce"
+        title: "Artemis",
+        desc: "CLI orchestrator for automatic semantic versioning, changelog generation, and creating releases.",
+        tags: ["CLI", "TypeScript"],
+        codeLink: "https://github.com/yehezkieldio/artemis"
     },
     {
-        title: "Task Management App",
-        description:
-            "Collaborative task management application with real-time updates and team collaboration features.",
-        tags: ["Next.js", "Prisma", "PostgreSQL"],
-        viewLink: "https://example.com/tasks",
-        codeLink: "https://github.com/example/task-manager"
+        title: "Imperia",
+        desc: "A versatile Discord bot designed to be a comprehensive solution for a wide range of tasks.",
+        tags: ["TypeScript", "Discord.js"],
+        codeLink: "https://github.com/yehezkieldio/imperia-2024"
     },
     {
-        title: "Weather Dashboard",
-        description: "Interactive weather dashboard with location-based forecasts and weather data visualization.",
-        tags: ["Vue.js", "Chart.js", "API Integration"],
-        viewLink: "https://example.com/weather"
+        title: "TrashTrack",
+        desc: "IoT-based smart trash bin system for filtering and monitoring trash efficiently.",
+        tags: ["React", "NestJS", "PostgreSQL", "Espressif"],
+        codeLink: "https://github.com/trashtrackteam/trashtrack"
     },
     {
-        title: "Portfolio Website",
-        description:
-            "Modern portfolio website built with Next.js featuring dynamic project showcase and responsive design.",
-        tags: ["Next.js", "Tailwind CSS", "TypeScript"],
-        codeLink: "https://github.com/example/portfolio"
+        title: "Administrarte",
+        desc: "An intuitive website application with the aim of managing the office asset inventory of an organization.",
+        tags: ["React", "Next.js", "NestJS", "FastAPI", "MongoDB"],
+        codeLink: "https://github.com/astrantialabs/administrare"
     },
     {
-        title: "Blog Platform",
-        description: "Content management system with markdown support, SEO optimization, and comment functionality.",
-        tags: ["React", "Express", "MongoDB"],
-        viewLink: "https://example.com/blog",
-        codeLink: "https://github.com/example/blog"
+        title: "dikaios",
+        desc: "A comprehensive Tauri desktop application for a various IP address management tools.",
+        tags: ["React", "Tauri", "TypeScript", "Rust"],
+        codeLink: "https://github.com/yehezkieldio/dikaios"
     },
     {
-        title: "Mobile Banking App",
-        description: "Secure mobile banking application with biometric authentication and transaction tracking.",
-        tags: ["React Native", "Firebase", "Redux"],
-        viewLink: "https://apps.apple.com/app/example"
+        title: "Voidsong",
+        desc: "Self-hosted API aggregator for various random contents built using Axum.",
+        tags: ["Axum", "Rust", "Docker"],
+        codeLink: "https://github.com/yehezkieldio/voidsong"
     },
     {
-        title: "Social Media Analytics",
-        description: "Analytics dashboard for social media metrics with data visualization and reporting features.",
-        tags: ["Python", "Django", "D3.js"],
-        viewLink: "https://example.com/analytics",
-        codeLink: "https://github.com/example/analytics"
+        title: "pittacia",
+        desc: "CLI to quickly load and overwrite GitHub labels from a JSON file to a repository.",
+        tags: ["CLI", "Rust"],
+        codeLink: "https://github.com/yehezkieldio/pittacia"
     },
     {
-        title: "Inventory Management System",
-        description: "Enterprise inventory management system with barcode scanning and automated reordering.",
-        tags: ["Angular", "Spring Boot", "MySQL"],
-        codeLink: "https://github.com/example/inventory"
+        title: "Finance Recap",
+        desc: "A web application that extracts, manipulates, and displays financial data from Excel spreadsheets.",
+        tags: ["Laravel", "Python", "MongoDB"],
+        codeLink: "https://github.com/astrantialabs/administrare"
+    },
+    {
+        title: "genshin-db",
+        desc: "A JSON data package for Genshin Impact, providing detailed information about characters, weapons, and artifacts.",
+        tags: ["NPM", "JavaScript"],
+        codeLink: "https://github.com/theBowja/genshin-db"
+    },
+    {
+        title: "ProjectileHP",
+        desc: "A PocketMine-MP plugin that displays the player health and play sound on projectile hit.",
+        tags: ["PocketMine-MP", "PHP"],
+        codeLink: "https://gitlab.com/yehezkieldio/projectilehp"
+    },
+    {
+        title: "Mythcord",
+        desc: "A yet another multipurpose Discord bot with various features, utilities and a web dashboard.",
+        tags: ["React", "Next.js", "TypeScript", "Discord.js"],
+        codeLink: "https://github.com/yehezkieldio/mythcord-old"
+    },
+    {
+        title: "Raiden",
+        desc: "A general operations management Discord bot for the Discord community: Genshin Impact ID.",
+        tags: ["TypeScript", "Discord.js"],
+        codeLink: "https://github.com/yehezkieldio/raiden-old"
+    },
+    {
+        title: "Lumine",
+        desc: "A simple Indonesian multipurpose Discord bot that provides various basic features.",
+        tags: ["JavaScript", "Discord.js"],
+        codeLink: "https://github.com/yehezkieldio/lumine-old"
+    },
+    {
+        title: "Aqua",
+        desc: "A landing page for AQUA, the mineral water brand, showcasing its products and features.",
+        tags: ["HTML", "CSS"],
+        codeLink: "https://github.com/yehezkieldio/aqua-concept-website",
+        viewLink: "https://yehezkieldio.github.io/aqua-concept-website"
+    },
+    {
+        title: "LokasiZero",
+        desc: "A landing page for fictional cybersecurity company, part of a competition project.",
+        tags: ["HTML", "CSS"],
+        codeLink: "https://github.com/yehezkieldio/lokasi-zero",
+        viewLink: "https://yehezkieldio.github.io/lokasi-zero"
     }
 ];
 

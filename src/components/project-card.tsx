@@ -7,13 +7,15 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
     return (
-        <Card className="group bg-card/50 hover:bg-card/80 relative overflow-hidden backdrop-blur-sm transition-all duration-300 hover:shadow-lg">
-            <CardContent className="p-5">
+        <Card className="group bg-card/50 hover:bg-card/80 relative flex h-52 flex-col overflow-hidden backdrop-blur-sm transition-all duration-300 hover:shadow-lg">
+            <CardContent className="flex h-full flex-col p-5">
                 <div className="mb-3 flex items-start justify-between">
-                    <h3 className="font-display text-base leading-tight font-medium">{project.title}</h3>
+                    <h3 className="font-display line-clamp-2 text-base leading-tight font-medium">{project.title}</h3>
                 </div>
 
-                <p className="text-muted-foreground mb-4 text-xs leading-relaxed">{project.description}</p>
+                <p className="text-muted-foreground mb-4 line-clamp-4 flex-1 overflow-hidden text-xs leading-relaxed">
+                    {project.desc}
+                </p>
 
                 <div className="mb-4 flex flex-wrap gap-1">
                     {project.tags.map((tag, index) => (
@@ -26,7 +28,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                     ))}
                 </div>
 
-                <div className="flex gap-2 text-xs">
+                <div className="mt-auto flex gap-2 text-xs">
                     {project.viewLink && (
                         <a
                             href={project.viewLink}

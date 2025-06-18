@@ -32,8 +32,8 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
 
     const miniSearch = useMemo(() => {
         const ms = new MiniSearch<Project>({
-            fields: ["title", "description", "tags"],
-            storeFields: ["title", "description", "tags"],
+            fields: ["title", "desc", "tags"],
+            storeFields: ["title", "desc", "tags"],
             searchOptions: {
                 boost: { title: 2 },
                 fuzzy: 0.2
@@ -63,20 +63,6 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
         });
         return Array.from(tags).sort();
     }, []);
-
-    // const filteredProjects: Project[] = useMemo((): Project[] => {
-    //     return projects.filter((project: Project): boolean => {
-    //         const matchesSearch: boolean =
-    //             search === "" ||
-    //             project.title.toLowerCase().includes(search.toLowerCase()) ||
-    //             project.description.toLowerCase().includes(search.toLowerCase()) ||
-    //             project.tags.some((tag: string): boolean => tag.toLowerCase().includes(search.toLowerCase()));
-
-    //         const matchesTag: boolean = selectedTag === "" || project.tags.includes(selectedTag);
-
-    //         return matchesSearch && matchesTag;
-    //     });
-    // }, [search, selectedTag]);
 
     const filteredProjects = useMemo(() => {
         let results;
@@ -113,10 +99,7 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
         });
 
         setTimeout(() => {
-            const projectsSection = document.getElementById("projects-section");
-            if (projectsSection) {
-                projectsSection.scrollIntoView({ behavior: "smooth" });
-            }
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }, 100);
     };
 
