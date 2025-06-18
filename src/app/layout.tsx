@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
-import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
+import { cn } from "#/lib/utils";
 
 import "./globals.css";
+
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -31,8 +33,17 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} ${bricolageGrotesque.variable} antialiased`}>
-                {children}
+            <body
+                className={cn(
+                    geistSans.variable,
+                    geistMono.variable,
+                    bricolageGrotesque.variable,
+                    "font-sans antialiased"
+                )}
+            >
+                <div className="relative min-h-screen">
+                    <div className="relative flex min-h-screen w-full flex-col">{children}</div>
+                </div>
             </body>
         </html>
     );
