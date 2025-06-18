@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { OpenGraph } from "#/lib/opengraph";
 import { cn } from "#/lib/utils";
 
@@ -52,6 +53,7 @@ export default function RootLayout({
                     </div>
                 </div>
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
