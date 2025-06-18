@@ -1,42 +1,42 @@
 name: Create Release PR
 
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
 
 permissions:
-    contents: read
-    pull-requests: write
+  contents: read
+  pull-requests: write
 
 jobs:
-    create_release_pr:
-        name: Create Release Pull Request
-        runs-on: ubuntu-latest
-        if: ${{contains(github.event.head_commit.message, format('chore(release){0} release @yehezkieldio/portfolio@', ':'))}}
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+  create_release_pr:
+    name: Create Release Pull Request
+    runs-on: ubuntu-latest
+    if: ${{contains(github.event.head_commit.message, format('chore(release){0} release @yehezkieldio/portfolio@', ':'))}}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Extract Version from Commit Message
-              id: extract_version
-              run: |
-                  COMMIT_MSG="${{ github.event.head_commit.message }}"
-                  VERSION=${COMMIT_MSG##*website@}
-                  VERSION=$(echo "$VERSION" | xargs)
-                  echo "Detected version: $VERSION"
-                  echo "version=$VERSION" >> $GITHUB_OUTPUT
+      - name: Extract Version from Commit Message
+        id: extract_version
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          VERSION=$(echo "$COMMIT_MSG" | grep -oP '@yehezkieldio/portfolio@\K[0-9]+\.[0-9]+\.[0-9]+')
+          VERSION=$(echo "$VERSION" | xargs)
+          echo "Detected version: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-            - name: Create Pull Request
-              env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  VERSION: ${{ steps.extract_version.outputs.version }}
-              run: |
-                  echo "Creating PR for version: v${VERSION}"
-                  gh pr create \
-                    --base stable \
-                    --head master \
-                    --title "v${VERSION}" \
-                    --body "Automated release PR for version v${VERSION}. Please review and merge." \
-                    --assignee "yehezkieldio"
-                  echo "Pull request creation initiated."
+      - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.extract_version.outputs.version }}
+        run: |
+          echo "Creating PR for version: v${VERSION}"
+          gh pr create \
+            --base stable \
+            --head master \
+            --title "v${VERSION}" \
+            --body "Automated release PR for version v${VERSION}. Please review and merge." \
+            --assignee "yehezkieldio"
+          echo "Pull request creation initiated."
