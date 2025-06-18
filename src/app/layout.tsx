@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 
 import { cn } from "#/lib/utils";
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
-import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -33,16 +34,21 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <head>
+                <meta name="view-transition" content="same-origin" />
+            </head>
             <body
                 className={cn(
                     geistSans.variable,
                     geistMono.variable,
                     bricolageGrotesque.variable,
-                    "font-sans antialiased"
+                    "dark font-sans antialiased"
                 )}
             >
                 <div className="relative min-h-screen">
-                    <div className="relative flex min-h-screen w-full flex-col">{children}</div>
+                    <div className="relative flex min-h-screen w-full flex-col">
+                        <NuqsAdapter>{children}</NuqsAdapter>
+                    </div>
                 </div>
             </body>
         </html>
