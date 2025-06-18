@@ -60,7 +60,7 @@ export const _projects: Project[] = [
         title: "Finance Recap",
         desc: "A web application that extracts, manipulates, and displays financial data from Excel spreadsheets.",
         tags: ["Laravel", "Python", "MongoDB"],
-        additionalTags: ["Livewire", "SQLite", "Sass"],
+        additionalTags: ["PHP", "Livewire", "SQLite", "Sass"],
         codeLink: "https://github.com/astrantialabs/administrare"
     },
     {
