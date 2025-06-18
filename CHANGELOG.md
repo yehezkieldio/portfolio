@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## 📦 @yehezkieldio/portfolio@1.0.1-alpha.2 (June 18, 2025)
+
+
+### 🔹 <!-- 11 -->Project Maintenance
+
+-  Reorder imports in pagination component for consistency ([`332a9ab`](https://github.com/yehezkieldio/portfolio/commit/332a9abdc350830e1123acf7201bc6dff4933674))
+-  Add code quality workflow with linting and typechecking steps ([`0de9a78`](https://github.com/yehezkieldio/portfolio/commit/0de9a7877de4b049ebdb4a0815ecef5dd537d946))
+-  Wrap ProjectList component in Suspense for better loading handling ([`81f1129`](https://github.com/yehezkieldio/portfolio/commit/81f1129eefc8867affa5b858c02e77011a1a5c5c))
+-  Add typecheck script to package.json ([`a4c0cff`](https://github.com/yehezkieldio/portfolio/commit/a4c0cff14645c8a4fdaa206647ba853519ac253f))
+-  Update next.config.ts to include TypeScript and ESLint configurations ([`84b2343`](https://github.com/yehezkieldio/portfolio/commit/84b2343569c9384a06fe96501560c1dae1fa4a00))
+-  Update build script to use turbopack ([`01f528c`](https://github.com/yehezkieldio/portfolio/commit/01f528c313ec07b909d366b99b7e7d708ea4daeb))
+-  Remove TypeScript and ESLint configuration from next.config.ts ([`b83bd19`](https://github.com/yehezkieldio/portfolio/commit/b83bd19cd017c71cc3ea1e8bb3417946a0cccfa1))
+
+[[Compare Changes]](https://github.com/yehezkieldio/portfolio/compare/@yehezkieldio/portfolio@1.0.1-alpha.1...@yehezkieldio/portfolio@1.0.1-alpha.2) · [[View Source]](https://github.com/yehezkieldio/portfolio/tree/@yehezkieldio/portfolio@1.0.1-alpha.2)
 ## 📦 @yehezkieldio/portfolio@1.0.1-alpha.1 (June 18, 2025)
 
 

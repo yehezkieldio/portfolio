@@ -1,7 +1,7 @@
 import { ProjectList } from "#/components/project-list";
 import { socials } from "#/lib/socials";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 
 interface SocialLink {
     name: string;
@@ -40,7 +40,9 @@ export default function Home() {
                         ))}
                     </div>
                 </div>
-                <ProjectList itemsPerPage={9} />
+                <Suspense>
+                    <ProjectList itemsPerPage={9} />
+                </Suspense>
             </div>
         </div>
     );

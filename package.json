@@ -1,13 +1,14 @@
 {
     "name": "portfolio",
-    "version": "1.0.1-alpha.1",
+    "version": "1.0.1-alpha.2",
     "private": true,
     "scripts": {
         "dev": "next dev --turbopack",
-        "build": "next build",
+        "build": "next build --turbopack",
         "start": "next start",
         "lint": "next lint",
         "lint:fix": "next lint --fix",
+        "typecheck": "tsc --noEmit",
         "format": "prettier --write ."
     },
     "dependencies": {
