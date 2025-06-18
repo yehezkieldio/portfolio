@@ -1,6 +1,12 @@
 {
     "typescript.tsdk": "node_modules/typescript/lib",
     "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.preferences.autoImportFileExcludePatterns": [
+        "lucide-react",
+        "next/router",
+        "next/dist",
+        "@radix-ui/react-*"
+    ],
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
