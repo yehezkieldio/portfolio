@@ -11,11 +11,13 @@ import {
     PaginationNext,
     PaginationPrevious
 } from "#/components/ui/pagination";
-import { Select } from "#/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "#/components/ui/select";
 import { useViewTransition } from "#/hooks/use-view-transition";
-import { projects } from "#/lib/projects";
+import { Project, projects } from "#/lib/projects";
+import MiniSearch from "minisearch";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 interface ProjectListProps {
     itemsPerPage?: number;
@@ -25,60 +27,91 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
     const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
     const [search, setSearch] = useQueryState("search", parseAsString.withDefault(""));
     const [selectedTag, setSelectedTag] = useQueryState("tag", parseAsString.withDefault(""));
+    const [searchInput, setSearchInput] = useState(search);
     const { startViewTransition } = useViewTransition();
 
-    // Get all unique tags from projects
-    const allTags = useMemo(() => {
-        const tags = new Set<string>();
-        projects.forEach((project) => {
-            project.tags.forEach((tag) => tags.add(tag));
+    const miniSearch = useMemo(() => {
+        const ms = new MiniSearch<Project>({
+            fields: ["title", "description", "tags"],
+            storeFields: ["title", "description", "tags"],
+            searchOptions: {
+                boost: { title: 2 },
+                fuzzy: 0.2
+            }
         });
-        return Array.from(tags).sort();
+        ms.addAll(projects);
+        return ms;
     }, []);
 
-    // Filter projects based on search and tag
-    const filteredProjects = useMemo(() => {
-        return projects.filter((project) => {
-            // Search filter: check title first, then description, then tags
-            const matchesSearch =
-                search === "" ||
-                project.title.toLowerCase().includes(search.toLowerCase()) ||
-                project.description.toLowerCase().includes(search.toLowerCase()) ||
-                project.tags.some((tag) => tag.toLowerCase().includes(search.toLowerCase()));
-
-            // Tag filter
-            const matchesTag = selectedTag === "" || project.tags.includes(selectedTag);
-
-            return matchesSearch && matchesTag;
-        });
-    }, [search, selectedTag]);
-
-    const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentProjects = filteredProjects.slice(startIndex, endIndex);
-
-    // Reset page to 1 when filters change
-    const handleSearchChange = (value: string) => {
+    const debouncedSearch = useDebouncedCallback((value: string) => {
         startViewTransition(() => {
             setSearch(value);
             setPage(1);
         });
+    }, 300);
+
+    useEffect(() => {
+        if (searchInput !== search) {
+            debouncedSearch(searchInput);
+        }
+    }, [searchInput, search, debouncedSearch]);
+
+    const allTags: string[] = useMemo((): string[] => {
+        const tags = new Set<string>();
+        projects.forEach((project: Project): void => {
+            project.tags.forEach((tag: string): Set<string> => tags.add(tag));
+        });
+        return Array.from(tags).sort();
+    }, []);
+
+    // const filteredProjects: Project[] = useMemo((): Project[] => {
+    //     return projects.filter((project: Project): boolean => {
+    //         const matchesSearch: boolean =
+    //             search === "" ||
+    //             project.title.toLowerCase().includes(search.toLowerCase()) ||
+    //             project.description.toLowerCase().includes(search.toLowerCase()) ||
+    //             project.tags.some((tag: string): boolean => tag.toLowerCase().includes(search.toLowerCase()));
+
+    //         const matchesTag: boolean = selectedTag === "" || project.tags.includes(selectedTag);
+
+    //         return matchesSearch && matchesTag;
+    //     });
+    // }, [search, selectedTag]);
+
+    const filteredProjects = useMemo(() => {
+        let results;
+        if (search.trim() !== "") {
+            results = miniSearch.search(search, { combineWith: "AND" }).map((r) => r);
+        } else {
+            results = projects;
+        }
+        if (selectedTag !== "") {
+            results = results.filter((project) => project.tags.includes(selectedTag));
+        }
+        return results;
+    }, [search, selectedTag, miniSearch]);
+
+    const totalPages: number = Math.ceil(filteredProjects.length / itemsPerPage);
+    const startIndex: number = (page - 1) * itemsPerPage;
+    const endIndex: number = startIndex + itemsPerPage;
+    const currentProjects = filteredProjects.slice(startIndex, endIndex) as Project[];
+
+    const handleSearchChange = (value: string): void => {
+        setSearchInput(value);
     };
 
-    const handleTagChange = (value: string) => {
-        startViewTransition(() => {
-            setSelectedTag(value);
+    const handleTagChange = (value: string): void => {
+        startViewTransition((): void => {
+            setSelectedTag(value === "all" ? "" : value);
             setPage(1);
         });
     };
 
-    const handlePageChange = (newPage: number) => {
-        startViewTransition(() => {
+    const handlePageChange = (newPage: number): void => {
+        startViewTransition((): void => {
             setPage(newPage);
         });
 
-        // Scroll to top of projects section with a slight delay for transition
         setTimeout(() => {
             const projectsSection = document.getElementById("projects-section");
             if (projectsSection) {
@@ -97,37 +130,39 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
 
     return (
         <div id="projects-section" className="flex flex-col gap-6">
-            {/* Search and Filter Controls */}
             <div className="flex flex-col gap-4 px-4 md:flex-row md:gap-4">
                 <div className="flex-1">
                     <Input
                         type="text"
                         placeholder="Search projects by title, description, or tags..."
-                        value={search}
+                        value={searchInput}
                         onChange={(e) => handleSearchChange(e.target.value)}
                         className="w-full"
                     />
                 </div>
                 <div className="w-full md:w-48">
-                    <Select value={selectedTag} onChange={(e) => handleTagChange(e.target.value)} className="w-full">
-                        <option value="">All Tags</option>
-                        {allTags.map((tag) => (
-                            <option key={tag} value={tag}>
-                                {tag}
-                            </option>
-                        ))}
+                    <Select value={selectedTag || "all"} onValueChange={handleTagChange}>
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Filter by tag" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">All Tags</SelectItem>
+                            {allTags.map((tag) => (
+                                <SelectItem key={tag} value={tag}>
+                                    {tag}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
                     </Select>
                 </div>
             </div>
 
-            {/* No results message */}
             {filteredProjects.length === 0 && (search !== "" || selectedTag !== "") && (
                 <div className="py-8 text-center">
                     <p className="text-muted-foreground">No projects found matching your search criteria.</p>
                 </div>
             )}
 
-            {/* Projects Grid */}
             {currentProjects.length > 0 && (
                 <div
                     className="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 md:px-4 lg:grid-cols-3"
@@ -148,27 +183,24 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
                 </div>
             )}
 
-            {/* Pagination */}
             {totalPages > 1 && currentProjects.length > 0 && (
                 <div className="mt-8 flex justify-center" style={{ viewTransitionName: "pagination" }}>
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
                                 <PaginationPrevious
-                                    onClick={() => handlePageChange(Math.max(1, page - 1))}
+                                    onClick={(): void => handlePageChange(Math.max(1, page - 1))}
                                     className={page <= 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
                                 />
                             </PaginationItem>
 
                             {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
-                                // Show first page, last page, current page, and pages around current
                                 const showPage =
                                     pageNum === 1 ||
                                     pageNum === totalPages ||
                                     (pageNum >= page - 1 && pageNum <= page + 1);
 
                                 if (!showPage) {
-                                    // Show ellipsis for gaps
                                     if (pageNum === page - 2 || pageNum === page + 2) {
                                         return (
                                             <PaginationItem key={pageNum}>

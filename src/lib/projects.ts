@@ -1,4 +1,5 @@
 export interface Project {
+    id?: string;
     title: string;
     description: string;
     tags: string[];
@@ -6,7 +7,7 @@ export interface Project {
     codeLink?: string;
 }
 
-export const projects: Project[] = [
+export const _projects: Project[] = [
     {
         title: "E-Commerce Platform",
         description:
@@ -63,3 +64,12 @@ export const projects: Project[] = [
         codeLink: "https://github.com/example/inventory"
     }
 ];
+
+export function remapProjects(projects: Project[]): Project[] {
+    return projects.map((project) => ({
+        ...project,
+        id: project.id || crypto.randomUUID()
+    }));
+}
+
+export const projects = remapProjects(_projects);

@@ -156,10 +156,9 @@
     }
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 2px;
+    height: 2px;
 }
 
 ::-webkit-scrollbar-track {
@@ -182,13 +181,11 @@
     background: transparent;
 }
 
-/* Firefox scrollbar */
 * {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
 }
 
-/* View Transition API styles */
 @view-transition {
     navigation: auto;
 }
@@ -201,7 +198,6 @@
     animation: fade-in 0.3s ease-in;
 }
 
-/* Page transition animations */
 @keyframes fade-out {
     from {
         opacity: 1;
@@ -224,7 +220,6 @@
     }
 }
 
-/* Project cards fade animation */
 ::view-transition-old(project-grid),
 ::view-transition-new(project-grid) {
     animation-duration: 0.4s;
@@ -261,19 +256,16 @@
     }
 }
 
-/* Pagination transition */
 ::view-transition-old(pagination),
 ::view-transition-new(pagination) {
     animation-duration: 0.2s;
     animation-timing-function: ease-in-out;
 }
 
-/* Smooth scrolling for the entire page */
 html {
     scroll-behavior: smooth;
 }
 
-/* Enhanced focus styles */
 :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
