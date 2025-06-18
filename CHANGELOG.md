@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 📦 @yehezkieldio/portfolio@1.0.1-alpha.3 (June 18, 2025)
+
+
+### 🔹 <!-- 9 -->Code Styling
+
+-  Improve layout and typography in Home component ([`591ecac`](https://github.com/yehezkieldio/portfolio/commit/591ecacf2cd2d00e8af696c8ce6037b67d465800))
+
+[[Compare Changes]](https://github.com/yehezkieldio/portfolio/compare/@yehezkieldio/portfolio@1.0.1-alpha.2...@yehezkieldio/portfolio@1.0.1-alpha.3) · [[View Source]](https://github.com/yehezkieldio/portfolio/tree/@yehezkieldio/portfolio@1.0.1-alpha.3)
 ## 📦 @yehezkieldio/portfolio@1.0.1-alpha.2 (June 18, 2025)
 
 
