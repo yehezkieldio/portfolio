@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 📦 @yehezkieldio/portfolio@1.0.1-alpha.5 (June 18, 2025)
+
+
+### 🔹 <!-- 3 -->New Features
+
+-  Update additionalTags for Finance Recap project ([`408e965`](https://github.com/yehezkieldio/portfolio/commit/408e965bd1fbd1869b9d2c99b07d486e7f8da2ce))
+-  Remove custom extractField function from MiniSearch configuration ([`cf0953b`](https://github.com/yehezkieldio/portfolio/commit/cf0953b2b2612c01aa4210dd4ea137957c676d4f))
+-  Enhance MiniSearch extraction for tags and additionalTags fields ([`16871fe`](https://github.com/yehezkieldio/portfolio/commit/16871fe264f9a9e4c3f66e732cdf5ede7a0132f9))
+-  Enhance search ranking by adjusting boost values for project fields ([`cd54301`](https://github.com/yehezkieldio/portfolio/commit/cd5430169d719429c31daad32bd127428b3aaccb))
+
+[[Compare Changes]](https://github.com/yehezkieldio/portfolio/compare/@yehezkieldio/portfolio@1.0.1-alpha.4...@yehezkieldio/portfolio@1.0.1-alpha.5) · [[View Source]](https://github.com/yehezkieldio/portfolio/tree/@yehezkieldio/portfolio@1.0.1-alpha.5)
 ## 📦 @yehezkieldio/portfolio@1.0.1-alpha.4 (June 18, 2025)
 
 
