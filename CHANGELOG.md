@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 📦 @yehezkieldio/portfolio@1.0.1-alpha.1 (June 18, 2025)
+
+
+### 🔹 <!-- 16 -->CI/CD Configuration
+
+-  Update version extraction regex to support pre-release versions ([`aa713ae`](https://github.com/yehezkieldio/portfolio/commit/aa713aea423861e122d338dbd5875553cf7e8e10))
+
+[[Compare Changes]](https://github.com/yehezkieldio/portfolio/compare/@yehezkieldio/portfolio@1.0.1-alpha.0...@yehezkieldio/portfolio@1.0.1-alpha.1) · [[View Source]](https://github.com/yehezkieldio/portfolio/tree/@yehezkieldio/portfolio@1.0.1-alpha.1)
 ## 📦 @yehezkieldio/portfolio@1.0.1-alpha.0 (June 18, 2025)
 
 
