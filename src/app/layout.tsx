@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 
+import { OpenGraph } from "#/lib/opengraph";
 import { cn } from "#/lib/utils";
-import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = Geist({
@@ -23,8 +24,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-    title: "Yehezkiel Dio Sinolungan",
-    description: "Software Engineer. Web Developer. Open Source Enthusiast."
+    ...OpenGraph
 };
 
 export default function RootLayout({
