@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 📦 @yehezkieldio/portfolio@1.0.1-alpha.0 (June 18, 2025)
+
+
+### 🔹 <!-- 16 -->CI/CD Configuration
+
+-  Format YAML workflow for consistency and readability ([`8ae1401`](https://github.com/yehezkieldio/portfolio/commit/8ae1401667edb34a258f0e83fc708541714bd49a))
+
+[[Compare Changes]](https://github.com/yehezkieldio/portfolio/compare/@yehezkieldio/portfolio@1.0.0...@yehezkieldio/portfolio@1.0.1-alpha.0) · [[View Source]](https://github.com/yehezkieldio/portfolio/tree/@yehezkieldio/portfolio@1.0.1-alpha.0)
 ## 📦 @yehezkieldio/portfolio@1.0.0 (June 18, 2025)
 
 
