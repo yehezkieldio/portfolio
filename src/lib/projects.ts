@@ -3,6 +3,7 @@ export interface Project {
     title: string;
     desc: string;
     tags: string[];
+    additionalTags?: string[];
     viewLink?: string;
     codeLink?: string;
 }
@@ -12,30 +13,35 @@ export const _projects: Project[] = [
         title: "Artemis",
         desc: "CLI orchestrator for automatic semantic versioning, changelog generation, and creating releases.",
         tags: ["CLI", "TypeScript"],
+        additionalTags: ["Bun"],
         codeLink: "https://github.com/yehezkieldio/artemis"
     },
     {
         title: "Imperia",
         desc: "A versatile Discord bot designed to be a comprehensive solution for a wide range of tasks.",
         tags: ["TypeScript", "Discord.js"],
+        additionalTags: ["Bun"],
         codeLink: "https://github.com/yehezkieldio/imperia-2024"
     },
     {
         title: "TrashTrack",
         desc: "IoT-based smart trash bin system for filtering and monitoring trash efficiently.",
         tags: ["React", "NestJS", "PostgreSQL", "Espressif"],
+        additionalTags: ["Capacitor", "Vite", "Ionic", "shadcn/ui", "TailwindCSS", "Prisma", "Java", "C++"],
         codeLink: "https://github.com/trashtrackteam/trashtrack"
     },
     {
         title: "Administrarte",
         desc: "An intuitive website application with the aim of managing the office asset inventory of an organization.",
         tags: ["React", "Next.js", "NestJS", "FastAPI", "MongoDB"],
+        additionalTags: ["Redux", "Chakra UI", "Python"],
         codeLink: "https://github.com/astrantialabs/administrare"
     },
     {
         title: "dikaios",
         desc: "A comprehensive Tauri desktop application for a various IP address management tools.",
         tags: ["React", "Tauri", "TypeScript", "Rust"],
+        additionalTags: ["Bun", "Vite"],
         codeLink: "https://github.com/yehezkieldio/dikaios"
     },
     {
@@ -54,6 +60,7 @@ export const _projects: Project[] = [
         title: "Finance Recap",
         desc: "A web application that extracts, manipulates, and displays financial data from Excel spreadsheets.",
         tags: ["Laravel", "Python", "MongoDB"],
+        additionalTags: ["Livewire", "SQLite", "Sass"],
         codeLink: "https://github.com/astrantialabs/administrare"
     },
     {

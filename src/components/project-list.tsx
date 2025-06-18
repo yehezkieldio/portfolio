@@ -30,10 +30,10 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
     const [searchInput, setSearchInput] = useState(search);
     const { startViewTransition } = useViewTransition();
 
-    const miniSearch = useMemo(() => {
+    const projectsMinisearch = useMemo(() => {
         const ms = new MiniSearch<Project>({
-            fields: ["title", "desc", "tags"],
-            storeFields: ["title", "desc", "tags"],
+            fields: ["title", "desc", "tags", "additionalTags"],
+            storeFields: ["title", "desc", "tags", "additionalTags"],
             searchOptions: {
                 boost: { title: 2 },
                 fuzzy: 0.2
@@ -67,7 +67,7 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
     const filteredProjects = useMemo(() => {
         let results;
         if (search.trim() !== "") {
-            results = miniSearch.search(search, { combineWith: "AND" }).map((r) => r);
+            results = projectsMinisearch.search(search, { combineWith: "AND" }).map((r) => r);
         } else {
             results = projects;
         }
@@ -75,7 +75,7 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
             results = results.filter((project) => project.tags.includes(selectedTag));
         }
         return results;
-    }, [search, selectedTag, miniSearch]);
+    }, [search, selectedTag, projectsMinisearch]);
 
     const totalPages: number = Math.ceil(filteredProjects.length / itemsPerPage);
     const startIndex: number = (page - 1) * itemsPerPage;
