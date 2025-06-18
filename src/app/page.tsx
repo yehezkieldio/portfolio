@@ -1,4 +1,19 @@
 import { ProjectList } from "#/components/project-list";
+import { socials } from "#/lib/socials";
+import Link from "next/link";
+import { Fragment } from "react";
+
+interface SocialLink {
+    name: string;
+    href: string;
+}
+
+const socialLinks: SocialLink[] = [
+    { name: "GitHub", href: socials.github },
+    { name: "X", href: socials.x },
+    { name: "Instagram", href: socials.instagram },
+    { name: "LinkedIn", href: socials.linkedin }
+];
 
 export default function Home() {
     return (
@@ -9,6 +24,21 @@ export default function Home() {
                     <p className="font-display text-foreground/85 text-sm md:text-base">
                         Software Engineer. Web Developer. Open Source Enthusiast.
                     </p>
+                    <div>
+                        {socialLinks.map((social: SocialLink, index: number) => (
+                            <Fragment key={social.href}>
+                                <Link
+                                    href={social.href}
+                                    className="text-foreground hover:text-foreground/90 font-display mx-2 underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {social.name}
+                                </Link>
+                                {index < socialLinks.length - 1 && <span className="text-muted-foreground/60">•</span>}
+                            </Fragment>
+                        ))}
+                    </div>
                 </div>
                 <ProjectList itemsPerPage={8} />
             </div>
