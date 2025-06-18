@@ -22,7 +22,7 @@ jobs:
         id: extract_version
         run: |
           COMMIT_MSG="${{ github.event.head_commit.message }}"
-          VERSION=$(echo "$COMMIT_MSG" | grep -oP '@yehezkieldio/portfolio@\K[0-9]+\.[0-9]+\.[0-9]+')
+          VERSION=$(echo "$COMMIT_MSG" | grep -oP '@yehezkieldio/portfolio@\K\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?')
           VERSION=$(echo "$VERSION" | xargs)
           echo "Detected version: $VERSION"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
