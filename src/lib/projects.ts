@@ -12,7 +12,7 @@ export const _projects: Project[] = [
     {
         title: "Artemis",
         desc: "CLI orchestrator for automatic semantic versioning, changelog generation, and creating releases.",
-        tags: ["CLI", "TypeScript"],
+        tags: ["CLI", "NPM", "TypeScript"],
         additionalTags: ["Bun"],
         codeLink: "https://github.com/yehezkieldio/artemis"
     },
