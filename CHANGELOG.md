@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 📦 @yehezkieldio/portfolio@1.0.1-alpha.4 (June 18, 2025)
+
+
+### 🔹 <!-- 3 -->New Features
+
+-  Integrate @vercel/speed-insights for performance tracking ([`86f8416`](https://github.com/yehezkieldio/portfolio/commit/86f84169ed086c6ba8920dfc79a37ad883d396bd))
+-  Add @vercel/analytics for enhanced analytics tracking ([`0bac808`](https://github.com/yehezkieldio/portfolio/commit/0bac80835ef765207a4b65a796ec140792239399))
+
+### 🔹 <!-- 4 -->Bug Fixes
+
+-  Update tags for Artemis project to include NPM ([`b32933d`](https://github.com/yehezkieldio/portfolio/commit/b32933df98160a695caaa506e74792ba2fff7517))
+
+[[Compare Changes]](https://github.com/yehezkieldio/portfolio/compare/@yehezkieldio/portfolio@1.0.1-alpha.3...@yehezkieldio/portfolio@1.0.1-alpha.4) · [[View Source]](https://github.com/yehezkieldio/portfolio/tree/@yehezkieldio/portfolio@1.0.1-alpha.4)
 ## 📦 @yehezkieldio/portfolio@1.0.1-alpha.3 (June 18, 2025)
 
 
