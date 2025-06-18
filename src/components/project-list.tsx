@@ -37,14 +37,6 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
             searchOptions: {
                 boost: { title: 3, desc: 2, tags: 1, additionalTags: 0.5 },
                 fuzzy: 0.2
-            },
-            extractField: (doc, fieldName) => {
-                if (fieldName === "tags" || fieldName === "additionalTags") {
-                    // @ts-expect-error Project does not have a index signature
-                    return doc[fieldName].join(" ");
-                }
-                // @ts-expect-error Project does not have a index signature
-                return doc[fieldName];
             }
         });
         ms.addAll(projects);
