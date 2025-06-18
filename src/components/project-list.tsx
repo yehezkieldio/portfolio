@@ -35,7 +35,7 @@ export function ProjectList({ itemsPerPage = 6 }: ProjectListProps) {
             fields: ["title", "desc", "tags", "additionalTags"],
             storeFields: ["title", "desc", "tags", "additionalTags"],
             searchOptions: {
-                boost: { title: 2 },
+                boost: { title: 3, desc: 2, tags: 1, additionalTags: 0.5 },
                 fuzzy: 0.2
             }
         });
