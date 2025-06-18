@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Analytics } from "@vercel/analytics/next";
 import { OpenGraph } from "#/lib/opengraph";
 import { cn } from "#/lib/utils";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
                         <NuqsAdapter>{children}</NuqsAdapter>
                     </div>
                 </div>
+                <Analytics />
             </body>
         </html>
     );
