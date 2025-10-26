@@ -128,6 +128,25 @@
         @apply bg-background text-foreground;
     }
 
+    html {
+        transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body,
+    [data-theme] {
+        transition:
+            background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *:not(.no-theme-transition) {
+        transition-property:
+            background-color, border-color, color, fill, stroke;
+        transition-duration: 0.3s;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     h1,
     h2,
     h3,
