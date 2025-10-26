@@ -14,19 +14,13 @@ export default async function Home() {
                     </p>
                 </header>
 
-                <ProjectsPrimitive.Root>
-                    <Suspense fallback={<div className="h-32 animate-pulse rounded-lg bg-surface" />}>
+                <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-surface" />}>
+                    <ProjectsPrimitive.Root>
                         <ProjectsPrimitive.Filters />
-                    </Suspense>
-
-                    <Suspense fallback={<div className="mt-8 h-96 animate-pulse rounded-lg bg-surface" />}>
                         <ProjectsPrimitive.Grid />
-                    </Suspense>
-
-                    <Suspense fallback={<div className="mt-8 h-16 animate-pulse rounded-lg bg-surface" />}>
                         <ProjectsPrimitive.Pagination />
-                    </Suspense>
-                </ProjectsPrimitive.Root>
+                    </ProjectsPrimitive.Root>
+                </Suspense>
             </div>
         </div>
     );
