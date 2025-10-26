@@ -31,7 +31,9 @@
         "noUnknownAtRules": "off"
       },
       "style": {
-        "noMagicNumbers": "off"
+        "noMagicNumbers": "off",
+        "useConsistentTypeDefinitions": "off",
+        "useBlockStatements": "off"
       }
     },
     "domains": {

@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Gloock, Source_Sans_3 } from "next/font/google";
-import "./globals.css";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ThemeProvider } from "#/components/theme-provider";
 import { cn } from "#/lib/utils";
+
+import "./globals.css";
 
 const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
     subsets: ["latin"],
 });
 
-const gloock = Gloock({
-    weight: "400",
-    variable: "--font-gloock",
+const geist = Geist({
+    variable: "--font-geist",
     subsets: ["latin"],
 });
 
-const sourceSans3 = Source_Sans_3({
-    variable: "--font-source-sans-3",
+const playfairDisplay = Playfair_Display({
+    variable: "--font-playfair-display",
     subsets: ["latin"],
 });
 
@@ -76,13 +77,13 @@ export default function RootLayout({
             <body
                 className={cn(
                     geistMono.variable,
-                    gloock.variable,
-                    sourceSans3.variable,
+                    geist.variable,
+                    playfairDisplay.variable,
                     "font-sans antialiased"
                 )}
             >
                 <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
-                    {children}
+                    <NuqsAdapter>{children}</NuqsAdapter>
                 </ThemeProvider>
             </body>
         </html>
