@@ -1,0 +1,45 @@
+name: Code Quality
+
+on:
+  push:
+    branches-ignore:
+      - stable
+  pull_request:
+    branches-ignore:
+      - stable
+
+jobs:
+  biome:
+    name: Biome
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: canary
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run Biome
+        run: bunx biome ci .
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: canary
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run TSC Typecheck
+        run: bun run typecheck
