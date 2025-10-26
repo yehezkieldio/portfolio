@@ -17,6 +17,11 @@
   "[graphql]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "file": ".github/copilot-commit-instructions.md"
+    }
+  ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.preferences.autoImportFileExcludePatterns": [
     "lucide-react",
