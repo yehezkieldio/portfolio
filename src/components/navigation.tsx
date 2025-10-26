@@ -6,11 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ThemeToggle } from "#/components/theme-toggle";
 import { Button } from "#/components/ui/button";
 
-const NAV_LINKS = [
-    { href: "#about", label: "About" },
-    { href: "/projects", label: "Projects" },
-    { href: "#contact", label: "Contact" },
-] as const;
+const NAV_LINKS = [{ href: "/projects", label: "Projects" }] as const;
 
 export function Navigation() {
     const [isScrolled, setIsScrolled] = useState(false);
