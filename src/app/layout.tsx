@@ -1,10 +1,10 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ThemeProvider } from "#/components/theme-provider";
 import { cn } from "#/lib/utils";
-
-import "./globals.css";
 
 const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
