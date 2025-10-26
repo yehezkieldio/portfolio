@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Gloock, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "#/components/theme-provider";
 import { cn } from "#/lib/utils";
 
 const geistMono = Geist_Mono({
@@ -73,7 +74,9 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={cn(geistMono.variable, gloock.variable, sourceSans3.variable, "antialiased")}>
-                {children}
+                <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     );
