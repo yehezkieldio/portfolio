@@ -26,7 +26,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.0",
+    "@biomejs/biome": "2.3.1",
     "@tailwindcss/postcss": "^4.1.16",
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/node": "^20.19.23",
