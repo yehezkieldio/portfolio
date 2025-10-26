@@ -82,7 +82,7 @@ export default function RootLayout({
                     "font-sans antialiased"
                 )}
             >
-                <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
+                <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange enableSystem>
                     <NuqsAdapter>{children}</NuqsAdapter>
                 </ThemeProvider>
             </body>
