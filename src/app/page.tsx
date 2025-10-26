@@ -1,7 +1,9 @@
+import { Navigation } from "#/components/navigation";
+
 export default function Home() {
     return (
-        <div className="p-4">
-            <h1>Hello, world!</h1>
+        <div className="min-h-screen bg-background">
+            <Navigation />
         </div>
     );
 }
