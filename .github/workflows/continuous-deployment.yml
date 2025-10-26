@@ -55,7 +55,7 @@ jobs:
       needs.detect-deployment-type.outputs.src_changed == 'true'
     runs-on: ubuntu-latest
     environment:
-      name: production
+      name: Production
       url: ${{ steps.deploy.outputs.url }}
     steps:
       - name: Checkout Repository
@@ -95,7 +95,7 @@ jobs:
       needs.detect-deployment-type.outputs.src_changed == 'true'
     runs-on: ubuntu-latest
     environment:
-      name: development
+      name: Development
       url: ${{ steps.deploy.outputs.url }}
     steps:
       - name: Checkout Repository
