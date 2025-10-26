@@ -1,7 +1,5 @@
 import { Suspense } from "react";
-import { ProjectPagination } from "#/components/project-pagination";
-import { ProjectsGrid } from "#/components/projects-grid";
-import { SearchFilters } from "#/components/search-filters";
+import { ProjectsPrimitive } from "#/features/projects";
 
 export default function Home() {
     return (
@@ -16,17 +14,19 @@ export default function Home() {
                     </p>
                 </header>
 
-                <Suspense fallback={<div className="h-32 animate-pulse rounded-lg bg-surface" />}>
-                    <SearchFilters />
-                </Suspense>
+                <ProjectsPrimitive.Root>
+                    <Suspense fallback={<div className="h-32 animate-pulse rounded-lg bg-surface" />}>
+                        <ProjectsPrimitive.Filters />
+                    </Suspense>
 
-                <Suspense fallback={<div className="mt-8 h-96 animate-pulse rounded-lg bg-surface" />}>
-                    <ProjectsGrid />
-                </Suspense>
+                    <Suspense fallback={<div className="mt-8 h-96 animate-pulse rounded-lg bg-surface" />}>
+                        <ProjectsPrimitive.Grid />
+                    </Suspense>
 
-                <Suspense fallback={<div className="mt-8 h-16 animate-pulse rounded-lg bg-surface" />}>
-                    <ProjectPagination />
-                </Suspense>
+                    <Suspense fallback={<div className="mt-8 h-16 animate-pulse rounded-lg bg-surface" />}>
+                        <ProjectsPrimitive.Pagination />
+                    </Suspense>
+                </ProjectsPrimitive.Root>
             </div>
         </div>
     );

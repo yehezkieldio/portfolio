@@ -2,24 +2,26 @@
 
 import { ExternalLinkIcon, GithubIcon } from "lucide-react";
 import Image from "next/image";
+import { memo } from "react";
 import { Badge } from "#/components/ui/badge";
 import { Button } from "#/components/ui/button";
-import type { Project } from "#/lib/projects-data";
+import type { Project } from "#/features/projects/lib/data";
 
-interface ProjectCardProps {
+interface CardProps {
     project: Project;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+function CardComponent({ project }: CardProps) {
     return (
         <article className="group minimal-hover relative flex h-full flex-col overflow-hidden border border-border bg-card">
-            {/* Image or Fallback */}
             <div className="relative aspect-video overflow-hidden bg-muted">
                 {project.image ? (
                     <Image
                         alt={project.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        height={360}
                         src={project.image || "/placeholder.svg"}
+                        width={640}
                     />
                 ) : (
                     <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-muted to-card p-6">
@@ -31,7 +33,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                         </div>
                     </div>
                 )}
-                {/* Year Badge */}
+
                 <div className="absolute top-4 right-4">
                     <Badge className="border-border bg-background/90 backdrop-blur-sm" variant="secondary">
                         {project.year}
@@ -39,7 +41,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 </div>
             </div>
 
-            {/* Content */}
             <div className="flex flex-1 flex-col p-6">
                 <div className="flex-1">
                     <div className="mb-3 flex items-start justify-between gap-2">
@@ -52,12 +53,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
                         {project.description}
                     </p>
 
-                    {/* Category */}
                     <Badge className="mb-4 border-accent/30 text-accent" variant="outline">
                         {project.category}
                     </Badge>
 
-                    {/* Technologies */}
                     <div className="mb-4 flex flex-wrap gap-2">
                         {project.technologies.slice(0, 3).map((tech) => (
                             <Badge
@@ -105,3 +104,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </article>
     );
 }
+
+export const Card = memo(CardComponent);
+Card.displayName = "ProjectsPrimitive.Card";
