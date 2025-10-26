@@ -73,8 +73,15 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={cn(geistMono.variable, gloock.variable, sourceSans3.variable, "antialiased")}>
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <body
+                className={cn(
+                    geistMono.variable,
+                    gloock.variable,
+                    sourceSans3.variable,
+                    "font-sans antialiased"
+                )}
+            >
+                <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
                     {children}
                 </ThemeProvider>
             </body>

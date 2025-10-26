@@ -51,7 +51,7 @@ export function Navigation() {
                             className="font-normal font-serif text-base tracking-normal transition-colors duration-300 hover:text-accent sm:text-lg"
                             href="/"
                         >
-                            Yehezkiel Dio
+                            YDS
                         </Link>
 
                         <div className="hidden items-center gap-6 md:flex lg:gap-8">
@@ -65,7 +65,7 @@ export function Navigation() {
                                     <span className="-bottom-1 absolute left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
                                 </Link>
                             ))}
-                            <div className="h-4 w-px bg-border/40" />
+                            <div className="h-4 w-px bg-muted-foreground/40" />
                             <ThemeToggle />
                         </div>
 
