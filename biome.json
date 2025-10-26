@@ -28,7 +28,8 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "useAwait": "off"
       },
       "style": {
         "noMagicNumbers": "off",
