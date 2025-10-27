@@ -53,4 +53,16 @@ export const PROJECTS: Project[] = [
         viewUrl: "https://yehezkieldio.github.io/lokasi-zero",
         image: "/img_projects/3.png",
     },
+    {
+        id: "4",
+        title: "Aqua",
+        description:
+            "A landing page for AQUA, the mineral water brand, showcasing its products and features.",
+        category: "Web Development",
+        year: 2023,
+        technologies: ["HTML", "CSS", "JavaScript"],
+        sourceUrl: "https://github.com/yehezkieldio/aqua-concept-website",
+        viewUrl: "https://yehezkieldio.github.io/aqua-concept-website",
+        image: "/img_projects/4.png",
+    },
 ];
