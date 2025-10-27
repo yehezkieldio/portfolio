@@ -6,6 +6,7 @@ import { memo } from "react";
 import { Icons } from "#/components/icons";
 import { Badge } from "#/components/ui/badge";
 import { Button } from "#/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "#/components/ui/popover";
 import type { Project } from "#/features/projects/lib/data";
 
 interface CardProps {
@@ -60,7 +61,7 @@ function CardComponent({ project }: CardProps) {
                     </Badge>
 
                     <div className="mb-4 flex flex-wrap gap-2">
-                        {project.technologies.slice(0, 3).map((tech) => (
+                        {project.technologies.slice(0, 4).map((tech) => (
                             <Badge
                                 className="border border-border bg-muted text-xs"
                                 key={tech}
@@ -69,10 +70,34 @@ function CardComponent({ project }: CardProps) {
                                 {tech}
                             </Badge>
                         ))}
-                        {project.technologies.length > 3 && (
-                            <Badge className="border border-border bg-muted text-xs" variant="secondary">
-                                +{project.technologies.length - 3}
-                            </Badge>
+                        {project.technologies.length > 4 && (
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <button type="button">
+                                        <Badge
+                                            className="cursor-pointer border border-border bg-muted text-xs transition-colors hover:bg-muted/70"
+                                            variant="secondary"
+                                        >
+                                            +{project.technologies.length - 4}
+                                        </Badge>
+                                    </button>
+                                </PopoverTrigger>
+                                <PopoverContent align="start" className="w-auto">
+                                    <div className="space-y-2">
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.technologies.slice(4).map((tech) => (
+                                                <Badge
+                                                    className="border border-border bg-muted text-xs"
+                                                    key={tech}
+                                                    variant="secondary"
+                                                >
+                                                    {tech}
+                                                </Badge>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
                         )}
                     </div>
                 </div>
