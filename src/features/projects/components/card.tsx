@@ -61,7 +61,7 @@ function CardComponent({ project }: CardProps) {
                     </Badge>
 
                     <div className="mb-4 flex flex-wrap gap-2">
-                        {project.technologies.slice(0, 4).map((tech) => (
+                        {project.technologies.slice(0, 5).map((tech) => (
                             <Badge
                                 className="border border-border bg-muted text-xs"
                                 key={tech}
@@ -70,7 +70,7 @@ function CardComponent({ project }: CardProps) {
                                 {tech}
                             </Badge>
                         ))}
-                        {project.technologies.length > 4 && (
+                        {project.technologies.length > 5 && (
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <button type="button">
@@ -78,14 +78,14 @@ function CardComponent({ project }: CardProps) {
                                             className="cursor-pointer border border-border bg-muted text-xs transition-colors hover:bg-muted/70"
                                             variant="secondary"
                                         >
-                                            +{project.technologies.length - 4}
+                                            +{project.technologies.length - 5}
                                         </Badge>
                                     </button>
                                 </PopoverTrigger>
                                 <PopoverContent align="start" className="w-auto">
                                     <div className="space-y-2">
                                         <div className="flex flex-wrap gap-2">
-                                            {project.technologies.slice(4).map((tech) => (
+                                            {project.technologies.slice(5).map((tech) => (
                                                 <Badge
                                                     className="border border-border bg-muted text-xs"
                                                     key={tech}
