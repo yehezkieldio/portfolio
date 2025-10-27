@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.3 (October 27, 2025)
+
+### <!-- 3 -->🚀 New Features
+
+- [`d932d62`](https://github.com/yehezkieldio/portfolio/commit/d932d62f95671f807837726562697e51d5ad48fd) projects: Add magnus
+
 ## portfolio@2.0.0-alpha.2 (October 27, 2025)
 
 ### <!-- 11 -->🛠️ Miscellaneous
