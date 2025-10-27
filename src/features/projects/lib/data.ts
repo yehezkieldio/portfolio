@@ -40,7 +40,7 @@ export const PROJECTS: Project[] = [
         category: "Discord Bot",
         year: 2021,
         technologies: ["JavaScript", "Discord.js"],
-        sourceUrl: "https://github.com/yehezkieldio/lumine-old",
+        sourceUrl: "https://gitlab.com/yehezkieldio/lumine",
     },
     {
         id: "3",

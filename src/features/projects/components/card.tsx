@@ -17,13 +17,16 @@ function CardComponent({ project }: CardProps) {
         <article className="group minimal-hover relative flex h-full flex-col overflow-hidden border border-border bg-card">
             <div className="relative aspect-video overflow-hidden bg-muted">
                 {project.image ? (
-                    <Image
-                        alt={project.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        height={360}
-                        src={project.image || "/placeholder.svg"}
-                        width={640}
-                    />
+                    <>
+                        <Image
+                            alt={project.title}
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            height={360}
+                            src={project.image || "/placeholder.svg"}
+                            width={640}
+                        />
+                        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-card/40 via-card/10 to-transparent" />
+                    </>
                 ) : (
                     <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-muted to-card p-6">
                         <div className="text-center">
@@ -78,7 +81,7 @@ function CardComponent({ project }: CardProps) {
                     {project.viewUrl && (
                         <Button
                             asChild
-                            className="flex-1 bg-primary text-primary-foreground transition-all hover:bg-primary/90"
+                            className="flex-1 bg-primary/90 text-primary-foreground transition-all hover:bg-primary/70 hover:text-primary-foreground"
                         >
                             <a href={project.viewUrl} rel="noopener noreferrer" target="_blank">
                                 <ExternalLinkIcon className="mr-2 h-4 w-4" />
@@ -89,11 +92,15 @@ function CardComponent({ project }: CardProps) {
                     {project.sourceUrl && (
                         <Button
                             asChild
-                            className="flex-1 border-border bg-transparent transition-all hover:text-muted-foreground/90"
+                            className="flex-1 border-border bg-transparent transition-all hover:text-foreground"
                             variant="outline"
                         >
                             <a href={project.sourceUrl} rel="noopener noreferrer" target="_blank">
-                                <Icons.github className="mr-1 h-2 w-2" />
+                                {project.sourceUrl.includes("gitlab.com") ? (
+                                    <Icons.gitlab className="mr-1 h-2 w-2" />
+                                ) : (
+                                    <Icons.github className="mr-1 h-2 w-2" />
+                                )}
                                 Source
                             </a>
                         </Button>
