@@ -275,4 +275,14 @@ export const PROJECTS: Project[] = [
         technologies: ["Rust"],
         sourceUrl: "https://github.com/yehezkieldio/starrlight-rust",
     },
+    {
+        id: "26",
+        title: "Magnus",
+        description: "Simple chess game that allows you to play by taking turns with another player",
+        category: "Desktop Application",
+        year: 2024,
+        technologies: ["Visual Basic .NET"],
+        sourceUrl: "https://github.com/yehezkieldio/magnus",
+        image: "/img_projects/26.png",
+    },
 ];
