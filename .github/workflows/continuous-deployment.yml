@@ -51,8 +51,7 @@ jobs:
     if: |
       github.event_name == 'push' &&
       github.ref == 'refs/heads/master' &&
-      needs.detect-deployment-type.outputs.deploy_prod == 'true' &&
-      needs.detect-deployment-type.outputs.src_changed == 'true'
+      needs.detect-deployment-type.outputs.deploy_prod == 'true'
     runs-on: ubuntu-latest
     environment:
       name: Production
