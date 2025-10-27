@@ -73,7 +73,7 @@ export function useFilteredProjects(itemsPerPage = 9): UseFilteredProjectsReturn
             !filters.search && filters.category === "all" && filters.year === 0 && filters.tech.length === 0;
 
         if (hasNoFilters) {
-            return results;
+            return results.sort((a, b) => b.year - a.year);
         }
 
         if (filters.search) {
@@ -97,7 +97,7 @@ export function useFilteredProjects(itemsPerPage = 9): UseFilteredProjectsReturn
             results = results.filter((p) => p.year === filters.year);
         }
 
-        return results;
+        return results.sort((a, b) => b.year - a.year);
     }, [filters.search, filters.category, filters.year, filters.tech, miniSearch]);
 
     const paginationData = useMemo(() => {
