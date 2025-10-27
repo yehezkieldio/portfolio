@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
         mcpServer: true,
         turbopackFileSystemCacheForDev: true,
     },
+    allowedDevOrigins: ["192.168.137.2", "192.168.137.1"],
 };
 
 export default nextConfig;
