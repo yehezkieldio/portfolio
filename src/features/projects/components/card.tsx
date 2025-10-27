@@ -1,8 +1,9 @@
 "use client";
 
-import { ExternalLinkIcon, GithubIcon } from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 import Image from "next/image";
 import { memo } from "react";
+import { Icons } from "#/components/icons";
 import { Badge } from "#/components/ui/badge";
 import { Button } from "#/components/ui/button";
 import type { Project } from "#/features/projects/lib/data";
@@ -26,7 +27,7 @@ function CardComponent({ project }: CardProps) {
                 ) : (
                     <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-muted to-card p-6">
                         <div className="text-center">
-                            <h3 className="mb-2 font-bold text-2xl text-accent">{project.title}</h3>
+                            <h3 className="mb-2 font-bold text-2xl">{project.title}</h3>
                             <p className="line-clamp-3 text-muted-foreground text-sm">
                                 {project.description}
                             </p>
@@ -44,9 +45,7 @@ function CardComponent({ project }: CardProps) {
             <div className="flex flex-1 flex-col p-6">
                 <div className="flex-1">
                     <div className="mb-3 flex items-start justify-between gap-2">
-                        <h3 className="font-bold text-xl leading-tight transition-colors group-hover:text-primary">
-                            {project.title}
-                        </h3>
+                        <h3 className="font-bold text-xl leading-tight transition-colors">{project.title}</h3>
                     </div>
 
                     <p className="mb-4 line-clamp-2 text-muted-foreground text-sm leading-relaxed">
@@ -90,11 +89,11 @@ function CardComponent({ project }: CardProps) {
                     {project.sourceUrl && (
                         <Button
                             asChild
-                            className="flex-1 border-border bg-transparent transition-all hover:border-accent/30 hover:bg-muted"
+                            className="flex-1 border-border bg-transparent transition-all hover:text-muted-foreground/90"
                             variant="outline"
                         >
                             <a href={project.sourceUrl} rel="noopener noreferrer" target="_blank">
-                                <GithubIcon className="mr-2 h-4 w-4" />
+                                <Icons.github className="mr-1 h-2 w-2" />
                                 Source
                             </a>
                         </Button>
