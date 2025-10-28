@@ -29,7 +29,8 @@
       "recommended": true,
       "suspicious": {
         "noUnknownAtRules": "off",
-        "useAwait": "off"
+        "useAwait": "off",
+        "noConsole": "off"
       },
       "style": {
         "noMagicNumbers": "off",
@@ -38,6 +39,14 @@
       },
       "performance": {
         "noNamespaceImport": "off"
+      },
+      "complexity": {
+        "noExcessiveCognitiveComplexity": {
+          "level": "warn",
+          "options": {
+            "maxAllowedComplexity": 50
+          }
+        }
       }
     },
     "domains": {
