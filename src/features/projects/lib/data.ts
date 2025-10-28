@@ -31,6 +31,7 @@ export const PROJECTS: Project[] = [
         year: 2019,
         technologies: ["PHP"],
         sourceUrl: "https://gitlab.com/yehezkieldio/projectilehp",
+        viewUrl: "https://www.youtube.com/watch?v=NI9k6nBrmpU",
         image: "/img_projects/1.png",
     },
     {
