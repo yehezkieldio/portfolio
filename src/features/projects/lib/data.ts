@@ -39,7 +39,7 @@ export const PROJECTS: Project[] = [
         description: "A simple Indonesian multipurpose Discord bot that provides various basic features.",
         category: "Discord Bot",
         year: 2021,
-        technologies: ["JavaScript", "Discord.js"],
+        technologies: ["JavaScript", "discord.js"],
         sourceUrl: "https://gitlab.com/yehezkieldio/lumine",
     },
     {
@@ -71,7 +71,7 @@ export const PROJECTS: Project[] = [
         description: "An operations management Discord bot built for the Genshin Impact ID community.",
         category: "Discord Bot",
         year: 2021,
-        technologies: ["TypeScript", "Discord.js"],
+        technologies: ["TypeScript", "discord.js"],
         sourceUrl: "https://gitlab.com/yehezkieldio/raiden",
     },
     {
@@ -81,7 +81,7 @@ export const PROJECTS: Project[] = [
             "A yet another multipurpose Discord bot with various features, utilities and a web dashboard.",
         category: "Discord Bot",
         year: 2021,
-        technologies: ["TypeScript", "Discord.js", "React", "Next.js"],
+        technologies: ["TypeScript", "discord.js", "React", "Next.js"],
         sourceUrl: "https://gitlab.com/yehezkieldio/mythcord",
     },
     {
@@ -162,7 +162,7 @@ export const PROJECTS: Project[] = [
             "A versatile Discord bot designed to be a comprehensive solution for a wide range of tasks.",
         category: "Discord Bot",
         year: 2024,
-        technologies: ["TypeScript", "Discord.js"],
+        technologies: ["TypeScript", "discord.js"],
         sourceUrl: "https://github.com/yehezkieldio/imperia-2024",
     },
     {
@@ -244,7 +244,7 @@ export const PROJECTS: Project[] = [
             "Gemini-powered Discord bot with with RAG (retrieval-augmented generation) capabilities.",
         category: "Discord Bot",
         year: 2025,
-        technologies: ["TypeScript", "Discord.js", "PostgreSQL"],
+        technologies: ["TypeScript", "discord.js", "PostgreSQL"],
         sourceUrl: "https://github.com/yehezkieldio/argonavis",
     },
     {
@@ -284,5 +284,15 @@ export const PROJECTS: Project[] = [
         technologies: ["Visual Basic .NET"],
         sourceUrl: "https://github.com/yehezkieldio/magnus",
         image: "/img_projects/26.png",
+    },
+    {
+        id: "27",
+        title: "Antimony",
+        description:
+            "API that provides a wrapper around LiveKit for managing real-time video/audio rooms and access tokens.",
+        category: "API",
+        year: 2024,
+        technologies: ["Go", "Docker"],
+        sourceUrl: "https://github.com/yehezkieldio/antimony",
     },
 ];
