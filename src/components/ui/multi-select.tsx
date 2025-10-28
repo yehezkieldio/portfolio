@@ -958,15 +958,23 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                             }}
                                         >
                                             {`+ ${selectedValues.length - responsiveSettings.maxCount} more`}
-                                            <button
+                                            {/** biome-ignore lint/a11y/useSemanticElements: Nested button fix - cannot use button inside button */}
+                                            <div
                                                 aria-label="Clear extra options"
                                                 className={cn("ml-2 inline-flex cursor-pointer items-center")}
                                                 onClick={(event) => {
                                                     event.stopPropagation();
                                                     clearExtraOptions();
                                                 }}
+                                                onKeyDown={(event) => {
+                                                    if (event.key === "Enter" || event.key === " ") {
+                                                        event.preventDefault();
+                                                        event.stopPropagation();
+                                                        clearExtraOptions();
+                                                    }
+                                                }}
+                                                role="button"
                                                 tabIndex={0}
-                                                type="button"
                                             >
                                                 <XCircleIcon
                                                     className={cn(
@@ -974,23 +982,31 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                                         responsiveSettings.compactMode && "h-3 w-3"
                                                     )}
                                                 />
-                                            </button>
+                                            </div>
                                         </Badge>
                                     )}
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <button
+                                    {/** biome-ignore lint/a11y/useSemanticElements: Nested button fix - cannot use button inside button */}
+                                    <div
                                         aria-label={`Clear all ${selectedValues.length} selected options`}
                                         className="mx-2 flex h-4 w-4 cursor-pointer items-center justify-center rounded-sm border-0 bg-transparent text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
                                         onClick={(event) => {
                                             event.stopPropagation();
                                             handleClear();
                                         }}
+                                        onKeyDown={(event) => {
+                                            if (event.key === "Enter" || event.key === " ") {
+                                                event.preventDefault();
+                                                event.stopPropagation();
+                                                handleClear();
+                                            }
+                                        }}
+                                        role="button"
                                         tabIndex={0}
-                                        type="button"
                                     >
                                         <XIcon className="h-4 w-4" />
-                                    </button>
+                                    </div>
                                     <Separator className="flex h-full min-h-6" orientation="vertical" />
                                     <ChevronDownIcon
                                         aria-hidden="true"
