@@ -6,6 +6,65 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.4 (October 28, 2025)
+
+### <!-- 2 -->🧩 Dependencies Updates
+
+- [`1ef7ecf`](https://github.com/yehezkieldio/portfolio/commit/1ef7ecfbb18a905bcb85aef2361ddaa57e2d9a8f) deps: Update dependency ultracite to v6.0.4 ([#15](https://github.com/yehezkieldio/portfolio/issues/15))by renovate[bot]
+
+
+### <!-- 3 -->🚀 New Features
+
+- [`972109a`](https://github.com/yehezkieldio/portfolio/commit/972109a221e9c21d43cca4d19afece574112dbf4) ui: Add command palette, dialog, and separator components with supporting dependencies
+
+
+- [`e8b60e8`](https://github.com/yehezkieldio/portfolio/commit/e8b60e8492a185e96b54d26f6269287b7ef22f71) Add advanced MultiSelect UI component with responsive, animated, and accessible options plus updated biome.json rules
+
+
+- [`de85557`](https://github.com/yehezkieldio/portfolio/commit/de85557e8db347827a2a82d3573ce1dbd88ec1e3) projects: Standardize discord.js casing and add Antimony API project entry
+
+
+- [`d084a60`](https://github.com/yehezkieldio/portfolio/commit/d084a60c1ee107e64c013b1e6b2b279dbeb0306b) projects: Add Imperia AI Discord bot project to data list
+
+
+- [`50f0cd0`](https://github.com/yehezkieldio/portfolio/commit/50f0cd043d85165b7b16ba57cb155ae7fe24a3d5) ui: Enhance accessibility with keyboard support and replace tech badge filter with searchable multi-select
+
+
+- [`6149442`](https://github.com/yehezkieldio/portfolio/commit/6149442fbe0386b3b0477710f3611b0d50ec8e63) home: Add footer with author info and GitHub link, adjust header spacing, and refine input focus styles
+
+
+### <!-- 4 -->🐛 Bug Fixes
+
+- [`1afb1c6`](https://github.com/yehezkieldio/portfolio/commit/1afb1c6531629a898c251bd37e49b6748d31d96a) projects: Update sourceUrl for starrlight Rust project to correct repo link
+
+
+- [`f77d9f6`](https://github.com/yehezkieldio/portfolio/commit/f77d9f6e533d55f7798624e34ae6bbe0d4203c8f) multi-select: Adjust mobile width calculation and refine select all label formatting
+
+
+- [`dc2b295`](https://github.com/yehezkieldio/portfolio/commit/dc2b295ca3c19f987655b03aabd55c74597a33e7) multi-select: Replace button with div and add keyboard handling for option removal
+
+
+- [`4269e08`](https://github.com/yehezkieldio/portfolio/commit/4269e08801c9d6796b590370faf613f33e57ff4d) multi-select: Replace nested buttons with divs and add keyboard support for accessibility
+
+
+### <!-- 7 -->🚜 Refactor
+
+- [`d2141b6`](https://github.com/yehezkieldio/portfolio/commit/d2141b6b8885c1055963b8b4eaf12f7215b64e65) multi-select: Replace div role buttons with semantic button elements for accessibility and cleaner event handling
+
+
+### <!-- 9 -->🎨 Code Styling
+
+- [`9a41386`](https://github.com/yehezkieldio/portfolio/commit/9a413863bbc2b9a7188e27f158efc0f0fea2c582) filters: Make select inputs full width on small screens for better responsiveness
+
+
+- [`1561d57`](https://github.com/yehezkieldio/portfolio/commit/1561d576d4fc01c4bc62aa290ed8a93d20b9b022) filters: Add text color and dark mode background to dropdown
+
+
+- [`1dd92cf`](https://github.com/yehezkieldio/portfolio/commit/1dd92cf177d6cb1d7c7728f804a54386bf873bf0) multi-select: Update checkbox styling for consistency and remove close button
+
+
+- [`c1586b6`](https://github.com/yehezkieldio/portfolio/commit/c1586b6fef560d1055b7da196e7030f8376f8af2) multi-select: Adjust clear button container styles for better alignment and spacing
+
 ## portfolio@2.0.0-alpha.3 (October 27, 2025)
 
 ### <!-- 3 -->🚀 New Features
