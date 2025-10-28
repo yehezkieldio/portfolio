@@ -35,6 +35,9 @@
         "noMagicNumbers": "off",
         "useConsistentTypeDefinitions": "off",
         "useBlockStatements": "off"
+      },
+      "performance": {
+        "noNamespaceImport": "off"
       }
     },
     "domains": {
