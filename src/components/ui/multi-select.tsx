@@ -961,7 +961,9 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                             {/** biome-ignore lint/a11y/useSemanticElements: Nested button fix - cannot use button inside button */}
                                             <div
                                                 aria-label="Clear extra options"
-                                                className={cn("ml-2 inline-flex cursor-pointer items-center")}
+                                                className={cn(
+                                                    "ml-2 inline-flex cursor-pointer items-center justify-center"
+                                                )}
                                                 onClick={(event) => {
                                                     event.stopPropagation();
                                                     clearExtraOptions();
@@ -990,7 +992,7 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                     {/** biome-ignore lint/a11y/useSemanticElements: Nested button fix - cannot use button inside button */}
                                     <div
                                         aria-label={`Clear all ${selectedValues.length} selected options`}
-                                        className="mx-2 flex h-4 w-4 cursor-pointer items-center justify-center rounded-sm border-0 bg-transparent text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                                        className="mx-2 flex cursor-pointer items-center justify-center rounded-sm border-0 bg-transparent p-0.5 text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
                                         onClick={(event) => {
                                             event.stopPropagation();
                                             handleClear();
