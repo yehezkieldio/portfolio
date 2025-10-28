@@ -60,7 +60,7 @@ function FiltersComponent() {
             <div className="relative">
                 <SearchIcon className="-translate-y-1/2 absolute top-1/2 left-4 h-5 w-5 text-muted-foreground" />
                 <Input
-                    className="h-12 border-border bg-input pl-12 text-base transition-all focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-primary"
+                    className="h-12 border-border bg-input pl-12 text-base transition-colors hover:border-accent/30 focus-visible:border-accent/30"
                     onChange={(e) => handleSearchChange(e.target.value)}
                     placeholder="Search projects by name or description..."
                     type="search"
