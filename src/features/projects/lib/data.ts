@@ -295,4 +295,13 @@ export const PROJECTS: Project[] = [
         technologies: ["Go", "Docker"],
         sourceUrl: "https://github.com/yehezkieldio/antimony",
     },
+    {
+        id: "28",
+        title: "Imperia AI",
+        description: "Flexible Discord chat bot with various AI providers and sources.",
+        category: "Discord Bot",
+        year: 2025,
+        technologies: ["TypeScript", "discord.js", "AI SDK"],
+        sourceUrl: "https://github.com/yehezkieldio/imperia-ai",
+    },
 ];
