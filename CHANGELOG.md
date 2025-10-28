@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.6 (October 28, 2025)
+
+### <!-- 2 -->🧩 Dependencies Updates
+- [`3ac75c9`](https://github.com/yehezkieldio/portfolio/commit/3ac75c96027fee5595cdba6fe6e2efd64d64f931) deps: Update dependency fireflyy to ^3.0.6 by renovate[bot] ([#16](https://github.com/yehezkieldio/portfolio/issues/16))
+
+### <!-- 3 -->🚀 New Features
+- [`8d3cd12`](https://github.com/yehezkieldio/portfolio/commit/8d3cd1236333f08fdfa2cd864d3a1c4c168df8df) Integrate Vercel Analytics and Speed Insights
 ## portfolio@2.0.0-alpha.5 (October 28, 2025)
 
 ### <!-- 11 -->🛠️ Miscellaneous
