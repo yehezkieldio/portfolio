@@ -435,25 +435,18 @@ const BadgeItem = React.memo<BadgeItemProps>(
                     />
                 )}
                 <span className={cn(screenSize === "mobile" && "truncate")}>{option.label}</span>
-                <div
+                <button
                     aria-label={`Remove ${option.label} from selection`}
                     className="-m-0.5 ml-2 h-4 w-4 cursor-pointer rounded-sm border-0 bg-transparent p-0.5 hover:bg-white/20 focus:outline-none focus:ring-1 focus:ring-white/50"
                     onClick={(event) => {
                         event.stopPropagation();
                         toggleOption(value);
                     }}
-                    onKeyDown={(event) => {
-                        if (event.key === "Enter" || event.key === " ") {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            toggleOption(value);
-                        }
-                    }}
-                    role="button"
                     tabIndex={0}
+                    type="button"
                 >
                     <XCircleIcon className={cn("h-3 w-3", responsiveSettings.compactMode && "h-2.5 w-2.5")} />
-                </div>
+                </button>
             </Badge>
         );
     }
@@ -957,22 +950,15 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                             }}
                                         >
                                             {`+ ${selectedValues.length - responsiveSettings.maxCount} more`}
-                                            <div
+                                            <button
                                                 aria-label="Clear extra options"
                                                 className={cn("ml-2 inline-flex cursor-pointer items-center")}
                                                 onClick={(event) => {
                                                     event.stopPropagation();
                                                     clearExtraOptions();
                                                 }}
-                                                onKeyDown={(event) => {
-                                                    if (event.key === "Enter" || event.key === " ") {
-                                                        event.preventDefault();
-                                                        event.stopPropagation();
-                                                        clearExtraOptions();
-                                                    }
-                                                }}
-                                                role="button"
                                                 tabIndex={0}
+                                                type="button"
                                             >
                                                 <XCircleIcon
                                                     className={cn(
@@ -980,30 +966,23 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                                         responsiveSettings.compactMode && "h-3 w-3"
                                                     )}
                                                 />
-                                            </div>
+                                            </button>
                                         </Badge>
                                     )}
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <div
+                                    <button
                                         aria-label={`Clear all ${selectedValues.length} selected options`}
                                         className="mx-2 flex h-4 w-4 cursor-pointer items-center justify-center rounded-sm border-0 bg-transparent text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
                                         onClick={(event) => {
                                             event.stopPropagation();
                                             handleClear();
                                         }}
-                                        onKeyDown={(event) => {
-                                            if (event.key === "Enter" || event.key === " ") {
-                                                event.preventDefault();
-                                                event.stopPropagation();
-                                                handleClear();
-                                            }
-                                        }}
-                                        role="button"
                                         tabIndex={0}
+                                        type="button"
                                     >
                                         <XIcon className="h-4 w-4" />
-                                    </div>
+                                    </button>
                                     <Separator className="flex h-full min-h-6" orientation="vertical" />
                                     <ChevronDownIcon
                                         aria-hidden="true"
