@@ -119,7 +119,7 @@ function FiltersComponent() {
                         popoverAnimation: "scale",
                         optionHoverAnimation: "highlight",
                     }}
-                    className="border-border bg-input transition-colors hover:border-accent/30"
+                    className="border-border bg-input text-foreground transition-colors hover:border-accent/30 dark:bg-input/30"
                     defaultValue={filters.tech}
                     onValueChange={handleTechChange}
                     options={techOptions}
