@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.5 (October 28, 2025)
+
+### <!-- 11 -->🛠️ Miscellaneous
+- [`84ee9b7`](https://github.com/yehezkieldio/portfolio/commit/84ee9b75718abfa1c590f79e8eb6a8c82f52d53a) cliff.toml: Enhance commit grouping and release note formatting for clarity and broader keyword support
+
+### <!-- 3 -->🚀 New Features
+- [`f6c3aca`](https://github.com/yehezkieldio/portfolio/commit/f6c3aca062cd8898bbb7d1904d9ec2a3c5d8ed48) projects: Add three new web application projects with images and metadata
+- [`b38800f`](https://github.com/yehezkieldio/portfolio/commit/b38800fec566e84342976c0a99a4e4958597fceb) projects: Add viewUrl for ProjectileHP project to provide video demo link
+
+### <!-- 4 -->🐛 Bug Fixes
+- [`b0667f2`](https://github.com/yehezkieldio/portfolio/commit/b0667f2d63e8451386efba6e6131bb3038483ef1) projects: Update technologies list for Astral project to only include Astro
 ## portfolio@2.0.0-alpha.4 (October 28, 2025)
 
 ### <!-- 2 -->🧩 Dependencies Updates
