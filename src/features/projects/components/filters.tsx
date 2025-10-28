@@ -2,10 +2,10 @@
 
 import { SearchIcon, XIcon } from "lucide-react";
 import { memo, useCallback } from "react";
-import { Badge } from "#/components/ui/badge";
 import { Button } from "#/components/ui/button";
 import { Input } from "#/components/ui/input";
 import { Label } from "#/components/ui/label";
+import { MultiSelect, type MultiSelectOption } from "#/components/ui/multi-select";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "#/components/ui/select";
 import { useProjectsContext } from "#/features/projects/lib/context";
 
@@ -33,14 +33,11 @@ function FiltersComponent() {
         [setFilters]
     );
 
-    const handleTechToggle = useCallback(
-        (technology: string) => {
-            const newTech = filters.tech.includes(technology)
-                ? filters.tech.filter((t) => t !== technology)
-                : [...filters.tech, technology];
-            setFilters({ tech: newTech, page: 1 });
+    const handleTechChange = useCallback(
+        (values: string[]) => {
+            setFilters({ tech: values, page: 1 });
         },
-        [filters.tech, setFilters]
+        [setFilters]
     );
 
     const handleClearFilters = useCallback(() => {
@@ -52,6 +49,11 @@ function FiltersComponent() {
             page: 1,
         });
     }, [setFilters]);
+
+    const techOptions: MultiSelectOption[] = technologies.map((tech) => ({
+        label: tech,
+        value: tech,
+    }));
 
     return (
         <div className="mb-12 space-y-6">
@@ -111,25 +113,19 @@ function FiltersComponent() {
                 <Label className="font-medium text-muted-foreground text-sm uppercase tracking-wider">
                     Technologies
                 </Label>
-                <div className="flex flex-wrap gap-2">
-                    {technologies.map((tech) => {
-                        const isSelected = filters.tech.includes(tech);
-                        return (
-                            <Badge
-                                className={`cursor-pointer transition-all ${
-                                    isSelected
-                                        ? "border-primary bg-primary text-primary-foreground hover:bg-primary/90"
-                                        : "hover:border-accent/30 hover:bg-muted"
-                                }`}
-                                key={tech}
-                                onClick={() => handleTechToggle(tech)}
-                                variant={isSelected ? "default" : "outline"}
-                            >
-                                {tech}
-                            </Badge>
-                        );
-                    })}
-                </div>
+                <MultiSelect
+                    animationConfig={{
+                        badgeAnimation: "slide",
+                        popoverAnimation: "scale",
+                        optionHoverAnimation: "highlight",
+                    }}
+                    className="border-border bg-input transition-colors hover:border-accent/30"
+                    defaultValue={filters.tech}
+                    onValueChange={handleTechChange}
+                    options={techOptions}
+                    placeholder="Select technologies"
+                    searchable={true}
+                />
             </div>
         </div>
     );
