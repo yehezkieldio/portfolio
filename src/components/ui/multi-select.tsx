@@ -435,18 +435,26 @@ const BadgeItem = React.memo<BadgeItemProps>(
                     />
                 )}
                 <span className={cn(screenSize === "mobile" && "truncate")}>{option.label}</span>
-                <button
+                {/** biome-ignore lint/a11y/useSemanticElements: I hate working with ARIA roles */}
+                <div
                     aria-label={`Remove ${option.label} from selection`}
                     className="-m-0.5 ml-2 h-4 w-4 cursor-pointer rounded-sm border-0 bg-transparent p-0.5 hover:bg-white/20 focus:outline-none focus:ring-1 focus:ring-white/50"
                     onClick={(event) => {
                         event.stopPropagation();
                         toggleOption(value);
                     }}
+                    onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            toggleOption(value);
+                        }
+                    }}
+                    role="button"
                     tabIndex={0}
-                    type="button"
                 >
                     <XCircleIcon className={cn("h-3 w-3", responsiveSettings.compactMode && "h-2.5 w-2.5")} />
-                </button>
+                </div>
             </Badge>
         );
     }
