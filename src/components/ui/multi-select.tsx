@@ -1005,7 +1005,7 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                     className={cn(
                         "w-auto p-0",
                         getPopoverAnimationClass(),
-                        screenSize === "mobile" && "w-[85vw] max-w-[280px]",
+                        screenSize === "mobile" && "w-[calc(100vw-2rem)]",
                         screenSize === "tablet" && "w-[70vw] max-w-md",
                         screenSize === "desktop" && "min-w-[300px]",
                         popoverClassName
@@ -1016,7 +1016,10 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                     style={{
                         animationDuration: `${animationConfig?.duration || animation}s`,
                         animationDelay: `${animationConfig?.delay || 0}s`,
-                        maxWidth: `min(${widthConstraints.maxWidth}, 85vw)`,
+                        maxWidth:
+                            screenSize === "mobile"
+                                ? "calc(100vw - 2rem)"
+                                : `min(${widthConstraints.maxWidth}, 85vw)`,
                         maxHeight: screenSize === "mobile" ? "70vh" : "60vh",
                         touchAction: "manipulation",
                     }}
@@ -1071,11 +1074,10 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                             <CheckIcon className="h-4 w-4" />
                                         </div>
                                         <span>
-                                            (Select All
+                                            Select All
                                             {getAllOptions().length > 20
-                                                ? ` - ${getAllOptions().length} options`
+                                                ? ` (${getAllOptions().length} options)`
                                                 : ""}
-                                            )
                                         </span>
                                     </CommandItem>
                                 </CommandGroup>
