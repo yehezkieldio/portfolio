@@ -273,7 +273,7 @@ export const PROJECTS: Project[] = [
         category: "CLI",
         year: 2025,
         technologies: ["Rust"],
-        sourceUrl: "https://github.com/yehezkieldio/starrlight-rust",
+        sourceUrl: "https://github.com/yehezkieldio/starrlight",
     },
     {
         id: "26",
