@@ -1061,11 +1061,11 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                         <div
                                             aria-hidden="true"
                                             className={cn(
-                                                "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                                                "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border-2",
                                                 selectedValues.length ===
                                                     getAllOptions().filter((opt) => !opt.disabled).length
-                                                    ? "bg-primary text-primary-foreground"
-                                                    : "opacity-50 [&_svg]:invisible"
+                                                    ? "border-primary bg-primary text-primary-foreground"
+                                                    : "border-input bg-background [&_svg]:invisible"
                                             )}
                                         >
                                             <CheckIcon className="h-4 w-4" />
@@ -1104,10 +1104,10 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                                     <div
                                                         aria-hidden="true"
                                                         className={cn(
-                                                            "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                                                            "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border-2",
                                                             isSelected
-                                                                ? "bg-primary text-primary-foreground"
-                                                                : "opacity-50 [&_svg]:invisible"
+                                                                ? "border-primary bg-primary text-primary-foreground"
+                                                                : "border-input bg-background [&_svg]:invisible"
                                                         )}
                                                     >
                                                         <CheckIcon className="h-4 w-4" />
@@ -1147,10 +1147,10 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                                 <div
                                                     aria-hidden="true"
                                                     className={cn(
-                                                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                                                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border-2",
                                                         isSelected
-                                                            ? "bg-primary text-primary-foreground"
-                                                            : "opacity-50 [&_svg]:invisible"
+                                                            ? "border-primary bg-primary text-primary-foreground"
+                                                            : "border-input bg-background [&_svg]:invisible"
                                                     )}
                                                 >
                                                     <CheckIcon className="h-4 w-4" />
@@ -1184,12 +1184,6 @@ export const MultiSelect = (props: MultiSelectProps & { ref?: React.Ref<MultiSel
                                             />
                                         </>
                                     )}
-                                    <CommandItem
-                                        className="max-w-full flex-1 cursor-pointer justify-center"
-                                        onSelect={() => setIsPopoverOpen(false)}
-                                    >
-                                        Close
-                                    </CommandItem>
                                 </div>
                             </CommandGroup>
                         </CommandList>
