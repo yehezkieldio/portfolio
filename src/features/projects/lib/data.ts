@@ -223,7 +223,7 @@ export const PROJECTS: Project[] = [
         description: "Landing page template with a design inspired from GitBook and the stars.",
         category: "Web Application",
         year: 2024,
-        technologies: ["React", "Vite", "TypeScript", "Tailwind CSS"],
+        technologies: ["Astro"],
         sourceUrl: "https://github.com/yehezkieldio/astral",
         image: "/img_projects/20.png",
     },
