@@ -70,7 +70,7 @@ function FiltersComponent() {
 
             <div className="flex flex-wrap items-center gap-4">
                 <Select onValueChange={handleCategoryChange} value={filters.category}>
-                    <SelectTrigger className="w-[180px] border-border bg-input transition-colors hover:border-accent/30">
+                    <SelectTrigger className="w-full border-border bg-input transition-colors hover:border-accent/30 sm:w-[180px]">
                         <SelectValue placeholder="Category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -84,7 +84,7 @@ function FiltersComponent() {
                 </Select>
 
                 <Select onValueChange={handleYearChange} value={filters.year.toString()}>
-                    <SelectTrigger className="w-[140px] border-border bg-input transition-colors hover:border-accent/30">
+                    <SelectTrigger className="w-full border-border bg-input transition-colors hover:border-accent/30 sm:w-[140px]">
                         <SelectValue placeholder="Year" />
                     </SelectTrigger>
                     <SelectContent>
