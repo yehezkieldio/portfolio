@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
     {
         id: "1",
         title: "ProjectileHP",
-        description: "PocketMine-MP plugin that display Health and Playsound on Projectile Hit.",
+        description: "PocketMine-MP plugin that show entity health on projectile hit with sound feedback.",
         category: "Plugin",
         year: 2019,
         technologies: ["PHP"],
@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
     {
         id: "2",
         title: "Lumine",
-        description: "A simple Indonesian multipurpose Discord bot that provides various basic features.",
+        description: "Multipurpose Discord bot providing utility features for Indonesian communities.",
         category: "Discord Bot",
         year: 2021,
         technologies: ["JavaScript", "discord.js"],
@@ -46,7 +46,7 @@ export const PROJECTS: Project[] = [
     {
         id: "3",
         title: "LokasiZero",
-        description: "A landing page for fictional cybersecurity company, part of a competition project.",
+        description: "Fictional cybersecurity company landing page created for a web design competition.",
         category: "Web Application",
         year: 2023,
         technologies: ["HTML", "CSS", "JavaScript"],
@@ -57,8 +57,7 @@ export const PROJECTS: Project[] = [
     {
         id: "4",
         title: "Aqua",
-        description:
-            "A landing page for AQUA, the mineral water brand, showcasing its products and features.",
+        description: "Product showcase landing page concept for AQUA mineral water brand.",
         category: "Web Application",
         year: 2022,
         technologies: ["HTML", "CSS", "JavaScript"],
@@ -69,7 +68,7 @@ export const PROJECTS: Project[] = [
     {
         id: "5",
         title: "Raiden",
-        description: "An operations management Discord bot built for the Genshin Impact ID community.",
+        description: "Operations and management Discord bot for the Genshin Impact ID community.",
         category: "Discord Bot",
         year: 2021,
         technologies: ["TypeScript", "discord.js"],
@@ -78,8 +77,7 @@ export const PROJECTS: Project[] = [
     {
         id: "6",
         title: "Mythcord",
-        description:
-            "A yet another multipurpose Discord bot with various features, utilities and a web dashboard.",
+        description: "Multipurpose Discord bot with feature-rich utilities and integrated web dashboard.",
         category: "Discord Bot",
         year: 2021,
         technologies: ["TypeScript", "discord.js", "React", "Next.js"],
@@ -88,18 +86,17 @@ export const PROJECTS: Project[] = [
     {
         id: "7",
         title: "genshin-db",
-        description:
-            "A data package for Genshin Impact, providing information about characters, weapons, and artifacts.",
+        description: "Data package for providing Genshin Impact data on various in-game elements.",
         category: "Library",
         technologies: ["JavaScript"],
         year: 2020,
         sourceUrl: "https://github.com/theBowja/genshin-db",
+        viewUrl: "https://www.npmjs.com/package/genshin-db",
     },
     {
         id: "8",
         title: "Finance Recap",
-        description:
-            "A web application that extracts, manipulates, and displays financial data from Excel spreadsheets.",
+        description: "Web application for extracting and visualizing financial data from Excel spreadsheets.",
         category: "Web Application",
         year: 2022,
         technologies: ["PHP", "Laravel", "MongoDB"],
@@ -109,8 +106,7 @@ export const PROJECTS: Project[] = [
     {
         id: "9",
         title: "Inventory Management",
-        description:
-            "An web application with the aim of managing the office asset inventory of an organization.",
+        description: "Office asset inventory management system for organizational resource tracking.",
         category: "Web Application",
         year: 2022,
         technologies: ["React", "Next.js", "Nest.js", "MongoDB"],
@@ -120,8 +116,7 @@ export const PROJECTS: Project[] = [
     {
         id: "10",
         title: "Pittacia",
-        description:
-            "CLI to quickly create or override GitHub issue labels from a JSON file to a repository.",
+        description: "CLI tool for managing GitHub issue labels from JSON configuration files.",
         category: "CLI",
         year: 2023,
         technologies: ["Rust"],
@@ -130,7 +125,7 @@ export const PROJECTS: Project[] = [
     {
         id: "11",
         title: "Voidsong",
-        description: "Self-hosted API aggregator for various random contents.",
+        description: "Self-hosted API aggregator providing access to various random content sources.",
         category: "API",
         year: 2024,
         technologies: ["Rust", "Docker"],
@@ -139,7 +134,7 @@ export const PROJECTS: Project[] = [
     {
         id: "12",
         title: "Dikaios",
-        description: "A desktop application for a various IP address management tools.",
+        description: "Desktop application providing comprehensive IP address management utilities.",
         category: "Desktop Application",
         year: 2024,
         technologies: ["Tauri", "Vite", "Rust", "React", "TypeScript"],
@@ -149,7 +144,7 @@ export const PROJECTS: Project[] = [
     {
         id: "13",
         title: "TrashTrack",
-        description: "IoT-based smart trash bin system for filtering and monitoring trash efficiently.",
+        description: "IoT waste management system with filtering and real-time monitoring capabilities.",
         category: "Mobile Application",
         year: 2024,
         technologies: ["Capacitor", "Ionic", "Vite", "React", "TypeScript"],
@@ -159,18 +154,16 @@ export const PROJECTS: Project[] = [
     {
         id: "14",
         title: "Imperia",
-        description:
-            "A versatile Discord bot designed to be a comprehensive solution for a wide range of tasks.",
+        description: "Comprehensive multipurpose Discord bot for server management and utility tasks.",
         category: "Discord Bot",
         year: 2024,
-        technologies: ["TypeScript", "discord.js"],
+        technologies: ["TypeScript", "discord.js", "PostgreSQL", "Dragonfly"],
         sourceUrl: "https://github.com/yehezkieldio/imperia-2024",
     },
     {
         id: "15",
         title: "Topaz",
-        description:
-            "A personal reading tracker and metadata hub for fanfiction, webnovels, and online fiction.",
+        description: "Personal reading tracker for fanfiction, webnovels, and online fiction.",
         category: "Web Application",
         year: 2025,
         technologies: ["React", "Next.js", "TypeScript", "PostgreSQL"],
@@ -181,8 +174,7 @@ export const PROJECTS: Project[] = [
     {
         id: "16",
         title: "Firefly",
-        description:
-            "Automatic semantic versioning, changelog generation, and creating GitHub releases via a CLI.",
+        description: "CLI tool for automated semantic versioning, changelog generation, and GitHub release.",
         category: "CLI",
         year: 2025,
         technologies: ["Bun", "TypeScript"],
@@ -192,7 +184,7 @@ export const PROJECTS: Project[] = [
     {
         id: "17",
         title: "Sleeplesslabs",
-        description: "The landing page for Sleeplesslabs, a software development group.",
+        description: "Landing page for Sleeplesslabs software development group.",
         category: "Web Application",
         year: 2024,
         technologies: ["React", "Next.js", "TypeScript"],
@@ -202,7 +194,7 @@ export const PROJECTS: Project[] = [
     {
         id: "18",
         title: "Asteria",
-        description: "Remote input relay system to control Windows from Linux peripherals over the network.",
+        description: "Remote input relay for controlling Windows systems using Linux peripherals.",
         category: "CLI",
         year: 2025,
         technologies: ["Rust"],
@@ -211,8 +203,7 @@ export const PROJECTS: Project[] = [
     {
         id: "19",
         title: "Kyra",
-        description:
-            "A tool for seamless transfer of various data types between my Windows and Arch Linux laptops.",
+        description: "Data transfer tool between Windows and Arch Linux systems.",
         category: "CLI",
         year: 2025,
         technologies: ["Rust"],
@@ -221,7 +212,7 @@ export const PROJECTS: Project[] = [
     {
         id: "20",
         title: "Astral",
-        description: "Landing page template with a design inspired from GitBook and the stars.",
+        description: "Landing page template with a design inspired by GitBook and the stars.",
         category: "Web Application",
         year: 2024,
         technologies: ["Astro"],
@@ -231,8 +222,7 @@ export const PROJECTS: Project[] = [
     {
         id: "21",
         title: "Callisto",
-        description:
-            "Automatically streamline the setup and configuration process for various tools and utilities.",
+        description: "Automated setup and config tool for development environment initialization.",
         category: "CLI",
         year: 2024,
         technologies: ["TypeScript"],
@@ -241,8 +231,7 @@ export const PROJECTS: Project[] = [
     {
         id: "22",
         title: "ArgoNavis",
-        description:
-            "Gemini-powered Discord bot with with RAG (retrieval-augmented generation) capabilities.",
+        description: "Gemini-powered Discord bot with retrieval-augmented generation (RAG) capabilities.",
         category: "Discord Bot",
         year: 2025,
         technologies: ["TypeScript", "discord.js", "PostgreSQL"],
@@ -251,7 +240,7 @@ export const PROJECTS: Project[] = [
     {
         id: "23",
         title: "Amaya",
-        description: "Schema/file-based automated opinionated development configurations.",
+        description: "Schema-driven CLI for automated, opinionated development environment configuration.",
         category: "CLI",
         year: 2025,
         technologies: ["Rust"],
@@ -260,8 +249,7 @@ export const PROJECTS: Project[] = [
     {
         id: "24",
         title: "Avalon",
-        description:
-            "Cloudflare Workers-based Discord bot using LLMs for fast, context-aware question answering.",
+        description: "Serverless Discord bot on Cloudflare Workers for AI-powered chat interactions.",
         category: "Discord Bot",
         year: 2025,
         technologies: ["TypeScript", "LangChain", "Cloudflare Workers"],
@@ -270,7 +258,7 @@ export const PROJECTS: Project[] = [
     {
         id: "25",
         title: "Starrlight",
-        description: "Turn your GitHub stars into a beautiful Awesome List with ease.",
+        description: "Generate curated Awesome Lists from your GitHub starred repositories.",
         category: "CLI",
         year: 2025,
         technologies: ["Rust"],
@@ -279,7 +267,7 @@ export const PROJECTS: Project[] = [
     {
         id: "26",
         title: "Magnus",
-        description: "Simple chess game that allows you to play by taking turns with another player",
+        description: "Turn-based chess game for two players.",
         category: "Desktop Application",
         year: 2024,
         technologies: ["Visual Basic .NET"],
@@ -289,8 +277,7 @@ export const PROJECTS: Project[] = [
     {
         id: "27",
         title: "Antimony",
-        description:
-            "API that provides a wrapper around LiveKit for managing real-time video/audio rooms and access tokens.",
+        description: "API wrapper for LiveKit providing real-time video/audio room and token management.",
         category: "API",
         year: 2024,
         technologies: ["Go", "Docker"],
@@ -299,7 +286,7 @@ export const PROJECTS: Project[] = [
     {
         id: "28",
         title: "Imperia AI",
-        description: "Flexible Discord chat bot with various AI providers and sources.",
+        description: "Flexible Discord bot with multi-provider AI integration for chat interactions.",
         category: "Discord Bot",
         year: 2025,
         technologies: ["TypeScript", "discord.js", "AI SDK"],
@@ -308,7 +295,7 @@ export const PROJECTS: Project[] = [
     {
         id: "29",
         title: "TrackRunny",
-        description: "TrackRunny's personal website.",
+        description: "Personal portfolio website for TrackRunny.",
         category: "Web Application",
         year: 2020,
         technologies: ["HTML", "CSS", "JavaScript"],
@@ -318,7 +305,7 @@ export const PROJECTS: Project[] = [
     {
         id: "30",
         title: "Obama",
-        description: "A landing page for Obama, a feature-rich multifunction Discord bot.",
+        description: "Landing page for Obama, a feature-rich multipurpose Discord bot.",
         category: "Web Application",
         year: 2020,
         technologies: ["HTML", "CSS", "JavaScript"],
@@ -328,7 +315,7 @@ export const PROJECTS: Project[] = [
     {
         id: "31",
         title: "ExynosNetwork",
-        description: "A landing page for ExynosNetwork, a skyblock Minecraft Bedrock Edition server.",
+        description: "Landing page for ExynosNetwork skyblock Minecraft Bedrock Edition server.",
         category: "Web Application",
         year: 2020,
         technologies: ["HTML", "CSS", "JavaScript"],
