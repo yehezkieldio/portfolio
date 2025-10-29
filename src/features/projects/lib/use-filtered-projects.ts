@@ -44,7 +44,10 @@ function getMiniSearchInstance(): MiniSearch<Project> {
             searchOptions: {
                 boost: { title: 2 },
                 fuzzy: 0.2,
+                prefix: true,
+                combineWith: "AND",
             },
+            processTerm: (term) => term.toLowerCase(),
         });
 
         miniSearchInstance.addAll(PROJECTS);
