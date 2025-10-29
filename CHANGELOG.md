@@ -6,6 +6,28 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.7 (October 29, 2025)
+
+### <!-- 2 -->🧩 Dependencies Updates
+- [`f753e7c`](https://github.com/yehezkieldio/portfolio/commit/f753e7cc9c58ccdca543bec1cdbb93b826dca20e) deps: Update dependency @biomejs/biome to v2.3.2 by renovate[bot] ([#17](https://github.com/yehezkieldio/portfolio/issues/17))
+- [`cbbe52e`](https://github.com/yehezkieldio/portfolio/commit/cbbe52ec8ae06879c60346979e97517fad00d81c) deps: Update dependency @types/node to ^20.19.24 by renovate[bot] ([#18](https://github.com/yehezkieldio/portfolio/issues/18))
+- [`978ef86`](https://github.com/yehezkieldio/portfolio/commit/978ef86d9e2f0169b32754ac08c915b77b74541e) deps: Update dependency ultracite to v6.0.5 by renovate[bot] ([#19](https://github.com/yehezkieldio/portfolio/issues/19))
+- [`e8794db`](https://github.com/yehezkieldio/portfolio/commit/e8794dbc2fcf88eb20199c26e0302c0fea6720d0) deps: Update dependency next to v16.0.1 by renovate[bot] ([#20](https://github.com/yehezkieldio/portfolio/issues/20))
+- [`c413c76`](https://github.com/yehezkieldio/portfolio/commit/c413c7651c834883731b961f6277fe76aa63fcbf) deps: Add dependency motion
+
+### <!-- 3 -->🚀 New Features
+- [`1a21799`](https://github.com/yehezkieldio/portfolio/commit/1a217991ab015441e9ba54dcdfa891a60d7f9ad3) mcp: Add Context7 MCP server config and update agent docs for integration
+- [`57c585e`](https://github.com/yehezkieldio/portfolio/commit/57c585e9b34c7a972f9309b238f655b827de0fc0) projects: Add motion animations to grid and pagination
+- [`78dc8d1`](https://github.com/yehezkieldio/portfolio/commit/78dc8d1a0aa03c117980ee54eb5146c2928f800b) projects: Add debounced and deferred search with pending state and accessibility improvements
+- [`7a440cf`](https://github.com/yehezkieldio/portfolio/commit/7a440cfbd10b77feda97166b76a1cc91e0184a72) search: Enhance project filtering with prefix matching, AND logic, and lowercase term processing
+
+### <!-- 4 -->🐛 Bug Fixes
+- [`3d60850`](https://github.com/yehezkieldio/portfolio/commit/3d608504a7eec4965dacf1aad7e96ce4e7394aa0) pagination: Await filter update and use rAF for smooth scroll
+
+### <!-- 9 -->🎨 Code Styling
+- [`0d776cf`](https://github.com/yehezkieldio/portfolio/commit/0d776cf610dc4aee0c561502f69f3fdc55b0b01e) card: Add rounded corners to project card and update items per page to 12
+- [`3ccd65f`](https://github.com/yehezkieldio/portfolio/commit/3ccd65f8225bf2d20869c90aa0a224225f320d8f) page.tsx: Replace strong tag with span using font-medium for footer text styling
+- [`226e621`](https://github.com/yehezkieldio/portfolio/commit/226e621bbd98f839330a1792b0b3c4e31e61cbe1) card: Adjust background gradient opacity and reduce title font weight for visual consistency
 ## portfolio@2.0.0-alpha.6 (October 28, 2025)
 
 ### <!-- 2 -->🧩 Dependencies Updates
