@@ -25,7 +25,8 @@ export default async function Home() {
 
                 <footer className="mt-20 pt-12 text-center">
                     <p className="mx-auto max-w-4xl text-pretty text-muted-foreground text-xs md:text-base">
-                        This project archive belongs to <strong>Yehezkiel Dio Sinolungan</strong>.
+                        This project archive belongs to{" "}
+                        <span className="font-medium">Yehezkiel Dio Sinolungan</span>.
                     </p>
                     <p className="mx-auto mt-2 max-w-4xl text-pretty text-muted-foreground text-xs md:text-base">
                         Want to see more? Check out my{" "}
