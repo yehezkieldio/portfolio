@@ -1,6 +1,6 @@
 import MiniSearch from "minisearch";
 import { parseAsArrayOf, parseAsInteger, parseAsString, useQueryStates } from "nuqs";
-import { useMemo } from "react";
+import { useDeferredValue, useEffect, useMemo } from "react";
 import type { Project } from "#/features/projects/lib/data";
 import { PROJECTS } from "#/features/projects/lib/data";
 
@@ -20,6 +20,8 @@ interface UseFilteredProjectsReturn {
     paginatedProjects: Project[];
     totalPages: number;
     hasActiveFilters: boolean;
+    filterKey: string;
+    isSearching: boolean;
 }
 
 let miniSearchInstance: MiniSearch<Project> | null = null;
@@ -66,27 +68,27 @@ export function useFilteredProjects(itemsPerPage = 9): UseFilteredProjectsReturn
 
     const miniSearch = getMiniSearchInstance();
 
+    const deferredSearch = useDeferredValue(filters.search);
+    const isSearching = deferredSearch !== filters.search;
+
     const filteredProjects = useMemo(() => {
         let results = PROJECTS;
 
         const hasNoFilters =
-            !filters.search && filters.category === "all" && filters.year === 0 && filters.tech.length === 0;
+            !deferredSearch && filters.category === "all" && filters.year === 0 && filters.tech.length === 0;
 
         if (hasNoFilters) {
             return results.sort((a, b) => b.year - a.year);
         }
 
-        if (filters.search) {
-            const searchResults = miniSearch.search(filters.search);
+        if (deferredSearch) {
+            const searchResults = miniSearch.search(deferredSearch);
             const projectIds = new Set(searchResults.map((result) => result.id));
             results = PROJECTS.filter((p) => projectIds.has(p.id));
         }
 
         if (filters.tech.length > 0) {
-            const techSet = new Set(filters.tech);
-            results = results.filter((p) =>
-                filters.tech.every((tech) => techSet.has(tech) && p.technologies.includes(tech))
-            );
+            results = results.filter((p) => filters.tech.every((tech) => p.technologies.includes(tech)));
         }
 
         if (filters.category !== "all") {
@@ -98,20 +100,29 @@ export function useFilteredProjects(itemsPerPage = 9): UseFilteredProjectsReturn
         }
 
         return results.sort((a, b) => b.year - a.year);
-    }, [filters.search, filters.category, filters.year, filters.tech, miniSearch]);
+    }, [deferredSearch, filters.category, filters.year, filters.tech, miniSearch]);
 
     const paginationData = useMemo(() => {
         const totalCount = filteredProjects.length;
-        const totalPages = Math.ceil(totalCount / itemsPerPage);
-        const startIndex = (filters.page - 1) * itemsPerPage;
+        const totalPages = Math.max(1, Math.ceil(totalCount / itemsPerPage));
+
+        const validPage = Math.max(1, Math.min(filters.page, totalPages));
+        const startIndex = (validPage - 1) * itemsPerPage;
         const paginatedProjects = filteredProjects.slice(startIndex, startIndex + itemsPerPage);
 
         return {
             totalCount,
             totalPages,
             paginatedProjects,
+            validPage,
         };
     }, [filteredProjects, filters.page, itemsPerPage]);
+
+    useEffect(() => {
+        if (paginationData.validPage !== filters.page) {
+            setFilters({ page: paginationData.validPage });
+        }
+    }, [paginationData.validPage, filters.page, setFilters]);
 
     const hasActiveFilters = useMemo(
         () =>
@@ -122,6 +133,11 @@ export function useFilteredProjects(itemsPerPage = 9): UseFilteredProjectsReturn
         [filters.search, filters.category, filters.year, filters.tech]
     );
 
+    const filterKey = useMemo(
+        () => `${filters.page}-${paginationData.totalCount}-${hasActiveFilters}`,
+        [filters.page, paginationData.totalCount, hasActiveFilters]
+    );
+
     return {
         filters,
         setFilters,
@@ -130,5 +146,7 @@ export function useFilteredProjects(itemsPerPage = 9): UseFilteredProjectsReturn
         paginatedProjects: paginationData.paginatedProjects,
         totalPages: paginationData.totalPages,
         hasActiveFilters,
+        filterKey,
+        isSearching,
     };
 }

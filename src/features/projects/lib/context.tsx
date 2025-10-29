@@ -29,6 +29,9 @@ interface ProjectsContextValue {
     categories: string[];
     technologies: string[];
     years: number[];
+
+    filterKey: string;
+    isSearching: boolean;
 }
 
 const ProjectsContext = createContext<ProjectsContextValue | undefined>(undefined);
@@ -47,6 +50,8 @@ export function ProjectsProvider({ children, itemsPerPage = ITEMS_PER_PAGE }: Pr
         totalCount,
         totalPages,
         hasActiveFilters,
+        filterKey,
+        isSearching,
     } = useFilteredProjects(itemsPerPage);
 
     const paginationHelpers = useMemo(() => {
@@ -78,6 +83,8 @@ export function ProjectsProvider({ children, itemsPerPage = ITEMS_PER_PAGE }: Pr
             filters,
             setFilters,
             hasActiveFilters,
+            filterKey,
+            isSearching,
             ...paginationHelpers,
             ...derivedFilterValues,
         }),
@@ -89,6 +96,8 @@ export function ProjectsProvider({ children, itemsPerPage = ITEMS_PER_PAGE }: Pr
             filters,
             setFilters,
             hasActiveFilters,
+            filterKey,
+            isSearching,
             paginationHelpers,
             derivedFilterValues,
         ]

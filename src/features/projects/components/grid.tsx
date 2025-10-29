@@ -6,7 +6,7 @@ import { Card } from "#/features/projects/components/card";
 import { useProjectsContext } from "#/features/projects/lib/context";
 
 function GridComponent() {
-    const { paginatedProjects, startIndex, endIndex, totalCount, currentPage } = useProjectsContext();
+    const { paginatedProjects, startIndex, endIndex, totalCount, filterKey } = useProjectsContext();
 
     if (totalCount === 0) {
         return (
@@ -34,7 +34,9 @@ function GridComponent() {
                 initial={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
             >
-                Showing {startIndex + 1}-{endIndex} of {totalCount} projects
+                <span aria-atomic="true" aria-live="polite">
+                    Showing {startIndex + 1}-{endIndex} of {totalCount} projects
+                </span>
             </motion.div>
             <AnimatePresence mode="wait">
                 <motion.div
@@ -42,7 +44,7 @@ function GridComponent() {
                     className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                     exit="hidden"
                     initial="hidden"
-                    key={currentPage}
+                    key={filterKey}
                     variants={{
                         hidden: { opacity: 0 },
                         visible: {
