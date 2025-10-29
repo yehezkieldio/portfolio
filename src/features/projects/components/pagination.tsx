@@ -9,9 +9,17 @@ function PaginationComponent() {
     const { currentPage, totalPages, setFilters } = useProjectsContext();
 
     const handlePageChange = useCallback(
-        (newPage: number) => {
-            setFilters({ page: newPage });
-            window.scrollTo({ top: 0, behavior: "smooth" });
+        async (newPage: number) => {
+            await setFilters({ page: newPage });
+
+            const scrollOptions: ScrollToOptions = {
+                top: 0,
+                behavior: "smooth",
+            };
+
+            requestAnimationFrame(() => {
+                window.scrollTo(scrollOptions);
+            });
         },
         [setFilters]
     );
