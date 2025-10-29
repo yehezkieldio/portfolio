@@ -328,7 +328,7 @@ export const PROJECTS: Project[] = [
     {
         id: "31",
         title: "ExynosNetwork",
-        description: "A landing page for ExynosNetwork, a skyblock Minecrat Bedrock Edition server.",
+        description: "A landing page for ExynosNetwork, a skyblock Minecraft Bedrock Edition server.",
         category: "Web Application",
         year: 2020,
         technologies: ["HTML", "CSS", "JavaScript"],
