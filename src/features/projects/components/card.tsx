@@ -15,7 +15,7 @@ interface CardProps {
 
 function CardComponent({ project }: CardProps) {
     return (
-        <article className="group minimal-hover relative flex h-full flex-col overflow-hidden border border-border bg-card">
+        <article className="group minimal-hover relative flex h-full flex-col overflow-hidden rounded-md border border-border bg-card">
             <div className="relative aspect-video overflow-hidden bg-muted">
                 {project.image ? (
                     <>
