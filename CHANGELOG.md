@@ -6,6 +6,16 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.8 (October 29, 2025)
+### 📝 Release Notes
+Rework project descriptions.
+
+### <!-- 2 -->🧩 Dependencies Updates
+- [`0724eb3`](https://github.com/yehezkieldio/portfolio/commit/0724eb3d4512efa5c9adb662ab41c05c91acd680) deps: Update dependency lefthook to ^2.0.2 by renovate[bot] ([#21](https://github.com/yehezkieldio/portfolio/issues/21))
+
+### <!-- 4 -->🐛 Bug Fixes
+- [`1599ede`](https://github.com/yehezkieldio/portfolio/commit/1599edeba70cdeabbfd2b8d33ef054be8608bf0e) projects: Correct typo in project description
+- [`d49b5d8`](https://github.com/yehezkieldio/portfolio/commit/d49b5d8f18b3b381a2f996d8a4c10c75cebf1c85) projects: Update project descriptions for consistency
 ## portfolio@2.0.0-alpha.7 (October 29, 2025)
 
 ### <!-- 2 -->🧩 Dependencies Updates
