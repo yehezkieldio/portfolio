@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { motion } from "motion/react";
 import { memo, useCallback } from "react";
 import { Button } from "#/components/ui/button";
 import { useProjectsContext } from "#/features/projects/lib/context";
@@ -39,7 +40,12 @@ function PaginationComponent() {
     if (totalPages <= 1) return null;
 
     return (
-        <div className="mt-16 flex items-center justify-center gap-2">
+        <motion.div
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-16 flex items-center justify-center gap-2"
+            initial={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+        >
             <Button
                 className="border-border bg-transparent transition-all hover:border-accent/30 hover:bg-muted disabled:cursor-not-allowed disabled:opacity-30"
                 disabled={currentPage === 1}
@@ -82,7 +88,7 @@ function PaginationComponent() {
                 <ChevronRightIcon className="h-4 w-4" />
                 <span className="sr-only">Next page</span>
             </Button>
-        </div>
+        </motion.div>
     );
 }
 
