@@ -29,9 +29,9 @@ function CardComponent({ project }: CardProps) {
                         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-card/40 via-card/10 to-transparent" />
                     </>
                 ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-muted to-card p-6">
+                    <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-muted to-card/10 p-6">
                         <div className="text-center">
-                            <h3 className="mb-2 font-bold text-2xl">{project.title}</h3>
+                            <h3 className="mb-2 font-medium text-2xl">{project.title}</h3>
                             <p className="line-clamp-3 text-muted-foreground text-sm">
                                 {project.description}
                             </p>
@@ -49,7 +49,9 @@ function CardComponent({ project }: CardProps) {
             <div className="flex flex-1 flex-col p-6">
                 <div className="flex-1">
                     <div className="mb-3 flex items-start justify-between gap-2">
-                        <h3 className="font-bold text-xl leading-tight transition-colors">{project.title}</h3>
+                        <h3 className="font-medium text-xl leading-tight transition-colors">
+                            {project.title}
+                        </h3>
                     </div>
 
                     <p className="mb-4 line-clamp-2 text-muted-foreground text-sm leading-relaxed">
