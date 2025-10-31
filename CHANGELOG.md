@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.10 (October 31, 2025)
+
+### <!-- 3 -->🚀 New Features
+- [`97b97fa`](https://github.com/yehezkieldio/portfolio/commit/97b97fadf7dd4e8f3a5c6e1d68eea6e603fc5393) projects: Add support for multiple platform icons and enhance card links with dynamic icon rendering
 ## portfolio@2.0.0-alpha.9 (October 31, 2025)
 
 ### <!-- 2 -->🧩 Dependencies Updates
