@@ -13,6 +13,32 @@ interface CardProps {
     project: Project;
 }
 
+function getViewIcon(url: string) {
+    if (url.includes("youtube.com") || url.includes("youtu.be")) {
+        return <Icons.youtube className="mr-1 h-4 w-4" />;
+    }
+    if (url.includes("npmjs.com")) {
+        return <Icons.npm className="mr-1 h-4 w-4" />;
+    }
+    if (url.includes("codepen.io")) {
+        return <Icons.codepen className="mr-1 h-4 w-4" />;
+    }
+    return <ExternalLinkIcon className="mr-1 h-4 w-4" />;
+}
+
+function getSourceIcon(url: string) {
+    if (url.includes("gitlab.com")) {
+        return <Icons.gitlab className="mr-1 h-2 w-2" />;
+    }
+    if (url.includes("github.com")) {
+        return <Icons.github className="mr-1 h-2 w-2" />;
+    }
+    if (url.includes("codepen.io")) {
+        return <Icons.codepen className="mr-1 h-2 w-2" />;
+    }
+    return <Icons.github className="mr-1 h-2 w-2" />;
+}
+
 function CardComponent({ project }: CardProps) {
     return (
         <article className="group minimal-hover relative flex h-full flex-col overflow-hidden rounded-md border border-border bg-card">
@@ -111,7 +137,7 @@ function CardComponent({ project }: CardProps) {
                             className="flex-1 bg-primary/90 text-primary-foreground transition-all hover:bg-primary/70 hover:text-primary-foreground"
                         >
                             <a href={project.viewUrl} rel="noopener noreferrer" target="_blank">
-                                <ExternalLinkIcon className="mr-2 h-4 w-4" />
+                                {getViewIcon(project.viewUrl)}
                                 View
                             </a>
                         </Button>
@@ -123,11 +149,7 @@ function CardComponent({ project }: CardProps) {
                             variant="outline"
                         >
                             <a href={project.sourceUrl} rel="noopener noreferrer" target="_blank">
-                                {project.sourceUrl.includes("gitlab.com") ? (
-                                    <Icons.gitlab className="mr-1 h-2 w-2" />
-                                ) : (
-                                    <Icons.github className="mr-1 h-2 w-2" />
-                                )}
+                                {getSourceIcon(project.sourceUrl)}
                                 Source
                             </a>
                         </Button>

@@ -339,7 +339,7 @@ export const PROJECTS: Project[] = [
         category: "Web Application",
         year: 2019,
         technologies: ["HTML", "CSS", "JavaScript"],
-        viewUrl: "https://gitlab.com/yehezkieldio/blazedbe",
+        sourceUrl: "https://gitlab.com/yehezkieldio/blazedbe",
         image: "/img_projects/33.png",
     },
 ];
