@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.9 (October 31, 2025)
+
+### <!-- 2 -->🧩 Dependencies Updates
+- [`3f1931e`](https://github.com/yehezkieldio/portfolio/commit/3f1931ee0d65b3046e250616fa82c06a1a0aada9) deps: Update dependency ultracite to v6.1.0 by renovate[bot] ([#22](https://github.com/yehezkieldio/portfolio/issues/22))
+- [`343491e`](https://github.com/yehezkieldio/portfolio/commit/343491ec8391cc6b5da444b6c28e5708f4078499) deps: Update dependency lucide-react to ^0.552.0 by renovate[bot] ([#23](https://github.com/yehezkieldio/portfolio/issues/23))
+
+### <!-- 3 -->🚀 New Features
+- [`ffa3cd5`](https://github.com/yehezkieldio/portfolio/commit/ffa3cd5b42d05f91a55f2c5df74babd4f177bd12) projects: Add PixelBedrock and BlazedBE entries with images and fix ExynosNetwork description
 ## portfolio@2.0.0-alpha.8 (October 29, 2025)
 ### 📝 Release Notes
 Rework project descriptions.
