@@ -1,25 +1,22 @@
 import "./globals.css";
-
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ThemeProvider } from "#/components/theme-provider";
 import { cn } from "#/lib/utils";
 
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+const mono = Geist_Mono({
+    variable: "--font-mono",
     subsets: ["latin"],
 });
 
-const geist = Geist({
-    variable: "--font-geist",
+const sans = Geist({
+    variable: "--font-sans-serif",
     subsets: ["latin"],
 });
 
-const playfairDisplay = Playfair_Display({
-    variable: "--font-playfair-display",
+const serif = Playfair_Display({
+    variable: "--font-serif",
     subsets: ["latin"],
 });
 
@@ -76,20 +73,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body
-                className={cn(
-                    geistMono.variable,
-                    geist.variable,
-                    playfairDisplay.variable,
-                    "font-sans antialiased"
-                )}
-            >
+            <body className={cn(mono.variable, sans.variable, serif.variable, "antialiased")}>
                 <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange enableSystem>
-                    <NuqsAdapter>
-                        {children}
-                        <SpeedInsights />
-                        <Analytics />
-                    </NuqsAdapter>
+                    <NuqsAdapter>{children}</NuqsAdapter>
                 </ThemeProvider>
             </body>
         </html>
