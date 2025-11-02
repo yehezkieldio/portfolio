@@ -1,5 +1,3 @@
-# Commit Message Generation Instructions
-
 ## 1. Format Structure
 
 ```
@@ -20,16 +18,22 @@ type(scope): description
 - **fix**: bug fixes, error handling, or corrections
 - **refactor**: code restructuring without behavior changes
 - **perf**: performance optimizations or improvements
+- **chore**: maintenance, dependencies, tooling, configuration, or broad non-source code changes
 
 ### Secondary Types
 
-- **docs**: documentation changes only
-- **style**: formatting, whitespace, linting fixes (no logic changes)
-- **test**: adding/modifying tests without production code changes
-- **ci**: CI/CD pipeline, build, or deployment configuration
-- **chore**: maintenance, dependencies, tooling, configuration
+- **deps**, **fix(deps)**, **chore(deps)**, **build(deps)**: dependency additions, upgrades, or removals
+- **i18n**, **locale**, **translation**: internationalization and localization changes
+- **style**, **format**: formatting, whitespace, linting fixes
 - **security**: vulnerability fixes or security improvements
 - **revert**: reverting previous commits
+- **build**: build system or tooling changes
+- **compat**: compatibility updates
+- **revert**: revert commits
+- **test**: adding/modifying tests without production code changes
+- **ci**: CI/CD pipeline, build, or deployment configuration
+- **docs**: documentation changes only, either markdown or code comments
+- **deprecated** (in message or body): deprecation notices
 
 ## 3. Scope Determination Rules
 
@@ -45,7 +49,7 @@ type(scope): description
 - Configuration: `config`
 - Build/tooling: `build`, `ci`
 - Documentation: `docs`
-- Root files: omit scope or use `config`
+- Root files: omit scope
 
 ### Scope Selection Priority:
 
@@ -57,7 +61,7 @@ type(scope): description
 
 ```
 1. Is this a dependency change?
-   -> YES: chore(deps): action package-name
+   -> YES: chore(deps): action dependency package-name
 
 2. Is this outside src/ directory?
    -> YES: chore(scope): action
@@ -95,10 +99,9 @@ type(scope): description
 ### Dependencies
 
 ```
-chore(deps): upgrade react to v18.2.0
-chore(deps): add lodash for utilities
-chore(deps): remove unused axios
-chore(deps): bump security packages
+fix(deps): upgrade dependency react to v18.2.0
+chore(deps): add lodash dependency
+chore(deps): remove unused axios dependency
 ```
 
 ### Features
@@ -139,9 +142,3 @@ refactor: consolidate utility functions
 - Use parent scope if logical grouping exists
 - Omit scope if no clear parent
 - Consider splitting into multiple commits
-
-### Configuration vs Feature:
-
-- New config enabling features → `feat`
-- Config changes only → `chore(config)`
-- Build process changes → `chore(build)` or `ci`
