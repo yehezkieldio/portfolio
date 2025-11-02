@@ -4,7 +4,6 @@ type IconProps = React.SVGAttributes<SVGSVGElement>;
 
 const baseIconStyles = "transition-colors duration-300";
 
-// Icons aquired from https://simpleicons.org
 export const Icons = {
     github: ({ className, ...props }: IconProps) => (
         <svg
