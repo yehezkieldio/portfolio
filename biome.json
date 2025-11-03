@@ -35,10 +35,15 @@
       "style": {
         "noMagicNumbers": "off",
         "useConsistentTypeDefinitions": "off",
-        "useBlockStatements": "off"
+        "useBlockStatements": "off",
+        "noNestedTernary": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
       },
       "performance": {
-        "noNamespaceImport": "off"
+        "noNamespaceImport": "off",
+        "noBarrelFile": "off"
       },
       "complexity": {
         "noExcessiveCognitiveComplexity": {
@@ -62,6 +67,9 @@
     }
   },
   "css": {
+    "formatter": {
+      "lineWidth": 100
+    },
     "parser": {
       "tailwindDirectives": true
     }
