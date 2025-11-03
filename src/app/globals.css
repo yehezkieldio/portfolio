@@ -77,7 +77,7 @@
     --sidebar-accent: oklch(0.92 0.01 50);
     --sidebar-accent-foreground: oklch(0.15 0.01 30);
     --sidebar-border: oklch(0.88 0.01 50);
-    --sidebar-ring: oklch(0.15 0.01 30);
+    --sidebar-ring: rgb(15, 10, 9);
 }
 
 .dark {

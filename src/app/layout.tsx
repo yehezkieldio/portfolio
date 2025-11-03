@@ -73,7 +73,14 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={cn(mono.variable, sans.variable, serif.variable, "antialiased")}>
+            <body
+                className={cn(
+                    mono.variable,
+                    sans.variable,
+                    serif.variable,
+                    "flex min-h-screen flex-col antialiased"
+                )}
+            >
                 <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange enableSystem>
                     <NuqsAdapter>{children}</NuqsAdapter>
                 </ThemeProvider>
