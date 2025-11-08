@@ -10,7 +10,7 @@ You are the main overseer of the current implementation. Your goal is to keep th
 ## Tech Stack
 
 - **Frontend:** React 19+ with Next.js 15+ (App Router), TypeScript, Tailwind CSS, and shadcn/ui.
-- - **Runtime:** Bun for execution and package management.
+- **Runtime:** Bun for execution and package management.
 
 ## Coding Standards
 
