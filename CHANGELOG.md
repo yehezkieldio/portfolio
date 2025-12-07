@@ -6,6 +6,64 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.11 (December 7, 2025)
+
+### <!-- 11 -->🛠️ Miscellaneous
+- [`f4cb3b7`](https://github.com/yehezkieldio/portfolio/commit/f4cb3b76c1bf4b27c9ca40dbb4e694c5966f303e) lockfile: Add configVersion field to bun.lock for consistency
+- [`835bd06`](https://github.com/yehezkieldio/portfolio/commit/835bd06e933a3132265869f519d54d36cb11ce1c) config: Disable noLeakedRender rule
+
+### <!-- 2 -->🧩 Dependencies Updates
+- [`c3cb045`](https://github.com/yehezkieldio/portfolio/commit/c3cb0455cac3ec953c8bdf314ef4629958aca6cf) deps: Remove unused lefthook dependency
+- [`c3acf14`](https://github.com/yehezkieldio/portfolio/commit/c3acf1436524749b65071a168debe23edcd791ea) deps: Update dependency @biomejs/biome to v2.3.3 by renovate[bot] ([#24](https://github.com/yehezkieldio/portfolio/issues/24))
+- [`c1f68d9`](https://github.com/yehezkieldio/portfolio/commit/c1f68d96d356037055069e38b818145d59f76386) deps: Update dependency ultracite to v6.2.0 by renovate[bot] ([#25](https://github.com/yehezkieldio/portfolio/issues/25))
+- [`37bce6e`](https://github.com/yehezkieldio/portfolio/commit/37bce6e3e50d9242e499fc58e5e059e1e7a02b81) deps: Update dependency ultracite to v6.2.1 by renovate[bot] ([#26](https://github.com/yehezkieldio/portfolio/issues/26))
+- [`2e619e0`](https://github.com/yehezkieldio/portfolio/commit/2e619e0d59650978d9ce8aa83a91774655af20a0) deps: Update radix-ui-primitives monorepo by renovate[bot] ([#27](https://github.com/yehezkieldio/portfolio/issues/27))
+- [`7ef56ae`](https://github.com/yehezkieldio/portfolio/commit/7ef56ae139bca535bde415ebb614a1a705a625d5) deps: Update dependency @biomejs/biome to v2.3.4 by renovate[bot] ([#28](https://github.com/yehezkieldio/portfolio/issues/28))
+- [`22ecc81`](https://github.com/yehezkieldio/portfolio/commit/22ecc81439ca455a6e53e27c1d6f740e0283fe0a) deps: Update dependency ultracite to v6.3.0 by renovate[bot] ([#29](https://github.com/yehezkieldio/portfolio/issues/29))
+- [`8629114`](https://github.com/yehezkieldio/portfolio/commit/8629114c19cbce99f7dfc5570cb9aebed13aabd6) deps: Update tailwindcss monorepo to ^4.1.17 by renovate[bot] ([#30](https://github.com/yehezkieldio/portfolio/issues/30))
+- [`759d5ec`](https://github.com/yehezkieldio/portfolio/commit/759d5ec3e396ba514db806d64f1c616faa1fdb33) deps: Update dependency ultracite to v6.3.2 by renovate[bot] ([#31](https://github.com/yehezkieldio/portfolio/issues/31))
+- [`242dcce`](https://github.com/yehezkieldio/portfolio/commit/242dcce16103b8a85e12a3a4617f8329799ae94f) deps: Update dependency lucide-react to ^0.553.0 by renovate[bot] ([#32](https://github.com/yehezkieldio/portfolio/issues/32))
+- [`1ad4465`](https://github.com/yehezkieldio/portfolio/commit/1ad4465543a25a7310741eb4f025d77571acc50f) deps: Update dependency nuqs to ^2.7.3 by renovate[bot] ([#33](https://github.com/yehezkieldio/portfolio/issues/33))
+- [`fe308f7`](https://github.com/yehezkieldio/portfolio/commit/fe308f74af8d5da46daafb417bb413b1c7a73c08) deps: Update dependency fireflyy to ^3.0.7 by renovate[bot] ([#34](https://github.com/yehezkieldio/portfolio/issues/34))
+- [`42dc615`](https://github.com/yehezkieldio/portfolio/commit/42dc615837a104dfdb2d8b57db54cba951ad30a9) deps: Update dependency tailwind-merge to ^3.4.0 by renovate[bot] ([#35](https://github.com/yehezkieldio/portfolio/issues/35))
+- [`61126e3`](https://github.com/yehezkieldio/portfolio/commit/61126e3d20ca1e85a31010ba2f2ad54702afff2b) deps: Update dependency @biomejs/biome to v2.3.5 by renovate[bot] ([#36](https://github.com/yehezkieldio/portfolio/issues/36))
+- [`d87c589`](https://github.com/yehezkieldio/portfolio/commit/d87c589ed83bfd3f51a40dadbf8057aa7aeb8ef7) deps: Update dependency @types/react to ^19.2.3 by renovate[bot] ([#37](https://github.com/yehezkieldio/portfolio/issues/37))
+- [`40bcb11`](https://github.com/yehezkieldio/portfolio/commit/40bcb11cd235512734c922511498ccba66f38f95) deps: Update dependency @types/node to ^20.19.25 by renovate[bot] ([#38](https://github.com/yehezkieldio/portfolio/issues/38))
+- [`1514256`](https://github.com/yehezkieldio/portfolio/commit/15142564151f3d197c496a306738910030e63e66) deps: Update dependency @types/react-dom to ^19.2.3 by renovate[bot] ([#39](https://github.com/yehezkieldio/portfolio/issues/39))
+- [`eb04d4c`](https://github.com/yehezkieldio/portfolio/commit/eb04d4cebe1e149c1127157308306b2e6a78591f) deps: Update dependency @types/react to ^19.2.4 by renovate[bot] ([#40](https://github.com/yehezkieldio/portfolio/issues/40))
+- [`926cbdb`](https://github.com/yehezkieldio/portfolio/commit/926cbdba671fc345ec5d6fd540c7ad152c724afd) deps: Update dependency next to v16.0.2 by renovate[bot] ([#41](https://github.com/yehezkieldio/portfolio/issues/41))
+- [`0a4894f`](https://github.com/yehezkieldio/portfolio/commit/0a4894f2f493e7b5c7aecc16b2907c039d53d23c) deps: Update dependency next to v16.0.3 by renovate[bot] ([#42](https://github.com/yehezkieldio/portfolio/issues/42))
+- [`d781aa5`](https://github.com/yehezkieldio/portfolio/commit/d781aa54e99d9e0ef08f1411ec5586db1f037aac) deps: Update dependency @types/react to ^19.2.5 by renovate[bot] ([#43](https://github.com/yehezkieldio/portfolio/issues/43))
+- [`e3f0e4f`](https://github.com/yehezkieldio/portfolio/commit/e3f0e4f999b0124f101e431f30d2a1712b00a5e9) deps: Update dependency ultracite to v6.3.3 by renovate[bot] ([#44](https://github.com/yehezkieldio/portfolio/issues/44))
+- [`897e1bc`](https://github.com/yehezkieldio/portfolio/commit/897e1bc8aff20b1489ab44a223bd35858eec728f) deps: Update dependency @biomejs/biome to v2.3.6 by renovate[bot] ([#45](https://github.com/yehezkieldio/portfolio/issues/45))
+- [`f77ca55`](https://github.com/yehezkieldio/portfolio/commit/f77ca556c96fff1b3d9be8e524c76a1f1a5d2325) deps: Update dependency lucide-react to ^0.554.0 by renovate[bot] ([#46](https://github.com/yehezkieldio/portfolio/issues/46))
+- [`6dee1c7`](https://github.com/yehezkieldio/portfolio/commit/6dee1c7a283067595fba1ad284de3e000965db46) deps: Update dependency @types/react to ^19.2.6 by renovate[bot] ([#47](https://github.com/yehezkieldio/portfolio/issues/47))
+- [`5bc73d2`](https://github.com/yehezkieldio/portfolio/commit/5bc73d20e363974a3eb0c7d92dfd39796b065ed2) deps: Update dependency nuqs to ^2.8.0 by renovate[bot] ([#48](https://github.com/yehezkieldio/portfolio/issues/48))
+- [`f74d926`](https://github.com/yehezkieldio/portfolio/commit/f74d92692043cda18e67bc5e3371971cf9f2f21f) deps: Update dependency ultracite to v6.3.4 by renovate[bot] ([#49](https://github.com/yehezkieldio/portfolio/issues/49))
+- [`e52ae48`](https://github.com/yehezkieldio/portfolio/commit/e52ae48d5b7db82716246fededabaaa635a5b75b) deps: Update dependency @biomejs/biome to v2.3.7 by renovate[bot] ([#50](https://github.com/yehezkieldio/portfolio/issues/50))
+- [`3a877e9`](https://github.com/yehezkieldio/portfolio/commit/3a877e99aa7937ca30cb99f70e415421048d80d9) deps: Update dependency nuqs to ^2.8.1 by renovate[bot] ([#51](https://github.com/yehezkieldio/portfolio/issues/51))
+- [`5f8970a`](https://github.com/yehezkieldio/portfolio/commit/5f8970a654c10aaca002ca0baf5dfacc7b3e94fd) deps: Update dependency ultracite to v6.3.5 by renovate[bot] ([#52](https://github.com/yehezkieldio/portfolio/issues/52))
+- [`08c6cdf`](https://github.com/yehezkieldio/portfolio/commit/08c6cdf729fa4236cf8130e7cedf8b77e2bc97fd) deps: Update dependency ultracite to v6.3.6 by renovate[bot] ([#53](https://github.com/yehezkieldio/portfolio/issues/53))
+- [`9dc8945`](https://github.com/yehezkieldio/portfolio/commit/9dc8945ae39c93ae20fe97b4b26e1f6f5ef74476) deps: Update dependency @types/react to ^19.2.7 by renovate[bot] ([#54](https://github.com/yehezkieldio/portfolio/issues/54))
+- [`0102a0b`](https://github.com/yehezkieldio/portfolio/commit/0102a0be8f93e12497e05ec2344d817a2f7d6a8b) deps: Update dependency next to v16.0.4 by renovate[bot] ([#55](https://github.com/yehezkieldio/portfolio/issues/55))
+- [`ca3ef04`](https://github.com/yehezkieldio/portfolio/commit/ca3ef0401f5e01bbdc46ddc29e847a40cfd1f749) deps: Update dependency lucide-react to ^0.555.0 by renovate[bot] ([#56](https://github.com/yehezkieldio/portfolio/issues/56))
+- [`83ad718`](https://github.com/yehezkieldio/portfolio/commit/83ad718671cf5dfb25d0139b0167a48810a8c831) deps: Update dependency next to v16.0.5 by renovate[bot] ([#57](https://github.com/yehezkieldio/portfolio/issues/57))
+- [`60294c3`](https://github.com/yehezkieldio/portfolio/commit/60294c3083ecf93838b992278425a805b2b6c9b1) deps: Update dependency ultracite to v6.3.7 by renovate[bot] ([#58](https://github.com/yehezkieldio/portfolio/issues/58))
+- [`07c7975`](https://github.com/yehezkieldio/portfolio/commit/07c797553940ff2de70b0a891aebbf13f20885ec) deps: Update dependency @biomejs/biome to v2.3.8 by renovate[bot] ([#59](https://github.com/yehezkieldio/portfolio/issues/59))
+- [`094afb9`](https://github.com/yehezkieldio/portfolio/commit/094afb9e055eb1f7acd6eb26e10150626c11a8cb) deps: Update dependency ultracite to v6.3.8 by renovate[bot] ([#60](https://github.com/yehezkieldio/portfolio/issues/60))
+- [`372a79d`](https://github.com/yehezkieldio/portfolio/commit/372a79dbae5ec1dc3d755f98837811350079ab04) deps: Update dependency next to v16.0.6 by renovate[bot] ([#61](https://github.com/yehezkieldio/portfolio/issues/61))
+- [`a439089`](https://github.com/yehezkieldio/portfolio/commit/a439089f11d20fbb13e6532cb71999b891b503b8) deps: Update dependency motion to ^12.23.25 by renovate[bot] ([#62](https://github.com/yehezkieldio/portfolio/issues/62))
+- [`82e8251`](https://github.com/yehezkieldio/portfolio/commit/82e82511a60c7c791333fdfa8de35af626b55f52) deps: Update dependency nuqs to ^2.8.2 by renovate[bot] ([#63](https://github.com/yehezkieldio/portfolio/issues/63))
+- [`7abd58e`](https://github.com/yehezkieldio/portfolio/commit/7abd58e5e10d17420a795446ab65b4ef4bcef288) deps: Update dependency fireflyy to ^3.0.10 by renovate[bot] ([#64](https://github.com/yehezkieldio/portfolio/issues/64))
+- [`4910ff7`](https://github.com/yehezkieldio/portfolio/commit/4910ff77d2ca457af524bbad01f0fe3fbbdf46a8) deps: Update dependency @vercel/analytics to ^1.6.0 by renovate[bot] ([#65](https://github.com/yehezkieldio/portfolio/issues/65))
+- [`c462d52`](https://github.com/yehezkieldio/portfolio/commit/c462d52cf3b8f13785f04f2ca198c64e5edaa885) deps: Update dependency @vercel/speed-insights to ^1.3.0 by renovate[bot] ([#66](https://github.com/yehezkieldio/portfolio/issues/66))
+- [`5208067`](https://github.com/yehezkieldio/portfolio/commit/5208067431f669dc8596f8a23b805185fa293a0d) deps: Update dependency @vercel/analytics to ^1.6.1 by renovate[bot] ([#67](https://github.com/yehezkieldio/portfolio/issues/67))
+- [`baaef3d`](https://github.com/yehezkieldio/portfolio/commit/baaef3d8511966c7f57637b1c232037e48ce52f5) deps: Update dependency @vercel/speed-insights to ^1.3.1 by renovate[bot] ([#68](https://github.com/yehezkieldio/portfolio/issues/68))
+- [`34fa1b3`](https://github.com/yehezkieldio/portfolio/commit/34fa1b39fff7fb7b862e66f478c328afe519ddde) deps: Update dependency next to v16.0.7 by renovate[bot] ([#69](https://github.com/yehezkieldio/portfolio/issues/69))
+- [`8516bf7`](https://github.com/yehezkieldio/portfolio/commit/8516bf786f116fd0cbdbdd066db8022d7617657a) deps: Update react monorepo to v19.2.1 by renovate[bot] ([#70](https://github.com/yehezkieldio/portfolio/issues/70))
+- [`9772875`](https://github.com/yehezkieldio/portfolio/commit/9772875e0c786f41b7a4880a37a1295efeb73b95) deps: Update dependency ultracite to v6.3.9 by renovate[bot] ([#71](https://github.com/yehezkieldio/portfolio/issues/71))
+- [`4feee3a`](https://github.com/yehezkieldio/portfolio/commit/4feee3ad996533e0e9cd48f282d2f17b4e68d4ff) deps: Update dependency nuqs to ^2.8.3 by renovate[bot] ([#72](https://github.com/yehezkieldio/portfolio/issues/72))
+- [`f5ac0ac`](https://github.com/yehezkieldio/portfolio/commit/f5ac0ac322d2015e8347c4801b992a597fdb0b94) deps: Update dependency lucide-react to ^0.556.0 by renovate[bot] ([#73](https://github.com/yehezkieldio/portfolio/issues/73))
 ## portfolio@2.0.0-alpha.10 (October 31, 2025)
 
 ### <!-- 3 -->🚀 New Features
