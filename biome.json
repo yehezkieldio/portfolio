@@ -27,6 +27,9 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "nursery": {
+        "noLeakedRender": "off"
+      },
       "suspicious": {
         "noUnknownAtRules": "off",
         "useAwait": "off",
