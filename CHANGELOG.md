@@ -6,6 +6,19 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.12 (December 11, 2025)
+
+### <!-- 2 -->🧩 Dependencies Updates
+- [`5f24554`](https://github.com/yehezkieldio/portfolio/commit/5f24554e88b05d0df7e752efdc893f4d1578f315) deps: Update dependency ultracite to v6.3.10 by renovate[bot] ([#74](https://github.com/yehezkieldio/portfolio/issues/74))
+- [`5ecefb6`](https://github.com/yehezkieldio/portfolio/commit/5ecefb6966231b8ce0a6a595c3f3bc681720ebe0) deps: Update dependency next to v16.0.8 by renovate[bot] ([#75](https://github.com/yehezkieldio/portfolio/issues/75))
+- [`6688228`](https://github.com/yehezkieldio/portfolio/commit/6688228b306000b3094dbd8f7d7c881a3753d260) deps: Update dependency @types/node to ^20.19.26 by renovate[bot] ([#76](https://github.com/yehezkieldio/portfolio/issues/76))
+- [`ee57b83`](https://github.com/yehezkieldio/portfolio/commit/ee57b83370f157783a62ab8c3f09f4c4fe9dd0ec) deps: Update dependency nuqs to ^2.8.4 by renovate[bot] ([#77](https://github.com/yehezkieldio/portfolio/issues/77))
+- [`b47cdfc`](https://github.com/yehezkieldio/portfolio/commit/b47cdfcfd7d8d5d868a6d31569cb7cf0ecc7757a) deps: Update dependency motion to ^12.23.26 by renovate[bot] ([#78](https://github.com/yehezkieldio/portfolio/issues/78))
+- [`70a4451`](https://github.com/yehezkieldio/portfolio/commit/70a4451334f440e9b82cfe8c24cc6cb058c2cd3f) deps: Update dependency nuqs to ^2.8.5 by renovate[bot] ([#79](https://github.com/yehezkieldio/portfolio/issues/79))
+- [`aa3cddf`](https://github.com/yehezkieldio/portfolio/commit/aa3cddfdd774bc5e464fb26450085092f83955d4) deps: Update dependency lucide-react to ^0.559.0 by renovate[bot] ([#80](https://github.com/yehezkieldio/portfolio/issues/80))
+- [`a0adf33`](https://github.com/yehezkieldio/portfolio/commit/a0adf333557d0e1c18d9e43dbe337e5b562a933b) deps: Update dependency lucide-react to ^0.560.0 by renovate[bot] ([#81](https://github.com/yehezkieldio/portfolio/issues/81))
+- [`3e6ace0`](https://github.com/yehezkieldio/portfolio/commit/3e6ace08ffbfd8e94e71669d25fa636b50500f27) deps: Update tailwindcss monorepo to ^4.1.18 by renovate[bot] ([#82](https://github.com/yehezkieldio/portfolio/issues/82))
+- [`8d1e098`](https://github.com/yehezkieldio/portfolio/commit/8d1e098213fdc42ed8360f4cf0f9e4c1b140c366) deps: Upgrade next, react, react-dom, and types versions
 ## portfolio@2.0.0-alpha.11 (December 7, 2025)
 
 ### <!-- 11 -->🛠️ Miscellaneous
