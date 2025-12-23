@@ -6,6 +6,37 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.13 (December 23, 2025)
+
+### <!-- 11 -->🛠️ Miscellaneous
+- [`04e14ce`](https://github.com/yehezkieldio/portfolio/commit/04e14ced6b87f25a82aad59496a23c1ac63a2323) Adjust stuff
+
+### <!-- 2 -->🧩 Dependencies Updates
+- [`e2c7073`](https://github.com/yehezkieldio/portfolio/commit/e2c70735caf79f79b2d12d0fa3894ddbe642ea58) deps: Update dependency @types/node to ^25.0.1 by renovate[bot] ([#83](https://github.com/yehezkieldio/portfolio/issues/83))
+- [`4849536`](https://github.com/yehezkieldio/portfolio/commit/48495364b974b20c66dc4daffe26fa35d4e94956) deps: Update dependency next to v16.0.10 by renovate[bot] ([#84](https://github.com/yehezkieldio/portfolio/issues/84))
+- [`8c1e334`](https://github.com/yehezkieldio/portfolio/commit/8c1e334d5655a1d5d6ede7c2cd5bd5ff3ffebb8e) deps: Update dependency ultracite to v6.3.12 by renovate[bot] ([#85](https://github.com/yehezkieldio/portfolio/issues/85))
+- [`834e2c3`](https://github.com/yehezkieldio/portfolio/commit/834e2c321beae8e39e877512375ca07222a76c8b) deps: Update react monorepo to v19.2.3 by renovate[bot] ([#86](https://github.com/yehezkieldio/portfolio/issues/86))
+- [`c9033d5`](https://github.com/yehezkieldio/portfolio/commit/c9033d501432b3da3a7a3543297e77bc2fb06b84) deps: Update dependency ultracite to v6.4.0 by renovate[bot] ([#87](https://github.com/yehezkieldio/portfolio/issues/87))
+- [`0246a37`](https://github.com/yehezkieldio/portfolio/commit/0246a3713e9614bf5aa13d559570681bc1fc62ac) deps: Update dependency lucide-react to ^0.561.0 by renovate[bot] ([#88](https://github.com/yehezkieldio/portfolio/issues/88))
+- [`7a71bbf`](https://github.com/yehezkieldio/portfolio/commit/7a71bbfbcae7904da2ffe54370b0d3b4224a613a) deps: Update dependency @types/node to ^25.0.2 by renovate[bot] ([#89](https://github.com/yehezkieldio/portfolio/issues/89))
+- [`e432a97`](https://github.com/yehezkieldio/portfolio/commit/e432a97dc535e9ee0c99863b7c88d26306999269) deps: Update dependency ultracite to v6.4.1 by renovate[bot] ([#90](https://github.com/yehezkieldio/portfolio/issues/90))
+- [`fbfb7b1`](https://github.com/yehezkieldio/portfolio/commit/fbfb7b1e52b1ceee9dfe5d166b82a7615b3b5c52) deps: Update dependency @biomejs/biome to v2.3.9 by renovate[bot] ([#91](https://github.com/yehezkieldio/portfolio/issues/91))
+- [`2f05e3e`](https://github.com/yehezkieldio/portfolio/commit/2f05e3e195074cfbf1602edb2b5c6e25ac5bfe4e) deps: Update dependency @types/node to ^25.0.3 by renovate[bot] ([#92](https://github.com/yehezkieldio/portfolio/issues/92))
+- [`be3cb93`](https://github.com/yehezkieldio/portfolio/commit/be3cb9358b94e0a74720c92d2b30f91ef8287e3c) deps: Update dependency @biomejs/biome to v2.3.10 by renovate[bot] ([#93](https://github.com/yehezkieldio/portfolio/issues/93))
+- [`11878e9`](https://github.com/yehezkieldio/portfolio/commit/11878e9c6bfe51c329c408abe017cf4de3060938) deps: Update dependency ultracite to v6.4.2 by renovate[bot] ([#94](https://github.com/yehezkieldio/portfolio/issues/94))
+- [`65d736b`](https://github.com/yehezkieldio/portfolio/commit/65d736b517ff2530b92fd07e6c85b4445bb6c0f4) deps: Update dependency lucide-react to ^0.562.0 by renovate[bot] ([#95](https://github.com/yehezkieldio/portfolio/issues/95))
+- [`df5a86d`](https://github.com/yehezkieldio/portfolio/commit/df5a86dbee533023059a0f60040e2ff5f2c23fae) deps: Update dependency next to v16.1.0 by renovate[bot] ([#96](https://github.com/yehezkieldio/portfolio/issues/96))
+- [`1445893`](https://github.com/yehezkieldio/portfolio/commit/1445893b84760fee4cd80c9fcec298a90d07f4af) deps: Update dependency ultracite to v6.4.3 by renovate[bot] ([#97](https://github.com/yehezkieldio/portfolio/issues/97))
+- [`80beea8`](https://github.com/yehezkieldio/portfolio/commit/80beea8ae75f889c6c1f70015891c2cf66566939) deps: Update dependency ultracite to v6.5.0 by renovate[bot] ([#98](https://github.com/yehezkieldio/portfolio/issues/98))
+- [`2639ba0`](https://github.com/yehezkieldio/portfolio/commit/2639ba01cd5e26802d560ddf115035757e9b2e3e) deps: Update dependency next to v16.1.1 by renovate[bot] ([#99](https://github.com/yehezkieldio/portfolio/issues/99))
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+**NOTE:** Changes are ordered by date, starting with the most oldest to the most recent.
+
+> This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
+
 ## portfolio@2.0.0-alpha.12 (December 11, 2025)
 
 ### <!-- 2 -->🧩 Dependencies Updates
