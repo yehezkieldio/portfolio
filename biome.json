@@ -8,14 +8,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": [
-      "**",
-      "!node_modules",
-      "!.next",
-      "!!dist",
-      "!!build",
-      "!bun.lock"
-    ]
+    "includes": ["!node_modules", "!.next", "!!dist", "!!build", "!bun.lock"]
   },
   "formatter": {
     "enabled": true,

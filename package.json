@@ -6,9 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "biome check",
+    "check": "biome check .",
+    "check:unsafe": "biome check --write --unsafe .",
+    "check:write": "biome check --write .",
     "typecheck": "tsc --noEmit",
-    "format": "biome format --write"
+    "format": "biome format . --write",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --fix --unsafe"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",

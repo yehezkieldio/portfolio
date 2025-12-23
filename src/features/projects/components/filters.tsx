@@ -78,7 +78,7 @@ function FiltersComponent() {
         <div className="mb-12 space-y-6">
             <div className="relative">
                 <SearchIcon
-                    className={`-translate-y-1/2 absolute top-1/2 left-4 h-5 w-5 text-muted-foreground transition-opacity ${isSearching || isPending ? "animate-pulse" : ""}`}
+                    className={`absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-opacity ${isSearching || isPending ? "animate-pulse" : ""}`}
                 />
                 <Input
                     aria-label="Search projects by name or description"
@@ -89,7 +89,7 @@ function FiltersComponent() {
                     value={localSearch}
                 />
                 {(isSearching || isPending) && (
-                    <div className="-translate-y-1/2 absolute top-1/2 right-4">
+                    <div className="absolute top-1/2 right-4 -translate-y-1/2">
                         <div className="h-4 w-4 animate-spin rounded-full border-2 border-muted-foreground border-t-transparent" />
                     </div>
                 )}
