@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 > This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
+## portfolio@2.0.0-alpha.14 (January 2, 2026)
+
+### <!-- 2 -->🧩 Dependencies Updates
+- [`a9d7a78`](https://github.com/yehezkieldio/portfolio/commit/a9d7a789a2a79798be6c803f584647dcfa5ce145) deps: Update dependency nuqs to ^2.8.6 by renovate[bot] ([#100](https://github.com/yehezkieldio/portfolio/issues/100))
+- [`d6dc850`](https://github.com/yehezkieldio/portfolio/commit/d6dc850abb695e4cf7075cab52159daa14c3cd72) deps: Update dependency ultracite to v6.5.1 by renovate[bot] ([#101](https://github.com/yehezkieldio/portfolio/issues/101))
 ## portfolio@2.0.0-alpha.13 (December 23, 2025)
 
 ### <!-- 11 -->🛠️ Miscellaneous
