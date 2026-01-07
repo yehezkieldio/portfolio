@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "customManagers:biomeVersions"],
+  "enabled": false,
   "prHourlyLimit": 3,
   "rangeStrategy": "bump",
   "ignoreTests": true,
