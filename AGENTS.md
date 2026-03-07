@@ -28,7 +28,7 @@ Context7 excels at retrieving authoritative usage patterns and syntax for librar
 
 If you know which library feature you need but not the syntax, Context7 is usually the correct tool.
 
-## Next.js MC
+## Next.js MCP
 
 Use the Next.js MCP server when working inside a Next.js application during development.
 

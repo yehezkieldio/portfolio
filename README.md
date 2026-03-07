@@ -1,4 +1,4 @@
-<div align="center">
+<div align="left">
 <h3>Portfolio</h3>
 <p>A collection of my personal, collaborative, and open source projects.</p>
 </div>
