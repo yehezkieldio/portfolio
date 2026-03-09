@@ -49,7 +49,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={cn(...fonts, "isolate flex min-h-screen flex-col bg-background antialiased")}>
-                <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange enableSystem>
+                <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
                     <NuqsAdapter>{children}</NuqsAdapter>
                 </ThemeProvider>
             </body>
