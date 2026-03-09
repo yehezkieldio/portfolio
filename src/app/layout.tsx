@@ -2,7 +2,6 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono, Public_Sans } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { cn } from "#/lib/utils";
 
@@ -49,9 +48,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={cn(...fonts, "isolate flex min-h-screen flex-col bg-background antialiased")}>
-                <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
-                    <NuqsAdapter>{children}</NuqsAdapter>
-                </ThemeProvider>
+                <NuqsAdapter>{children}</NuqsAdapter>
             </body>
         </html>
     );
