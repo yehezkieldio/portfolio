@@ -1,5 +1,5 @@
 import { AmbientBackdrop } from "#/components/layout/ambient-backdrop";
-import { SiteFrame } from "#/components/site/site-frame";
+import { SiteFrame } from "#/components/site-frame";
 
 export default function PortfolioPage() {
     return (
