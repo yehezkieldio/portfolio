@@ -48,6 +48,9 @@
     --font-sans: var(--font-sans-serif);
     --font-display: var(--font-display-face);
     --font-mono: var(--font-mono);
+    --color-crimson: hsl(var(--crimson));
+    --color-ultraviolet: hsl(var(--ultraviolet));
+    --color-void: hsl(var(--void));
 }
 
 :root {
