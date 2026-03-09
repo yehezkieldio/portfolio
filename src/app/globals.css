@@ -45,9 +45,9 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
-    --font-sans: var(--font-sans);
+    --font-sans: var(--font-sans-serif);
+    --font-display: var(--font-display-face);
     --font-mono: var(--font-mono);
-    --font-heading: var(--font-heading);
 }
 
 :root {
@@ -91,6 +91,30 @@
     }
 
     body {
+        min-height: 100vh;
+        overflow-x: hidden;
+        font-feature-settings:
+            "ss01" 1,
+            "ss02" 1;
+        background-image:
+            radial-gradient(
+                circle at 15% 16%,
+                hsl(4 100% 60% / 0.1),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 82% 14%,
+                hsl(263 70% 58% / 0.08),
+                transparent 24%
+            ),
+            linear-gradient(
+                180deg,
+                hsl(0 0% 3%) 0%,
+                hsl(0 0% 2%) 48%,
+                hsl(0 0% 1%) 100%
+            );
+        background-attachment: fixed;
+
         @apply bg-background text-foreground font-sans;
     }
 
@@ -102,7 +126,23 @@
     h6,
     [data-slot="card-title"],
     [data-slot="sheet-title"] {
-        @apply font-heading;
+        @apply font-display;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        font: inherit;
+    }
+
+    ::selection {
+        color: hsl(var(--foreground));
+        background: hsl(var(--primary) / 0.25);
+    }
+
+    a {
+        color: inherit;
     }
 }
 

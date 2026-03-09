@@ -1,24 +1,28 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Mona_Sans } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Public_Sans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { cn } from "#/lib/utils";
 
-const sans = Geist({ subsets: ["latin"], variable: "--font-sans" });
-
-const heading = Mona_Sans({
-    variable: "--font-heading",
-    subsets: ["latin"],
-});
-
-const mono = Geist_Mono({
+const mono = IBM_Plex_Mono({
     variable: "--font-mono",
+    weight: ["400", "500"],
     subsets: ["latin"],
 });
 
-const fonts = [sans.variable, heading.variable, mono.variable];
+const sans = Public_Sans({
+    variable: "--font-sans-serif",
+    subsets: ["latin"],
+});
+
+const display = Archivo({
+    variable: "--font-display-face",
+    subsets: ["latin"],
+});
+
+const fonts = [sans.variable, display.variable, mono.variable];
 
 export const metadata: Metadata = {
     title: "Yehezkiel Dio Sinolungan",
@@ -44,7 +48,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={cn(...fonts, "isolate flex min-h-screen flex-col antialiased")}>
+            <body className={cn(...fonts, "isolate flex min-h-screen flex-col bg-background antialiased")}>
                 <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange enableSystem>
                     <NuqsAdapter>{children}</NuqsAdapter>
                 </ThemeProvider>
