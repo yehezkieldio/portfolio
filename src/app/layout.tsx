@@ -5,23 +5,21 @@ import { Archivo, IBM_Plex_Mono, Public_Sans } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { cn } from "#/lib/utils";
 
-const mono = IBM_Plex_Mono({
-    variable: "--font-mono",
-    weight: ["400", "500"],
-    subsets: ["latin"],
-});
-
-const sans = Public_Sans({
-    variable: "--font-sans-serif",
-    subsets: ["latin"],
-});
-
-const display = Archivo({
-    variable: "--font-display-face",
-    subsets: ["latin"],
-});
-
-const fonts = [sans.variable, display.variable, mono.variable];
+const fonts = [
+    IBM_Plex_Mono({
+        variable: "--font-mono",
+        weight: ["400", "500"],
+        subsets: ["latin"],
+    }).variable,
+    Public_Sans({
+        variable: "--font-sans",
+        subsets: ["latin"],
+    }).variable,
+    Archivo({
+        variable: "--font-display",
+        subsets: ["latin"],
+    }).variable,
+];
 
 export const metadata: Metadata = {
     title: "Yehezkiel Dio Sinolungan",

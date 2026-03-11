@@ -74,6 +74,11 @@
     },
     "globals": ["Bun"]
   },
+  "css": {
+    "formatter": {
+      "lineWidth": 140
+    }
+  },
   "assist": {
     "actions": {
       "source": {
