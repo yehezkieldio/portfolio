@@ -6,21 +6,23 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { RouteTransition } from "#/components/route-transition";
 import { cn } from "#/lib/utils";
 
-const fonts = [
-    IBM_Plex_Mono({
-        variable: "--font-mono",
-        weight: ["400", "500"],
-        subsets: ["latin"],
-    }).variable,
-    Public_Sans({
-        variable: "--font-sans",
-        subsets: ["latin"],
-    }).variable,
-    Archivo({
-        variable: "--font-display",
-        subsets: ["latin"],
-    }).variable,
-];
+const mono = IBM_Plex_Mono({
+    variable: "--font-mono",
+    weight: ["400", "500"],
+    subsets: ["latin"],
+});
+
+const sans = Public_Sans({
+    variable: "--font-sans",
+    subsets: ["latin"],
+});
+
+const display = Archivo({
+    variable: "--font-display",
+    subsets: ["latin"],
+});
+
+const fonts = [mono.variable, sans.variable, display.variable];
 
 export const metadata: Metadata = {
     title: "Yehezkiel Dio Sinolungan",
