@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono, Public_Sans } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { RouteTransition } from "#/components/route-transition";
 import { cn } from "#/lib/utils";
 
 const fonts = [
@@ -46,7 +47,9 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={cn(...fonts, "isolate flex min-h-screen flex-col bg-background antialiased")}>
-                <NuqsAdapter>{children}</NuqsAdapter>
+                <NuqsAdapter>
+                    <RouteTransition>{children}</RouteTransition>
+                </NuqsAdapter>
             </body>
         </html>
     );
