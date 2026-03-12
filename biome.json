@@ -79,6 +79,11 @@
       "lineWidth": 140
     }
   },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  },
   "assist": {
     "actions": {
       "source": {
