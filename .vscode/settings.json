@@ -1,7 +1,6 @@
 {
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
-  "emmet.showExpandedAbbreviation": "never",
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
@@ -56,5 +55,6 @@
   ],
   "workbench.editor.customLabels.patterns": {
     "**/app/**/{page,layout,route,template,loading}.{tsx,ts}": "${dirname}/${filename}.${extname}"
-  }
+  },
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
 }

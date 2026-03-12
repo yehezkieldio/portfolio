@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono, Public_Sans } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { RouteTransition } from "#/components/route-transition";
+import { SiteHeader } from "#/components/site-header";
 import { cn } from "#/lib/utils";
 
 const mono = IBM_Plex_Mono({
@@ -50,6 +51,7 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body className={cn(...fonts, "isolate flex min-h-screen flex-col bg-background antialiased")}>
                 <NuqsAdapter>
+                    <SiteHeader />
                     <RouteTransition>{children}</RouteTransition>
                 </NuqsAdapter>
             </body>
