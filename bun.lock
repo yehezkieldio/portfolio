@@ -6,6 +6,7 @@
       "name": "portfolio",
       "dependencies": {
         "@base-ui/react": "^1.2.0",
+        "@ridemountainpig/svgl-react": "^1.0.15",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "fumadocs-core": "^16.6.14",
@@ -310,6 +311,8 @@
     "@open-draft/until": ["@open-draft/until@2.1.0", "", {}, "sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg=="],
 
     "@orama/orama": ["@orama/orama@3.1.18", "", {}, "sha512-a61ljmRVVyG5MC/698C8/FfFDw5a8LOIvyOLW5fztgUXqUpc1jOfQzOitSCbge657OgXXThmY3Tk8fpiDb4UcA=="],
+
+    "@ridemountainpig/svgl-react": ["@ridemountainpig/svgl-react@1.0.15", "", { "peerDependencies": { "react": "^16.8 || ^17.0 || ^18.0 || ^19.0", "react-dom": "^16.8 || ^17.0 || ^18.0 || ^19.0" } }, "sha512-SeJ2TbDUvcWXA31UyKXOsaMohC7gY6VHiiB/+yColFO0aZG1v08kbUyYSQIOvIZhVukfV0cmz+HwlhNCZ1oQPA=="],
 
     "@sec-ant/readable-stream": ["@sec-ant/readable-stream@0.4.1", "", {}, "sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg=="],
 
