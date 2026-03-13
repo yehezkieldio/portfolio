@@ -47,6 +47,9 @@
     "source.fixAll.biome": "explicit",
     "source.organizeImports.biome": "explicit"
   },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
   "js/ts.preferences.autoImportFileExcludePatterns": [
     "next/router",
     "next/dist",
