@@ -5,6 +5,11 @@
     "TSX": { "formatter": { "language_server": { "name": "biome" } } },
     "TypeScript": { "formatter": { "language_server": { "name": "biome" } } },
     "CSS": {
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      },
       "language_servers": [
         "tailwindcss-intellisense-css",
         "!vscode-css-language-server",

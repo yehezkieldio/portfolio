@@ -76,7 +76,7 @@
   },
   "css": {
     "formatter": {
-      "lineWidth": 140
+      "lineWidth": 160
     }
   },
   "json": {
