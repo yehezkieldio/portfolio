@@ -109,10 +109,10 @@
         font-feature-settings:
             "ss01" 1,
             "ss02" 1;
-        background-image:
+        /* background-image:
             radial-gradient(circle at 15% 16%, oklch(0.6589 0.2278 28.98 / 10%), transparent 28%),
             radial-gradient(circle at 82% 14%, oklch(0.5539 0.2156 296.2 / 8%), transparent 24%),
-            linear-gradient(in oklch 180deg, oklch(0.1324 0 0) 0%, oklch(0.1157 0 0) 48%, oklch(0.0918 0 0) 100%);
+            linear-gradient(in oklch 180deg, oklch(0.1324 0 0) 0%, oklch(0.1157 0 0) 48%, oklch(0.0918 0 0) 100%); */
 
         @apply bg-background text-foreground font-sans antialiased overflow-x-hidden min-h-screen;
     }

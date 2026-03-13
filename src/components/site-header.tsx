@@ -35,7 +35,7 @@ export function SiteHeader() {
     }
 
     return (
-        <header className="relative z-40 border-white/6 border-b bg-background/85 backdrop-blur-sm">
+        <header className="relative z-40 bg-background/85 backdrop-blur-sm">
             <div className="pointer-events-none absolute inset-0">
                 <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/12 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-primary/18 to-transparent" />
@@ -48,22 +48,21 @@ export function SiteHeader() {
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div className="flex flex-col gap-3">
                             <Link className="group inline-flex w-fit items-center gap-3" href="/">
-                                {/* <div className="flex items-center gap-2">
-                                    <div className="h-2 w-2 rotate-45 border border-primary/35 bg-primary/10 transition-colors group-hover:border-primary/60" />
-                                    <div className="h-px w-10 bg-linear-to-r from-primary/35 to-transparent transition-all duration-300 group-hover:w-14" />
-                                </div> */}
                                 <div>
                                     <p className="font-display text-base text-foreground uppercase tracking-[-0.03em] sm:text-lg">
                                         Yehezkiel Dio Sinolungan
                                     </p>
-                                    <p className="font-mono text-[8px] text-muted-foreground/80 uppercase tracking-[0.24em]">
-                                        Software Engineer
+                                    <p className="font-mono text-[8px] text-muted-foreground/70 uppercase tracking-[0.24em]">
+                                        Software Engineer · Full-stack Developer
                                     </p>
                                 </div>
                             </Link>
                         </div>
 
                         <div className="hidden flex-col items-start gap-3 sm:flex sm:flex-row sm:items-center">
+                            <p className="font-mono text-[8px] text-muted-foreground/70 uppercase tracking-[0.22em]">
+                                Available for work
+                            </p>
                             <a
                                 className="system-button-secondary min-w-0 justify-between px-4 py-3"
                                 href="mailto:yehezkieldio@proton.me"
