@@ -8,22 +8,20 @@ import { SiteHeader } from "#/components/site-header";
 import { cn } from "#/lib/utils";
 
 const mono = IBM_Plex_Mono({
-    variable: "--font-mono",
+    variable: "--font-ibm-plex-mono",
     weight: ["400", "500"],
     subsets: ["latin"],
 });
 
 const sans = Public_Sans({
-    variable: "--font-sans",
+    variable: "--font-public-sans",
     subsets: ["latin"],
 });
 
 const display = Archivo({
-    variable: "--font-display",
+    variable: "--font-archivo",
     subsets: ["latin"],
 });
-
-const fonts = [mono.variable, sans.variable, display.variable];
 
 export const metadata: Metadata = {
     title: "Yehezkiel Dio Sinolungan",
@@ -49,7 +47,14 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={cn(...fonts, "isolate flex min-h-screen flex-col bg-background antialiased")}>
+            <body
+                className={cn(
+                    mono.variable,
+                    sans.variable,
+                    display.variable,
+                    "isolate flex min-h-screen flex-col bg-background antialiased"
+                )}
+            >
                 <NuqsAdapter>
                     <SiteHeader />
                     <RouteTransition>{children}</RouteTransition>
