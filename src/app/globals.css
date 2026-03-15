@@ -363,6 +363,23 @@
         transform: translate3d(0, -3px, 0);
     }
 
+    .scanline-texture {
+        background-image: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            oklch(from var(--foreground) l c h / 1),
+            oklch(from var(--foreground) l c h / 1) 3px
+        );
+        background-position: 0 0;
+    }
+
+    @supports (-moz-appearance: none) {
+        .scanline-texture {
+            background-image: linear-gradient(180deg, transparent 0%, transparent 60%, oklch(from var(--foreground) l c h / 0.035) 100%);
+        }
+    }
+
     .backdrop-canvas {
         contain: paint;
 

@@ -194,13 +194,7 @@ export function FeaturedWork() {
                                                 </div>
                                             </div>
 
-                                            <div
-                                                className="pointer-events-none absolute inset-0 opacity-[0.015] transition-opacity duration-500 group-hover:opacity-[0.03]"
-                                                style={{
-                                                    backgroundImage:
-                                                        "repeating-linear-gradient(0deg, transparent, transparent 2px, hsl(0 0% 100%) 2px, hsl(0 0% 100%) 3px)",
-                                                }}
-                                            />
+                                            <div className="scanline-texture pointer-events-none absolute inset-0 opacity-[0.015] transition-opacity duration-500 group-hover:opacity-[0.03]" />
                                             <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
                                         </div>
                                     </FeaturedProjectWrapper>
