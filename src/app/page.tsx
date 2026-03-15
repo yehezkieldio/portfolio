@@ -1,5 +1,6 @@
 import { AmbientBackdrop } from "#/components/ambient-backdrop";
 import { SiteFrame } from "#/components/site-frame";
+import { FeaturedWork } from "#/features/home/components/featured-work";
 import { IdentityHeader } from "#/features/home/components/identity-header";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
             <main className="relative z-10">
                 <SiteFrame variant="home">
                     <IdentityHeader />
+                    <FeaturedWork />
                 </SiteFrame>
             </main>
         </div>
