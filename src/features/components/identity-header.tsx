@@ -57,7 +57,7 @@ export function IdentityHeader() {
                 </div>
 
                 <div
-                    className="mt-6 flex animate-fade-up flex-wrap items-center gap-x-3 gap-y-2 opacity-0"
+                    className="mt-6 flex animate-fade-up flex-wrap items-center gap-x-3 gap-y-2 opacity-0 md:mt-1"
                     style={{ animationDelay: "0.5s" }}
                 >
                     <span className="h-2 w-2 animate-pulse bg-primary" />
@@ -66,7 +66,7 @@ export function IdentityHeader() {
                     </span>
                     <span className="hidden h-px w-12 bg-border md:block" />
                     <span className="hidden font-mono text-[10px] text-muted-foreground/80 md:block">
-                        Available for Work, Opportunities, and Collaboration
+                        Based in Balikpapan, Indonesia • Open to Remote
                     </span>
                 </div>
 
@@ -74,7 +74,7 @@ export function IdentityHeader() {
                     className="mt-10 animate-fade-up opacity-0 md:mt-16 md:ml-auto md:max-w-xl lg:max-w-2xl"
                     style={{ animationDelay: "0.6s" }}
                 >
-                    <p className="max-w-2xl text-muted-foreground/70 text-sm leading-relaxed md:text-base">
+                    <p className="max-w-2xl text-muted-foreground/80 text-sm leading-relaxed md:text-base">
                         I build accessible, high-performance digital experiences. My expertise lies in full-stack web
                         development, with a focus on building resilient systems and scalable architectures.
                     </p>

@@ -171,7 +171,7 @@
         filter: blur(96px);
         animation: lightLeak 24s ease-in-out infinite;
 
-        @apply absolute inset-0 pointer-events-none opacity-12 filter;
+        @apply absolute inset-0 pointer-events-none opacity-12;
     }
 
     .light-leak-crimson {
