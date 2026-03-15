@@ -17,7 +17,7 @@ const projectRecords = [
         slug: "firefly",
         title: "Firefly",
         summary:
-            "CLI utility for managing project releases, including semantic versioning, changelog generation, and GitHub releases.",
+            "CLI utility for project releases, including semantic versioning, changelog generation, and GitHub releases.",
         category: "Developer Tooling",
         year: "2025",
         tags: ["TypeScript", "Bun", "NPM"],

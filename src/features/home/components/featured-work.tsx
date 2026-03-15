@@ -132,7 +132,6 @@ export function FeaturedWork() {
                                 >
                                     <FeaturedProjectWrapper project={project}>
                                         <div className="interactive-card relative h-full min-h-64 p-6 hover:bg-card/30 md:min-h-80 md:p-8">
-                                            <div className="featured-card-overlay absolute inset-0 bg-linear-to-br from-card/60 to-card/20 backdrop-blur-sm transition-all duration-500 group-hover:from-card/80 group-hover:to-card/40" />
                                             <div className="pointer-events-none absolute inset-0 opacity-0 transition-all duration-700 group-hover:opacity-100">
                                                 <div className="absolute top-0 right-0 left-0 h-px animate-pulse bg-linear-to-r from-transparent via-primary/60 to-transparent" />
                                                 <div
