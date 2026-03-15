@@ -1,6 +1,6 @@
 import { AmbientBackdrop } from "#/components/ambient-backdrop";
 import { SiteFrame } from "#/components/site-frame";
-import { IdentityHeader } from "#/features/components/identity-header";
+import { IdentityHeader } from "#/features/home/components/identity-header";
 
 export default function Home() {
     return (
