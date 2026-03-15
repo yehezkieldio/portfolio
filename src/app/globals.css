@@ -92,6 +92,30 @@
         @apply text-foreground bg-primary/25;
     }
 
+    html {
+        scrollbar-color: oklch(from var(--primary) l c h / 0.25) var(--background);
+        scrollbar-width: thin;
+    }
+
+    *::-webkit-scrollbar {
+        width: 0.65rem;
+        height: 0.65rem;
+    }
+
+    *::-webkit-scrollbar-track {
+        @apply bg-background;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        border: 2px solid var(--background);
+        border-radius: 999px;
+        @apply bg-primary/25;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+        @apply bg-primary/35;
+    }
+
     * {
         @apply border-border;
     }
@@ -109,10 +133,6 @@
         font-feature-settings:
             "ss01" 1,
             "ss02" 1;
-        /* background-image:
-            radial-gradient(circle at 15% 16%, oklch(0.6589 0.2278 28.98 / 10%), transparent 28%),
-            radial-gradient(circle at 82% 14%, oklch(0.5539 0.2156 296.2 / 8%), transparent 24%),
-            linear-gradient(in oklch 180deg, oklch(0.1324 0 0) 0%, oklch(0.1157 0 0) 48%, oklch(0.0918 0 0) 100%); */
 
         @apply bg-background text-foreground font-sans antialiased overflow-x-hidden min-h-screen;
     }
