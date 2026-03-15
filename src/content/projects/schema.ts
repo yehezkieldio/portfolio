@@ -8,8 +8,8 @@ export const projectSchema = z.object({
     summary: z.string().min(20),
     tags: z.array(z.string().min(1)).min(1).readonly(),
     image: z.string().startsWith("/").optional(),
-    liveUrl: z.string().url().optional(),
-    repoUrl: z.string().url().optional(),
+    liveUrl: z.url().optional(),
+    repoUrl: z.url().optional(),
     featured: z.boolean().default(false),
 });
 
