@@ -14,7 +14,7 @@ function FeaturedProjectWrapper({
 }>) {
     if (project.destination.kind === "detail") {
         return (
-            <Link className="block h-full" href={project.destination.href}>
+            <Link className="group block h-full" href={project.destination.href}>
                 {children}
             </Link>
         );
@@ -22,7 +22,7 @@ function FeaturedProjectWrapper({
 
     if (project.destination.kind === "external") {
         return (
-            <a className="block h-full" href={project.destination.href} rel="noreferrer" target="_blank">
+            <a className="group block h-full" href={project.destination.href} rel="noreferrer" target="_blank">
                 {children}
             </a>
         );
@@ -128,8 +128,8 @@ export function FeaturedWork() {
                                     style={{ "--reveal-delay": `${160 + index * 80}ms` } as CSSProperties}
                                 >
                                     <FeaturedProjectWrapper project={project}>
-                                        <div className="interactive-card relative h-full min-h-56 p-5 hover:bg-card/30 md:min-h-80 md:p-8">
-                                            <div className="pointer-events-none absolute inset-0 opacity-0 transition-all duration-700 group-hover:opacity-100">
+                                        <div className="interactive-card relative h-full min-h-56 p-5 hover:bg-card/30 active:bg-card/30 md:min-h-80 md:p-8">
+                                            <div className="pointer-events-none absolute inset-0 opacity-0 transition-all duration-700 group-hover:opacity-100 group-active:opacity-100">
                                                 <div className="absolute top-0 right-0 left-0 h-px animate-pulse bg-linear-to-r from-transparent via-primary/60 to-transparent" />
                                                 <div
                                                     className="absolute right-0 bottom-0 left-0 h-px animate-pulse bg-linear-to-r from-transparent via-secondary/60 to-transparent"
@@ -139,29 +139,29 @@ export function FeaturedWork() {
                                                 <div className="absolute top-0 right-0 bottom-0 w-px bg-linear-to-b from-transparent via-secondary/40 to-transparent" />
                                             </div>
 
-                                            <div className="absolute top-4 left-1 h-4 w-4 border-muted-foreground/20 border-t-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 md:left-4 md:block" />
-                                            <div className="absolute top-4 right-1 h-4 w-4 border-muted-foreground/20 border-t-2 border-r-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 md:right-4 md:block" />
-                                            <div className="absolute bottom-4 left-1 h-4 w-4 border-muted-foreground/20 border-b-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 md:left-4 md:block" />
-                                            <div className="absolute right-1 bottom-4 h-4 w-4 border-muted-foreground/20 border-r-2 border-b-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 md:right-1 md:block" />
+                                            <div className="absolute top-4 left-1 h-4 w-4 border-muted-foreground/20 border-t-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 group-active:h-6 group-active:w-6 group-active:border-primary/60 md:left-4 md:block" />
+                                            <div className="absolute top-4 right-1 h-4 w-4 border-muted-foreground/20 border-t-2 border-r-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 group-active:h-6 group-active:w-6 group-active:border-primary/60 md:right-4 md:block" />
+                                            <div className="absolute bottom-4 left-1 h-4 w-4 border-muted-foreground/20 border-b-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 group-active:h-6 group-active:w-6 group-active:border-secondary/60 md:left-4 md:block" />
+                                            <div className="absolute right-1 bottom-4 h-4 w-4 border-muted-foreground/20 border-r-2 border-b-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 group-active:h-6 group-active:w-6 group-active:border-secondary/60 md:right-1 md:block" />
 
                                             <div className="relative z-10 flex h-full flex-col">
                                                 <div className="mt-2 flex items-start justify-between gap-4 md:mt-0">
-                                                    <span className="font-mono text-[10px] text-primary/70 tracking-[0.2em] transition-colors duration-300 group-hover:text-primary">
+                                                    <span className="font-mono text-[10px] text-primary/70 tracking-[0.2em] transition-colors duration-300 group-hover:text-primary group-active:text-primary">
                                                         PROJ_{String(index + 1).padStart(2, "0")}
                                                     </span>
-                                                    <span className="max-w-[70%] truncate whitespace-nowrap text-right font-mono text-[9px] text-muted-foreground/50 leading-none tracking-widest transition-colors duration-300 group-hover:text-muted-foreground/80">
+                                                    <span className="max-w-[70%] truncate whitespace-nowrap text-right font-mono text-[9px] text-muted-foreground/50 leading-none tracking-widest transition-colors duration-300 group-hover:text-muted-foreground/80 group-active:text-muted-foreground/80">
                                                         {project.category}
                                                     </span>
                                                 </div>
 
                                                 <div className="mt-10">
-                                                    <h3 className="mb-3 flex items-center gap-2 font-bold font-display text-foreground text-xl uppercase tracking-tight transition-colors duration-300 group-hover:translate-x-1 group-hover:text-primary md:text-2xl">
+                                                    <h3 className="mb-3 flex items-center gap-2 font-bold font-display text-foreground text-xl uppercase tracking-tight transition-colors duration-300 group-hover:translate-x-1 group-hover:text-primary group-active:translate-x-1 group-active:text-primary md:text-2xl">
                                                         <span>{project.title}</span>
                                                         {project.destination.kind === "static" ? null : (
-                                                            <ArrowUpRightIcon className="h-4 w-4 shrink-0 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+                                                            <ArrowUpRightIcon className="h-4 w-4 shrink-0 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 group-active:translate-x-0.5 group-active:-translate-y-0.5 group-active:opacity-100" />
                                                         )}
                                                     </h3>
-                                                    <p className="max-w-md text-muted-foreground text-sm leading-relaxed transition-colors duration-300 group-hover:text-muted-foreground/90">
+                                                    <p className="max-w-md text-muted-foreground text-sm leading-relaxed transition-colors duration-300 group-hover:text-muted-foreground/90 group-active:text-muted-foreground/90">
                                                         {project.summary}
                                                     </p>
                                                 </div>
@@ -170,7 +170,7 @@ export function FeaturedWork() {
                                                     <div className="mb-4 flex flex-wrap gap-2">
                                                         {project.tags.map((tag, tagIndex) => (
                                                             <span
-                                                                className="border border-border px-2 py-1 font-mono text-[9px] text-muted-foreground tracking-widest transition-all duration-300 group-hover:border-primary/40 group-hover:text-foreground/80"
+                                                                className="border border-border px-2 py-1 font-mono text-[9px] text-muted-foreground tracking-widest transition-all duration-300 group-hover:border-primary/40 group-hover:text-foreground/80 group-active:border-primary/40 group-active:text-foreground/80"
                                                                 key={tag}
                                                                 style={{
                                                                     transitionDelay: `${tagIndex * 50}ms`,
@@ -181,7 +181,7 @@ export function FeaturedWork() {
                                                         ))}
                                                     </div>
                                                     <div className="flex items-center gap-2 font-mono text-[8px] text-muted-foreground/50 uppercase tracking-[0.18em]">
-                                                        <div className="h-px w-7 bg-white/10 transition-all duration-300 group-hover:w-10 group-hover:bg-primary/30" />
+                                                        <div className="h-px w-7 bg-white/10 transition-all duration-300 group-hover:w-10 group-hover:bg-primary/30 group-active:w-10 group-active:bg-primary/30" />
                                                         <span>
                                                             {project.destination.kind === "detail"
                                                                 ? "Open dossier"
@@ -193,8 +193,8 @@ export function FeaturedWork() {
                                                 </div>
                                             </div>
 
-                                            <div className="scanline-texture pointer-events-none absolute inset-0 opacity-[0.015] transition-opacity duration-500 group-hover:opacity-[0.03]" />
-                                            <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+                                            <div className="scanline-texture pointer-events-none absolute inset-0 opacity-[0.015] transition-opacity duration-500 group-hover:opacity-[0.03] group-active:opacity-[0.03]" />
+                                            <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 transition-opacity duration-700 group-hover:opacity-100 group-active:opacity-100" />
                                         </div>
                                     </FeaturedProjectWrapper>
                                 </article>

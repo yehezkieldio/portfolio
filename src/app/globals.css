@@ -354,7 +354,8 @@
             opacity 240ms ease;
     }
 
-    .interactive-card:hover {
+    .interactive-card:hover,
+    .interactive-card:active {
         box-shadow: var(--shadow-elevated);
         transform: translate3d(0, -2px, 0);
     }
