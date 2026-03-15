@@ -17,7 +17,7 @@ const projectRecords = [
         slug: "azalea",
         title: "Azalea",
         summary:
-            "High-performance Discord bot for downloading images and videos from X (formerly Twitter) and reuploading them to Discord.",
+            "High-performance Discord bot for downloading images/videos from X (formerly Twitter) and reuploading them to Discord.",
         category: "Discord Bot",
         year: "2026",
         tags: ["Rust", "Twilight", "Tokio"],

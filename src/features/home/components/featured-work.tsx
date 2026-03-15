@@ -1,4 +1,4 @@
-import { ArrowUpRightIcon } from "lucide-react";
+import { ArrowUpRightIcon, SquareArrowOutUpRightIcon } from "lucide-react";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { SectionAtmosphere } from "#/components/section-atmosphere";
@@ -158,7 +158,7 @@ export function FeaturedWork() {
                                                     <h3 className="mb-3 flex items-center gap-2 font-bold font-display text-foreground text-xl uppercase tracking-tight transition-colors duration-300 group-hover:translate-x-1 group-hover:text-primary group-active:translate-x-1 group-active:text-primary md:text-2xl">
                                                         <span>{project.title}</span>
                                                         {project.destination.kind === "static" ? null : (
-                                                            <ArrowUpRightIcon className="h-4 w-4 shrink-0 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 group-active:translate-x-0.5 group-active:-translate-y-0.5 group-active:opacity-100" />
+                                                            <SquareArrowOutUpRightIcon className="h-4 w-4 shrink-0 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 group-active:translate-x-0.5 group-active:-translate-y-0.5 group-active:opacity-100" />
                                                         )}
                                                     </h3>
                                                     <p className="max-w-md text-muted-foreground text-sm leading-relaxed transition-colors duration-300 group-hover:text-muted-foreground/90 group-active:text-muted-foreground/90">
