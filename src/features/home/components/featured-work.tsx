@@ -122,7 +122,7 @@ export function FeaturedWork() {
 
                             return (
                                 <article
-                                    className={`${spanClass} featured-work-card group relative isolate overflow-hidden bg-background/80 md:bg-void/90`}
+                                    className={`${spanClass} featured-work-card group relative isolate overflow-hidden bg-background`}
                                     data-reveal=""
                                     key={project.slug}
                                     style={{ "--reveal-delay": `${160 + index * 80}ms` } as CSSProperties}
@@ -139,13 +139,13 @@ export function FeaturedWork() {
                                                 <div className="absolute top-0 right-0 bottom-0 w-px bg-linear-to-b from-transparent via-secondary/40 to-transparent" />
                                             </div>
 
-                                            <div className="absolute top-4 left-4 hidden h-4 w-4 border-muted-foreground/20 border-t-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 md:block" />
-                                            <div className="absolute top-4 right-4 hidden h-4 w-4 border-muted-foreground/20 border-t-2 border-r-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 md:block" />
-                                            <div className="absolute bottom-4 left-4 hidden h-4 w-4 border-muted-foreground/20 border-b-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 md:block" />
-                                            <div className="absolute right-4 bottom-4 hidden h-4 w-4 border-muted-foreground/20 border-r-2 border-b-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 md:block" />
+                                            <div className="absolute top-4 left-1 h-4 w-4 border-muted-foreground/20 border-t-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 md:left-4 md:block" />
+                                            <div className="absolute top-4 right-1 h-4 w-4 border-muted-foreground/20 border-t-2 border-r-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 md:right-4 md:block" />
+                                            <div className="absolute bottom-4 left-1 h-4 w-4 border-muted-foreground/20 border-b-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 md:left-4 md:block" />
+                                            <div className="absolute right-1 bottom-4 h-4 w-4 border-muted-foreground/20 border-r-2 border-b-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 md:right-1 md:block" />
 
                                             <div className="relative z-10 flex h-full flex-col">
-                                                <div className="flex items-start justify-between gap-4">
+                                                <div className="mt-2 flex items-start justify-between gap-4 md:mt-0">
                                                     <span className="font-mono text-[10px] text-primary/70 tracking-[0.2em] transition-colors duration-300 group-hover:text-primary">
                                                         PROJ_{String(index + 1).padStart(2, "0")}
                                                     </span>
@@ -166,7 +166,7 @@ export function FeaturedWork() {
                                                     </p>
                                                 </div>
 
-                                                <div className="mt-auto pt-4">
+                                                <div className="mt-auto mb-2 pt-4 md:mb-0">
                                                     <div className="mb-4 flex flex-wrap gap-2">
                                                         {project.tags.map((tag, tagIndex) => (
                                                             <span
