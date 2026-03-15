@@ -88,15 +88,14 @@ export function FeaturedWork() {
                                         </span>
                                         <div className="hidden h-px w-8 bg-linear-to-r from-white/10 to-transparent md:block" />
                                         <span className="hidden font-mono text-[8px] text-muted-foreground/30 tracking-widest md:block">
-                                            OPERATIONAL
+                                            SELECTED PROJECTS AND COLLABORATIONS
                                         </span>
                                     </div>
                                     <h2 className="font-bold font-display text-3xl text-foreground uppercase tracking-[-0.03em] md:text-5xl lg:text-6xl">
                                         Stuff I Do
                                     </h2>
                                     <p className="mt-2 font-mono text-[9px] text-muted-foreground/60 tracking-[0.15em]">
-                                        Notable projects and collaborations. For a more comprehensive list, check out
-                                        the full portfolio archive.
+                                        Notable projects and collaborations.
                                     </p>
                                 </div>
                             </div>

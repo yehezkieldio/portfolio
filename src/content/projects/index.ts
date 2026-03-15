@@ -6,7 +6,8 @@ const projectRecords = [
     {
         slug: "trashtrack",
         title: "TrashTrack",
-        summary: "Internet of Things (IoT) smart waste disposal system for filtering and monitoring trash efficiently.",
+        summary:
+            "Internet of Things (IoT) smart trash bin monitoring system for real-time fill level tracking and waste management solutions.",
         category: "Mobile Application",
         year: "2024",
         tags: ["TypeScript", "Capacitor", "Vite", "React", "Nx"],
@@ -16,8 +17,7 @@ const projectRecords = [
     {
         slug: "azalea",
         title: "Azalea",
-        summary:
-            "High-performance Discord bot for downloading images/videos from X (formerly Twitter) and reuploading them to Discord.",
+        summary: "Discord bot for downloading images/videos from X (formerly Twitter) and reuploading them to Discord.",
         category: "Discord Bot",
         year: "2026",
         tags: ["Rust", "Twilight", "Tokio"],
@@ -28,7 +28,7 @@ const projectRecords = [
         slug: "firefly",
         title: "Firefly",
         summary:
-            "CLI utility for project releases, including semantic versioning, changelog generation, and GitHub releases.",
+            "CLI for automated project releases, including semantic versioning, changelog generation, and GitHub releases.",
         category: "Developer Tooling",
         year: "2025",
         tags: ["TypeScript", "Bun", "NPM"],
