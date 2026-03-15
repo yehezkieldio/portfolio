@@ -119,20 +119,20 @@ export function FeaturedWork() {
                 </div>
 
                 <div className="mx-auto max-w-7xl">
-                    <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-3">
+                    <div className="featured-work-grid grid grid-cols-1 gap-px bg-border md:grid-cols-3">
                         {projects.map((project, index) => {
                             const spanClass = index === 0 || index === 3 ? "md:col-span-2" : "md:col-span-1";
 
                             return (
                                 <article
-                                    className={`${spanClass} group relative overflow-hidden bg-background`}
+                                    className={`${spanClass} featured-work-card group relative isolate overflow-hidden bg-background`}
                                     data-reveal=""
                                     key={project.slug}
                                     style={{ "--reveal-delay": `${160 + index * 80}ms` } as CSSProperties}
                                 >
                                     <FeaturedProjectWrapper project={project}>
                                         <div className="interactive-card relative h-full min-h-64 p-6 hover:bg-card/30 md:min-h-80 md:p-8">
-                                            <div className="absolute inset-0 bg-linear-to-br from-card/60 to-card/20 backdrop-blur-sm transition-all duration-500 group-hover:from-card/80 group-hover:to-card/40" />
+                                            <div className="featured-card-overlay absolute inset-0 bg-linear-to-br from-card/60 to-card/20 backdrop-blur-sm transition-all duration-500 group-hover:from-card/80 group-hover:to-card/40" />
                                             <div className="pointer-events-none absolute inset-0 opacity-0 transition-all duration-700 group-hover:opacity-100">
                                                 <div className="absolute top-0 right-0 left-0 h-px animate-pulse bg-linear-to-r from-transparent via-primary/60 to-transparent" />
                                                 <div
@@ -149,25 +149,28 @@ export function FeaturedWork() {
                                             <div className="absolute right-4 bottom-4 h-4 w-4 border-muted-foreground/20 border-r-2 border-b-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60" />
 
                                             <div className="relative z-10 flex h-full flex-col">
-                                                <div className="mb-auto flex items-start justify-between gap-4">
+                                                <div className="flex items-start justify-between gap-4">
                                                     <span className="font-mono text-[10px] text-primary/70 tracking-[0.2em] transition-colors duration-300 group-hover:text-primary">
                                                         VIS_{String(index + 1).padStart(2, "0")}
                                                     </span>
-                                                    <span className="font-mono text-[9px] text-muted-foreground/50 tracking-widest transition-colors duration-300 group-hover:text-muted-foreground/80">
+                                                    <span className="max-w-[70%] truncate whitespace-nowrap text-right font-mono text-[9px] text-muted-foreground/50 leading-none tracking-widest transition-colors duration-300 group-hover:text-muted-foreground/80">
                                                         {project.category}
                                                     </span>
                                                 </div>
 
-                                                <div className="mt-auto">
+                                                <div className="mt-12">
                                                     <h3 className="mb-3 flex items-center gap-2 font-bold font-display text-foreground text-xl uppercase tracking-tight transition-colors duration-300 group-hover:translate-x-1 group-hover:text-primary md:text-2xl">
                                                         <span>{project.title}</span>
                                                         {project.destination.kind === "static" ? null : (
                                                             <ArrowUpRightIcon className="h-4 w-4 shrink-0 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
                                                         )}
                                                     </h3>
-                                                    <p className="mb-5 max-w-md text-muted-foreground text-sm leading-relaxed transition-colors duration-300 group-hover:text-muted-foreground/90">
+                                                    <p className="max-w-md text-muted-foreground text-sm leading-relaxed transition-colors duration-300 group-hover:text-muted-foreground/90">
                                                         {project.summary}
                                                     </p>
+                                                </div>
+
+                                                <div className="mt-auto pt-5">
                                                     <div className="mb-4 flex flex-wrap gap-2">
                                                         {project.tags.map((tag, tagIndex) => (
                                                             <span

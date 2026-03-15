@@ -378,6 +378,15 @@
         .scanline-texture {
             background-image: linear-gradient(180deg, transparent 0%, transparent 60%, oklch(from var(--foreground) l c h / 0.035) 100%);
         }
+
+        .featured-card-overlay {
+            backdrop-filter: none !important;
+        }
+
+        .featured-work-grid {
+            gap: 0;
+            background: transparent;
+        }
     }
 
     .backdrop-canvas {
