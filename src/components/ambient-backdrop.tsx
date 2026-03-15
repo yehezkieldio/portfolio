@@ -31,9 +31,9 @@ export function AmbientBackdrop() {
                         "linear-gradient(hsl(0 0% 100% / 0.5) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 100% / 0.5) 1px, transparent 1px)",
                     backgroundSize: "84px 84px",
                     maskImage:
-                        "linear-gradient(135deg, transparent 0%, transparent 18%, rgba(0,0,0,0.12) 34%, rgba(0,0,0,0.55) 56%, black 78%, black 100%)",
+                        "linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.2) 10%, rgba(0,0,0,0.8) 40%, black 60%, black 100%)",
                     WebkitMaskImage:
-                        "linear-gradient(135deg, transparent 0%, transparent 18%, rgba(0,0,0,0.12) 34%, rgba(0,0,0,0.55) 56%, black 78%, black 100%)",
+                        "linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.2) 10%, rgba(0,0,0,0.8) 40%, black 60%, black 100%)",
                 }}
             />
             <div
