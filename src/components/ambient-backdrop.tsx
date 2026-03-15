@@ -50,8 +50,6 @@ export function AmbientBackdrop() {
                         "radial-gradient(circle at 28% 42%, black 0%, black 30%, transparent 72%), linear-gradient(90deg, transparent 0%, black 22%, black 64%, transparent 100%)",
                 }}
             />
-            <div className="absolute inset-x-0 top-[18vh] h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
-            <div className="absolute inset-x-0 top-1/2 h-px bg-linear-to-r from-transparent via-white/3 to-transparent" />
             <div className="absolute inset-y-0 left-6 hidden w-8 md:block">
                 <div className="absolute top-[6%] left-0 h-[13%] w-px bg-linear-to-b from-white/12 via-white/4 to-transparent" />
                 <div className="absolute top-[32%] left-0 h-[18%] w-px bg-linear-to-b from-transparent via-primary/22 to-transparent" />
