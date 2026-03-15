@@ -35,7 +35,7 @@ export function FeaturedWork() {
     const projects = buildProjectArchiveItems(allProjects.filter((project) => project.featured).slice(0, 4));
 
     return (
-        <section className="relative overflow-x-clip py-20 md:py-32">
+        <section className="relative overflow-x-clip py-16 md:py-32">
             <div
                 className="pointer-events-none absolute"
                 style={{
@@ -72,13 +72,9 @@ export function FeaturedWork() {
             />
 
             <div className="relative z-10">
-                <div className="mx-auto mb-12 max-w-7xl md:mb-16">
+                <div className="mx-auto mb-10 max-w-7xl md:mb-16">
                     <div className="relative">
-                        <div className="absolute top-1/2 left-0 h-px w-full -translate-y-1/2">
-                            <div className="h-full w-full bg-linear-to-r from-white/8 via-transparent to-white/8" />
-                        </div>
-
-                        <div className="relative flex flex-col items-start gap-4 pb-6 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+                        <div className="relative flex flex-col items-start gap-4 pb-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
                             <div className="flex items-start gap-4">
                                 <div className="hidden flex-col items-center gap-1 pt-1 md:flex">
                                     <div className="h-2 w-2 rotate-45 border border-white/15" />
@@ -88,28 +84,29 @@ export function FeaturedWork() {
                                 <div>
                                     <div className="mb-3 flex items-center gap-3">
                                         <span className="border border-primary/20 bg-primary/10 px-2 py-0.5 font-mono text-[8px] text-primary/80 tracking-widest">
-                                            SECTOR 02
+                                            FEATURED WORK
                                         </span>
                                         <div className="hidden h-px w-8 bg-linear-to-r from-white/10 to-transparent md:block" />
                                         <span className="hidden font-mono text-[8px] text-muted-foreground/30 tracking-widest md:block">
                                             OPERATIONAL
                                         </span>
                                     </div>
-                                    <h2 className="font-bold font-display text-4xl text-foreground uppercase tracking-[-0.03em] md:text-5xl lg:text-6xl">
+                                    <h2 className="font-bold font-display text-3xl text-foreground uppercase tracking-[-0.03em] md:text-5xl lg:text-6xl">
                                         Stuff I Do
                                     </h2>
-                                    <p className="mt-2 font-mono text-[9px] text-muted-foreground/40 tracking-[0.15em]">
-                                        ACTIVE MISSION PARAMETERS
+                                    <p className="mt-2 font-mono text-[9px] text-muted-foreground/60 tracking-[0.15em]">
+                                        Notable projects and collaborations I've worked on. For a more comprehensive
+                                        list, check out the full portfolio archive.
                                     </p>
                                 </div>
                             </div>
 
                             <Link
-                                className="group flex items-center gap-3 font-mono text-[10px] text-muted-foreground/50 tracking-[0.15em] transition-colors duration-300 hover:text-primary/80 sm:pb-1"
+                                className="group flex items-center gap-3 font-mono text-[10px] text-muted-foreground/80 tracking-[0.15em] transition-colors duration-300 hover:text-primary/80 sm:pb-1"
                                 href="/portfolio"
                             >
-                                <div className="h-px w-4 bg-white/10 transition-all duration-300 group-hover:w-8 group-hover:bg-primary/40" />
-                                <span>FULL LOG</span>
+                                <div className="h-px w-4 bg-white/20 transition-all duration-300 group-hover:w-8 group-hover:bg-primary/40" />
+                                <span>FULL LIST</span>
                                 <ArrowUpRightIcon className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                             </Link>
                         </div>
@@ -125,13 +122,13 @@ export function FeaturedWork() {
 
                             return (
                                 <article
-                                    className={`${spanClass} featured-work-card group relative isolate overflow-hidden bg-background`}
+                                    className={`${spanClass} featured-work-card group relative isolate overflow-hidden bg-background/80 md:bg-void/90`}
                                     data-reveal=""
                                     key={project.slug}
                                     style={{ "--reveal-delay": `${160 + index * 80}ms` } as CSSProperties}
                                 >
                                     <FeaturedProjectWrapper project={project}>
-                                        <div className="interactive-card relative h-full min-h-64 p-6 hover:bg-card/30 md:min-h-80 md:p-8">
+                                        <div className="interactive-card relative h-full min-h-56 p-5 hover:bg-card/30 md:min-h-80 md:p-8">
                                             <div className="pointer-events-none absolute inset-0 opacity-0 transition-all duration-700 group-hover:opacity-100">
                                                 <div className="absolute top-0 right-0 left-0 h-px animate-pulse bg-linear-to-r from-transparent via-primary/60 to-transparent" />
                                                 <div
@@ -142,22 +139,22 @@ export function FeaturedWork() {
                                                 <div className="absolute top-0 right-0 bottom-0 w-px bg-linear-to-b from-transparent via-secondary/40 to-transparent" />
                                             </div>
 
-                                            <div className="absolute top-4 left-4 h-4 w-4 border-muted-foreground/20 border-t-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60" />
-                                            <div className="absolute top-4 right-4 h-4 w-4 border-muted-foreground/20 border-t-2 border-r-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60" />
-                                            <div className="absolute bottom-4 left-4 h-4 w-4 border-muted-foreground/20 border-b-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60" />
-                                            <div className="absolute right-4 bottom-4 h-4 w-4 border-muted-foreground/20 border-r-2 border-b-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60" />
+                                            <div className="absolute top-4 left-4 hidden h-4 w-4 border-muted-foreground/20 border-t-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 md:block" />
+                                            <div className="absolute top-4 right-4 hidden h-4 w-4 border-muted-foreground/20 border-t-2 border-r-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-primary/60 md:block" />
+                                            <div className="absolute bottom-4 left-4 hidden h-4 w-4 border-muted-foreground/20 border-b-2 border-l-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 md:block" />
+                                            <div className="absolute right-4 bottom-4 hidden h-4 w-4 border-muted-foreground/20 border-r-2 border-b-2 transition-all duration-500 group-hover:h-6 group-hover:w-6 group-hover:border-secondary/60 md:block" />
 
                                             <div className="relative z-10 flex h-full flex-col">
                                                 <div className="flex items-start justify-between gap-4">
                                                     <span className="font-mono text-[10px] text-primary/70 tracking-[0.2em] transition-colors duration-300 group-hover:text-primary">
-                                                        VIS_{String(index + 1).padStart(2, "0")}
+                                                        PROJ_{String(index + 1).padStart(2, "0")}
                                                     </span>
                                                     <span className="max-w-[70%] truncate whitespace-nowrap text-right font-mono text-[9px] text-muted-foreground/50 leading-none tracking-widest transition-colors duration-300 group-hover:text-muted-foreground/80">
                                                         {project.category}
                                                     </span>
                                                 </div>
 
-                                                <div className="mt-12">
+                                                <div className="mt-10">
                                                     <h3 className="mb-3 flex items-center gap-2 font-bold font-display text-foreground text-xl uppercase tracking-tight transition-colors duration-300 group-hover:translate-x-1 group-hover:text-primary md:text-2xl">
                                                         <span>{project.title}</span>
                                                         {project.destination.kind === "static" ? null : (
@@ -169,7 +166,7 @@ export function FeaturedWork() {
                                                     </p>
                                                 </div>
 
-                                                <div className="mt-auto pt-5">
+                                                <div className="mt-auto pt-4">
                                                     <div className="mb-4 flex flex-wrap gap-2">
                                                         {project.tags.map((tag, tagIndex) => (
                                                             <span
@@ -183,7 +180,7 @@ export function FeaturedWork() {
                                                             </span>
                                                         ))}
                                                     </div>
-                                                    <div className="flex items-center gap-2 font-mono text-[8px] text-muted-foreground/35 uppercase tracking-[0.18em]">
+                                                    <div className="flex items-center gap-2 font-mono text-[8px] text-muted-foreground/50 uppercase tracking-[0.18em]">
                                                         <div className="h-px w-7 bg-white/10 transition-all duration-300 group-hover:w-10 group-hover:bg-primary/30" />
                                                         <span>
                                                             {project.destination.kind === "detail"
