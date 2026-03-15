@@ -2,41 +2,34 @@
 
 import { ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useSelectedLayoutSegment } from "next/navigation";
 import { cn } from "#/lib/utils";
 import { Icons } from "./icons";
 
 interface NavigationItem {
     href: string;
     label: string;
+    segment: string | null;
     signal: string;
 }
 
 const navigationItems: NavigationItem[] = [
-    { href: "/", label: "Home", signal: "00" },
-    { href: "/portfolio", label: "Portfolio", signal: "01" },
-    { href: "/writing", label: "Writing", signal: "02" },
-    { href: "/about", label: "About", signal: "03" },
+    { href: "/", label: "Home", signal: "00", segment: null },
+    { href: "/portfolio", label: "Portfolio", signal: "01", segment: "portfolio" },
+    { href: "/writing", label: "Writing", signal: "02", segment: "writing" },
+    { href: "/about", label: "About", signal: "03", segment: "about" },
 ] as const;
 
-function isActivePath(pathname: string, href: string): boolean {
-    if (href === "/") {
-        return pathname === href;
-    }
-
-    return pathname === href || pathname.startsWith(`${href}/`);
-}
-
 export function SiteHeader() {
-    const pathname = usePathname();
+    const activeSegment = useSelectedLayoutSegment();
 
-    if (pathname === "/uses") {
+    if (activeSegment === "uses") {
         return null;
     }
 
     return (
         <header className="relative z-40 bg-background/85 backdrop-blur-sm">
-            <div className="pointer-events-none absolute inset-0">
+            <div aria-hidden className="pointer-events-none absolute inset-0">
                 <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/12 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-primary/18 to-transparent" />
                 <div className="absolute inset-y-0 left-[max(1rem,calc(50%-40rem))] hidden w-px bg-linear-to-b from-transparent via-white/10 to-transparent lg:block" />
@@ -76,14 +69,18 @@ export function SiteHeader() {
                     <nav aria-label="Primary" className="border-white/6 border-t pt-3">
                         <ul className="flex flex-wrap items-center gap-2 md:gap-3">
                             {navigationItems.map((item) => {
-                                const isActive = isActivePath(pathname, item.href);
+                                const isActive = activeSegment === item.segment;
+
+                                if (isActive) {
+                                    return null;
+                                }
 
                                 return (
-                                    <li className={cn(isActive && "hidden")} key={item.href}>
+                                    <li key={item.href}>
                                         <Link
                                             aria-current={isActive ? "page" : undefined}
                                             className={cn(
-                                                "group inline-flex items-center gap-1 border px-2 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] transition-all duration-300 md:gap-3 md:px-3 md:py-2 md:text-[10px]",
+                                                "group inline-flex items-center gap-1 border px-2 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] motion-safe:transition-all motion-safe:duration-300 motion-reduce:transition-none md:gap-3 md:px-3 md:py-2 md:text-[10px]",
                                                 isActive
                                                     ? "border-primary/40 bg-primary/10 text-primary"
                                                     : "border-white/8 bg-card/18 text-muted-foreground hover:border-white/16 hover:bg-card/42 hover:text-foreground"
@@ -101,7 +98,7 @@ export function SiteHeader() {
                                             <span>{item.label}</span>
                                             <ArrowUpRightIcon
                                                 className={cn(
-                                                    "h-2.5 w-2.5 transition-all duration-300 md:h-3 md:w-3",
+                                                    "h-2.5 w-2.5 motion-safe:transition-all motion-safe:duration-300 motion-reduce:transition-none md:h-3 md:w-3",
                                                     isActive
                                                         ? "translate-x-0.5 -translate-y-0.5 text-primary/70"
                                                         : "text-muted-foreground/25 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary/70"

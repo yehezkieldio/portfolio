@@ -32,7 +32,7 @@ export function RouteTransition({ children }: RouteTransitionProps) {
 
     useEffect(() => {
         setCanUseRouteTransition(supportRouteTransitions());
-    });
+    }, []);
 
     if (!canUseRouteTransition) {
         return <div id="main-content">{children}</div>;

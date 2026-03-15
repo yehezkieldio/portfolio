@@ -173,7 +173,7 @@ If code is performance-sensitive:
 - Batch operations when possible
 - Keep critical paths predictable for the JavaScript engine
 
-Measure when performance matters.
+Account for React Compiler, and do not blindly apply optimizations.
 
 Do not optimize blindly.
 
