@@ -11,7 +11,8 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "typecheck": "tsc --noEmit",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install",
+    "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",
