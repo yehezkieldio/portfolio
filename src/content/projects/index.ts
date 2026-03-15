@@ -4,6 +4,16 @@ import { type Project, projectSchema } from "./schema";
 
 const projectRecords = [
     {
+        slug: "trashtrack",
+        title: "TrashTrack",
+        summary: "Internet of Things (IoT) smart waste disposal system for filtering and monitoring trash efficiently.",
+        category: "Mobile Application",
+        year: "2024",
+        tags: ["TypeScript", "Capacitor", "Vite", "React", "Nx"],
+        featured: true,
+        repoUrl: "https://github.com/trashtrackteam/trashtrack",
+    },
+    {
         slug: "azalea",
         title: "Azalea",
         summary:
@@ -25,16 +35,7 @@ const projectRecords = [
         featured: true,
         repoUrl: "https://github.com/yehezkieldio/firefly",
     },
-    {
-        slug: "trashtrack",
-        title: "TrashTrack",
-        summary: "Internet of Things (IoT) smart waste disposal system for filtering and monitoring trash efficiently.",
-        category: "Mobile Application",
-        year: "2024",
-        tags: ["TypeScript", "Capacitor", "Vite", "React", "Nx"],
-        featured: true,
-        repoUrl: "https://github.com/trashtrackteam/trashtrack",
-    },
+
     {
         slug: "administrate",
         title: "Administrate",

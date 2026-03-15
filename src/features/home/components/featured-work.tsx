@@ -170,7 +170,7 @@ export function FeaturedWork() {
                                                     <div className="mb-4 flex flex-wrap gap-2">
                                                         {project.tags.map((tag, tagIndex) => (
                                                             <span
-                                                                className="border border-border px-2 py-1 font-mono text-[9px] text-muted-foreground tracking-widest transition-all duration-300 group-hover:border-primary/40 group-hover:text-foreground/80 group-active:border-primary/40 group-active:text-foreground/80"
+                                                                className="border border-border px-1.5 py-0.5 font-mono text-[8px] text-muted-foreground tracking-[0.14em] transition-all duration-300 group-hover:border-primary/40 group-hover:text-foreground/80 group-active:border-primary/40 group-active:text-foreground/80 md:px-2 md:py-1 md:text-[9px] md:tracking-widest"
                                                                 key={tag}
                                                                 style={{
                                                                     transitionDelay: `${tagIndex * 50}ms`,
