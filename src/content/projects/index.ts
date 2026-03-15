@@ -28,8 +28,7 @@ const projectRecords = [
     {
         slug: "trashtrack",
         title: "TrashTrack",
-        summary:
-            "Internet of Things (IoT) smart waste disposal system and data analytics to monitor and sort waste effectively.",
+        summary: "Internet of Things (IoT) smart waste disposal system for filtering and monitoring trash efficiently.",
         category: "Mobile Application",
         year: "2024",
         tags: ["Capacitor", "Vite", "React", "TypeScript"],

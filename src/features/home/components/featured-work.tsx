@@ -95,8 +95,8 @@ export function FeaturedWork() {
                                         Stuff I Do
                                     </h2>
                                     <p className="mt-2 font-mono text-[9px] text-muted-foreground/60 tracking-[0.15em]">
-                                        Notable projects and collaborations I've worked on. For a more comprehensive
-                                        list, check out the full portfolio archive.
+                                        Notable projects and collaborations. For a more comprehensive list, check out
+                                        the full portfolio archive.
                                     </p>
                                 </div>
                             </div>
