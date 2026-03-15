@@ -704,7 +704,15 @@
     animation: data-stream 20s linear infinite;
 }
 
+/* Today I Learned that if you disable animation effects in Windows, it sets the `prefers-reduced-motion` media query to `reduce`, which can cause some animations to not work at all. */
 @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-fade-up {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
     *,
     *::before,
     *::after {
