@@ -74,10 +74,9 @@ export function IdentityHeader() {
                     className="mt-10 animate-fade-up opacity-0 md:mt-16 md:ml-auto md:max-w-xl lg:max-w-2xl"
                     style={{ animationDelay: "0.6s" }}
                 >
-                    <p className="max-w-2xl text-muted-foreground text-sm leading-relaxed md:text-base">
-                        <span className="text-foreground">Based in Indonesia.</span> I build accessible,
-                        high-performance digital experiences. My expertise lies in full-stack web development, with a
-                        focus on building resilient systems and scalable architectures.
+                    <p className="max-w-2xl text-muted-foreground/70 text-sm leading-relaxed md:text-base">
+                        I build accessible, high-performance digital experiences. My expertise lies in full-stack web
+                        development, with a focus on building resilient systems and scalable architectures.
                     </p>
                 </div>
 
@@ -100,29 +99,6 @@ export function IdentityHeader() {
                     </Link>
                 </div>
 
-                {/* <div className="mt-4 animate-fade-up opacity-0" style={{ animationDelay: "0.78s" }}>
-                    <p className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[10px] text-muted-foreground/55 tracking-[0.14em]">
-                        <span>
-                            Best for product engineering roles, thoughtful freelance work, and direct collaboration.
-                        </span>
-                        <a
-                            className="text-primary transition-colors hover:text-primary/80"
-                            href="mailto:hello@yehezkiel.dev"
-                        >
-                            Email me
-                        </a>
-                        <span className="text-muted-foreground/30">/</span>
-                        <a
-                            className="text-primary transition-colors hover:text-primary/80"
-                            href="https://github.com/yehezkieldio"
-                            rel="noreferrer"
-                            target="_blank"
-                        >
-                            GitHub
-                        </a>
-                    </p>
-                </div> */}
-
                 <div
                     className="mt-14 flex animate-fade-up items-center gap-4 opacity-0 md:mt-24 md:gap-6"
                     style={{ animationDelay: "0.9s" }}
@@ -135,17 +111,6 @@ export function IdentityHeader() {
                     </div>
                     <div className="h-px flex-1 bg-linear-to-r from-border to-transparent" />
                 </div>
-            </div>
-
-            <div
-                className="absolute bottom-12 left-1/2 flex -translate-x-1/2 animate-fade-in flex-col items-center gap-3 opacity-0"
-                style={{ animationDelay: "1.5s" }}
-            >
-                <div className="relative">
-                    <div className="h-16 w-px bg-linear-to-b from-primary/50 to-transparent" />
-                    <div className="absolute top-0 left-1/2 h-1 w-1 -translate-x-1/2 animate-pulse bg-primary" />
-                </div>
-                <span className="font-mono text-[8px] text-muted-foreground/70 tracking-[0.4em]">SCROLL</span>
             </div>
         </section>
     );
