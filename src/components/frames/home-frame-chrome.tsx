@@ -1,6 +1,6 @@
 import { cn } from "#/lib/utils";
 
-const homeFrameAnchors = ["16%", "37%", "68%"] as const;
+const homeFrameAnchors = ["6%", "37%", "68%"] as const;
 
 export function HomeFrameChrome() {
     return (

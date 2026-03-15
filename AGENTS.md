@@ -189,6 +189,7 @@ A task is incomplete unless the following pass:
 Additional rules:
 
 - Treat all warnings as errors
+- Do not run `bun run build` at all
 - Do not suppress lint rules without justification
 - Do not land partially-correct refactors
 - Do not add placeholders, speculative comments, or unfinished logic
