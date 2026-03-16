@@ -12,6 +12,7 @@ const coreTechnologies = [
     { iconName: "Bun", name: "Bun" },
     { iconName: "TypeScript", name: "TypeScript" },
     { iconName: "Rust", name: "Rust" },
+    { iconName: "Docker", name: "Docker" },
     { iconName: "GitHub Copilot", name: "GitHub Copilot" },
 ] as const satisfies readonly TechEntry[];
 
@@ -69,13 +70,13 @@ export function TechOverview() {
                             <div className="flex-1 text-left md:text-right">
                                 <div className="mb-3 flex items-center justify-start gap-3 md:justify-end">
                                     <span className="hidden font-mono text-[7px] text-muted-foreground/25 tracking-widest md:block">
-                                        INVENTORY ACTIVE
+                                        THE TOOLS I WIELD
                                     </span>
                                     <div className="h-px max-w-24 flex-1 bg-linear-to-l from-white/8 to-transparent" />
                                     <div className="flex items-center gap-2">
                                         <div className="h-1.5 w-1.5 animate-pulse bg-primary/40" />
                                         <span className="font-mono text-[8px] text-primary/60 tracking-[0.25em]">
-                                            SYS.ARSENAL
+                                            SOFTWARE STACK
                                         </span>
                                     </div>
                                 </div>
@@ -85,17 +86,8 @@ export function TechOverview() {
                                 </h2>
 
                                 <div className="flex items-center justify-start gap-3 md:justify-end">
-                                    <div className="flex gap-0.5">
-                                        {techDots.map((value) => (
-                                            <div
-                                                className="h-0.5 w-0.5 bg-white/15"
-                                                key={`tech-dot-${value}`}
-                                                style={{ opacity: 1 - value * 0.18 }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <span className="font-mono text-[9px] text-muted-foreground/40 tracking-[0.15em]">
-                                        WEAPONS &amp; INSTRUMENTS
+                                    <span className="font-mono text-[9px] text-muted-foreground/60 tracking-[0.15em]">
+                                        Frameworks, libraries, tools, and services.
                                     </span>
                                 </div>
                             </div>
@@ -123,6 +115,8 @@ export function TechOverview() {
                                 >
                                     <div className="absolute top-3 left-3 h-2 w-2 border border-white/8 border-r-0 border-b-0" />
                                     <div className="absolute top-3 right-3 h-2 w-2 border border-white/8 border-b-0 border-l-0" />
+                                    <div className="absolute bottom-3 left-3 h-2 w-2 border border-white/8 border-t-0 border-r-0" />
+                                    <div className="absolute right-3 bottom-3 h-2 w-2 border border-white/8 border-t-0 border-l-0" />
                                     <div className="rounded-full border border-white/8 bg-card/40 p-3">
                                         <BrandGlyph className="h-5 w-5" name={tech.iconName} />
                                     </div>
