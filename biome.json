@@ -32,7 +32,8 @@
         "noUnknownAtRules": "off",
         "noConsole": "off",
         "useAwait": "off",
-        "noEmptyBlockStatements": "off"
+        "noEmptyBlockStatements": "off",
+        "noArrayIndexKey": "off"
       },
       "style": {
         "useBlockStatements": "off",

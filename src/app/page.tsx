@@ -2,6 +2,7 @@ import { AmbientBackdrop } from "#/components/ambient-backdrop";
 import { SiteFrame } from "#/components/site-frame";
 import { FeaturedWork } from "#/features/home/components/featured-work";
 import { IdentityHeader } from "#/features/home/components/identity-header";
+import { TechOverview } from "#/features/home/components/tech-overview";
 
 export default function Home() {
     return (
@@ -11,6 +12,7 @@ export default function Home() {
                 <SiteFrame variant="home">
                     <IdentityHeader />
                     <FeaturedWork />
+                    <TechOverview />
                 </SiteFrame>
             </main>
         </div>
