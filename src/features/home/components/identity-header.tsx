@@ -75,7 +75,7 @@ export function IdentityHeader() {
                     style={{ animationDelay: "0.6s" }}
                 >
                     <p className="max-w-2xl text-muted-foreground/80 text-sm leading-relaxed md:text-base">
-                        Building accessible, high-performance digital experiences. My expertise lies in full-stack web
+                        Building accessible, high-performance digital experiences. I specialize in full-stack web
                         development, with a focus on building resilient systems and scalable architectures.
                     </p>
                 </div>
