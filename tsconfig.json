@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
+    "baseUrl": ".",
     "incremental": true,
     "plugins": [
       {
@@ -19,9 +20,9 @@
       }
     ],
     "paths": {
-      "#/*": ["./src/*"]
-    },
-    "strictNullChecks": true
+      "#/*": ["./src/*"],
+      "fumadocs-mdx:collections/*": [".source/*"]
+    }
   },
   "include": [
     "next-env.d.ts",

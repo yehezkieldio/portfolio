@@ -1,6 +1,10 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["ultracite/core", "ultracite/react", "ultracite/next"],
+  "extends": [
+    "ultracite/biome/core",
+    "ultracite/biome/next",
+    "ultracite/biome/react"
+  ],
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -8,41 +12,56 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["!node_modules", "!.next", "!!dist", "!!build", "!bun.lock"]
+    "includes": ["!node_modules", "!.next", "!dist", "!build"]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 4,
-    "lineWidth": 110
+    "lineWidth": 120
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
-      "nursery": {
-        "noLeakedRender": "off"
+      "correctness": {
+        "noUnusedVariables": "off",
+        "noUndeclaredVariables": "off"
       },
       "suspicious": {
         "noUnknownAtRules": "off",
+        "noConsole": "off",
         "useAwait": "off",
-        "noConsole": "off"
+        "noEmptyBlockStatements": "off",
+        "noArrayIndexKey": "off"
       },
       "style": {
+        "useBlockStatements": "off",
         "noMagicNumbers": "off",
         "useConsistentTypeDefinitions": "off",
-        "useBlockStatements": "off"
+        "noParameterProperties": "off",
+        "noNestedTernary": "off"
       },
       "performance": {
-        "noNamespaceImport": "off"
+        "noNamespaceImport": "off",
+        "noImgElement": "off"
       },
       "complexity": {
+        "noVoid": "off",
+        "noExcessiveLinesPerFunction": "off",
         "noExcessiveCognitiveComplexity": {
           "level": "warn",
           "options": {
-            "maxAllowedComplexity": 50
+            "maxAllowedComplexity": 150
           }
         }
+      },
+      "a11y": {
+        "useSemanticElements": "off",
+        "noLabelWithoutControl": "off",
+        "noStaticElementInteractions": "off",
+        "noNoninteractiveElementInteractions": "off",
+        "useKeyWithClickEvents": "off"
       }
     },
     "domains": {
@@ -50,16 +69,27 @@
       "react": "recommended"
     }
   },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    },
+    "globals": ["Bun"]
+  },
+  "css": {
+    "formatter": {
+      "lineWidth": 160
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  },
   "assist": {
     "actions": {
       "source": {
         "organizeImports": "on"
       }
-    }
-  },
-  "css": {
-    "parser": {
-      "tailwindDirectives": true
     }
   }
 }
