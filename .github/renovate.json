@@ -1,10 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", "customManagers:biomeVersions"],
-  "enabled": false,
-  "prHourlyLimit": 3,
-  "rangeStrategy": "bump",
+  "enabled": true,
+  "extends": ["config:recommended", "group:allNonMajor"],
+  "prHourlyLimit": 5,
+  "mode": "full",
   "ignoreTests": true,
+  "dependencyDashboard": true,
+  "timezone": "Asia/Makassar",
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
@@ -12,9 +14,9 @@
       "automerge": false
     },
     {
-      "matchUpdateTypes": ["patch", "minor"],
-      "dependencyDashboardApproval": false,
-      "automerge": true
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "pr"
     }
   ]
 }
