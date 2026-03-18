@@ -1,26 +1,17 @@
 {
   "servers": {
-    "next-devtools": {
-      "command": "npx",
-      "args": ["-y", "next-devtools-mcp@latest"],
-      "type": "stdio"
+    "deepwiki": {
+      "url": "https://mcp.deepwiki.com/mcp",
+      "type": "http"
     },
-    "upstash/context7": {
-      "type": "http",
+    "context7": {
       "url": "https://mcp.context7.com/mcp",
-      "headers": {
-        "CONTEXT7_API_KEY": "${input:context7_api_key}"
-      },
-      "gallery": "https://api.mcp.github.com",
-      "version": "1.0.0"
+      "type": "http"
+    },
+    "next-devtools": {
+      "command": "bunx",
+      "args": ["-y", "next-devtools-mcp@latest"]
     }
   },
-  "inputs": [
-    {
-      "id": "context7_api_key",
-      "type": "promptString",
-      "description": "Context7 API key (optional; increases rate limits). Get one at https://context7.com/dashboard",
-      "password": true
-    }
-  ]
+  "inputs": []
 }

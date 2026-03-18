@@ -1,35 +1,30 @@
 import "./globals.css";
 
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Public_Sans } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
-import { ThemeProvider } from "#/components/theme-provider";
+import { RouteTransition } from "#/components/route-transition";
+import { SiteHeader } from "#/components/site-header";
 import { cn } from "#/lib/utils";
 
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+const mono = IBM_Plex_Mono({
+    variable: "--font-ibm-plex-mono",
+    weight: ["400", "500"],
     subsets: ["latin"],
 });
 
-const geist = Geist({
-    variable: "--font-geist",
+const sans = Public_Sans({
+    variable: "--font-public-sans",
     subsets: ["latin"],
 });
 
-const playfairDisplay = Playfair_Display({
-    variable: "--font-playfair-display",
+const display = Archivo({
+    variable: "--font-archivo",
     subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-    title: {
-        default: "Yehezkiel Dio Sinolungan",
-        template: "%s",
-    },
-    description: "Software Engineer, Web Developer, and Open Source Enthusiast.",
-    keywords: ["Design", "Development", "Engineering"],
+    title: "Yehezkiel Dio Sinolungan",
     icons: {
         icon: [
             { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -43,30 +38,6 @@ export const metadata: Metadata = {
         ],
     },
     manifest: "/site.webmanifest",
-    openGraph: {
-        type: "website",
-        locale: "en_US",
-        url: process.env.NEXT_PUBLIC_SITE_URL,
-        title: "Yehezkiel Dio Sinolungan",
-        description: "Software Engineer, Web Developer, and Open Source Enthusiast.",
-        siteName: "Yehezkiel Dio Sinolungan",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Yehezkiel Dio Sinolungan",
-        description: "Software Engineer, Web Developer, and Open Source Enthusiast.",
-    },
-    robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-            index: true,
-            follow: true,
-            "max-video-preview": -1,
-            "max-image-preview": "large",
-            "max-snippet": -1,
-        },
-    },
 };
 
 export default function RootLayout({
@@ -78,19 +49,16 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body
                 className={cn(
-                    geistMono.variable,
-                    geist.variable,
-                    playfairDisplay.variable,
-                    "font-sans antialiased"
+                    mono.variable,
+                    sans.variable,
+                    display.variable,
+                    "isolate flex min-h-screen flex-col bg-background antialiased"
                 )}
             >
-                <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange enableSystem>
-                    <NuqsAdapter>
-                        {children}
-                        <SpeedInsights />
-                        <Analytics />
-                    </NuqsAdapter>
-                </ThemeProvider>
+                <NuqsAdapter>
+                    <SiteHeader />
+                    <RouteTransition>{children}</RouteTransition>
+                </NuqsAdapter>
             </body>
         </html>
     );

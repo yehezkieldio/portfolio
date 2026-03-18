@@ -1,0 +1,68 @@
+---
+title: Signalboard
+description: A calmer product analytics workspace designed to reduce release ambiguity and make reporting readable under pressure.
+slug: signalboard
+kicker: Project dossier / product telemetry
+timeline: Concept sprint · 6 weeks
+role: Product design, frontend architecture, systems framing
+status: Selected portfolio deep dive
+---
+
+## Context
+
+Signalboard started from a familiar problem: product teams were technically surrounded by data, but still lacked a clean view of **what changed, what was live, and what needed attention next**. Every answer existed somewhere — in dashboards, changelogs, issue trackers, release notes, and alerts — but the experience of stitching those pieces together felt more expensive than it should.
+
+The goal was not to build yet another metrics cockpit. The goal was to design a workspace that made operational awareness feel **calm, legible, and current**.
+
+## What I optimized for
+
+- Release visibility without dashboard sprawl
+- A layout that kept the primary signal readable at a glance
+- Server-first rendering so the page stayed dependable under heavy filtering
+- A visual system that felt technical without becoming noisy
+
+## Product shape
+
+The interface centered on three questions:
+
+1. What changed recently?
+2. What looks unhealthy right now?
+3. What deserves attention before the next release window?
+
+That led to a structure where the UI favored **timelines, grouped signals, and reduction of duplicate context** over endless configurable widgets. If a panel could not justify its presence quickly, it did not survive.
+
+## Technical direction
+
+The implementation was framed as a server-first Next.js application with typed data boundaries and a deliberately restrained client surface. The important state would live in URLs and validated server inputs, while interactive controls would mostly exist to refine views rather than to become the source of truth.
+
+That approach mattered because monitoring software becomes brittle fast when too much filtering logic drifts into the client. I wanted the architecture to stay obvious:
+
+- the route owns the query state
+- the server owns the filtered result set
+- the UI owns presentation and affordances
+
+## Interface decisions
+
+A recurring theme was avoiding franticness. Monitoring products often equate importance with aggression: loud charts, alert-red everything, dense widget walls. I pushed in the opposite direction.
+
+Instead, the page used:
+
+- stronger hierarchy before stronger color
+- fewer competing panels
+- restrained motion
+- typography that could carry emphasis without depending on decoration
+
+The result was less “war room” and more “control room” — still technical, but not exhausting.
+
+## What I would ship next
+
+If this moved beyond a portfolio prototype, the next steps would be:
+
+- customizable saved views per team
+- deploy-linked anomaly summaries
+- richer trend comparisons over release windows
+- notification design that preserves context rather than merely forwarding alarms
+
+## Takeaway
+
+Signalboard represents the kind of product work I enjoy most: a blend of systems thinking, interface restraint, and architecture decisions that are meant to make complexity feel understandable rather than merely visible.
