@@ -1,15 +1,14 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Archivo, IBM_Plex_Mono, Public_Sans } from "next/font/google";
+import { Archivo, Geist_Mono, Public_Sans } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { RouteTransition } from "#/components/route-transition";
 import { SiteHeader } from "#/components/site-header";
 import { cn } from "#/lib/utils";
 
-const mono = IBM_Plex_Mono({
-    variable: "--font-ibm-plex-mono",
-    weight: ["400", "500"],
+const mono = Geist_Mono({
+    variable: "--font-geist-mono",
     subsets: ["latin"],
 });
 

@@ -39,7 +39,7 @@
     --radius-4xl: calc(var(--radius) * 2.6);
     --font-sans: var(--font-public-sans);
     --font-display: var(--font-archivo);
-    --font-mono: var(--font-ibm-plex-mono);
+    --font-mono: var(--font-geist-mono);
 }
 
 :root {
