@@ -916,7 +916,6 @@ export function SectionAtmosphere({ bleed = "viewport", className, variant }: Se
                     {hex.value}
                 </div>
             ))}
-            <div className="absolute inset-0" style={{ background: fieldMeltOverlay }} />
             <div
                 className="absolute inset-0"
                 style={{
