@@ -159,7 +159,7 @@ export function TechOverview() {
                                             className="flex items-center gap-3 border-white/6 border-b py-2.5 last:border-b-0 last:pb-0"
                                             key={tech}
                                         >
-                                            <span className="w-5 font-mono text-[8px] text-muted-foreground/35">
+                                            <span className="w-5 font-mono text-[8px] text-muted-foreground/50">
                                                 {String(columnIndex * column.length + techIndex + 1).padStart(2, "0")}
                                             </span>
                                             <span className="font-mono text-[10px] text-foreground/60 uppercase tracking-[0.14em]">
