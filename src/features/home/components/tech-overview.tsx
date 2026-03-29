@@ -128,6 +128,50 @@ export function TechOverview() {
                         </div>
                     </div>
                 </div>
+
+                <div className="mx-auto mb-16 max-w-7xl">
+                    <div className="flex items-center gap-4">
+                        <div className="h-px flex-1 bg-linear-to-r from-transparent via-border to-transparent" />
+                        <span className="font-mono text-[8px] text-muted-foreground/70 tracking-[0.3em]">
+                            FULL STACK
+                        </span>
+                        <div className="h-px flex-1 bg-linear-to-r from-transparent via-border to-transparent" />
+                    </div>
+                </div>
+
+                <div className="mx-auto max-w-7xl">
+                    <div className="grid gap-px bg-border md:grid-cols-2 xl:grid-cols-4">
+                        {fullStackColumns.map((column, columnIndex) => (
+                            <div
+                                className="relative bg-background px-4 py-5 md:px-6 md:py-6"
+                                data-reveal=""
+                                key={`stack-column-${columnIndex + 1}`}
+                                style={{ "--reveal-delay": `${220 + columnIndex * 80}ms` } as CSSProperties}
+                            >
+                                <div className="absolute top-3 left-3 h-2 w-2 border border-white/8 border-r-0 border-b-0" />
+                                <div className="absolute top-3 right-3 h-2 w-2 border border-white/8 border-b-0 border-l-0" />
+                                <div className="absolute bottom-3 left-3 h-2 w-2 border border-white/8 border-t-0 border-r-0" />
+                                <div className="absolute right-3 bottom-3 h-2 w-2 border border-white/8 border-t-0 border-l-0" />
+
+                                <ul className="space-y-2.5">
+                                    {column.map((tech, techIndex) => (
+                                        <li
+                                            className="flex items-center gap-3 border-white/6 border-b py-2.5 last:border-b-0 last:pb-0"
+                                            key={tech}
+                                        >
+                                            <span className="w-5 font-mono text-[8px] text-muted-foreground/35">
+                                                {String(columnIndex * column.length + techIndex + 1).padStart(2, "0")}
+                                            </span>
+                                            <span className="font-mono text-[10px] text-foreground/60 uppercase tracking-[0.14em]">
+                                                {tech}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
 
             <div className="absolute top-1/2 right-8 z-1 hidden -translate-y-1/2 opacity-[0.04] lg:block">
