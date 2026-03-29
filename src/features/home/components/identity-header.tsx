@@ -41,6 +41,7 @@ export function IdentityHeader() {
                                     alt="Portrait of Yehezkiel Dio Sinolungan"
                                     className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
                                     fill
+                                    loading="eager"
                                     sizes="(max-width: 768px) 80px, (max-width: 1024px) 112px, 128px"
                                     src="https://avatars.githubusercontent.com/u/47420407?v=4"
                                 />
@@ -65,7 +66,7 @@ export function IdentityHeader() {
                         FULL-STACK SOFTWARE ENGINEER
                     </span>
                     <span className="hidden h-px w-12 bg-border md:block" />
-                    <span className="hidden font-mono text-[10px] text-muted-foreground/80 md:block">
+                    <span className="hidden font-mono text-[12px] text-muted-foreground/80 md:block">
                         Based in Balikpapan, Indonesia • Open to Remote
                     </span>
                 </div>
