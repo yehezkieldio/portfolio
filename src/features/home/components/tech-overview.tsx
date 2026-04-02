@@ -17,10 +17,10 @@ const coreTechnologies = [
 ] as const satisfies readonly TechEntry[];
 
 const fullStackColumns = [
-    ["Next.js", "React", "TypeScript"],
-    ["Tailwind CSS", "Node.js", "Bun"],
-    ["PostgreSQL", "Docker", "Rust"],
-    ["Tokio", "GitHub Actions", "Vercel"],
+    ["TypeScript", "Bun", "Rust"],
+    ["Next.js", "React", "Drizzle ORM"],
+    ["Tailwind CSS", "shadcn/ui", "Zod"],
+    ["PostgreSQL", "Redis", "Docker"],
 ] as const satisfies readonly (readonly string[])[];
 
 export function TechOverview() {
@@ -86,6 +86,16 @@ export function TechOverview() {
                                 </h2>
 
                                 <div className="flex items-center justify-start gap-3 md:justify-end">
+                                    <div className="flex gap-0.5">
+                                        {techDots.map((value) => (
+                                            <div
+                                                className="h-0.5 w-0.5 bg-white/15"
+                                                key={`tech-dot-${value}`}
+                                                style={{ opacity: 1 - value * 0.18 }}
+                                            />
+                                        ))}
+                                    </div>
+
                                     <span className="font-mono text-[9px] text-muted-foreground/60 tracking-[0.15em]">
                                         Frameworks, libraries, tools, and services.
                                     </span>
@@ -162,7 +172,7 @@ export function TechOverview() {
                                             <span className="w-5 font-mono text-[8px] text-muted-foreground/50">
                                                 {String(columnIndex * column.length + techIndex + 1).padStart(2, "0")}
                                             </span>
-                                            <span className="font-mono text-[10px] text-foreground/60 uppercase tracking-[0.14em]">
+                                            <span className="font-mono text-[10px] text-foreground/50 uppercase tracking-[0.12em]">
                                                 {tech}
                                             </span>
                                         </li>
