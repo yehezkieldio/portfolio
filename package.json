@@ -38,7 +38,7 @@
     "lefthook": "^2.1.2",
     "tailwindcss": "^4",
     "typescript": "^6.0.0",
-    "ultracite": "7.6.0"
+    "ultracite": "7.6.1"
   },
   "ignoreScripts": [
     "sharp",
