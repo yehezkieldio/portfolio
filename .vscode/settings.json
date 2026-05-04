@@ -59,5 +59,6 @@
   "workbench.editor.customLabels.patterns": {
     "**/app/**/{page,layout,route,template,loading}.{tsx,ts}": "${dirname}/${filename}.${extname}"
   },
-  "js/ts.tsdk.path": "node_modules/typescript/lib"
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.experimental.useTsgo": true
 }
