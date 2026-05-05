@@ -35,4 +35,14 @@ export const { docs: projects, meta: projectsMeta } = defineDocs({
     },
 });
 
+export const { docs: notes, meta: notesMeta } = defineDocs({
+    dir: "content/notes",
+    docs: {
+        schema: pageSchema.extend({
+            date: z.string().optional(),
+            tags: z.array(z.string()).default([]),
+        }),
+    },
+});
+
 export default defineConfig({});
