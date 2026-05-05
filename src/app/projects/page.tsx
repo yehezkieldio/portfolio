@@ -1,3 +1,4 @@
+import { PageHeader, PageSection } from "#/app/_component/content-primitives";
 import { getProjects } from "#/lib/projects";
 import { ProjectIndex } from "./_component/project-index";
 
@@ -15,14 +16,9 @@ export default async function ProjectsPage() {
     }));
 
     return (
-        <section className="space-y-8">
-            <header className="project-row-enter space-y-3">
-                <h1 className="font-semibold text-2xl leading-tight">Projects</h1>
-                <p className="max-w-xl text-muted-foreground/95 leading-7">
-                    A collection of my personal and professional projects.
-                </p>
-            </header>
+        <PageSection>
+            <PageHeader description="A collection of my personal and professional projects." title="Projects" />
             <ProjectIndex projects={projects} />
-        </section>
+        </PageSection>
     );
 }

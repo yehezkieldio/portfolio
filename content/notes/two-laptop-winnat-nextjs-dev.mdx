@@ -1,0 +1,172 @@
+---
+title: Two-Laptop WinNAT Next.js Dev Setup
+description: Using a Windows laptop as a Wi-Fi-to-Ethernet NAT gateway so a second Linux laptop can serve local Next.js work to phones on the same network.
+date: "2026-05-06"
+tags:
+  - Windows
+  - Linux
+  - Networking
+  - Next.js
+---
+
+This setup is useful when a Windows laptop has Wi-Fi internet, a second laptop is connected over Ethernet, and the second laptop needs to expose a local dev server to other devices on the Wi-Fi network.
+
+The shape is simple:
+
+- Windows 11 stays connected to Wi-Fi.
+- Windows Ethernet becomes the private gateway at `192.168.137.1`.
+- The Linux laptop uses Ethernet at `192.168.137.2`.
+- WinNAT handles outbound internet for Linux.
+- A static WinNAT mapping forwards Windows port `3000` to Linux port `3000`.
+
+## Topology
+
+| Device | Interface | Role | Address |
+| --- | --- | --- | --- |
+| Windows 11 | Wi-Fi | Upstream internet | DHCP from router |
+| Windows 11 | Ethernet | NAT gateway | `192.168.137.1/24` |
+| WinNAT | `ArchNAT` | NAT network | `192.168.137.0/24` |
+| Linux laptop | Ethernet | NAT client | `192.168.137.2/24` |
+
+Normal outbound traffic flows from Linux to Windows, then through Wi-Fi to the internet. Phone access flows to the Windows Wi-Fi IP on port `3000`, then Windows forwards that traffic to the Linux laptop.
+
+## Windows Setup
+
+Set the Ethernet adapter manually:
+
+- IP address: `192.168.137.1`
+- Subnet mask: `255.255.255.0`
+- Default gateway: blank
+- DNS: blank
+
+Run the WinNAT setup from an elevated Windows PowerShell 5.1 session:
+
+```powershell
+Get-NetIPAddress -InterfaceAlias "Ethernet"
+
+New-NetNat `
+  -Name "ArchNAT" `
+  -InternalIPInterfaceAddressPrefix 192.168.137.0/24
+
+Get-NetNat
+```
+
+Add the static mapping for the dev server:
+
+```powershell
+Add-NetNatStaticMapping `
+  -NatName "ArchNAT" `
+  -Protocol TCP `
+  -ExternalIPAddress 0.0.0.0 `
+  -ExternalPort 3000 `
+  -InternalIPAddress 192.168.137.2 `
+  -InternalPort 3000
+
+Get-NetNatStaticMapping
+```
+
+Allow the inbound port through Windows Firewall:
+
+```powershell
+New-NetFirewallRule `
+  -DisplayName "Allow TCP 3000 to Linux dev laptop" `
+  -Direction Inbound `
+  -Protocol TCP `
+  -LocalPort 3000 `
+  -Action Allow
+```
+
+For long dev sessions, keep Windows awake while plugged in and disable power saving on the Wi-Fi and Ethernet adapters. Otherwise the link can disappear mid-session and make the Linux side look broken.
+
+## Linux Setup
+
+Create a static Ethernet profile with NetworkManager:
+
+```bash
+nmcli con add type ethernet ifname enp3s0 \
+  con-name win-nat \
+  ipv4.addresses 192.168.137.2/24 \
+  ipv4.gateway 192.168.137.1 \
+  ipv4.dns "1.1.1.1 1.0.0.1" \
+  ipv4.method manual
+
+nmcli con up win-nat
+```
+
+Use the real Ethernet interface name for `ifname`. Check it with:
+
+```bash
+ip link
+```
+
+Run Next.js bound to all interfaces, not just localhost:
+
+```bash
+npm run dev -- -H 0.0.0.0 -p 3000
+```
+
+The package manager does not matter here. The important part is binding to `0.0.0.0` so Windows can reach the server over Ethernet.
+
+## Phone Access
+
+Find the Windows Wi-Fi address:
+
+```powershell
+ipconfig
+```
+
+Open this from a phone on the same Wi-Fi:
+
+```txt
+http://<windows-wifi-ip>:3000
+```
+
+Do not use `192.168.137.2` from the phone. That address lives behind Windows on the private Ethernet side. The phone reaches Windows first, and Windows forwards the request.
+
+## Quick Checks
+
+From Linux:
+
+```bash
+ping -c 3 192.168.137.1
+curl -I http://192.168.137.2:3000
+```
+
+From Windows:
+
+```powershell
+Test-NetConnection 192.168.137.2 -Port 3000
+Get-NetNatStaticMapping
+```
+
+From the phone:
+
+```txt
+http://<windows-wifi-ip>:3000
+```
+
+If Windows can reach Linux but the phone cannot reach Windows, check the Windows Firewall rule and confirm the phone is on the same Wi-Fi network as Windows.
+
+## Reset
+
+Remove the port forward:
+
+```powershell
+Remove-NetNatStaticMapping -NatName "ArchNAT" -ExternalIPAddress 0.0.0.0 -ExternalPort 3000 -Protocol TCP
+```
+
+Remove the NAT:
+
+```powershell
+Remove-NetNat -Name "ArchNAT"
+```
+
+Remove the Linux NetworkManager profile:
+
+```bash
+nmcli con delete win-nat
+```
+
+## The Important Detail
+
+WinNAT is outbound-only by default. The static mapping is the step that makes port `3000` reachable from the Wi-Fi side. Without it, Linux can use the internet through Windows, but phones cannot open the Linux dev server through Windows.

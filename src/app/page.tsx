@@ -1,29 +1,27 @@
+import { PageHeader, PageSection } from "./_component/content-primitives";
+
+const intro = [
+    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem sunt delectus dignissimos asperiores illo? Sit culpa, totam dolores tempore voluptatem vitae error consequuntur fuga tenetur sunt non nulla.",
+    "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit doloribus libero dignissimos voluptatibus quaerat optio, quas incidunt, repudiandae facere totam id, ab consequuntur et!",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quasi aliquam doloremque, facilis id quidem rerum doloribus vitae reprehenderit voluptatum, ad debitis ducimus? Ratione consequatur, suscipit ea corporis distinctio cumque.",
+];
+
 export default function Home() {
     return (
-        <section className="space-y-12">
-            <div className="space-y-5">
-                <div className="project-row-enter space-y-1">
-                    <h1 className="font-semibold text-2xl tracking-normal">Yehezkiel Dio Sinolungan</h1>
-                    <p className="text-muted-foreground/95">Software Engineer</p>
-                </div>
+        <PageSection>
+            <PageHeader description="Software Engineer" title="Yehezkiel Dio Sinolungan" />
 
-                <div className="max-w-xl space-y-4 text-[16px] text-muted-foreground/90 leading-7">
-                    <p className="project-row-enter" style={{ animationDelay: "45ms" }}>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem sunt delectus dignissimos
-                        asperiores illo? Sit culpa, totam dolores tempore voluptatem vitae error consequuntur fuga
-                        tenetur sunt non nulla.
+            <div className="max-w-xl space-y-4 text-[16px] text-muted-foreground/90 leading-7">
+                {intro.map((paragraph, index) => (
+                    <p
+                        className="project-row-enter"
+                        key={paragraph}
+                        style={{ animationDelay: `${(index + 1) * 45}ms` }}
+                    >
+                        {paragraph}
                     </p>
-                    <p className="project-row-enter" style={{ animationDelay: "90ms" }}>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit doloribus libero dignissimos
-                        voluptatibus quaerat optio, quas incidunt, repudiandae facere totam id, ab consequuntur et!
-                    </p>
-                    <p className="project-row-enter" style={{ animationDelay: "135ms" }}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quasi aliquam doloremque,
-                        facilis id quidem rerum doloribus vitae reprehenderit voluptatum, ad debitis ducimus? Ratione
-                        consequatur, suscipit ea corporis distinctio cumque.
-                    </p>
-                </div>
+                ))}
             </div>
-        </section>
+        </PageSection>
     );
 }
