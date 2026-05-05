@@ -24,7 +24,7 @@ A task is incomplete until all required quality gates pass without errors:
 ```sh
 bun run format
 bun run fix
-bun run typecheck
+bun run typecheck # if no output, then is a pass
 ```
 
 If the task is unrelated to TypeScript or application code, these commands may be skipped.

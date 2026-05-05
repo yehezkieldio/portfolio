@@ -10,7 +10,7 @@
     "format": "biome format --write",
     "check": "ultracite check",
     "fix": "ultracite fix",
-    "typecheck": "fumadocs-mdx && bunx tsgo --noEmit",
+    "typecheck": "bunx tsgo --noEmit",
     "prepare": "lefthook install",
     "postinstall": "fumadocs-mdx"
   },
