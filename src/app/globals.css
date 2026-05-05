@@ -198,6 +198,15 @@
     animation: 300ms var(--ease-ui-soft) both project-row-enter;
 }
 
+.shiki {
+    color: var(--shiki-dark);
+    background: transparent;
+}
+
+.shiki span {
+    color: var(--shiki-dark);
+}
+
 .motion-link {
     position: relative;
     text-decoration-thickness: 1px;

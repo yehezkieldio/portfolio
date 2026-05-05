@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { cn } from "#/lib/utils";
 
 type PageSectionProps = {
     children: ReactNode;
@@ -38,7 +39,7 @@ export function PageSection({ children }: PageSectionProps) {
 
 export function PageHeader({ children, description, meta, title, withRule = false }: PageHeaderProps) {
     return (
-        <header className={`project-row-enter space-y-3${withRule ? "border-border border-b pb-8" : ""}`}>
+        <header className={cn("project-row-enter space-y-3", withRule && "border-border border-b pb-8")}>
             {meta}
             <h1 className="font-semibold text-2xl leading-tight">{title}</h1>
             {description ? <p className="max-w-xl text-muted-foreground/95 leading-7">{description}</p> : null}
@@ -58,9 +59,10 @@ export function ContentList({ children, empty, isEmpty = false, withTopRule = fa
 export function ContentRow({ children, delayIndex = 0, withRule = true }: ContentRowProps) {
     return (
         <article
-            className={`project-row-enter motion-row space-y-2 transition-[transform] duration-200 ease-(--ease-ui)${
-                withRule ? "border-border border-b py-6 sm:py-7" : ""
-            }`}
+            className={cn(
+                "project-row-enter motion-row space-y-2 transition-[transform] duration-200 ease-(--ease-ui)",
+                withRule && "border-border border-b py-6 sm:py-7"
+            )}
             style={{ animationDelay: `${delayIndex * 45}ms` }}
         >
             {children}

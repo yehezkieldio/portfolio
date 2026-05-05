@@ -199,7 +199,7 @@ function MdxPre({ children, ...props }: ComponentPropsWithoutRef<"pre">) {
         <div className="max-w-full overflow-hidden border border-border/80 bg-foreground/[0.025]">
             <pre
                 className={cn(
-                    "max-w-full overflow-x-auto p-4 font-mono text-xs leading-6 [tab-size:2] [&_code]:grid [&_code]:min-w-max",
+                    "max-w-full overflow-x-auto p-4 font-mono text-xs leading-6 [tab-size:2] [&_code]:grid [&_code]:min-w-max [&_code]:break-normal [&_code]:border-0 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-[inherit]",
                     className
                 )}
                 style={style}
