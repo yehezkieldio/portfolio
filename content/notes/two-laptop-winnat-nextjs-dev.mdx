@@ -1,6 +1,6 @@
 ---
-title: Two-Laptop WinNAT Next.js Dev Setup
-description: Using a Windows laptop as a Wi-Fi-to-Ethernet NAT gateway so a second Linux laptop can serve local Next.js work to phones on the same network.
+title: My Two-Laptop WinNAT Dev Setup
+description: The Windows 11 to Linux laptop network setup I use so the Linux machine gets internet through Windows and can expose local dev servers over Ethernet.
 date: "2026-05-06"
 tags:
   - Windows
@@ -9,15 +9,17 @@ tags:
   - Next.js
 ---
 
-This setup is useful when a Windows laptop has Wi-Fi internet, a second laptop is connected over Ethernet, and the second laptop needs to expose a local dev server to other devices on the Wi-Fi network.
+This is the two-laptop setup I use when my Windows 11 laptop has the upstream Wi-Fi connection and my Linux laptop is plugged into it over Ethernet. Windows acts as the small NAT gateway, and the Linux laptop gets a stable wired dev link without needing to join the upstream network directly.
 
-The shape is simple:
+The practical benefit is boring in a good way: the Linux laptop gets internet from Windows, local development is easier over Ethernet, and I can still expose a Next.js dev server to a phone on the same Wi-Fi by forwarding one port through Windows.
 
-- Windows 11 stays connected to Wi-Fi.
+The shape:
+
+- Windows 11 stays connected to the real Wi-Fi network.
 - Windows Ethernet becomes the private gateway at `192.168.137.1`.
-- The Linux laptop uses Ethernet at `192.168.137.2`.
-- WinNAT handles outbound internet for Linux.
-- A static WinNAT mapping forwards Windows port `3000` to Linux port `3000`.
+- The Linux laptop sits behind Windows at `192.168.137.2`.
+- WinNAT gives the Linux laptop outbound internet through Windows.
+- A static WinNAT mapping forwards Windows port `3000` to the Linux laptop's port `3000`.
 
 ## Topology
 
@@ -28,18 +30,18 @@ The shape is simple:
 | WinNAT | `ArchNAT` | NAT network | `192.168.137.0/24` |
 | Linux laptop | Ethernet | NAT client | `192.168.137.2/24` |
 
-Normal outbound traffic flows from Linux to Windows, then through Wi-Fi to the internet. Phone access flows to the Windows Wi-Fi IP on port `3000`, then Windows forwards that traffic to the Linux laptop.
+Normal outbound traffic flows from Linux to Windows, then from Windows through Wi-Fi to the internet. Phone access goes the other direction: phone to the Windows Wi-Fi IP on port `3000`, then Windows forwards that request over Ethernet to the Linux laptop.
 
 ## Windows Setup
 
-Set the Ethernet adapter manually:
+On Windows, I set the Ethernet adapter manually:
 
 - IP address: `192.168.137.1`
 - Subnet mask: `255.255.255.0`
 - Default gateway: blank
 - DNS: blank
 
-Run the WinNAT setup from an elevated Windows PowerShell 5.1 session:
+Then I create the WinNAT network from an elevated Windows PowerShell 5.1 session:
 
 ```powershell
 Get-NetIPAddress -InterfaceAlias "Ethernet"
@@ -51,7 +53,7 @@ New-NetNat `
 Get-NetNat
 ```
 
-Add the static mapping for the dev server:
+For the dev server, I add a static mapping:
 
 ```powershell
 Add-NetNatStaticMapping `
@@ -65,7 +67,7 @@ Add-NetNatStaticMapping `
 Get-NetNatStaticMapping
 ```
 
-Allow the inbound port through Windows Firewall:
+Then I allow the inbound port through Windows Firewall:
 
 ```powershell
 New-NetFirewallRule `
@@ -76,11 +78,11 @@ New-NetFirewallRule `
   -Action Allow
 ```
 
-For long dev sessions, keep Windows awake while plugged in and disable power saving on the Wi-Fi and Ethernet adapters. Otherwise the link can disappear mid-session and make the Linux side look broken.
+For long sessions, I keep Windows awake while plugged in and disable power saving on the Wi-Fi and Ethernet adapters. If Windows sleeps or powers down the adapter, the Linux side looks broken even though the Linux config is fine.
 
 ## Linux Setup
 
-Create a static Ethernet profile with NetworkManager:
+On Linux, I use a static NetworkManager profile for the Ethernet link:
 
 ```bash
 nmcli con add type ethernet ifname enp3s0 \
@@ -93,35 +95,35 @@ nmcli con add type ethernet ifname enp3s0 \
 nmcli con up win-nat
 ```
 
-Use the real Ethernet interface name for `ifname`. Check it with:
+The interface name may differ. I check it with:
 
 ```bash
 ip link
 ```
 
-Run Next.js bound to all interfaces, not just localhost:
+For Next.js, the dev server needs to bind to all interfaces:
 
 ```bash
 npm run dev -- -H 0.0.0.0 -p 3000
 ```
 
-The package manager does not matter here. The important part is binding to `0.0.0.0` so Windows can reach the server over Ethernet.
+The package manager does not matter. The important part is `0.0.0.0`; binding only to localhost means Windows cannot reach the server over Ethernet.
 
 ## Phone Access
 
-Find the Windows Wi-Fi address:
+I access the site from the phone through the Windows Wi-Fi address, not the Linux Ethernet address. First I find the Windows Wi-Fi IP:
 
 ```powershell
 ipconfig
 ```
 
-Open this from a phone on the same Wi-Fi:
+Then I open this from a phone on the same Wi-Fi:
 
 ```txt
 http://<windows-wifi-ip>:3000
 ```
 
-Do not use `192.168.137.2` from the phone. That address lives behind Windows on the private Ethernet side. The phone reaches Windows first, and Windows forwards the request.
+The phone should not use `192.168.137.2`. That address only exists on the private Ethernet side behind Windows. The phone reaches Windows first, and Windows forwards the request.
 
 ## Quick Checks
 
@@ -145,7 +147,7 @@ From the phone:
 http://<windows-wifi-ip>:3000
 ```
 
-If Windows can reach Linux but the phone cannot reach Windows, check the Windows Firewall rule and confirm the phone is on the same Wi-Fi network as Windows.
+If Windows can reach Linux but the phone cannot reach Windows, I check the firewall rule and confirm the phone is on the same Wi-Fi network as Windows.
 
 ## Reset
 
@@ -169,4 +171,4 @@ nmcli con delete win-nat
 
 ## The Important Detail
 
-WinNAT is outbound-only by default. The static mapping is the step that makes port `3000` reachable from the Wi-Fi side. Without it, Linux can use the internet through Windows, but phones cannot open the Linux dev server through Windows.
+WinNAT is outbound-only by default. That is enough for the Linux laptop to use the internet through Windows, but it is not enough for a phone to open the Linux dev server. The static mapping is the step that makes port `3000` reachable from the Wi-Fi side.

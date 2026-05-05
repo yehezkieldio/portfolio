@@ -45,4 +45,16 @@ export const { docs: notes, meta: notesMeta } = defineDocs({
     },
 });
 
-export default defineConfig({});
+export default defineConfig({
+    mdxOptions: {
+        rehypeCodeOptions: {
+            defaultColor: false,
+            defaultLanguage: "plaintext",
+            engine: "js",
+            themes: {
+                dark: "github-dark",
+                light: "github-light",
+            },
+        },
+    },
+});
