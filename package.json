@@ -10,13 +10,16 @@
     "format": "biome format --write",
     "check": "ultracite check",
     "fix": "ultracite fix",
-    "typecheck": "bunx tsgo --noEmit",
-    "prepare": "lefthook install"
+    "typecheck": "fumadocs-mdx && bunx tsgo --noEmit",
+    "prepare": "lefthook install",
+    "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
     "@ridemountainpig/svgl-react": "^1.0.16",
     "clsx": "^2.1.1",
+    "fumadocs-core": "^16.8.7",
+    "fumadocs-mdx": "^14.3.2",
     "lucide-react": "^1.14.0",
     "next": "16.2.4",
     "nuqs": "^2.8.9",
