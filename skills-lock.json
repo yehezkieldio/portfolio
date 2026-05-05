@@ -1,11 +1,23 @@
 {
   "version": 1,
   "skills": {
+    "design-engineer": {
+      "source": "darasoba/design-engineer-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/design-engineer/SKILL.md",
+      "computedHash": "9af9a91f5469cae4162e05df312af0a9641d63cdfd174a696ccfd757a18ad481"
+    },
     "design-taste-frontend": {
       "source": "Leonxlnx/taste-skill",
       "sourceType": "github",
       "skillPath": "skills/taste-skill/SKILL.md",
       "computedHash": "9d1e82c5c409d2b0247245a005bc0f7e4447c0999b78dcea60f568c1ba4a6694"
+    },
+    "emil-design-eng": {
+      "source": "emilkowalski/skill",
+      "sourceType": "github",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "computedHash": "8bdf9e4e6de7a4969147bf4828a4ad2c5aacd9fba4b690b250a85e0467ca387d"
     },
     "full-output-enforcement": {
       "source": "Leonxlnx/taste-skill",
