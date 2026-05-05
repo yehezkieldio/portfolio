@@ -9,18 +9,18 @@ export default function Home() {
 
                 <div className="max-w-xl space-y-4 text-[16px] text-muted-foreground/90 leading-7">
                     <p>
-                        I build high-performance digital experiences with a focus on reliability and speed. My work sits
-                        across the stack, with a strong bias toward systems thinking and clean releases.
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem sunt delectus dignissimos
+                        asperiores illo? Sit culpa, totam dolores tempore voluptatem vitae error consequuntur fuga
+                        tenetur sunt non nulla.
                     </p>
                     <p>
-                        Currently, I focus on product-facing engineering and developer tooling. I primarily work with
-                        modern web technologies, and I'm increasingly interested in low-level performance work and
-                        systems design.
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit doloribus libero dignissimos
+                        voluptatibus quaerat optio, quas incidunt, repudiandae facere totam id, ab consequuntur et!
                     </p>
                     <p>
-                        I'm based in Balikpapan, Indonesia, studying Informatics while building practical experience
-                        alongside it. I'm drawn to open-source, thoughtful tooling, and problems where engineering
-                        quality compounds over time.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quasi aliquam doloremque,
+                        facilis id quidem rerum doloribus vitae reprehenderit voluptatum, ad debitis ducimus? Ratione
+                        consequatur, suscipit ea corporis distinctio cumque.
                     </p>
                 </div>
             </div>

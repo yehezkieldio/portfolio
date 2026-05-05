@@ -1,15 +1,6 @@
-import { GitHubDark, Gmail, LinkedIn, XDark } from "@ridemountainpig/svgl-react";
-import { ExternalLinkList } from "./external-link-list";
 import { PageTransition } from "./page-transition";
 import { SiteBackground } from "./site-background";
 import { SiteNav } from "./site-nav";
-
-const socialLinks = [
-    { label: "email", href: "mailto:yehezkieldio@gmail.com", icon: Gmail },
-    { label: "github", href: "https://github.com/yehezkieldio", icon: GitHubDark },
-    { label: "linkedin", href: "https://www.linkedin.com/in/yehezkieldio/", icon: LinkedIn },
-    { label: "x", href: "https://x.com/yhezkieldio", icon: XDark },
-];
 
 export function SiteLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -24,13 +15,6 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
                 </header>
 
                 <PageTransition>{children}</PageTransition>
-
-                <footer
-                    className="mt-12 border-border/70 border-t pt-5 sm:mt-16 sm:pt-6"
-                    style={{ viewTransitionName: "persistent-contact" }}
-                >
-                    <ExternalLinkList links={socialLinks} />
-                </footer>
             </div>
         </main>
     );
