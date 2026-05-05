@@ -2,11 +2,11 @@ import { getProjects } from "#/lib/projects";
 import { ProjectIndex } from "./_component/project-index";
 
 export default async function ProjectsPage() {
-    const projects = getProjects().map(({ description, hasNote, icon, iconTree, links, slug, tags, title, year }) => ({
+    const projects = getProjects().map(({ description, hasNote, icon, iconTrees, links, slug, tags, title, year }) => ({
         description: description ?? "",
         hasNote,
         icon,
-        iconTree,
+        iconTrees,
         links,
         slug,
         tags,

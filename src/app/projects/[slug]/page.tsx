@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import { createElement } from "react";
+import type { ProjectIconNode, ProjectIconTree } from "#/lib/projects";
 import { getProject, getProjects } from "#/lib/projects";
 
 type ProjectPageProps = {
@@ -25,22 +27,22 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     const Body = project.body;
 
     return (
-        <article className="space-y-10">
-            <header className="space-y-4 border-border border-b pb-8">
-                <h1 className="font-semibold text-2xl leading-tight">{project.title}</h1>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-muted-foreground">
-                    <project.Icon aria-hidden="true" className="h-5 w-5 opacity-80" />
-                    <span className="font-mono text-xs">{project.year}</span>
-                    {project.tags.length > 0 ? (
-                        <span className="font-mono text-[11px] text-muted-foreground/70">
-                            {project.tags.slice(0, 5).join(" / ")}
-                        </span>
-                    ) : null}
+        <article className="space-y-9">
+            <header className="space-y-3 border-border border-b pb-8">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <ProjectIconGroup icons={project.iconTrees} />
+                    <p className="font-mono text-muted-foreground text-xs">{project.year}</p>
                 </div>
+                <h1 className="font-semibold text-2xl leading-tight">{project.title}</h1>
                 <p className="max-w-xl text-muted-foreground/95 leading-7">{project.description}</p>
+                {project.tags.length > 0 ? (
+                    <p className="font-mono text-[11px] text-muted-foreground/70">
+                        {project.tags.slice(0, 5).join(" / ")}
+                    </p>
+                ) : null}
             </header>
 
-            <div className="project-note max-w-none">
+            <div className="project-note space-y-5">
                 <Body components={projectNoteComponents} />
             </div>
         </article>
@@ -54,6 +56,9 @@ const projectNoteComponents = {
     h1: ProjectNoteH1,
     h2: ProjectNoteH2,
     h3: ProjectNoteH3,
+    h4: ProjectNoteH4,
+    h5: ProjectNoteH5,
+    h6: ProjectNoteH6,
     hr: ProjectNoteDivider,
     li: ProjectNoteListItem,
     ol: ProjectNoteOrderedList,
@@ -68,9 +73,47 @@ const projectNoteComponents = {
     ul: ProjectNoteUnorderedList,
 };
 
+function ProjectIconGroup({ icons }: { icons: ProjectIconTree[] }) {
+    if (icons.length === 0) {
+        return null;
+    }
+
+    return (
+        <span className="flex shrink-0 flex-row-reverse justify-end sm:flex-row">
+            {icons.slice(0, 5).map((icon, index) => (
+                <span
+                    className="-ml-1.5 grid size-6 place-items-center border border-background bg-background first:ml-0 sm:-ml-1 sm:first:ml-0"
+                    key={index}
+                    style={{ zIndex: icons.length - index }}
+                >
+                    {renderIconTree(icon)}
+                </span>
+            ))}
+        </span>
+    );
+}
+
+function renderIconTree(tree: ProjectIconTree): ReactNode {
+    if (typeof tree === "string") {
+        return tree;
+    }
+
+    return createElement(
+        tree.type,
+        tree.props,
+        ...tree.children.map((child, index) =>
+            typeof child === "string" ? child : createElement(IconTreeFragment, { key: index, node: child })
+        )
+    );
+}
+
+function IconTreeFragment({ node }: { node: ProjectIconNode }): ReactNode {
+    return renderIconTree(node);
+}
+
 function ProjectNoteH1({ children, ...props }: ComponentPropsWithoutRef<"h1">) {
     return (
-        <h1 className="mt-12 font-semibold text-2xl leading-tight first:mt-0" {...props}>
+        <h1 className="font-semibold text-2xl leading-tight [&:not(:first-child)]:mt-12" {...props}>
             {children}
         </h1>
     );
@@ -78,7 +121,10 @@ function ProjectNoteH1({ children, ...props }: ComponentPropsWithoutRef<"h1">) {
 
 function ProjectNoteH2({ children, ...props }: ComponentPropsWithoutRef<"h2">) {
     return (
-        <h2 className="mt-11 border-border border-t pt-7 font-semibold text-xl leading-tight first:mt-0" {...props}>
+        <h2
+            className="border-border border-t pt-7 font-semibold text-xl leading-tight [&:not(:first-child)]:mt-12"
+            {...props}
+        >
             {children}
         </h2>
     );
@@ -86,15 +132,45 @@ function ProjectNoteH2({ children, ...props }: ComponentPropsWithoutRef<"h2">) {
 
 function ProjectNoteH3({ children, ...props }: ComponentPropsWithoutRef<"h3">) {
     return (
-        <h3 className="mt-8 font-medium text-base leading-tight" {...props}>
+        <h3 className="font-medium text-base leading-tight [&:not(:first-child)]:mt-9" {...props}>
             {children}
         </h3>
     );
 }
 
+function ProjectNoteH4({ children, ...props }: ComponentPropsWithoutRef<"h4">) {
+    return (
+        <h4 className="font-medium text-sm leading-tight [&:not(:first-child)]:mt-8" {...props}>
+            {children}
+        </h4>
+    );
+}
+
+function ProjectNoteH5({ children, ...props }: ComponentPropsWithoutRef<"h5">) {
+    return (
+        <h5
+            className="font-mono font-normal text-muted-foreground text-xs uppercase [&:not(:first-child)]:mt-7"
+            {...props}
+        >
+            {children}
+        </h5>
+    );
+}
+
+function ProjectNoteH6({ children, ...props }: ComponentPropsWithoutRef<"h6">) {
+    return (
+        <h6
+            className="font-mono font-normal text-[11px] text-muted-foreground/70 uppercase [&:not(:first-child)]:mt-6"
+            {...props}
+        >
+            {children}
+        </h6>
+    );
+}
+
 function ProjectNoteParagraph({ children, ...props }: ComponentPropsWithoutRef<"p">) {
     return (
-        <p className="mt-4 max-w-2xl text-muted-foreground text-sm leading-7 first:mt-0" {...props}>
+        <p className="max-w-2xl text-muted-foreground text-sm leading-7" {...props}>
             {children}
         </p>
     );
@@ -121,7 +197,10 @@ function ProjectNoteStrong({ children, ...props }: ComponentPropsWithoutRef<"str
 
 function ProjectNoteUnorderedList({ children, ...props }: ComponentPropsWithoutRef<"ul">) {
     return (
-        <ul className="mt-4 ml-4 max-w-2xl list-disc space-y-2 text-muted-foreground text-sm leading-7" {...props}>
+        <ul
+            className="max-w-2xl list-disc space-y-2 pl-5 text-muted-foreground text-sm leading-7 marker:text-muted-foreground/55"
+            {...props}
+        >
             {children}
         </ul>
     );
@@ -129,7 +208,10 @@ function ProjectNoteUnorderedList({ children, ...props }: ComponentPropsWithoutR
 
 function ProjectNoteOrderedList({ children, ...props }: ComponentPropsWithoutRef<"ol">) {
     return (
-        <ol className="mt-4 ml-4 max-w-2xl list-decimal space-y-2 text-muted-foreground text-sm leading-7" {...props}>
+        <ol
+            className="max-w-2xl list-decimal space-y-2 pl-5 text-muted-foreground text-sm leading-7 marker:font-mono marker:text-[11px] marker:text-muted-foreground/55"
+            {...props}
+        >
             {children}
         </ol>
     );
@@ -137,7 +219,7 @@ function ProjectNoteOrderedList({ children, ...props }: ComponentPropsWithoutRef
 
 function ProjectNoteListItem({ children, ...props }: ComponentPropsWithoutRef<"li">) {
     return (
-        <li className="pl-1 marker:text-muted-foreground/60" {...props}>
+        <li className="pl-1 [&>ol]:mt-2 [&>ol]:space-y-1.5 [&>ul]:mt-2 [&>ul]:space-y-1.5 [&>ul]:pl-4" {...props}>
             {children}
         </li>
     );
@@ -146,7 +228,7 @@ function ProjectNoteListItem({ children, ...props }: ComponentPropsWithoutRef<"l
 function ProjectNoteBlockquote({ children, ...props }: ComponentPropsWithoutRef<"blockquote">) {
     return (
         <blockquote
-            className="mt-6 max-w-2xl border-border border-l pl-4 text-muted-foreground text-sm leading-7"
+            className="max-w-2xl border-border border-l pl-4 text-muted-foreground text-sm leading-7"
             {...props}
         >
             {children}
@@ -168,7 +250,7 @@ function ProjectNoteCode({ children, ...props }: ComponentPropsWithoutRef<"code"
 function ProjectNotePre({ children, ...props }: ComponentPropsWithoutRef<"pre">) {
     return (
         <pre
-            className="mt-5 max-w-full overflow-x-auto border border-border/80 bg-foreground/[0.025] p-4 font-mono text-muted-foreground text-xs leading-6"
+            className="max-w-full overflow-x-auto border border-border/80 bg-foreground/[0.025] p-4 font-mono text-muted-foreground text-xs leading-6"
             {...props}
         >
             {children}
@@ -177,12 +259,12 @@ function ProjectNotePre({ children, ...props }: ComponentPropsWithoutRef<"pre">)
 }
 
 function ProjectNoteDivider(props: ComponentPropsWithoutRef<"hr">) {
-    return <hr className="my-9 border-border" {...props} />;
+    return <hr className="border-border" {...props} />;
 }
 
 function ProjectNoteTable({ children, ...props }: ComponentPropsWithoutRef<"table">) {
     return (
-        <div className="mt-6 max-w-full overflow-x-auto border border-border/70">
+        <div className="max-w-full overflow-x-auto border border-border/70">
             <table className="w-full min-w-[34rem] border-collapse text-left text-sm" {...props}>
                 {children}
             </table>

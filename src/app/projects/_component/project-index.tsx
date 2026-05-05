@@ -62,11 +62,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
                 }}
             >
                 <div className="" key={projectIndex.currentPage}>
-                    <ProjectList
-                        page={projectIndex.currentPage}
-                        pageSize={projectIndex.pageSize}
-                        projects={projectIndex.visibleItems}
-                    />
+                    <ProjectList projects={projectIndex.visibleItems} />
                 </div>
             </ViewTransition>
 

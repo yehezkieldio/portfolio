@@ -10,7 +10,7 @@ export type ProjectListItem = {
     description: string;
     hasNote: boolean;
     icon: ProjectIconName;
-    iconTree: ProjectIconTree;
+    iconTrees: ProjectIconTree[];
     links: ProjectLink[];
     slug: string;
     tags: string[];

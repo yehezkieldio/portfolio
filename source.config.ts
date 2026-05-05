@@ -16,6 +16,14 @@ export const { docs: projects, meta: projectsMeta } = defineDocs({
                 .string()
                 .min(1)
                 .transform((icon) => icon as SvglComponentName),
+            icons: z
+                .array(
+                    z
+                        .string()
+                        .min(1)
+                        .transform((icon) => icon as SvglComponentName)
+                )
+                .optional(),
             external: z.array(projectLinkSchema).default([]),
             github: z.url().optional(),
             gitlab: z.url().optional(),

@@ -44,12 +44,12 @@ function getProjectIcon(icon: ProjectIconName) {
     return Icon;
 }
 
-function projectIconTree(icon: ProjectIconName): ProjectIconTree {
+function projectIconTree(icon: ProjectIconName, className: string): ProjectIconTree {
     const Icon = getProjectIcon(icon);
     const tree = serializeIconNode(
         Icon({
             "aria-hidden": "true",
-            className: "mt-0 h-5 w-5 opacity-70 transition-opacity group-hover:opacity-100 sm:mt-6",
+            className,
         })
     );
 
@@ -116,14 +116,28 @@ function projectLinks(project: (typeof projectDocs)[number]) {
     ].filter((link) => link !== null);
 }
 
+function projectIconNames(project: (typeof projectDocs)[number]) {
+    return project.icons && project.icons.length > 0 ? project.icons : [project.icon];
+}
+
+function normalizeTag(tag: string) {
+    return tag.trim().toLowerCase().replace(/\s+/g, "-");
+}
+
 function withProjectRuntimeFields(project: (typeof projectDocs)[number]) {
+    const iconNames = projectIconNames(project);
+
     return {
         ...project,
         hasNote: project.note,
+        iconTrees: iconNames.map((icon) =>
+            projectIconTree(icon, "h-5 w-5 opacity-75 transition-opacity group-hover:opacity-100")
+        ),
         links: projectLinks(project),
         slug: projectSlug(project.info.path),
         Icon: getProjectIcon(project.icon),
-        iconTree: projectIconTree(project.icon),
+        iconTree: projectIconTree(project.icon, "h-5 w-5 opacity-80"),
+        tags: project.tags.map(normalizeTag),
     };
 }
 

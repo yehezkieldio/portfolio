@@ -1,66 +1,68 @@
 "use client";
 
-import { ExternalLink, FileText, GitBranch } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { createElement } from "react";
 import type { ProjectIconNode, ProjectIconTree } from "#/lib/projects";
-import type { ProjectLink, ProjectListItem } from "./project-types";
+import type { ProjectListItem } from "./project-types";
 
 type ProjectListProps = {
-    page: number;
-    pageSize: number;
     projects: ProjectListItem[];
 };
 
-export function ProjectList({ page, pageSize, projects }: ProjectListProps) {
+export function ProjectList({ projects }: ProjectListProps) {
     if (projects.length === 0) {
         return (
             <p className="border-border border-b py-8 text-muted-foreground text-sm">No projects match that search.</p>
         );
     }
 
-    return projects.map((project, index) => (
-        <ProjectRow
-            index={(page - 1) * pageSize + index + 1}
-            key={project.slug}
-            project={project}
-            revealIndex={index}
-        />
-    ));
+    return projects.map((project, index) => <ProjectRow key={project.slug} project={project} revealIndex={index} />);
 }
 
-function ProjectRow({ index, project, revealIndex }: { index: number; project: ProjectListItem; revealIndex: number }) {
+function ProjectRow({ project, revealIndex }: { project: ProjectListItem; revealIndex: number }) {
     return (
         <article
-            className="project-row-enter group grid gap-4 border-border border-b py-6 transition-colors sm:grid-cols-[3.5rem_1fr] sm:gap-5 sm:py-8"
+            className="project-row-enter group space-y-2 border-border border-b py-6 transition-colors sm:py-7"
             style={{ animationDelay: `${revealIndex * 90}ms` }}
         >
-            <div className="flex items-center justify-between gap-4 sm:block">
-                <p className="font-mono text-muted-foreground/70 text-xs">{String(index).padStart(2, "0")}</p>
-                <ProjectIcon tree={project.iconTree} />
-            </div>
-
-            <div className="space-y-4">
-                <div className="grid gap-1 min-[420px]:flex min-[420px]:flex-wrap min-[420px]:items-baseline min-[420px]:justify-between min-[420px]:gap-x-6 min-[420px]:gap-y-2">
-                    <h2 className="font-medium text-lg leading-tight">
+            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+                <div className="flex min-w-0 items-center gap-2.5">
+                    <ProjectIconGroup icons={project.iconTrees} />
+                    <h2 className="min-w-0 font-medium text-sm leading-tight">
                         <ProjectTitle project={project} />
                     </h2>
-                    <p className="font-mono text-muted-foreground/80 text-xs">{project.year}</p>
                 </div>
-
-                <p className="max-w-xl text-muted-foreground text-sm leading-6">{project.description}</p>
-
-                <ProjectLinks project={project} />
-
-                <ProjectTags tags={project.tags} />
+                <p className="font-mono text-muted-foreground text-xs">{project.year}</p>
             </div>
+
+            <p className="max-w-xl text-muted-foreground text-sm leading-6">{project.description}</p>
+
+            <ProjectTags tags={project.tags} />
+
+            <ProjectLinks project={project} />
         </article>
     );
 }
 
-function ProjectIcon({ tree }: { tree: ProjectIconTree }): ReactNode {
-    return renderIconTree(tree);
+function ProjectIconGroup({ icons }: { icons: ProjectIconTree[] }) {
+    if (icons.length === 0) {
+        return null;
+    }
+
+    return (
+        <span className="flex shrink-0 flex-row-reverse justify-end sm:flex-row">
+            {icons.slice(0, 4).map((icon, index) => (
+                <span
+                    className="-ml-1.5 grid size-5 place-items-center border border-background bg-background first:ml-0 sm:-ml-1 sm:first:ml-0"
+                    key={index}
+                    style={{ zIndex: icons.length - index }}
+                >
+                    {renderIconTree(icon)}
+                </span>
+            ))}
+        </span>
+    );
 }
 
 function renderIconTree(tree: ProjectIconTree): ReactNode {
@@ -109,37 +111,28 @@ function ProjectTitle({ project }: { project: ProjectListItem }) {
 
 function ProjectLinks({ project }: { project: ProjectListItem }) {
     return (
-        <div className="flex flex-wrap items-center gap-2 text-xs">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
             {project.hasNote ? (
                 <Link
-                    className="inline-flex h-7 items-center gap-1.5 border border-border/70 px-2 text-foreground transition-colors hover:border-foreground/35 hover:bg-foreground/[0.035]"
+                    className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                     href={`/projects/${project.slug}`}
                     transitionTypes={["nav-forward"]}
                 >
-                    <FileText aria-hidden="true" className="size-3.5" />
-                    note
+                    read note
                 </Link>
             ) : null}
             {project.links.map((link) => (
-                <ProjectExternalLink key={`${link.kind}:${link.href}`} link={link} />
+                <a
+                    className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                    href={link.href}
+                    key={`${link.kind}:${link.href}`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                >
+                    {link.label}
+                </a>
             ))}
-        </div>
-    );
-}
-
-function ProjectExternalLink({ link }: { link: ProjectLink }) {
-    const Icon = link.kind === "external" ? ExternalLink : GitBranch;
-
-    return (
-        <a
-            className="inline-flex h-7 items-center gap-1.5 border border-border/70 px-2 text-muted-foreground transition-colors hover:border-foreground/35 hover:bg-foreground/[0.035] hover:text-foreground"
-            href={link.href}
-            rel="noopener noreferrer"
-            target="_blank"
-        >
-            <Icon aria-hidden="true" className="size-3.5" />
-            {link.label}
-        </a>
+        </p>
     );
 }
 
