@@ -3,7 +3,7 @@
 import { useDeferredValue, useMemo, useState } from "react";
 import type { ProjectListItem } from "./project-types";
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 5;
 const ALL_TAGS_VALUE = "all";
 
 function uniqueTags(projects: ProjectListItem[]) {

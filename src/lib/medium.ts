@@ -1,3 +1,5 @@
+import { XMLParser } from "fast-xml-parser";
+
 type MediumPost = {
     title: string;
     link: string;
@@ -10,58 +12,61 @@ type MediumPost = {
 const MEDIUM_FEED_URL = "https://medium.com/feed/@yehezkieldio";
 const MEDIUM_SOURCE_QUERY_REGEX = /\?source=.*$/;
 const HTML_TAG_REGEX = /<[^>]+>/g;
-const ITEM_REGEX = /<item>([\s\S]*?)<\/item>/g;
 const WHITESPACE_REGEX = /\s+/g;
-const CATEGORY_REGEX = /<category><!\[CDATA\[(.*?)\]\]><\/category>/g;
 const DATE_FORMATTER = new Intl.DateTimeFormat("en", {
     dateStyle: "medium",
 });
 
-function readTag(item: string, tag: string) {
-    const cdataOpen = `<${tag}`;
-    const start = item.indexOf(cdataOpen);
+const mediumFeedParser = new XMLParser({
+    ignoreAttributes: true,
+    isArray: (_name, jpath) => jpath === "rss.channel.item" || jpath === "rss.channel.item.category",
+    trimValues: true,
+});
 
-    if (start === -1) {
-        return "";
-    }
+type ParsedMediumFeed = {
+    rss?: {
+        channel?: {
+            item?: ParsedMediumItem[];
+        };
+    };
+};
 
-    const openEnd = item.indexOf(">", start);
-    const close = item.indexOf(`</${tag}>`, openEnd);
-
-    if (openEnd === -1 || close === -1) {
-        return "";
-    }
-
-    const raw = item.slice(openEnd + 1, close);
-    return raw.startsWith("<![CDATA[") && raw.endsWith("]]>") ? raw.slice(9, -3) : raw;
-}
-
-function decodeXml(value: string) {
-    return value
-        .replaceAll("&amp;", "&")
-        .replaceAll("&lt;", "<")
-        .replaceAll("&gt;", ">")
-        .replaceAll("&quot;", '"')
-        .replaceAll("&#39;", "'");
-}
+type ParsedMediumItem = {
+    category?: string[];
+    "content:encoded"?: string;
+    link?: string;
+    pubDate?: string;
+    title?: string;
+};
 
 function textFromHtml(value: string) {
-    return decodeXml(value).replace(HTML_TAG_REGEX, " ").replace(WHITESPACE_REGEX, " ").trim();
+    return value.replace(HTML_TAG_REGEX, " ").replace(WHITESPACE_REGEX, " ").trim();
+}
+
+function formatPublishedDate(publishedAt: string) {
+    const date = new Date(publishedAt);
+
+    if (Number.isNaN(date.valueOf())) {
+        return publishedAt;
+    }
+
+    return DATE_FORMATTER.format(date);
 }
 
 export function parseMediumFeed(xml: string): MediumPost[] {
-    return Array.from(xml.matchAll(ITEM_REGEX), (match) => {
-        const item = match[1] ?? "";
-        const publishedAt = readTag(item, "pubDate");
-        const categories = Array.from(item.matchAll(CATEGORY_REGEX), (category) => category[1] ?? "");
+    const feed = mediumFeedParser.parse(xml) as ParsedMediumFeed;
+    const items = feed.rss?.channel?.item ?? [];
+
+    return items.map((item) => {
+        const publishedAt = item.pubDate ?? "";
 
         return {
-            title: decodeXml(readTag(item, "title")),
-            link: decodeXml(readTag(item, "link")).replace(MEDIUM_SOURCE_QUERY_REGEX, ""),
+            title: item.title ?? "",
+            link: (item.link ?? "").replace(MEDIUM_SOURCE_QUERY_REGEX, ""),
             publishedAt,
-            publishedLabel: DATE_FORMATTER.format(new Date(publishedAt)),
-            excerpt: textFromHtml(readTag(item, "content:encoded")).slice(0, 180),
-            categories,
+            publishedLabel: formatPublishedDate(publishedAt),
+            excerpt: textFromHtml(item["content:encoded"] ?? "").slice(0, 180),
+            categories: item.category ?? [],
         };
     });
 }

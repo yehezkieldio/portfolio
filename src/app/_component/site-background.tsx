@@ -1,29 +1,29 @@
 const backgroundLayers = [
-    "fluff-base",
-    "fluff-stars fluff-stars-a",
-    "fluff-stars fluff-stars-b",
-    "fluff-orbit fluff-orbit-a",
-    "fluff-orbit fluff-orbit-b",
-    "fluff-panel fluff-panel-left",
-    "fluff-panel fluff-panel-right",
-    "fluff-scanline",
-    "fluff-cross fluff-cross-a",
-    "fluff-cross fluff-cross-b",
-    "fluff-cross fluff-cross-c",
+    "ambient-base",
+    "ambient-stars ambient-stars-a",
+    "ambient-stars ambient-stars-b",
+    "ambient-orbit ambient-orbit-a",
+    "ambient-orbit ambient-orbit-b",
+    "ambient-panel ambient-panel-left",
+    "ambient-panel ambient-panel-right",
+    "ambient-scanline",
+    "ambient-cross ambient-cross-a",
+    "ambient-cross ambient-cross-b",
+    "ambient-cross ambient-cross-c",
 ] as const;
 
 export function SiteBackground() {
     return (
-        <div aria-hidden="true" className="portfolio-fluff">
+        <div aria-hidden="true" className="portfolio-ambient">
             {backgroundLayers.map((className) => (
                 <div className={className} key={className} />
             ))}
-            <div className="fluff-constellation">
+            <div className="ambient-constellation">
                 <span />
                 <span />
                 <span />
             </div>
-            <div className="fluff-grain" />
+            <div className="ambient-grain" />
         </div>
     );
 }

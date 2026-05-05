@@ -61,7 +61,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
                     default: "none",
                 }}
             >
-                <div className="" key={projectIndex.currentPage}>
+                <div key={projectIndex.currentPage}>
                     <ProjectList projects={projectIndex.visibleItems} />
                 </div>
             </ViewTransition>

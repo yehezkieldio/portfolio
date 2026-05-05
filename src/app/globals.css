@@ -275,7 +275,7 @@
     }
 }
 
-.portfolio-fluff {
+.portfolio-ambient {
     position: fixed;
     inset: 0;
     z-index: 0;
@@ -283,11 +283,11 @@
     pointer-events: none;
 }
 
-.portfolio-fluff > * {
+.portfolio-ambient > * {
     position: absolute;
 }
 
-.fluff-base {
+.ambient-base {
     inset: 0;
     background-color: var(--background);
     background-image:
@@ -302,13 +302,13 @@
     opacity: 1;
 }
 
-.fluff-stars {
+.ambient-stars {
     inset: -10%;
     background-repeat: repeat;
     mask-image: radial-gradient(ellipse at center, transparent 0 28%, black 54%, black 100%);
 }
 
-.fluff-stars-a {
+.ambient-stars-a {
     background-image:
         radial-gradient(circle, color-mix(in oklch, var(--foreground) 34%, transparent) 0 1px, transparent 1.4px),
         radial-gradient(circle, color-mix(in oklch, var(--foreground) 18%, transparent) 0 1px, transparent 1.2px);
@@ -321,7 +321,7 @@
     opacity: 0.26;
 }
 
-.fluff-stars-b {
+.ambient-stars-b {
     background-image:
         radial-gradient(circle, color-mix(in oklch, var(--secondary) 30%, transparent) 0 1px, transparent 1.5px),
         radial-gradient(circle, color-mix(in oklch, var(--primary) 20%, transparent) 0 1px, transparent 1.4px);
@@ -334,12 +334,12 @@
     opacity: 0.18;
 }
 
-.fluff-orbit {
+.ambient-orbit {
     border: 1px solid color-mix(in oklch, var(--foreground) 8%, transparent);
     border-radius: 999px;
 }
 
-.fluff-orbit-a {
+.ambient-orbit-a {
     top: 12%;
     right: -14rem;
     width: 25rem;
@@ -348,7 +348,7 @@
     opacity: 0.42;
 }
 
-.fluff-orbit-b {
+.ambient-orbit-b {
     bottom: -12rem;
     left: -13rem;
     width: 28rem;
@@ -356,12 +356,12 @@
     opacity: 0.28;
 }
 
-.fluff-panel {
+.ambient-panel {
     border: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
     opacity: 0.22;
 }
 
-.fluff-panel-left {
+.ambient-panel-left {
     top: 34%;
     left: -2rem;
     width: 8rem;
@@ -370,7 +370,7 @@
     background-size: 14px 14px;
 }
 
-.fluff-panel-right {
+.ambient-panel-right {
     right: -1rem;
     bottom: 18%;
     width: 14rem;
@@ -379,7 +379,7 @@
     rotate: -6deg;
 }
 
-.fluff-scanline {
+.ambient-scanline {
     top: 18%;
     right: 4%;
     width: 11rem;
@@ -390,51 +390,51 @@
     rotate: 12deg;
 }
 
-.fluff-cross {
+.ambient-cross {
     width: 1rem;
     height: 1rem;
     opacity: 0.32;
 }
 
-.fluff-cross::before,
-.fluff-cross::after {
+.ambient-cross::before,
+.ambient-cross::after {
     position: absolute;
     content: "";
     background: color-mix(in oklch, var(--foreground) 28%, transparent);
 }
 
-.fluff-cross::before {
+.ambient-cross::before {
     top: 50%;
     left: 0;
     width: 100%;
     height: 1px;
 }
 
-.fluff-cross::after {
+.ambient-cross::after {
     top: 0;
     left: 50%;
     width: 1px;
     height: 100%;
 }
 
-.fluff-cross-a {
+.ambient-cross-a {
     top: 23%;
     left: 9%;
 }
 
-.fluff-cross-b {
+.ambient-cross-b {
     right: 9%;
     bottom: 33%;
     scale: 0.75;
 }
 
-.fluff-cross-c {
+.ambient-cross-c {
     top: 64%;
     left: 5%;
     scale: 0.55;
 }
 
-.fluff-constellation {
+.ambient-constellation {
     top: 16%;
     left: 3%;
     width: 9rem;
@@ -442,9 +442,9 @@
     opacity: 0.24;
 }
 
-.fluff-constellation::before,
-.fluff-constellation::after,
-.fluff-constellation span {
+.ambient-constellation::before,
+.ambient-constellation::after,
+.ambient-constellation span {
     position: absolute;
     height: 1px;
     content: "";
@@ -452,21 +452,21 @@
     transform-origin: left center;
 }
 
-.fluff-constellation::before {
+.ambient-constellation::before {
     top: 1.2rem;
     left: 0.4rem;
     width: 4.7rem;
     rotate: 16deg;
 }
 
-.fluff-constellation::after {
+.ambient-constellation::after {
     top: 3.6rem;
     left: 4.8rem;
     width: 3.2rem;
     rotate: -23deg;
 }
 
-.fluff-constellation span:nth-child(1) {
+.ambient-constellation span:nth-child(1) {
     top: 1.1rem;
     left: 0.2rem;
     width: 0.25rem;
@@ -474,7 +474,7 @@
     border-radius: 999px;
 }
 
-.fluff-constellation span:nth-child(2) {
+.ambient-constellation span:nth-child(2) {
     top: 2.2rem;
     left: 4.7rem;
     width: 0.2rem;
@@ -482,7 +482,7 @@
     border-radius: 999px;
 }
 
-.fluff-constellation span:nth-child(3) {
+.ambient-constellation span:nth-child(3) {
     top: 3.1rem;
     left: 7.8rem;
     width: 0.3rem;
@@ -490,7 +490,7 @@
     border-radius: 999px;
 }
 
-.fluff-grain {
+.ambient-grain {
     inset: 0;
     background-image:
         radial-gradient(circle, color-mix(in oklch, var(--foreground) 14%, transparent) 0 0.38px, transparent 0.7px),
@@ -601,41 +601,41 @@
 }
 
 @media (width < 640px) {
-    .fluff-stars {
+    .ambient-stars {
         inset: -18%;
         opacity: 0.14;
     }
 
-    .fluff-orbit-a {
+    .ambient-orbit-a {
         top: 4%;
         right: -20rem;
         opacity: 0.18;
     }
 
-    .fluff-orbit-b {
+    .ambient-orbit-b {
         bottom: -18rem;
         left: -20rem;
         opacity: 0.16;
     }
 
-    .fluff-panel-left,
-    .fluff-panel-right,
-    .fluff-scanline,
-    .fluff-constellation {
+    .ambient-panel-left,
+    .ambient-panel-right,
+    .ambient-scanline,
+    .ambient-constellation {
         opacity: 0.1;
     }
 
-    .fluff-cross-a {
+    .ambient-cross-a {
         top: 18%;
         left: 4%;
     }
 
-    .fluff-cross-b {
+    .ambient-cross-b {
         right: 4%;
         bottom: 22%;
     }
 
-    .fluff-cross-c {
+    .ambient-cross-c {
         opacity: 0;
     }
 }
