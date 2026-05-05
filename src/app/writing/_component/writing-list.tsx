@@ -17,11 +17,15 @@ export function WritingList({ posts }: WritingListProps) {
 
     return (
         <div className="space-y-7 border-border border-t pt-6">
-            {posts.map((post) => (
-                <article className="space-y-2" key={post.link}>
+            {posts.map((post, index) => (
+                <article
+                    className="project-row-enter motion-row space-y-2 transition-[transform] duration-200 ease-(--ease-ui)"
+                    key={post.link}
+                    style={{ animationDelay: `${index * 45}ms` }}
+                >
                     <p className="font-mono text-muted-foreground text-xs">{post.publishedLabel}</p>
                     <h2 className="font-medium text-sm">
-                        <a className="hover:text-muted-foreground" href={post.link}>
+                        <a className="motion-link motion-title-link" href={post.link}>
                             {post.title}
                         </a>
                     </h2>

@@ -29,7 +29,7 @@ function SelectTrigger({
     return (
         <SelectPrimitive.Trigger
             className={cn(
-                "flex h-9 w-full select-none items-center justify-between gap-2 border-border border-b bg-transparent py-1 text-muted-foreground text-sm outline-none transition-colors hover:text-foreground focus-visible:border-foreground focus-visible:text-foreground disabled:cursor-not-allowed disabled:opacity-45 data-[size=sm]:h-8 data-placeholder:text-muted-foreground/65 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+                "motion-focus motion-press flex h-9 w-full select-none items-center justify-between gap-2 border-border border-b bg-transparent py-1 text-muted-foreground text-sm focus-visible:border-foreground focus-visible:text-foreground disabled:cursor-not-allowed disabled:opacity-45 data-[size=sm]:h-8 data-placeholder:text-muted-foreground/65 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-200 [&_svg]:ease-(--ease-ui) data-[popup-open]:[&_svg]:rotate-180",
                 className
             )}
             data-size={size}
@@ -67,7 +67,7 @@ function SelectContent({
             >
                 <SelectPrimitive.Popup
                     className={cn(
-                        "data-closed:fade-out-0 data-closed:slide-out-to-top-1 data-open:fade-in-0 data-open:slide-in-from-top-1 relative isolate z-50 max-h-(--available-height) min-w-40 origin-(--transform-origin) overflow-y-auto overflow-x-hidden border border-border bg-background/96 text-foreground shadow-[0_12px_40px_rgb(0_0_0/0.24)] backdrop-blur-md duration-150 data-closed:animate-out data-open:animate-in",
+                        "relative isolate z-50 max-h-(--available-height) min-w-40 origin-(--transform-origin) overflow-y-auto overflow-x-hidden border border-border bg-background/96 text-foreground opacity-100 shadow-[0_12px_40px_rgb(0_0_0/0.24)] backdrop-blur-md transition-[opacity,transform] duration-150 ease-(--ease-ui) data-ending-style:scale-[0.98] data-starting-style:scale-[0.98] data-ending-style:opacity-0 data-starting-style:opacity-0",
                         alignItemWithTrigger && "w-(--anchor-width)",
                         className
                     )}
@@ -98,7 +98,7 @@ function SelectItem({ children, className, ...props }: SelectPrimitive.Item.Prop
     return (
         <SelectPrimitive.Item
             className={cn(
-                "relative flex w-full cursor-default select-none items-center gap-2 px-2 py-1.5 pr-8 text-sm outline-none data-disabled:pointer-events-none data-highlighted:bg-muted data-highlighted:text-foreground data-disabled:opacity-40",
+                "relative flex w-full cursor-default select-none items-center gap-2 px-2 py-1.5 pr-8 text-sm outline-none transition-[background-color,color,transform] duration-150 ease-(--ease-ui) data-disabled:pointer-events-none data-highlighted:translate-x-0.5 data-highlighted:bg-foreground/[0.055] data-selected:bg-foreground/[0.08] data-highlighted:text-foreground data-selected:text-foreground data-disabled:opacity-40",
                 className
             )}
             data-slot="select-item"

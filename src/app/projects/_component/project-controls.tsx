@@ -21,6 +21,14 @@ export function ProjectControls({ onQueryChange, onTagChange, query, tag, tags }
                 className="h-10"
                 id="project-search"
                 onChange={(event) => onQueryChange(event.target.value)}
+                onKeyDown={(event) => {
+                    if (event.key !== "Escape" || query.length === 0) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    onQueryChange("");
+                }}
                 placeholder="search title, stack, notes..."
                 value={query}
             />

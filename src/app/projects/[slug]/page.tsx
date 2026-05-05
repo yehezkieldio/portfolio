@@ -28,7 +28,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
     return (
         <article className="space-y-9">
-            <header className="space-y-3 border-border border-b pb-8">
+            <header className="project-row-enter space-y-3 border-border border-b pb-8">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                     <ProjectIconGroup icons={project.iconTrees} />
                     <p className="font-mono text-muted-foreground text-xs">{project.year}</p>
@@ -42,7 +42,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 ) : null}
             </header>
 
-            <div className="project-note space-y-5">
+            <div className="project-note project-row-enter space-y-5" style={{ animationDelay: "55ms" }}>
                 <Body components={projectNoteComponents} />
             </div>
         </article>
@@ -178,10 +178,7 @@ function ProjectNoteParagraph({ children, ...props }: ComponentPropsWithoutRef<"
 
 function ProjectNoteLink({ children, ...props }: ComponentPropsWithoutRef<"a">) {
     return (
-        <a
-            className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
-            {...props}
-        >
+        <a className="motion-link text-foreground underline decoration-border" {...props}>
             {children}
         </a>
     );

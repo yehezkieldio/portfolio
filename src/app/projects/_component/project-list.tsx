@@ -23,12 +23,13 @@ export function ProjectList({ projects }: ProjectListProps) {
 function ProjectRow({ project, revealIndex }: { project: ProjectListItem; revealIndex: number }) {
     return (
         <article
-            className="project-row-enter group space-y-2 border-border border-b py-6 transition-colors sm:py-7"
-            style={{ animationDelay: `${revealIndex * 90}ms` }}
+            className="project-row-enter motion-row group space-y-2 border-border border-b py-6 transition-[transform] duration-200 ease-(--ease-ui) sm:py-7"
+            style={{ animationDelay: `${revealIndex * 45}ms` }}
         >
             <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
                 <div className="flex min-w-0 items-center gap-2.5">
-                    <ProjectIconGroup icons={project.iconTrees} />
+                    {/* temp comment */}
+                    {/* <ProjectIconGroup icons={project.iconTrees} /> */}
                     <h2 className="min-w-0 font-medium text-sm leading-tight">
                         <ProjectTitle project={project} />
                     </h2>
@@ -87,7 +88,7 @@ function ProjectTitle({ project }: { project: ProjectListItem }) {
     if (project.hasNote) {
         return (
             <Link
-                className="hover:text-muted-foreground"
+                className="motion-link motion-title-link"
                 href={`/projects/${project.slug}`}
                 transitionTypes={["nav-forward"]}
             >
@@ -103,7 +104,7 @@ function ProjectTitle({ project }: { project: ProjectListItem }) {
     }
 
     return (
-        <a className="hover:text-muted-foreground" href={href} rel="noopener noreferrer" target="_blank">
+        <a className="motion-link motion-title-link" href={href} rel="noopener noreferrer" target="_blank">
             {project.title}
         </a>
     );
@@ -114,7 +115,7 @@ function ProjectLinks({ project }: { project: ProjectListItem }) {
         <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
             {project.hasNote ? (
                 <Link
-                    className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                    className="motion-link text-muted-foreground/75 hover:underline"
                     href={`/projects/${project.slug}`}
                     transitionTypes={["nav-forward"]}
                 >
@@ -123,7 +124,7 @@ function ProjectLinks({ project }: { project: ProjectListItem }) {
             ) : null}
             {project.links.map((link) => (
                 <a
-                    className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                    className="motion-link text-muted-foreground/75 hover:underline"
                     href={link.href}
                     key={`${link.kind}:${link.href}`}
                     rel="noopener noreferrer"

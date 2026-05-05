@@ -2,7 +2,7 @@ const MEDIUM_PROFILE_URL = "https://medium.com/@yehezkiel";
 
 export function MediumLink() {
     return (
-        <a className="underline hover:text-muted-foreground" href={MEDIUM_PROFILE_URL}>
+        <a className="motion-link motion-link-slow motion-title-link underline" href={MEDIUM_PROFILE_URL}>
             Medium
         </a>
     );

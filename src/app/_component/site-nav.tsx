@@ -30,7 +30,7 @@ export function SiteNav() {
                     <Link
                         aria-current={isActive ? "page" : undefined}
                         className={cn(
-                            "relative transition-colors duration-200 hover:text-foreground",
+                            "motion-link motion-press relative",
                             isActive ? "text-foreground" : "text-muted-foreground"
                         )}
                         href={link.href}
@@ -42,6 +42,7 @@ export function SiteNav() {
                             <span
                                 aria-hidden="true"
                                 className="absolute -bottom-1 left-0 h-px w-full bg-foreground/70"
+                                style={{ viewTransitionName: "nav-active-indicator" }}
                             />
                         ) : null}
                     </Link>

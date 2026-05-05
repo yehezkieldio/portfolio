@@ -37,9 +37,12 @@
 }
 
 :root {
-    --duration-exit: 220ms;
-    --duration-enter: 360ms;
-    --duration-move: 620ms;
+    --ease-ui: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-ui-move: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-ui-soft: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-exit: 160ms;
+    --duration-enter: 240ms;
+    --duration-move: 360ms;
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.9848 0 0);
     --card: oklch(0.1457 0 0);
@@ -111,6 +114,36 @@
     a {
         color: inherit;
     }
+
+    ::selection {
+        color: var(--foreground);
+        background: color-mix(in oklch, var(--foreground) 18%, transparent);
+    }
+
+    * {
+        scrollbar-color: color-mix(in oklch, var(--foreground) 24%, transparent) transparent;
+        scrollbar-width: thin;
+    }
+
+    *::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background: color-mix(in oklch, var(--foreground) 18%, transparent);
+        background-clip: content-box;
+        border: 3px solid transparent;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+        background: color-mix(in oklch, var(--foreground) 34%, transparent);
+        background-clip: content-box;
+    }
 }
 
 @keyframes fade {
@@ -135,9 +168,9 @@
 
 @keyframes route-content-enter {
     from {
-        filter: blur(5px);
+        filter: blur(3px);
         opacity: 0;
-        transform: translateY(14px);
+        transform: translateY(8px);
     }
     to {
         filter: blur(0);
@@ -147,13 +180,13 @@
 }
 
 .route-content-enter {
-    animation: 780ms cubic-bezier(0.16, 1, 0.3, 1) 90ms both route-content-enter;
+    animation: 320ms var(--ease-ui-soft) 40ms both route-content-enter;
 }
 
 @keyframes project-row-enter {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(7px);
     }
     to {
         opacity: 1;
@@ -162,7 +195,75 @@
 }
 
 .project-row-enter {
-    animation: 560ms cubic-bezier(0.16, 1, 0.3, 1) both project-row-enter;
+    animation: 300ms var(--ease-ui-soft) both project-row-enter;
+}
+
+.motion-link {
+    position: relative;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in oklch, var(--border) 90%, transparent);
+    text-underline-offset: 0.25em;
+    transition:
+        color 160ms var(--ease-ui),
+        text-decoration-color 160ms var(--ease-ui),
+        opacity 160ms var(--ease-ui),
+        transform 160ms var(--ease-ui);
+}
+
+.motion-link-slow {
+    transition-duration: 260ms;
+}
+
+.motion-title-link {
+    color: var(--foreground);
+}
+
+.motion-press {
+    transition:
+        border-color 160ms var(--ease-ui),
+        color 160ms var(--ease-ui),
+        opacity 160ms var(--ease-ui),
+        transform 140ms var(--ease-ui);
+}
+
+.motion-press:active {
+    transform: scale(0.98);
+}
+
+.motion-focus {
+    outline: none;
+    transition:
+        border-color 160ms var(--ease-ui),
+        color 160ms var(--ease-ui),
+        transform 140ms var(--ease-ui);
+}
+
+.motion-focus:focus-visible {
+    border-color: var(--foreground);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .motion-link:hover {
+        color: var(--foreground);
+        text-decoration-color: color-mix(in oklch, var(--foreground) 80%, transparent);
+    }
+
+    .motion-title-link:hover {
+        color: color-mix(in oklch, var(--primary) 26%, var(--foreground));
+    }
+
+    .motion-row:hover {
+        transform: translateX(3px);
+    }
+
+    .motion-press:hover {
+        color: var(--foreground);
+        border-color: color-mix(in oklch, var(--foreground) 46%, transparent);
+    }
+
+    .motion-focus:hover {
+        border-color: color-mix(in oklch, var(--foreground) 46%, transparent);
+    }
 }
 
 .portfolio-fluff {
@@ -398,67 +499,67 @@
 }
 
 ::view-transition-old(.content-fade-out) {
-    animation: var(--duration-exit) ease-in fade reverse;
+    animation: var(--duration-exit) var(--ease-ui-soft) fade reverse;
 }
 
 ::view-transition-new(.content-fade-in) {
-    animation: var(--duration-enter) ease-out var(--duration-exit) both fade;
+    animation: var(--duration-enter) var(--ease-ui) 60ms both fade;
 }
 
 ::view-transition-old(.nav-forward) {
     --slide-offset: -40px;
     animation:
-        var(--duration-exit) ease-in both fade reverse,
-        var(--duration-move) ease-in-out both slide reverse;
+        var(--duration-exit) var(--ease-ui-soft) both fade reverse,
+        var(--duration-move) var(--ease-ui-move) both slide reverse;
 }
 
 ::view-transition-new(.nav-forward) {
-    --slide-offset: 40px;
+    --slide-offset: 24px;
     animation:
-        var(--duration-enter) ease-out var(--duration-exit) both fade,
-        var(--duration-move) ease-in-out both slide;
+        var(--duration-enter) var(--ease-ui) 60ms both fade,
+        var(--duration-move) var(--ease-ui-move) both slide;
 }
 
 ::view-transition-old(.nav-back) {
-    --slide-offset: 40px;
+    --slide-offset: 24px;
     animation:
-        var(--duration-exit) ease-in both fade reverse,
-        var(--duration-move) ease-in-out both slide reverse;
+        var(--duration-exit) var(--ease-ui-soft) both fade reverse,
+        var(--duration-move) var(--ease-ui-move) both slide reverse;
 }
 
 ::view-transition-new(.nav-back) {
-    --slide-offset: -40px;
+    --slide-offset: -24px;
     animation:
-        var(--duration-enter) ease-out var(--duration-exit) both fade,
-        var(--duration-move) ease-in-out both slide;
+        var(--duration-enter) var(--ease-ui) 60ms both fade,
+        var(--duration-move) var(--ease-ui-move) both slide;
 }
 
 ::view-transition-old(.project-next) {
     --slide-offset: -18px;
     animation:
-        180ms ease-in both fade reverse,
-        420ms cubic-bezier(0.16, 1, 0.3, 1) both slide reverse;
+        140ms var(--ease-ui-soft) both fade reverse,
+        260ms var(--ease-ui-move) both slide reverse;
 }
 
 ::view-transition-new(.project-next) {
-    --slide-offset: 18px;
+    --slide-offset: 14px;
     animation:
-        320ms ease-out 110ms both fade,
-        520ms cubic-bezier(0.16, 1, 0.3, 1) both slide;
+        220ms var(--ease-ui) 45ms both fade,
+        300ms var(--ease-ui-move) both slide;
 }
 
 ::view-transition-old(.project-previous) {
     --slide-offset: 18px;
     animation:
-        180ms ease-in both fade reverse,
-        420ms cubic-bezier(0.16, 1, 0.3, 1) both slide reverse;
+        140ms var(--ease-ui-soft) both fade reverse,
+        260ms var(--ease-ui-move) both slide reverse;
 }
 
 ::view-transition-new(.project-previous) {
-    --slide-offset: -18px;
+    --slide-offset: -14px;
     animation:
-        320ms ease-out 110ms both fade,
-        520ms cubic-bezier(0.16, 1, 0.3, 1) both slide;
+        220ms var(--ease-ui) 45ms both fade,
+        300ms var(--ease-ui-move) both slide;
 }
 
 ::view-transition-group(persistent-nav),
@@ -467,13 +568,26 @@
     animation: none;
 }
 
+::view-transition-group(nav-active-indicator) {
+    z-index: 101;
+    animation-duration: 260ms;
+    animation-timing-function: var(--ease-ui-move);
+}
+
 @media (prefers-reduced-motion: reduce) {
     .route-content-enter,
+    .project-row-enter,
     ::view-transition-old(*),
     ::view-transition-new(*),
     ::view-transition-group(*) {
         animation-duration: 0s !important;
         animation-delay: 0s !important;
+    }
+
+    .motion-link,
+    .motion-press,
+    .motion-focus {
+        transition-duration: 0s !important;
     }
 }
 

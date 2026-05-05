@@ -16,7 +16,7 @@ export function ProjectPagination({ currentPage, onNext, onPrevious, pageCount, 
             </p>
             <div className="grid grid-cols-2 gap-2 min-[420px]:flex">
                 <button
-                    className="min-h-10 border border-border px-3 py-1.5 text-muted-foreground transition-colors enabled:hover:text-foreground disabled:opacity-35 min-[420px]:min-h-0"
+                    className="motion-focus motion-press min-h-10 border border-border px-3 py-1.5 text-muted-foreground/75 disabled:pointer-events-none disabled:opacity-35 min-[420px]:min-h-0"
                     disabled={currentPage === 1}
                     onClick={onPrevious}
                     type="button"
@@ -24,7 +24,7 @@ export function ProjectPagination({ currentPage, onNext, onPrevious, pageCount, 
                     prev
                 </button>
                 <button
-                    className="min-h-10 border border-border px-3 py-1.5 text-muted-foreground transition-colors enabled:hover:text-foreground disabled:opacity-35 min-[420px]:min-h-0"
+                    className="motion-focus motion-press min-h-10 border border-border px-3 py-1.5 text-muted-foreground/75 disabled:pointer-events-none disabled:opacity-35 min-[420px]:min-h-0"
                     disabled={currentPage === pageCount}
                     onClick={onNext}
                     type="button"
