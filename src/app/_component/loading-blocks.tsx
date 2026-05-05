@@ -1,0 +1,34 @@
+type SkeletonRowsProps = {
+    count?: number;
+};
+
+export function SkeletonHeader() {
+    return (
+        <div className="space-y-3">
+            <div className="h-7 w-40 bg-muted" />
+            <div className="h-4 w-full max-w-xl bg-muted" />
+        </div>
+    );
+}
+
+export function SkeletonRows({ count = 3 }: SkeletonRowsProps) {
+    return (
+        <div className="border-border border-t">
+            {Array.from({ length: count }, (_, index) => (
+                <article
+                    className="grid gap-4 border-border border-b py-6 sm:grid-cols-[3.5rem_1fr] sm:gap-5 sm:py-8"
+                    key={index}
+                >
+                    <div className="h-3 w-5 bg-muted" />
+                    <div className="space-y-4">
+                        <div className="h-5 w-36 bg-muted" />
+                        <div className="space-y-2">
+                            <div className="h-3 w-full bg-muted" />
+                            <div className="h-3 w-4/5 bg-muted" />
+                        </div>
+                    </div>
+                </article>
+            ))}
+        </div>
+    );
+}
