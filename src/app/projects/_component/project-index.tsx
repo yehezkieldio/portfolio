@@ -61,7 +61,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
                     default: "none",
                 }}
             >
-                <div className="border-border border-t" key={projectIndex.currentPage}>
+                <div className="" key={projectIndex.currentPage}>
                     <ProjectList
                         page={projectIndex.currentPage}
                         pageSize={projectIndex.pageSize}

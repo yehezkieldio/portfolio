@@ -1,10 +1,19 @@
+import type { ProjectIconName, ProjectIconTree } from "#/lib/projects";
+
+export type ProjectLink = {
+    href: string;
+    kind: "external" | "github" | "gitlab";
+    label: string;
+};
+
 export type ProjectListItem = {
     description: string;
-    github?: string;
-    icon: "Bun" | "Nextjs" | "React" | "Rust" | "TypeScript";
+    hasNote: boolean;
+    icon: ProjectIconName;
+    iconTree: ProjectIconTree;
+    links: ProjectLink[];
     slug: string;
     tags: string[];
     title: string;
-    website?: string;
     year: string;
 };

@@ -1,14 +1,47 @@
 ---
 title: Azalea
-description: Rust media pipeline and Discord bot experiments around upload latency, subprocess control, transcoding, and runtime diagnostics.
+description: High-performance Rust media pipeline and Discord bot for automated X/Twitter media native re-uploads with size-aware transcoding.
 icon: Rust
 year: "2026"
 tags:
   - Rust
-  - media
-  - systems
+  - Media
+  - Systems Engineering
 ---
 
-Azalea explores resilient media automation with Rust.
+Azalea is a Discord bot designed to bypass the limitations of X (formerly Twitter) embeds by natively fetching, transcoding, and re-uploading media directly to Discord. It implements a robust, multi-stage pipeline built for low latency and high reliability.
 
-The project focuses on runtime coordination, ffmpeg and yt-dlp subprocess behavior, upload latency, diagnostics, and failure handling around temporary files and long-running media work.
+### The Pipeline
+
+Every request flows through a meticulously orchestrated sequence of stages:
+
+1.  **Resolve**: A dual-resolver system that attempts VxTwitter API first, falling back to a `yt-dlp` subprocess. Results are cached with both positive (metadata) and negative (durable errors) TTL-based caches.
+2.  **Download**: Streams media to temporary storage while enforcing strict SSRF validation (DNS range checks) and file size caps. Pre-allocation via `fallocate` or `set_len` minimizes disk fragmentation.
+3.  **Optimize**: A "strategy ladder" selects the cheapest path to fit Discord's upload limits:
+    - **Pass-through**: Bits are kept original if they already fit.
+    - **Remux**: Container swap (e.g., `.webm` to `.mp4`) without re-encoding.
+    - **Transcode**: Re-encoding via FFmpeg with hardware acceleration (VAAPI, NVENC, etc.).
+    - **Segment Split**: If the video is still too large, it's split into sequential, playable chunks.
+4.  **Upload**: Prepared files are uploaded as native attachments. Large files can be batched into single messages or sent as ordered segments.
+
+### Systems Engineering Highlights
+
+#### Subprocess Orchestration
+Azalea manages external `ffmpeg` and `yt-dlp` processes with extreme care. It utilizes `SubprocessGuard` to ensure clean lifecycle management, using **UNIX process groups** and **Windows Job Objects** to guarantee that entire process trees are killed on timeout or shutdown, preventing zombie processes. Bounded `stdout`/`stderr` reads prevent untrusted output from exhausting system memory.
+
+#### State & Persistence
+The bot uses **Redb**, a high-performance, embedded key-value store, for persistent deduplication and metrics tracking.
+- **Deduplication**: Prevents redundant work for identical URLs within a TTL window.
+- **Metrics**: Tracks per-stage durations (p50/p90) and error categories, flushed periodically via a background worker to minimize hot-path latency.
+
+#### Hardware Acceleration
+The transcoding engine supports a wide range of hardware backends:
+- **Linux**: VAAPI (Intel/AMD) and QSV.
+- **Windows**: NVENC (NVIDIA), AMF (AMD), and QSV.
+- **macOS**: VideoToolbox.
+It features automatic **software fallback**; if a hardware encoder fails at runtime, the pipeline latches to `libx264` for subsequent tasks.
+
+#### Resiliency & Safety
+- **RAII Cleanup**: Temporary files and directories are owned by RAII guards that schedule async cleanup, ensuring no artifacts are leaked even during panics.
+- **SSRF Guard**: Validates URLs against an allowlist and resolves DNS to ensure target IPs are not in private or link-local ranges.
+- **Rate Limiting**: Per-user and per-channel sliding-window limiters protect against API abuse.

@@ -1,16 +1,11 @@
 "use client";
 
-import { Bun, Nextjs, ReactDark, RustDark, TypeScript } from "@ridemountainpig/svgl-react";
+import { ExternalLink, FileText, GitBranch } from "lucide-react";
 import Link from "next/link";
-import type { ProjectListItem } from "./project-types";
-
-const iconMap = {
-    Bun,
-    Nextjs,
-    React: ReactDark,
-    Rust: RustDark,
-    TypeScript,
-};
+import type { ReactNode } from "react";
+import { createElement } from "react";
+import type { ProjectIconNode, ProjectIconTree } from "#/lib/projects";
+import type { ProjectLink, ProjectListItem } from "./project-types";
 
 type ProjectListProps = {
     page: number;
@@ -36,8 +31,6 @@ export function ProjectList({ page, pageSize, projects }: ProjectListProps) {
 }
 
 function ProjectRow({ index, project, revealIndex }: { index: number; project: ProjectListItem; revealIndex: number }) {
-    const Icon = iconMap[project.icon];
-
     return (
         <article
             className="project-row-enter group grid gap-4 border-border border-b py-6 transition-colors sm:grid-cols-[3.5rem_1fr] sm:gap-5 sm:py-8"
@@ -45,22 +38,13 @@ function ProjectRow({ index, project, revealIndex }: { index: number; project: P
         >
             <div className="flex items-center justify-between gap-4 sm:block">
                 <p className="font-mono text-muted-foreground/70 text-xs">{String(index).padStart(2, "0")}</p>
-                <Icon
-                    aria-hidden="true"
-                    className="mt-0 h-5 w-5 opacity-70 transition-opacity group-hover:opacity-100 sm:mt-6"
-                />
+                <ProjectIcon tree={project.iconTree} />
             </div>
 
             <div className="space-y-4">
                 <div className="grid gap-1 min-[420px]:flex min-[420px]:flex-wrap min-[420px]:items-baseline min-[420px]:justify-between min-[420px]:gap-x-6 min-[420px]:gap-y-2">
                     <h2 className="font-medium text-lg leading-tight">
-                        <Link
-                            className="hover:text-muted-foreground"
-                            href={`/projects/${project.slug}`}
-                            transitionTypes={["nav-forward"]}
-                        >
-                            {project.title}
-                        </Link>
+                        <ProjectTitle project={project} />
                     </h2>
                     <p className="font-mono text-muted-foreground/80 text-xs">{project.year}</p>
                 </div>
@@ -69,38 +53,100 @@ function ProjectRow({ index, project, revealIndex }: { index: number; project: P
 
                 <ProjectLinks project={project} />
 
-                {project.tags.length > 0 ? (
-                    <div className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-muted-foreground/70">
-                        {project.tags.map((projectTag) => (
-                            <span key={projectTag}>{projectTag}</span>
-                        ))}
-                    </div>
-                ) : null}
+                <ProjectTags tags={project.tags} />
             </div>
         </article>
     );
 }
 
-function ProjectLinks({ project }: { project: ProjectListItem }) {
-    return (
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-xs">
+function ProjectIcon({ tree }: { tree: ProjectIconTree }): ReactNode {
+    return renderIconTree(tree);
+}
+
+function renderIconTree(tree: ProjectIconTree): ReactNode {
+    if (typeof tree === "string") {
+        return tree;
+    }
+
+    return createElement(
+        tree.type,
+        tree.props,
+        ...tree.children.map((child, index) =>
+            typeof child === "string" ? child : createElement(IconTreeFragment, { key: index, node: child })
+        )
+    );
+}
+
+function IconTreeFragment({ node }: { node: ProjectIconNode }): ReactNode {
+    return renderIconTree(node);
+}
+
+function ProjectTitle({ project }: { project: ProjectListItem }) {
+    if (project.hasNote) {
+        return (
             <Link
-                className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
+                className="hover:text-muted-foreground"
                 href={`/projects/${project.slug}`}
                 transitionTypes={["nav-forward"]}
             >
-                read note
+                {project.title}
             </Link>
-            {project.github ? (
-                <a className="text-muted-foreground hover:text-foreground" href={project.github}>
-                    github
-                </a>
+        );
+    }
+
+    const href = project.links[0]?.href;
+
+    if (!href) {
+        return project.title;
+    }
+
+    return (
+        <a className="hover:text-muted-foreground" href={href} rel="noopener noreferrer" target="_blank">
+            {project.title}
+        </a>
+    );
+}
+
+function ProjectLinks({ project }: { project: ProjectListItem }) {
+    return (
+        <div className="flex flex-wrap items-center gap-2 text-xs">
+            {project.hasNote ? (
+                <Link
+                    className="inline-flex h-7 items-center gap-1.5 border border-border/70 px-2 text-foreground transition-colors hover:border-foreground/35 hover:bg-foreground/[0.035]"
+                    href={`/projects/${project.slug}`}
+                    transitionTypes={["nav-forward"]}
+                >
+                    <FileText aria-hidden="true" className="size-3.5" />
+                    note
+                </Link>
             ) : null}
-            {project.website ? (
-                <a className="text-muted-foreground hover:text-foreground" href={project.website}>
-                    site
-                </a>
-            ) : null}
+            {project.links.map((link) => (
+                <ProjectExternalLink key={`${link.kind}:${link.href}`} link={link} />
+            ))}
         </div>
     );
+}
+
+function ProjectExternalLink({ link }: { link: ProjectLink }) {
+    const Icon = link.kind === "external" ? ExternalLink : GitBranch;
+
+    return (
+        <a
+            className="inline-flex h-7 items-center gap-1.5 border border-border/70 px-2 text-muted-foreground transition-colors hover:border-foreground/35 hover:bg-foreground/[0.035] hover:text-foreground"
+            href={link.href}
+            rel="noopener noreferrer"
+            target="_blank"
+        >
+            <Icon aria-hidden="true" className="size-3.5" />
+            {link.label}
+        </a>
+    );
+}
+
+function ProjectTags({ tags }: { tags: string[] }) {
+    if (tags.length === 0) {
+        return null;
+    }
+
+    return <p className="font-mono text-[11px] text-muted-foreground/70">{tags.slice(0, 5).join(" / ")}</p>;
 }

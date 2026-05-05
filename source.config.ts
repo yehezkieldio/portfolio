@@ -1,13 +1,25 @@
+import type { SvglComponentName } from "@ridemountainpig/svgl-react";
 import { pageSchema } from "fumadocs-core/source/schema";
 import { defineConfig, defineDocs } from "fumadocs-mdx/config";
 import { z } from "zod";
+
+const projectLinkSchema = z.object({
+    href: z.url(),
+    label: z.string().min(1),
+});
 
 export const { docs: projects, meta: projectsMeta } = defineDocs({
     dir: "content/projects",
     docs: {
         schema: pageSchema.extend({
-            icon: z.enum(["Nextjs", "React", "Rust", "TypeScript", "Bun"]),
+            icon: z
+                .string()
+                .min(1)
+                .transform((icon) => icon as SvglComponentName),
+            external: z.array(projectLinkSchema).default([]),
             github: z.url().optional(),
+            gitlab: z.url().optional(),
+            note: z.boolean().default(true),
             website: z.url().optional(),
             year: z.string(),
             tags: z.array(z.string()).default([]),

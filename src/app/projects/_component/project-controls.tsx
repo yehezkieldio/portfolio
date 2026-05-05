@@ -13,7 +13,7 @@ type ProjectControlsProps = {
 
 export function ProjectControls({ onQueryChange, onTagChange, query, tag, tags }: ProjectControlsProps) {
     return (
-        <div className="grid gap-3 border-border border-t pt-4 min-[520px]:grid-cols-[minmax(0,1fr)_12rem]">
+        <div className="grid gap-3 pt-2 min-[520px]:grid-cols-[minmax(0,1fr)_12rem]">
             <label className="sr-only" htmlFor="project-search">
                 Search projects
             </label>

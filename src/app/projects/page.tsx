@@ -2,14 +2,15 @@ import { getProjects } from "#/lib/projects";
 import { ProjectIndex } from "./_component/project-index";
 
 export default async function ProjectsPage() {
-    const projects = getProjects().map(({ description, github, icon, slug, tags, title, website, year }) => ({
+    const projects = getProjects().map(({ description, hasNote, icon, iconTree, links, slug, tags, title, year }) => ({
         description: description ?? "",
-        github,
+        hasNote,
         icon,
+        iconTree,
+        links,
         slug,
         tags,
         title,
-        website,
         year,
     }));
 
