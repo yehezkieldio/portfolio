@@ -1,4 +1,5 @@
 import { getMediumPosts } from "#/lib/medium";
+import { MediumLink } from "./_component/medium-link";
 import { WritingList } from "./_component/writing-list";
 
 export default async function WritingPage() {
@@ -9,11 +10,7 @@ export default async function WritingPage() {
             <header className="space-y-3">
                 <h1 className="font-semibold text-2xl leading-tight">Writing</h1>
                 <p className="max-w-xl text-muted-foreground/95 leading-7">
-                    Pulled from my{" "}
-                    <a className="underline hover:text-muted-foreground" href="https://medium.com/@yehezkiel">
-                        Medium
-                    </a>{" "}
-                    account.
+                    Pulled from my <MediumLink /> account.
                 </p>
             </header>
             <WritingList posts={posts} />
