@@ -5,7 +5,6 @@ const backgroundLayers = [
     "ambient-orbit ambient-orbit-a",
     "ambient-orbit ambient-orbit-b",
     "ambient-panel ambient-panel-left",
-    "ambient-panel ambient-panel-right",
     "ambient-scanline",
     "ambient-cross ambient-cross-a",
     "ambient-cross ambient-cross-b",

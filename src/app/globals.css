@@ -370,15 +370,6 @@
     background-size: 14px 14px;
 }
 
-.ambient-panel-right {
-    right: -1rem;
-    bottom: 18%;
-    width: 14rem;
-    height: 6rem;
-    background-image: repeating-linear-gradient(0deg, transparent 0 9px, color-mix(in oklch, var(--foreground) 9%, transparent) 9px 10px);
-    rotate: -6deg;
-}
-
 .ambient-scanline {
     top: 18%;
     right: 4%;
@@ -619,7 +610,6 @@
     }
 
     .ambient-panel-left,
-    .ambient-panel-right,
     .ambient-scanline,
     .ambient-constellation {
         opacity: 0.1;
