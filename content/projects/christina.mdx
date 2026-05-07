@@ -1,0 +1,152 @@
+---
+title: Christina
+description: Rust terminal tool for AI-assisted Conventional Commit generation, built around staged-diff analysis, token-aware chunking, and a map-reduce LLM pipeline.
+icon: Rust
+year: "2026"
+tags:
+  - Rust
+  - CLI
+  - AI
+  - Git
+---
+
+## Why It Exists
+
+Christina is a private experimental terminal tool for generating Conventional Commit messages from staged Git changes. It is not a public product right now, and I am not framing it as finished. It is one of those tools that starts as a personal workflow itch, becomes useful enough to keep using, and then grows into an architecture worth revisiting later.
+
+The problem is small on the surface: write a good commit message. The annoying part is that good commit messages require context. A staged diff can contain a tiny fix, a broad refactor, generated lockfile noise, deleted files, renamed files, and changes spread across several modules. A generic “summarize this diff” prompt works until the diff is too large, too noisy, or too structurally mixed.
+
+Christina exists to make that step feel less like a little tax at the end of every change. It reads the staged diff, budgets the input, chunks the diff when needed, asks an LLM for structured summaries, synthesizes intent, validates the final message, and then lets me accept, edit, regenerate, dry-run, or create the commit.
+
+## Current State
+
+Christina is currently private and experimental, but it is also something I use. That distinction matters. It is not only a theoretical architecture document, and it is not only a polished release. It is a working personal tool with enough sharp edges and active design questions that I still want room to revisit it later.
+
+The current workflow is intentionally direct. With staged changes present, running `christina` opens the commit-generation flow. The CLI validates the repository state, extracts staged changes, displays the changed files, loads configuration, processes the diff, generates a commit message, and asks for confirmation before committing.
+
+There are also supporting command surfaces for configuration, provider profiles, shell completions, context injection, tracing, and dry-runs. The default path stays small because this kind of tool only earns its place if it is faster than writing the message manually.
+
+## Product Shape
+
+The interaction model is built around the moment right before committing. Christina does not try to become a full Git client. It sits between `git add` and `git commit`.
+
+The user-facing loop is:
+
+1. Stage changes.
+2. Run Christina.
+3. Review the staged-file summary.
+4. Let the tool generate a Conventional Commit header.
+5. Accept, edit, regenerate, or cancel.
+6. Optionally create the commit.
+
+That last review step is important. Christina is AI-assisted, not AI-autonomous. The generated message should save time and surface intent, but the human still decides whether it is the right commit.
+
+The tool supports dry-run mode for previewing output without mutating the repository, and trace mode for inspecting pipeline behavior such as token counts, chunk counts, generation phases, warnings, and provider latency.
+
+## Architecture
+
+Christina is a Rust workspace split into a headless core crate and a CLI/orchestrator crate. `christina-core` contains the domain model, config schema, Git data types, tokenization, diff chunking, prompt construction, provider request types, and validation boundaries. The `christina` crate handles the actual runtime: CLI parsing, Git integration, config loading, provider construction, async orchestration, progress events, UI, and commit execution.
+
+That split keeps the core logic away from side effects. Diff processing and commit-message validation can live as ordinary data transformations, while the CLI crate does the messy work of opening repositories, talking to providers, resolving secrets, showing spinners, and asking the user what to do.
+
+There is also a small `ui-extractable` crate in the workspace. It reads like a supporting experiment around extracting or isolating UI behavior rather than the center of the system.
+
+## Diff Pipeline
+
+The pipeline starts from staged changes. Christina opens the Git repository with `git2`, checks that there are staged changes, builds a staged diff, and collects the list of changed files. From there, the diff becomes an owned input to the generation pipeline.
+
+Before calling the model, the tool calculates a token budget. It counts system prompts and direct-generation prompts locally, reserves output tokens, fits optional user context, optionally fits recent commit history, and then leaves the remaining budget for the actual diff. This is the part that makes the tool feel more serious than a prompt wrapper. It does not discover token problems only after the provider rejects the request.
+
+Diff chunking is recursive and Git-aware:
+
+- try to keep whole files together;
+- split large files by hunks;
+- split oversized hunks by lines as a last resort;
+- truncate low-signal lockfiles to a small token budget;
+- preserve file paths on each chunk;
+- keep UTF-8 boundaries safe during truncation.
+
+The goal is to preserve change locality. A fixed-size text split would be easier, but it would cut across Git’s natural structure and make the model reason about fragments that no longer represent coherent changes.
+
+## Map Reduce Generation
+
+Christina uses a map-reduce generation strategy for large diffs. If the processed diff fits into a single chunk, the tool uses a fast direct-generation path to avoid unnecessary API calls. If the diff needs multiple chunks, the map phase summarizes chunks in parallel, the intent phase groups summaries into themes, and the reduce phase synthesizes a final Conventional Commit message.
+
+The orchestrator is intentionally defensive. It rate-limits requests, retries transient failures with progressive timeouts, detects systemic provider failures, tolerates a configurable amount of partial chunk failure, and reports warnings when generation needed fallback behavior.
+
+This is the shape of the pipeline:
+
+1. Chunk the staged diff.
+2. Summarize each chunk independently.
+3. Detect or extract higher-level themes.
+4. Synthesize a single commit header.
+5. Validate the header.
+6. Salvage a valid message if the model returns extra prose.
+
+The intent extraction phase exists because a pile of chunk summaries can become just as noisy as the original diff. For larger commits, Christina tries to group atomic changes into architectural themes before asking for the final message. That makes it more likely to produce a commit message about the dominant intent instead of a grocery list of touched files.
+
+## Commit Validation
+
+The final output is not trusted just because a model produced it. Christina wraps commit messages in a validated `CommitMessage` type. A message must be non-empty, single-line, and match the Conventional Commits shape: type, optional scope, optional breaking-change marker, colon, and description.
+
+Length validation is configurable. Strict mode rejects messages above the configured maximum length. Soft mode keeps the message but warns. Disabled mode skips the length check for custom workflows.
+
+There is also salvage behavior. If a model responds with a sentence like “Here is the commit message:” followed by a valid header, Christina can attempt to extract the useful part instead of failing the entire run. That is a practical concession to model behavior while still preserving a typed validation boundary.
+
+## Configuration And Secrets
+
+Christina uses layered configuration. Environment variables have the highest precedence, followed by a local `christina.toml`, then a global config file, then defaults. The config schema covers active profile selection, provider/model settings, token budgets, validation mode, ignore-file patterns, concurrency limits, lockfile token limits, commit history behavior, and generation thresholds.
+
+Provider profiles are designed for LLM backends such as Azure OpenAI and OpenAI. A profile includes provider kind, model name, endpoint information, token limits, temperature, reasoning effort, and secret references.
+
+The security posture is simple but important for a local developer tool:
+
+- API keys are resolved from configuration or secure secret references.
+- secret values are redacted in debug output;
+- diffs and user context are treated as untrusted input;
+- prompts use delimiters and instructions that prevent diff content from masquerading as system instructions.
+
+The tool does send diff content to the configured provider. Christina’s privacy model is therefore direct-provider data flow, not local-only inference. That tradeoff is explicit.
+
+## User Experience
+
+The CLI tries to keep the main flow quick. It prints staged changes, shows progress while processing, warns when generation had to truncate or fall back, and then presents the proposed message. From there, the user can accept, edit inline, regenerate, or cancel.
+
+Editing matters because the model can get close while still missing the human intent. The inline edit path means the tool does not collapse into all-or-nothing automation. It helps produce the draft, then gets out of the way.
+
+Trace mode gives the tool a second personality: more diagnostic, less quiet. It can report repository path, staged file count, diff size, token count, chunk count, binary-only state, whether commit history was included, warning summaries, and whether the commit was created. That is useful while tuning prompts, token budgets, and provider behavior.
+
+## Performance
+
+Christina treats performance as a design constraint. It uses Rust, Tokio, local token counting, recursive chunking, request concurrency, a fast path for single-chunk diffs, and a capped allocator in the CLI binary. The chunker uses buffer reuse internally and avoids naïve allocation-heavy splitting where possible.
+
+The performance work is not only about speed. It is also about cost and reliability. Fewer chunks means fewer provider calls. Accurate local token budgeting prevents failed requests. Lockfile truncation preserves model context for the source changes that actually explain the commit.
+
+The repository includes benchmark and performance documentation, including tokenizer benchmarking and notes around chunking, caching, and memory behavior. For a private personal tool, that may sound excessive. In practice, commit generation is only pleasant if it is fast enough to become habit.
+
+## Engineering Notes
+
+Christina is built with Rust 2024, Clap, Tokio, Git2, tiktoken-rs, Serde, Schemars, thiserror, anyhow, tracing, compact strings, regex, parking_lot, Moka, AHash, and a capped mimalloc allocator in normal runs. The workspace has hard lints around unsafe code, unused results, unwraps, expects, panics, large futures, unnecessary wrappers, and unused dependencies.
+
+The most interesting engineering choices are:
+
+- a headless core crate separated from runtime orchestration;
+- staged diff extraction through `git2`;
+- token budgeting before provider calls;
+- recursive diff chunking by file, hunk, and line;
+- direct generation for small diffs;
+- map-reduce generation for large diffs;
+- optional recent commit history as style context;
+- validated Conventional Commit messages as a type boundary;
+- partial failure tolerance for large multi-chunk generations;
+- traceable progress events for tuning and debugging.
+
+Those choices are more than implementation detail. They are the reason Christina can be useful on real commits instead of only on tidy demo diffs.
+
+## Reflection
+
+Christina is experimental, private, and still in use. That makes it a different kind of portfolio project from something polished and public. It is closer to a personal tool that accidentally grew an architecture because the workflow kept mattering.
+
+What I like about Christina is that it takes a tiny developer ritual seriously. Commit messages are small, but they shape history. A good one says what changed and why. A bad one becomes noise forever. Christina tries to make the good version cheaper without removing the human review that gives the message meaning.
+
+I will probably revisit it later. The current version already captures the core idea: use Rust to make a fast, local-feeling commit assistant, use LLMs where they are good at summarizing intent, and put enough validation around the output that the tool remains a helper rather than a guessing machine.

@@ -1,0 +1,166 @@
+---
+title: Yinlin
+description: Successor to Firefly exploring a Rust-first deterministic release compiler with plan-first execution, rollback journals, CI release PRs, and Cargo/Bun workspace support.
+icon: Rust
+year: "2026"
+tags:
+  - Rust
+  - CLI
+  - Release Automation
+---
+
+## Why It Exists
+
+Yinlin is the direct successor to Firefly, but it is not a simple rewrite. Firefly approached release automation as a TypeScript CLI with a workflow engine: useful, practical, and already organized around preflight checks, semantic versioning, changelog generation, Git operations, and GitHub releases. Yinlin takes the same problem space and pushes the design further into a Rust and compiler-inspired direction.
+
+The project is currently private and experimental. It is a place to test a more serious release model without promising that the tool is ready for public use or everyday production adoption. The intent is to revisit it later, after the shape has had time to settle.
+
+The core idea is that releasing software can be treated as compilation. A release tool consumes a repository snapshot, Git history, workspace metadata, and explicit configuration. From those inputs, it compiles a deterministic release plan. Execution should then be the mechanical materialization of that plan, not a sequence of ad hoc decisions made while mutating the repository.
+
+## Relationship To Firefly
+
+Firefly was the earlier release automation project. It focused on making release work repeatable for small libraries and tools: inspect commits, decide the next version, update metadata, generate changelogs, commit, tag, push, and create GitHub releases.
+
+Yinlin keeps that motivation, but changes the framing. Instead of one CLI command coordinating a release workflow, Yinlin introduces a stricter split between analysis and execution. The plan is no longer an internal detail. It becomes the intermediate representation of the release.
+
+That makes Yinlin feel less like a task runner and more like a release compiler:
+
+- CLI commands are the front-end.
+- `yinlin-core` is the pure planning and verification layer.
+- `yinlin-envoy` is the effectful execution backend.
+- `.yinlin/plan.*` is the serialized release IR.
+- checksums, locks, staleness checks, and rollback journals enforce the contract between planning and execution.
+
+This is the main successor move. Firefly made releases more consistent. Yinlin experiments with making release intent inspectable, reviewable, and mechanically verifiable before side effects happen.
+
+## Current State
+
+Yinlin is not being framed as a finished public tool yet. It is a private experimental project with enough implementation to show the architecture, command surface, and release model, but it should be read as a laboratory for release-system ideas rather than as a stable product announcement.
+
+The current command surface includes:
+
+- `init`
+- `check`
+- `plan`
+- `validate`
+- `release`
+- `ci`
+- `status`
+- `recover`
+- `schema`
+- `completions`
+
+That is already a large surface area, but the important part is not the number of commands. It is the lifecycle they imply: initialize configuration, validate the environment, compile a plan, validate the plan, execute it in a controlled mode, inspect repository state, and recover from interrupted runs.
+
+## Compiler Model
+
+Yinlin’s architecture is intentionally described in compiler terms. The CLI crate is the front-end: it parses commands, resolves repository context, loads configuration, and orchestrates phases. `yinlin-core` is the mid-end: it owns configuration types, workspace discovery, conventional commit parsing, commit attribution, version policy, release plan construction, and plan verification. `yinlin-envoy` is the backend: it performs file edits, changelog generation, Git operations, lockfile updates, npm publishing, GitHub release creation, subprocess execution, and rollback.
+
+The data flow is designed to move forward:
+
+1. Resolve configuration and repository root.
+2. Scan Git state and commit history.
+3. Discover workspace packages and dependency graph.
+4. Attribute commits to packages.
+5. Resolve version decisions.
+6. Build a `ReleasePlan`.
+7. Verify the plan.
+8. Persist the plan with a checksum.
+9. Execute the selected subset of plan steps.
+
+That shape is very Rust-friendly. It favors owned values, explicit state transitions, verifier passes, and hard boundaries between pure planning and effectful execution. It also avoids the feeling of a release command that mutates state while still deciding what it wants to do.
+
+## Plan First
+
+The plan-first model is the heart of Yinlin. `yinlin plan` generates a serialized release plan in JSON, TOML, or YAML. The plan records the plan id, creation time, repository `HEAD`, checksum, packages, execution steps, selected strategy, config hash, and commit range.
+
+The plan is then loaded by `yinlin validate` or `yinlin release`. Before execution, Yinlin can verify the checksum, compare the plan’s `head_sha` to the current repository state, and reject stale plans. In normal mode, the current `HEAD` must match exactly. PR and finalize modes have more specific descendant allowances so CI workflows can still function without weakening the default safety model.
+
+This turns release planning into an artifact. A human or CI job can inspect the plan before execution. A release PR can carry version bumps and changelog edits without tags or publishing. A later finalize phase can execute only the irreversible release side effects from the approved plan.
+
+## Release Modes
+
+Yinlin supports several execution shapes because release automation often needs different behavior locally, in CI, and in review workflows.
+
+Direct release mode executes the plan against the current repository state. It can run preflight checks, acquire a repository lock, filter steps according to CLI flags, optimize the step list, simulate rollback, validate publish credentials when needed, and execute the result.
+
+PR mode is designed for release pull requests. It filters out tag, push, publish, and related hook side effects. It applies version, dependency, lockfile, changelog, and commit steps on a `release/<plan-id>` branch, then uses the GitHub CLI to create or update the PR.
+
+Finalize mode is the counterpart to PR mode. After a release PR has been reviewed and merged, finalize mode filters out version, changelog, and commit mutations. It executes the tag, push, build, publish, and GitHub release steps from the approved plan.
+
+There is also a CI command surface for matrix derivation and split build/publish flows. That points toward artifact fan-out workflows where build jobs can produce binaries and a later publish job can announce them without recomputing release intent.
+
+## Workspace Strategy
+
+Yinlin targets Rust Cargo projects and TypeScript projects that use Bun. That ecosystem boundary is deliberately narrow. It does not try to support every package manager or every registry. Rust crates are not published to crates.io; Rust binaries are distributed through GitHub Releases and optional npm transient wrapper packages.
+
+The workspace model is explicit:
+
+- single-package releases;
+- lockstep monorepos;
+- independent monorepos;
+- hybrid monorepos with strict, non-overlapping groups.
+
+Yinlin does not infer monorepo behavior silently. Workspace mode, strategy, package filters, group membership, tag templates, publish targets, and version policy come from configuration. Ambiguous configuration is treated as an error, not as a chance to guess.
+
+That explicitness is one of the biggest philosophical differences from lighter release tools. Yinlin is willing to make setup a little more deliberate so the release plan can be deterministic.
+
+## Configuration
+
+Configuration is loaded from defaults, a config file, environment overrides, and a workspace override. The normal file is `yinlin.toml`, with `.yinlin.toml` also supported. Environment overrides use `YINLIN_*` keys and are mapped into nested config fields deterministically.
+
+The configuration surface covers workspace strategy, version policy, changelog behavior, Git preconditions, tag and commit templates, push and retag behavior, signing, GitHub release settings, npm settings, release timeouts, and lifecycle hooks.
+
+Several constraints are enforced early:
+
+- workspace roots and hook working directories must resolve inside valid paths;
+- tag templates must include `{version}`;
+- independent and hybrid workspace tags must also include `{name}`;
+- hybrid groups must be explicit, unique, non-overlapping, and exhaustive;
+- publish credentials are required only when publish steps are present;
+- unknown environment overrides are errors.
+
+This is the same general theme again: make intent explicit, reject ambiguity, and let the release plan be a consequence of declared rules.
+
+## Execution And Rollback
+
+The executor in `yinlin-envoy` applies plan steps in order and records rollback data as it goes. Reversible side effects are journaled into `.yinlin/rollback-journal.json` with checksum protection. If a step fails, rollback runs in reverse journal order.
+
+Rollback data can include file backups, path removals, tags to delete, and pre-commit SHAs for soft reset. Non-reversible steps are represented explicitly and can include compensating-action hints. That distinction matters. A release system should not pretend that every side effect can be undone. Publishing to an external registry or creating a remote release has a different failure profile than editing a manifest file.
+
+Yinlin also uses a repository lock during release execution. The lock records holder metadata and protects against concurrent release attempts. `yinlin status` can inspect lock state, and `yinlin recover` can propose or apply cleanup for lock files, plans, transient artifacts, and local tag leftovers.
+
+## Testing
+
+The project has a fairly serious testing posture for an experimental tool. It includes module-level unit tests, property tests, parser and template regression tests, CLI black-box tests, snapshot tests for schema contracts, lock acquisition concurrency tests, smoke tests, and fuzz targets for untrusted-input surfaces.
+
+The fuzz targets currently cover release plan deserialization and conventional commit parsing. That is a sensible place to apply fuzzing because both surfaces convert external text into internal release decisions or executable artifacts.
+
+The quality gates in the repository are Rust-native: `just check` and `just clippy` are the required hard gates, with `just test`, `just smoke`, coverage, and fuzz-build commands available for broader validation.
+
+## Engineering Notes
+
+Yinlin is built as a Rust workspace with three crates: `yinlin`, `yinlin-core`, and `yinlin-envoy`. It uses Clap for the CLI, Serde for serialization, Figment and TOML for configuration, Git2 for Git repository access, git-cliff-core for changelog behavior, SemVer for version modeling, thiserror for errors, tracing for diagnostics, and schema generation for config/documentation support.
+
+The architecture is guided by a few sharp choices:
+
+- releases are compiled into plans before they are executed;
+- planning should be pure and deterministic;
+- execution is isolated behind the envoy crate;
+- plan files carry checksums;
+- stale plans are rejected;
+- release execution is locked;
+- rollback is explicit and journaled;
+- workspace behavior is configured, not guessed;
+- Rust and Bun are the only first-class ecosystems;
+- GitHub Releases and npm are the publishing targets.
+
+Those choices make Yinlin more constrained than a general automation framework. That is the point. The project is exploring whether a narrower, stricter tool can be safer and easier to reason about than a flexible release script.
+
+## Reflection
+
+Yinlin is not a public promise yet. It is a private experimental successor to Firefly, and that status matters. It gives the project room to be opinionated, unfinished, and unusually strict without needing to satisfy everyone who might want a release tool.
+
+What I like about it is the seriousness of the model. Firefly made release work smoother. Yinlin asks a deeper question: what if a release were not a command that “does things,” but a compiled artifact with verification, staleness checks, execution modes, and rollback semantics?
+
+That may be too much machinery for small projects. It may also be exactly the right machinery for the kind of releases where mistakes leave behind bad tags, wrong changelogs, broken packages, or published artifacts that are annoying to repair. For now, Yinlin is the experiment: release automation rebuilt as a Rust release compiler, waiting for the next pass.

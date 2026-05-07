@@ -5,10 +5,140 @@ icon: Nextjs
 github: https://github.com/trashtrackteam/trashtrack
 year: "2024"
 tags:
-    - TypeScript
-    - Capacitor
-    - IoT
-    - Analytics
+  - TypeScript
+  - Capacitor
+  - IoT
+  - Analytics
 ---
 
-WIP
+## Why It Exists
+
+TrashTrack is a smart waste monitoring project built around a simple civic operations problem: trash bins are physical infrastructure, but the people responsible for them often do not have a good live picture of where they are, how full they are, which ones are generating complaints, and whether reported problems have been handled.
+
+The project combines a mobile app, a NestJS API, a PostgreSQL database, and ESP8266-based IoT prototypes. It was a duo project, and my main focus was the mobile development work: turning the product idea into resident and operator flows that could run on Android through Capacitor. The REST API and IoT prototype were part of the full system context, but they were primarily handled by my teammate.
+
+TrashTrack is no longer an actively maintained project, but the repository is still useful as a snapshot of a complete student/team system: mobile runtime, backend contracts, shared UI packages, shared domain types, analytics, maps, reporting, and embedded device experiments all live together in one Nx monorepo.
+
+## Product Shape
+
+The app has two main audiences. The public-facing flow is for residents or reporters. They can enter personal details, select a trash bin, attach a photo, describe the problem, submit a report, and later check report history by NIK. The operator flow is for staff who need to manage the system. They can log in, view dashboard charts, manage trash bin locations, manage sub-bins, inspect fill history, process reports, create feedback, and manage users.
+
+That split gives the project a useful operational loop:
+
+- infrastructure is registered as trash bins and sub-trash bins;
+- devices or operators update sub-bin capacity;
+- residents submit reports against specific bins;
+- operators change report status and send feedback;
+- dashboards summarize bin count, trash events, report volume, and report status.
+
+The system is small, but it models the right lifecycle. A complaint is not just a form submission. It is tied to a location, a reporter, a status, a responsible operator, and feedback. A bin is not just a map pin. It has sub-containers, capacity measurements, trash events, and historical samples.
+
+## Monorepo Architecture
+
+TrashTrack is organized as an Nx monorepo with three application surfaces and a few shared libraries. `apps/api` contains the NestJS REST API. `apps/app` contains the React/Ionic/Capacitor mobile application. `apps/iot` contains Arduino sketches and Fritzing prototypes for the sensor hardware. Shared packages under `libs` provide domain types, UI components, and utilities.
+
+That structure makes sense for the project. The mobile app and backend both need to agree on things like users, reports, trash bins, sub-bins, status names, roles, and response shapes. Keeping the DTOs and models in `@trashtrack/common` avoids duplicating those contracts by hand.
+
+The UI library is also shared inside the monorepo. Forms, charts, buttons, cards, inputs, dialogs, and app-specific components such as complaint forms and operator forms live in `@trashtrack/ui`. The mobile app can stay focused on routes and screens while reusable interaction pieces sit in the component package.
+
+## Team Scope
+
+My strongest ownership in TrashTrack was the mobile application. I worked on the screens, navigation, forms, data fetching, local state, camera/image submission path, operator dashboard surfaces, report flows, map display, and the way the app consumed the API. The backend and IoT code matter to the writeup because the mobile work was designed around them, but they should be read as collaborative system context rather than as the center of my contribution.
+
+That distinction is important. The app had to make the whole system usable: public users needed a simple way to report a bin problem from a phone, while operators needed a compact dashboard and management interface without depending on a desktop admin panel. The mobile layer is where the civic workflow became something a person could actually tap through.
+
+## API Contract
+
+The backend is a NestJS API backed by Prisma and PostgreSQL. Its data model is compact and direct: users, trash bins, sub-trash bins, trash events, capacity history, reports, and feedback.
+
+Trash bins store names, coordinates, descriptions, an `openCount`, child sub-bins, and reports. Sub-bins store maximum capacity, current capacity, trash events, and history records. Reports store the reporter’s NIK, name, phone number, photo name, photo data, description, status, related trash bin, optional handling user, and feedback. Users are either operators or admins, with hashed passwords and active flags.
+
+From the mobile side, the useful part of the API was that it exposed a clear operational contract:
+
+- trash bin totals for dashboard cards;
+- open-count increments for bins;
+- sub-bin capacity updates for IoT or operator changes;
+- report lookup by NIK;
+- report reads that omit image bytes for list views;
+- report status updates;
+- report status pie-chart data;
+- seven-day area-chart totals for reports and trash events;
+- scheduled capacity history snapshots every five minutes.
+
+The API responses are normalized with `success`, `status`, `message`, and `data`, which made the mobile query and mutation code easier to keep consistent across complaint submission, report history, operator charts, and management screens.
+
+## Mobile App
+
+The mobile app is built with React, Ionic, Capacitor, TanStack Query, React Hook Form, Zod, Tailwind, OpenLayers, Recharts, and i18next. It is packaged as a web app that can be synced into Android through Capacitor.
+
+The home screen offers two paths: complaint submission and operator access. The complaint flow collects reporter details, lets the user choose a trash bin, opens the device camera or image picker, converts the selected image to base64, and submits the report through Capacitor HTTP. Report history can be queried by NIK so reporters can see what happened after submission.
+
+The operator side is more like a compact field dashboard. It has pull-to-refresh screens, charts, lists, search, status labels, detail pages, CRUD forms, and nested navigation for bins and sub-bins. Operators can inspect reports, search by trash-bin name with Fuse.js, sort records by date, view capacity history, and move through management flows without leaving the mobile shell.
+
+This is one of the more interesting product choices. TrashTrack does not assume that operators sit behind a desktop dashboard. It puts management workflows into the same mobile-first runtime as the resident flow.
+
+## Maps And Locations
+
+Location is a first-class part of the system. Trash bins carry latitude and longitude, and the operator UI includes an OpenLayers map component that renders an OpenStreetMap base layer with a pinned bin location.
+
+For a waste-management app, that detail matters more than it might seem. A report without a location is only half useful. The operator needs to know which physical bin is affected, where it is, and how it relates to the rest of the bin network.
+
+The implementation is restrained: it centers the map on the bin coordinate, disables some interactions for a simpler mobile experience, and places a custom pin over the point. It is enough for inspection without turning the project into a full GIS tool.
+
+## IoT Prototype
+
+The IoT side, handled outside my main mobile scope, uses ESP8266 sketches to connect to Wi-Fi, read ultrasonic distance sensors, and update sub-bin capacity through the REST API. The working mini prototype calibrates by measuring the initial distance as maximum capacity, then loops every five seconds, reads the current distance, filters out suspicious jumps, and sends `maxCapacity` and `currentCapacity` to `/api/sub-trash-bin/:id/capacity`.
+
+That hardware loop gives the backend a simple capacity signal. The database stores current capacity on the sub-bin, while the scheduled history service periodically records capacity snapshots for trend views.
+
+There is also a larger prototype sketch experimenting with multiple sub-bins, servos, and an inductive sensor for metal versus non-metal sorting. That file reads more like an active hardware experiment than a polished firmware module, but it shows the direction of the project: not only measuring fullness, but eventually sorting or routing waste based on sensor input.
+
+## Reporting Workflow
+
+TrashTrack’s reporting workflow is designed around accountability. A report belongs to a trash bin and starts with the `notResponded` status. Operators can move it through `accepted`, `rejected`, and `completed`, then add feedback records that explain what happened.
+
+The app tries to keep heavy report data out of list views. The backend has no-image report queries so operator lists can show metadata without shipping image bytes unnecessarily. The detailed screens can still access the richer report data when needed.
+
+The resident side stores personal details locally through Capacitor preferences and reuses them for report submission. That makes repeated reports less tedious while still tying each report to a NIK, name, and phone number.
+
+## Analytics
+
+The analytics layer is intentionally modest, but it covers the main operational questions. Operators can see the total number of trash bins, a seven-day chart of trash events, a seven-day chart of reports, and a pie chart of report statuses.
+
+The backend exposes those summaries through chart endpoints, and the mobile app renders them with Recharts inside the operator dashboard. The result is not a full BI system, but it gives operators a quick sense of whether reports are accumulating, how status handling is distributed, and whether trash activity is changing over the last week.
+
+The capacity-history screens fill in a different kind of analytics. Instead of summarizing complaints, they show how a sub-bin’s fill level has changed over time. That is the data path that connects the IoT prototype to operational monitoring.
+
+## Operations And Auth
+
+Operator authentication is username and password based. Passwords are hashed with bcrypt, and the login flow checks a username endpoint plus a compare-password endpoint before storing the operator context in the React app. The API has user-management endpoints for creating users, changing user details, changing passwords, and toggling active state.
+
+The project does not present itself as a hardened enterprise auth system, and that is fine for its scope. What mattered for the mobile app was the intended operating model: admins and operators are distinct roles, staff accounts can be managed, and operator-only screens are separated from public reporting flows.
+
+Local development is documented through Nx commands: start PostgreSQL with the API Docker Compose target, deploy Prisma migrations, run Prisma Studio, build and serve the API, build the app, sync it into Android, and run or open the Android project through Capacitor.
+
+## Engineering Notes
+
+TrashTrack is built with TypeScript, Nx, NestJS, Prisma, PostgreSQL, React, Ionic, Capacitor, TanStack Query, React Hook Form, Zod, Recharts, OpenLayers, Tailwind CSS, i18next, and ESP8266 Arduino code.
+
+The codebase is not trying to be a single elegant abstraction. It is a practical multi-surface system assembled around a concrete prototype. My mobile work sat at the point where the other surfaces became usable: the app had to translate API data, IoT-derived capacity, report statuses, and operator actions into screens that made sense on a phone.
+
+The most durable mobile and product ideas are:
+
+- mobile-first workflows through Ionic and Capacitor;
+- shared contracts between API and app through `@trashtrack/common`;
+- physical-bin modeling through trash bins and sub-trash bins;
+- capacity as a time-series-like history, not only a current value;
+- report status as an operational workflow rather than a plain message inbox;
+- lightweight analytics built from backend summary endpoints;
+- hardware data surfaced through the same API the app consumes.
+
+Those choices make TrashTrack more than a CRUD app with a green theme. It is an attempt to connect people, operators, data, and sensors into one civic feedback loop.
+
+## Reflection
+
+TrashTrack feels like a project built to prove an idea across the whole stack, even though my own emphasis was the mobile side. It has the messy, valuable shape of a real prototype: Android packaging, mobile UI, backend APIs, database schema, charts, maps, image reports, operator accounts, and microcontroller code all need to agree enough for the system to work.
+
+What I like about it is that it stays grounded in the physical world. A trash bin has a coordinate. A report has a photo. A sub-bin has capacity. A sensor has noise. An operator needs a dashboard, but also a phone-friendly path to inspect and respond. The software is at its best when it treats those constraints as the product, not as background details.
+
+It is archived now, but as a portfolio project it still says something useful: TrashTrack was not only a mockup of sustainability software. My part was making the mobile experience that connected residents and operators to the larger system, turning waste infrastructure into something observable, reportable, and manageable from a phone.
