@@ -14,6 +14,11 @@ type PageHeaderProps = {
     withRule?: boolean;
 };
 
+type PageIntroProps = {
+    delayStart?: number;
+    paragraphs: string[];
+};
+
 type ContentListProps = {
     children: ReactNode;
     empty?: ReactNode;
@@ -45,6 +50,22 @@ export function PageHeader({ children, description, meta, title, withRule = fals
             {description ? <p className="max-w-xl text-muted-foreground/95 leading-7">{description}</p> : null}
             {children}
         </header>
+    );
+}
+
+export function PageIntro({ delayStart = 1, paragraphs }: PageIntroProps) {
+    return (
+        <div className="max-w-xl space-y-4 text-[16px] text-muted-foreground/90 leading-7">
+            {paragraphs.map((paragraph, index) => (
+                <p
+                    className="project-row-enter"
+                    key={paragraph}
+                    style={{ animationDelay: `${(delayStart + index) * 45}ms` }}
+                >
+                    {paragraph}
+                </p>
+            ))}
+        </div>
     );
 }
 

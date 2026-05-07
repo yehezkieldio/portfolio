@@ -223,6 +223,14 @@
     transition-duration: 260ms;
 }
 
+.motion-social-link {
+    border-color: color-mix(in oklch, var(--border) 86%, transparent);
+    transition:
+        border-color 180ms var(--ease-ui-soft),
+        color 180ms var(--ease-ui),
+        opacity 180ms var(--ease-ui);
+}
+
 .motion-title-link {
     color: var(--foreground);
 }
@@ -259,6 +267,12 @@
 
     .motion-title-link:hover {
         color: color-mix(in oklch, var(--primary) 26%, var(--foreground));
+    }
+
+    .motion-social-link:hover {
+        border-color: color-mix(in oklch, var(--foreground) 48%, transparent);
+        transition-delay: 70ms, 0ms, 0ms;
+        transition-duration: 320ms, 180ms, 180ms;
     }
 
     .motion-row:hover {
