@@ -11,4 +11,97 @@ tags:
   - Media Pipeline
 ---
 
-WIP
+## Why It Exists
+
+Azalea started from a small irritation that became a systems project: sharing X/Twitter media in Discord should not require people to open an embed, chase a redirect, or depend on a third-party viewer at the moment they actually want to watch the clip.
+
+The user-facing shape is intentionally simple. Someone runs `/media` with a tweet URL, Azalea resolves the media behind it, prepares it for Discord's upload limits, and posts native attachments back into the channel.
+
+The complexity is everything hidden behind that plain command. X media is not a stable, friendly source. Discord has strict upload constraints. Video files arrive in different containers, codecs, bitrates, durations, and timestamp layouts. A clip that looks small enough may still fail because of muxing overhead. A file that can be copied safely as one MP4 may become unplayable if it is naively split. A hardware encoder can pass a startup probe and still fail on the first real encode.
+
+Azalea treats those cases as normal operating conditions instead of edge cases.
+
+## Architecture
+
+The codebase is split into two Rust crates. `azalea-core` owns the media engine: resolving, downloading, SSRF validation, ffprobe/ffmpeg orchestration, quality planning, deduplication, storage-backed metrics, temp-file lifecycle, and runtime transcode state.
+
+The `azalea` crate wraps that engine in Discord behavior: gateway startup, slash command registration, rate limiting, queue accounting, deferred interaction responses, progress updates, attachment preparation, upload retries, and shutdown coordination.
+
+That separation keeps the media pipeline testable without pretending Discord is a pure transport detail. The bot shell can worry about interactions and message lifecycle, while the core crate stays focused on turning hostile remote media into upload-ready files.
+
+## Pipeline
+
+Each `/media` request moves through five main stages:
+
+- Resolve the tweet URL through a cached resolver chain.
+- Download the selected media through SSRF and size guardrails.
+- Optimize the file using the cheapest viable media strategy.
+- Upload one or more native Discord attachments.
+- Persist deduplication and pipeline metrics in the background.
+
+The resolver chain tries VxTwitter first because it is lightweight, then falls back to `yt-dlp` when that result is unavailable or incomplete. Successful and durable-failed resolves are cached separately, which keeps repeated requests fast while avoiding long-lived negative cache poisoning for transient upstream failures.
+
+Once a media URL is selected, the download stage validates it before network I/O, follows redirects through pinned media clients, enforces size and disk-space limits, and streams data into either bounded memory or a guarded temp file depending on whether later probing is required.
+
+## Media Strategy
+
+The optimize stage is where Azalea feels most like a media engine rather than a bot. It chooses the cheapest viable path before reaching for expensive work:
+
+- Pass-through when the file already fits Discord's upload limit.
+- Remux when a container change can make the file uploadable.
+- Balanced transcode when size reduction is needed.
+- Aggressive transcode when the file still exceeds the limit.
+- Split-transcode for long or stubborn videos that cannot fit as one upload.
+
+That ladder matters because latency is part of the product. A 7 MB file should not pay the cost of ffmpeg. A file that only needs MP4 fast-start metadata should not be re-encoded. A video that must be split should come out as Discord-safe segments with clean timestamps and keyframe boundaries, not as frozen playback that technically uploaded.
+
+The quality planner is deliberately pragmatic. It estimates output size using duration, upload limits, configured overhead, safety margins, audio padding, minimum bitrate, and preset-specific target ratios. The point is not to preserve every bit of quality; the point is to produce something Discord accepts quickly while avoiding unnecessary degradation.
+
+## Hardware Fallback
+
+Hardware acceleration is supported, but it is treated carefully rather than romantically. Azalea can target VAAPI, NVENC, VideoToolbox, QSV, AMF, or plain libx264, and it maintains runtime state for the configured backend, active backend, software fallback status, fallback transitions, hardware encode counts, software encode counts, and average encode durations.
+
+If a hardware backend fails during real work, the engine can fall back to software without lying to operators about what happened. On weaker CPUs, effective transcode concurrency collapses during software fallback so recovery does not accidentally turn into self-inflicted overload.
+
+Some of the sharpest bugs in the project lived here: backend-specific ffmpeg flags, QSV filter behavior, split-transcode policy, and runtime fallback decisions that must survive multiple layers of config and retry logic.
+
+## Discord Uploads
+
+The upload side received the same level of attention. Prepared media can be sent sequentially or batched, with a bounded lookahead for attachment preparation so file reads and Discord HTTP sends overlap without losing deterministic order.
+
+Upload metrics are split into attachment preparation, HTTP send, response parsing, and post-upload cleanup. That made it possible to distinguish CPU-bound preparation from wire-bound Discord latency instead of staring at one opaque "upload was slow" number.
+
+For slash commands, Azalea defers an ephemeral interaction, sends progress during long work, uploads native media, then cleans up the temporary thinking response when the job succeeds. It also treats already-expired Discord interactions as a normal cleanup condition instead of noisy operational failure.
+
+## Operations
+
+Azalea is built for the boring parts too:
+
+- Redb-backed deduplication skips repeated URLs across restarts.
+- Redb-backed metrics preserve pipeline timing and failure history.
+- `/status` reports queue depth, resolver cache health, active encoder backend, software fallback state, and encode counters.
+- `/stats` reports current and peak queue depth plus average stage timings.
+- Per-user and per-channel rate limits protect the bot from abuse.
+- Gateway resume state reduces reconnect friction after restarts.
+
+Those details make it operator-owned software rather than a demo. The project optimizes for self-hosting, predictable failure, transparent diagnostics, and fast local iteration rather than hiding all complexity behind a managed service.
+
+## Safety
+
+One of the more valuable design constraints was treating media files as hostile inputs. The downloader rejects oversized content early when headers allow it, but still enforces caps while streaming. SSRF checks happen before fetching the selected media URL. Temp paths are owned by RAII guards so normal errors and panics do not leave a trail of stale files.
+
+Subprocess execution gets the same treatment. ffmpeg and ffprobe calls capture bounded stderr tails, drain progress output, and use timeouts so failures are diagnosable without letting logs or child processes grow without limit.
+
+## Engineering Notes
+
+The workspace carries a strict maintenance posture. It denies unsafe code, warns on ignored results and futures, treats `unwrap`, `expect`, panic paths, accidental indexing, unused dependencies, and placeholder macros as clippy warnings, and runs through `cargo fmt`, `cargo clippy -D warnings`, and `cargo nextest`.
+
+Regression tests cover the small but dangerous contracts: queue depth rollback when enqueue is cancelled, pass-through uploads preserving in-memory payloads, realistic temp-file guards, bounded split concurrency, ffmpeg argument construction, QSV filter behavior, and fallback decisions that must not be overwritten by later runtime selection.
+
+## Reflection
+
+Azalea is not a public service or a growth product. It is an operator-owned tool for personal or experimental Discord servers, and it is explicit about the legal gray area of relying on unofficial X media access. That boundary shaped the engineering.
+
+What I like about Azalea is that it lives in the space where small user experience friction meets real systems work. From the outside, it is a command that turns a tweet URL into a Discord attachment. Inside, it is a resolver chain, a guarded downloader, a size-aware transcode planner, a hardware-aware ffmpeg runner, an upload scheduler, a metrics system, a dedup store, and a shutdown-aware Discord worker.
+
+The surface is tiny; the machinery underneath is the point.
