@@ -323,8 +323,8 @@
 
 .ambient-stars-b {
     background-image:
-        radial-gradient(circle, color-mix(in oklch, var(--secondary) 30%, transparent) 0 1px, transparent 1.5px),
-        radial-gradient(circle, color-mix(in oklch, var(--primary) 20%, transparent) 0 1px, transparent 1.4px);
+        radial-gradient(circle, color-mix(in oklch, var(--foreground) 18%, transparent) 0 1px, transparent 1.5px),
+        radial-gradient(circle, color-mix(in oklch, var(--foreground) 12%, transparent) 0 1px, transparent 1.4px);
     background-position:
         83px 29px,
         11px 97px;
@@ -344,7 +344,7 @@
     right: -14rem;
     width: 25rem;
     height: 25rem;
-    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 8%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--foreground) 5%, transparent);
     opacity: 0.42;
 }
 
@@ -375,7 +375,7 @@
     bottom: 18%;
     width: 14rem;
     height: 6rem;
-    background-image: repeating-linear-gradient(0deg, transparent 0 9px, color-mix(in oklch, var(--secondary) 18%, transparent) 9px 10px);
+    background-image: repeating-linear-gradient(0deg, transparent 0 9px, color-mix(in oklch, var(--foreground) 9%, transparent) 9px 10px);
     rotate: -6deg;
 }
 
