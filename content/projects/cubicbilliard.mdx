@@ -1,41 +1,14 @@
 ---
 title: Cubic Billiard
-description: Internal staff-only POS and inventory management system for Cubic Billiard, featuring an append-only inventory ledger, automated thermal printing, and robust business cycle management.
+description: Full-stack internal ecosystem with real-time order management, financial reporting, and robust business cycle management for its eponymous venue.
 icon: Nextjs
-note: false
+github: https://github.com/yehezkieldio/azalea
 year: "2026"
 tags:
   - Next.js
   - TypeScript
-  - Systems Architecture
   - MariaDB
+  - Web Development
 ---
 
-Cubic is a meticulously engineered Point of Sale (POS) and inventory system built specifically for Cubic Billiard. It moves beyond a simple CRUD application, implementing a robust architecture focused on data integrity, observability, and operational reliability.
-
-### Inventory Architecture
-
-The inventory engine is built on an **append-only ledger** model (`stok_logs`), ensuring a complete audit trail of every movement.
-- **Consistency**: Uses MariaDB advisory locks (`get_lock`) to serialize stock read-model updates, preventing race conditions during concurrent mutations.
-- **Read Models**: High-performance derived tables (`stock_balances`, `stock_movement_totals`) provide O(1) access to current levels, avoiding expensive full-history scans.
-- **Negative Stock**: Implements a feature-gated "fast-path" for negative stock, allowing operations to proceed under controlled business exceptions while maintaining strict consistency.
-
-### The Order Pipeline
-
-Orders flow through a multi-stage lifecycle (Pending → Done/Kosong/Cancelled) designed for kitchen-staff reality.
-- **Packets**: Supports bundled items that snapshot their components at order time, ensuring that stock deduction follows the exact catalog state that existed when the guest ordered.
-- **Financial Snapshots**: Historical snapshots of PPN rates and discounts ensure that financial reporting remains accurate even if tax rates or catalog prices change later.
-- **Realtime Feeds**: Leverages Server-Sent Events (SSE) for instant kitchen-to-admin invalidation, paired with TanStack Query for stable, paginated data fetching.
-
-### Systems & Operations
-
-#### Thermal Printing
-A custom-built **Windows Print Agent** (`bun run print-agent`) handles direct ESC/POS communication with thermal printers. It features a browser-based ledger to prevent duplicate prints and handles spooler recovery automatically, allowing staff to print receipts directly from the web interface.
-
-#### Observability & Diagnostics
-- **Evlog**: A structured event logging system that captures wide events per request, including internal context, performance markers, and user-facing error support references.
-- **Maintenance Queue**: A background worker (using Oxen Queue) handles idempotent derived tasks like analytics rollups, search document rebuilding, and automated monthly stock checkpoints.
-- **Pre-production Guardrails**: A comprehensive diagnostic suite checks for API auth gaps, business cycle boundary consistency, and residual data drift before any release.
-
-#### Scalability
-The system is designed for high-density staff usage, utilizing cursor-based pagination, month-end snapshots for archival data, and DB-level `sort_key` optimization to keep UI surfaces responsive as the catalog and history grow.
+WIP

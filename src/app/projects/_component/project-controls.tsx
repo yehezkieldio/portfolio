@@ -40,7 +40,7 @@ export function ProjectControls({ onQueryChange, onTagChange, query, tag, tags }
                 <SelectTrigger className="h-10">
                     <SelectValue />
                 </SelectTrigger>
-                <SelectContent align="start">
+                <SelectContent align="start" className="w-[calc(var(--anchor-width)+1.5rem)] max-w-(--available-width)">
                     <SelectItem value="all">all tags</SelectItem>
                     {tags.map((projectTag) => (
                         <SelectItem key={projectTag} value={projectTag}>

@@ -29,7 +29,7 @@ function SelectTrigger({
     return (
         <SelectPrimitive.Trigger
             className={cn(
-                "motion-focus motion-press flex h-9 w-full select-none items-center justify-between gap-2 border-border border-b bg-transparent py-1 text-muted-foreground text-sm focus-visible:border-foreground focus-visible:text-foreground disabled:cursor-not-allowed disabled:opacity-45 data-[size=sm]:h-8 data-placeholder:text-muted-foreground/65 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-200 [&_svg]:ease-(--ease-ui) data-[popup-open]:[&_svg]:rotate-180",
+                "motion-press flex h-9 w-full select-none items-center justify-between gap-2 border-b bg-transparent py-1 text-muted-foreground text-sm focus-visible:text-foreground disabled:cursor-not-allowed disabled:opacity-45 data-[size=sm]:h-8 data-placeholder:text-muted-foreground/65 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-200 [&_svg]:ease-(--ease-ui) data-[popup-open]:[&_svg]:rotate-180",
                 className
             )}
             data-size={size}
@@ -98,7 +98,7 @@ function SelectItem({ children, className, ...props }: SelectPrimitive.Item.Prop
     return (
         <SelectPrimitive.Item
             className={cn(
-                "relative flex w-full cursor-default select-none items-center gap-2 px-2 py-1.5 pr-8 text-sm outline-none transition-[background-color,color,transform] duration-150 ease-(--ease-ui) data-disabled:pointer-events-none data-highlighted:translate-x-0.5 data-highlighted:bg-foreground/[0.055] data-selected:bg-foreground/[0.08] data-highlighted:text-foreground data-selected:text-foreground data-disabled:opacity-40",
+                "relative flex w-full cursor-default select-none items-center gap-2 px-2 py-1.5 pr-8 text-sm outline-none transition-[background-color,color] duration-150 ease-(--ease-ui) data-disabled:pointer-events-none data-highlighted:bg-foreground/[0.055] data-selected:bg-foreground/[0.08] data-highlighted:text-foreground data-selected:text-foreground data-disabled:opacity-40",
                 className
             )}
             data-slot="select-item"
