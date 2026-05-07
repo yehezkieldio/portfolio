@@ -116,8 +116,8 @@
     }
 
     ::selection {
-        color: var(--foreground);
-        background: color-mix(in oklch, var(--foreground) 18%, transparent);
+        color: color-mix(in oklch, var(--foreground) 72%, var(--muted-foreground));
+        background: color-mix(in oklch, var(--foreground) 11%, transparent);
     }
 
     * {
