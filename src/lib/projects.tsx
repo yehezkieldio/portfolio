@@ -134,6 +134,7 @@ function withProjectRuntimeFields(project: (typeof projectDocs)[number]) {
             projectIconTree(icon, "h-5 w-5 opacity-75 transition-opacity group-hover:opacity-100")
         ),
         links: projectLinks(project),
+        projectSortDate: project.projectSortDate ?? project.projectStartedAt,
         slug: projectSlug(project.info.path),
         Icon: getProjectIcon(project.icon),
         iconTree: projectIconTree(project.icon, "h-5 w-5 opacity-80"),
@@ -144,7 +145,7 @@ function withProjectRuntimeFields(project: (typeof projectDocs)[number]) {
 type Project = ReturnType<typeof withProjectRuntimeFields>;
 
 function sortProjects(a: Project, b: Project) {
-    return b.year.localeCompare(a.year) || a.title.localeCompare(b.title);
+    return b.projectSortDate.localeCompare(a.projectSortDate) || a.title.localeCompare(b.title);
 }
 
 const projects = projectDocs.map(withProjectRuntimeFields).sort(sortProjects);
