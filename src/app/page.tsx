@@ -1,9 +1,9 @@
 import { PageHeader, PageSection } from "./_component/content-primitives";
 
 const intro = [
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem sunt delectus dignissimos asperiores illo? Sit culpa, totam dolores tempore voluptatem vitae error consequuntur fuga tenetur sunt non nulla.",
-    "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit doloribus libero dignissimos voluptatibus quaerat optio, quas incidunt, repudiandae facere totam id, ab consequuntur et!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quasi aliquam doloremque, facilis id quidem rerum doloribus vitae reprehenderit voluptatum, ad debitis ducimus? Ratione consequatur, suscipit ea corporis distinctio cumque.",
+    "I am a generalist software engineer based in Indonesia, focused on building reliable, performant, and accessible digital experiences. I mostly work in web development, where I enjoy building software that feels clear, stable, and useful.",
+    "My work mainly involves full-stack development and release engineering. I am interested in how software is designed, built, shipped, and maintained across different parts of the stack.",
+    "I also explore systems programming and developer tools. I care about resiliency, thoughtful architecture, and building practical software that can be maintained over time.",
 ];
 
 export default function Home() {
