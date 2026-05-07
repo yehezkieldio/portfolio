@@ -5,10 +5,112 @@ icon: Nextjs
 github: https://github.com/yehezkieldio/topaz
 year: "2025"
 tags:
-    - TypeScript
-    - Next.js
-    - Metadata
-    - Reading Tracker
+  - TypeScript
+  - Next.js
+  - Metadata
+  - Reading Tracker
 ---
 
-WIP
+## Why It Exists
+
+Topaz is a personal reading tracker for the kind of fiction that does not fit neatly into ordinary book cataloging software. Fanfiction, webnovels, quests, forum serials, and long-running online fiction all have awkward metadata: changing chapter counts, inconsistent sources, fandoms instead of publishers, author handles instead of canonical names, and personal progress that matters more than ownership.
+
+The project exists because browser bookmarks and spreadsheets are bad at remembering a reading life. They can hold links, but they do not capture whether a story was completed, paused, dropped, reread-worthy, unusually good, or attached to a specific fandom mood. Topaz turns that scattered memory into a searchable library.
+
+It is intentionally personal, but not hidden. The public surface lets anyone browse the collection, see library statistics, and explore the stories. The admin surface is reserved for the owner through Discord authentication, which keeps curation private while leaving the archive readable.
+
+## Library Model
+
+Topaz treats a library entry as a combination of story metadata and reader progress. The story holds the external fact of the work: title, author, source, URL, chapter count, word count, story status, description, and whether the entry is NSFW. Progress holds the personal layer: reading status, current chapter, rating, notes, and timestamps.
+
+That split matters because a story and a reading state are different things. A story can be ongoing while the reader has completed the available chapters. A work can be abandoned by the author while still being worth keeping. A rating or note should belong to the reading relationship, not to the external source itself.
+
+The schema also has first-class many-to-many relationships for tags and fandoms. That gives Topaz enough vocabulary to support how online fiction is actually remembered:
+
+- by source, such as AO3, FanFiction.Net, SpaceBattles, Sufficient Velocity, Royal Road, Scribble Hub, WebNovel, and others;
+- by fandom, for the world or canon the story belongs to;
+- by custom tags, for personal retrieval and taste;
+- by progress status, such as reading, completed, paused, planned, or dropped;
+- by numeric metadata, such as chapters, words, and rating.
+
+The result is closer to a small personal catalog than a pile of links. It can answer both “where was that fic?” and “what have I actually been reading?”
+
+## Reading Surface
+
+The main library surface is built for browsing a large personal collection without making the browser carry the whole thing at once. Topaz uses tRPC with TanStack Query infinite loading, then renders the list through TanStack Virtual. Each row can open into a detailed sheet, and authenticated users also get edit and delete actions.
+
+The UI keeps the common reading-library tasks close together. Search, filters, sorting, creation, viewing, editing, and deletion all live inside the library flow rather than being scattered across separate admin pages. On desktop, controls stay near the top of the screen. On mobile, the control surface moves to the bottom so filtering and adding entries are still reachable while browsing.
+
+The list itself is designed around variable, information-rich entries. A story card can show title, author, source, status, tags, fandoms, progress, rating, notes, metadata, and admin controls without requiring a page transition. That is important for this domain because discovery often happens by scanning: recognizing an author, a fandom, a half-remembered tag, or a note written months earlier.
+
+## Search And Filtering
+
+Topaz does not depend on plain substring matching alone. The library read model builds a PostgreSQL search vector that combines title, author, description, summary, tags, fandoms, progress status, and notes with different weights. The query path also uses fallback `ILIKE` checks and similarity matching for titles and authors.
+
+That layered search is a small but meaningful product decision. Online fiction titles are often stylized, source names are inconsistent, and users rarely remember the exact wording they saved. A useful search needs to catch exact title matches, partial names, author fragments, fandom terms, and personal notes.
+
+Filtering goes beyond search text. The progress query accepts status, source, NSFW state, rating range, notes presence, completed-only, and in-progress-only filters. Sorting can happen by title, author, status, rating, progress ratio, creation time, update time, word count, chapter count, and NSFW state.
+
+Cursor pagination is typed to the chosen sort value, which keeps infinite scrolling stable across strings, numbers, dates, booleans, and computed progress. That is the unglamorous part of making a library feel calm: the user scrolls, filters, and sorts, and the system does not jump, duplicate rows, or lose its place unnecessarily.
+
+## Read Models
+
+The project uses Drizzle and PostgreSQL materialized views for its library reads. One view flattens story metadata, user progress, tags, fandoms, timestamps, versions, and search vectors into a single queryable surface. Another view precomputes library statistics such as total words, total chapters, story count, fandom count, completed count, paused count, dropped count, currently reading count, and average rating.
+
+This is a pragmatic choice for a read-heavy personal application. The write model can stay normalized and expressive, while the browsing surface reads from a shape that is already close to what the UI needs. The materialized view also gives search and stats a stable place to live instead of recreating the same joins and aggregations across components.
+
+After story or progress mutations, Topaz refreshes the library and statistics views, then invalidates the relevant Next cache tags. That keeps the public home page, hot tag searches, fandom suggestions, and library statistics aligned with the source data after curation changes.
+
+## Curation Workflow
+
+Authenticated users can create a story and its progress record together. The create flow stores story fields, validates tag and fandom ids, creates join rows, formats ratings, bounds progress values, trims notes to a maximum length, and rejects duplicate URLs.
+
+Editing follows the same idea but adds optimistic concurrency. Story and progress records carry version numbers, and update mutations require the client to send the version it edited. If the stored version has changed, Topaz returns a conflict instead of silently overwriting newer data.
+
+That may sound a little serious for a personal library, but it is exactly the kind of boring correctness that keeps a tool trustworthy. Notes and reading progress are small pieces of memory. Accidentally replacing them during an edit is the sort of bug that makes a personal archive feel unreliable.
+
+## Auth And Ownership
+
+Topaz uses NextAuth with the Drizzle adapter and Discord OAuth. Public browsing is allowed, but protected tRPC procedures require a session. The sign-in callback can restrict write access to a single Discord user id through `ALLOWED_DISCORD_ID`.
+
+This gives the app a clear trust shape. The library can be shared, linked, and explored without turning every visitor into a potential editor. The curation controls are rendered only when the server-side auth gate sees an authenticated administrator session, and the mutation procedures enforce the same boundary on the server.
+
+The useful detail is that Topaz does not make privacy the whole product. It assumes the collection can be public and the editing authority can still be private.
+
+## Caching And Responsiveness
+
+Topaz mixes several caching layers, each with a narrow job. Server cache functions use Next cache tags and cache lifetimes for statistics, hot tags, hot fandoms, and search suggestions. Client data uses TanStack Query with a persisted async-storage layer, controlled stale times, structural sharing, and explicit refetch behavior.
+
+That combination fits the use case well. The library should feel fast when revisited, but it should also update cleanly after the owner edits an entry. Search suggestions should be cheap to ask for repeatedly. Statistics can live for longer, then be invalidated when curation changes.
+
+The browsing path also pays attention to the cost of rendering. Virtualized rows, dynamic sheet imports, skeleton states, and measured item heights keep the page usable as the library grows. This matters because reading trackers tend to become valuable only after they accumulate a lot of old entries.
+
+## Developer Experience
+
+Topaz is a Bun-first Next.js application using the App Router, React 19, tRPC, Drizzle ORM, PostgreSQL, Zod, TanStack Query, TanStack Virtual, React Hook Form, Radix UI, Tailwind CSS, Biome, and NextAuth.
+
+The codebase is organized around the product domain rather than around generic folders alone. Library API hooks, list components, item components, sheets, forms, states, skeletons, and local stores sit under the library feature. Server concerns are separated into auth, database schema, cache helpers, and tRPC routers.
+
+Local development is deliberately ordinary: install dependencies, start PostgreSQL with Docker or the included `just` recipe, push or migrate the Drizzle schema, and run the dev server. Release metadata is also wired into the app through the public version environment, which lets the home page display the deployed Topaz version.
+
+## Engineering Notes
+
+The most interesting engineering in Topaz is not that it is a tracker. It is how much of the implementation is shaped by the messiness of internet fiction metadata.
+
+The domain has a few constraints that show up directly in the code:
+
+- sources are enumerated but include an escape hatch for `Other`;
+- titles, authors, tags, and fandoms use case-insensitive text where lookup should not depend on casing;
+- story status and reader progress status are separate concepts;
+- search combines formal metadata with personal notes;
+- list pagination needs deterministic cursors because sorting can happen across several data types;
+- mutations refresh materialized views because the UI reads from a denormalized library surface;
+- edits carry version checks because personal notes and progress should not be overwritten casually.
+
+Those details are easy to miss from the outside, but they are the difference between a toy tracker and a system that can become a durable personal archive.
+
+## Reflection
+
+Topaz is small in scope, but it is personal in a way that makes the engineering feel worthwhile. It is not trying to be Goodreads for everything. It is a tool for a specific reading habit: long-form online fiction that sprawls across platforms, updates irregularly, and becomes hard to rediscover without a memory system built around it.
+
+What I like about Topaz is that it respects that shape. It gives fanfiction and webnovels their own source list, their own fandom vocabulary, their own progress semantics, and their own search surface. It keeps the public experience open while keeping curation guarded. It uses serious database and UI patterns, but in service of a very human thing: remembering what was read, what mattered, and what is worth returning to.

@@ -5,10 +5,145 @@ icon: Nextjs
 github: https://github.com/yehezkieldio/weaver
 year: "2025"
 tags:
-    - TypeScript
-    - Next.js
-    - RAG
-    - AI Agents
+  - TypeScript
+  - Next.js
+  - RAG
+  - AI Agents
 ---
 
-WIP
+## Why It Exists
+
+Weaver is an agentic RAG research platform built around a very practical academic problem: students, lecturers, staff, and prospective students often need answers from university documents, but the source material is scattered across regulations, PDFs, procedures, internal guidance, and web-like text. A normal chatbot can sound confident while drifting away from the official record. A plain search box can retrieve documents but still leave the user to assemble the answer.
+
+The project was originally implemented internally under the MuliaChat name for Universitas Mulia, and that research case still shapes the codebase. The public idea is broader: a hallucination-aware question answering system for institutional knowledge, where every answer should be grounded in retrieved sources, citations, guardrails, and measurable evaluation.
+
+It is not just a chat UI wrapped around an LLM. Weaver is a full research artifact: document ingestion, vector storage, hybrid retrieval, reranking, agentic tool use, citation tracking, chat sessions, guardrail logging, RAGAS-style evaluation, ablation studies, statistical analysis, simulated-user testing, and exportable reports all live in the same application.
+
+## Research Context
+
+The concrete research question behind Weaver is whether Agentic Retrieval-Augmented Generation improves a university information service compared with simpler baselines. That matters because the phrase “implementation” has a higher bar than a demo. It has to show that the pipeline works end to end: documents can be uploaded, processed, retrieved, reasoned over, answered from, evaluated, and tested in multi-turn use.
+
+The codebase reflects that academic pressure. It stores not only documents and chat messages, but also agent steps, guardrail logs, evaluation questions, ablation studies, statistical analyses, document processing progress, and human annotations. Those tables are not decorative. They exist so the system can explain what happened, compare configurations, and produce evidence for a paper rather than relying on vibes.
+
+The evaluation layer is split into two complementary views:
+
+- component-level evaluation, where retrieval and generation are scored with RAGAS-style metrics;
+- system-level evaluation, where simulated users test whether the full chat system completes real tasks across multiple turns.
+
+That split is one of the most important decisions in the project. Good retrieval scores do not automatically mean a student can find the KRS procedure, understand graduation requirements, or follow an administrative process through clarifying questions. Weaver measures both the parts and the assembled experience.
+
+## Chat Pipeline
+
+The main chat endpoint supports three modes: direct LLM responses, standard RAG, and agentic RAG. That makes the system useful for comparison as well as for production-style interaction. A request can choose whether RAG is enabled, whether agentic mode is enabled, which retrieval strategy to use, whether guardrails should run, and which reranker strategy should be applied.
+
+In agentic mode, the system streams more than text. It emits progress updates, agent steps, retrieved chunks, tool results, and final answer content through the AI SDK stream. The UI can show the user that the system is searching, reasoning, retrieving sources, and synthesizing rather than sitting silently until the model finishes.
+
+The server stores the conversation afterward: user message, assistant message, retrieved chunks, guardrail triggers, latency, token count, and agent step count. If agentic steps were produced, they are persisted with tool names, inputs, outputs, reasoning, timing, and message linkage.
+
+That trace is essential for debugging. When an answer is bad, Weaver can ask a better question than “did the model fail?” It can inspect whether the query was decomposed poorly, whether retrieval missed the right chunk, whether reranking dropped the best source, whether synthesis ignored evidence, or whether a guardrail flagged the response.
+
+## Agentic Reasoning
+
+Weaver’s agentic pipeline is built around tools rather than one giant prompt. The agent can search documents, expand Indonesian academic queries, decompose complex questions, verify claims, and synthesize information across multiple sources. The system prompt explicitly pushes the agent to decompose complex queries first, then call multiple search tools in one turn so retrieval can happen in parallel.
+
+This is especially useful for university questions. A user rarely asks only one clean fact. They ask for procedures, comparisons, eligibility rules, documents required, timelines, or consequences. Those questions naturally become multi-hop retrieval tasks.
+
+The agentic path tracks:
+
+- planning and reasoning steps;
+- search tool calls and retrieved chunks;
+- reranking latency;
+- synthesis time;
+- token usage;
+- citations assigned across retrieved sources;
+- guardrail validation before and after generation.
+
+The goal is not to make the agent look clever. The goal is to make the answer path inspectable. A university information system needs trust, and trust improves when the system can show which documents shaped the response and which reasoning steps led there.
+
+## Hybrid Retrieval
+
+Weaver uses hybrid retrieval because academic information is hostile to single-strategy search. Pure vector search can understand paraphrases but miss exact terms like course codes, acronyms, document names, faculty names, or administrative labels. Pure keyword search can catch those terms but struggle when users ask in natural language.
+
+The retrieval engine combines PostgreSQL vector search through `pgvector` with Okapi BM25 keyword scoring. Embeddings use the 1536-dimensional shape expected by `text-embedding-3-small`, while BM25 uses Indonesian-aware tokenization, stopword removal, and stemming. Results are fused with Reciprocal Rank Fusion so semantic and lexical evidence can reinforce each other without needing fragile score normalization.
+
+The implementation keeps individual vector, BM25, and fused scores on each retrieval result. That makes the system more debuggable and more research-friendly. If a retrieval experiment improves answer quality, Weaver can inspect whether the improvement came from semantic retrieval, keyword matching, fusion, reranking, chunk quality weighting, or some combination of those pieces.
+
+## Reranking
+
+The first retrieval stage is designed for recall. Reranking is where Weaver tries to improve precision before the answer is generated. The code supports several reranking strategies with different cost and quality tradeoffs: a fast cross-encoder, pointwise LLM scoring, listwise LLM ranking, a pairwise comparison style, ensemble reranking, and a `none` mode for ablation.
+
+The default production path favors a cross-encoder because it is fast enough for interactive chat. Research and evaluation runs can choose slower strategies when the goal is to measure quality rather than minimize latency.
+
+This matters because “better RAG” is rarely one component. Retrieval might find the right source somewhere in the top ten, but the generator sees only the final context window. Reranking decides which evidence gets that limited attention.
+
+## Document Ingestion
+
+Weaver includes a full document processing pipeline for institutional knowledge. Uploaded files can be PDFs, DOCX files, text files, or Markdown. Extraction is format-specific, but the rest of the pipeline is unified: detect language, choose a chunking strategy, split content, generate embeddings, extract keywords, preserve headings and offsets, store chunks, and update processing status.
+
+The chunking layer is unusually detailed because chunk boundaries have an outsized effect on RAG quality. Weaver supports recursive chunking, semantic chunking, sentence-window chunking, and hierarchical parent-child chunking. It can also choose automatically based on document characteristics such as length, heading density, paragraph structure, list density, chapter markers, and sentence count.
+
+The system also calculates chunk quality signals. It looks at information density, structural importance, citation presence, academic keyword concentration, and sentence completeness. Those signals can later influence retrieval ranking so a short but structurally important passage is not treated the same as generic filler text.
+
+Ingestion is built with operational visibility too. Document processing status tracks pending, processing, completed, and failed states. A separate progress table records the current stage, percent progress, messages, estimated time, and per-stage counters so the UI can show long-running extraction and embedding work without pretending it is instant.
+
+## Guardrails
+
+Weaver includes input and output guardrails because the domain is academic and student-facing. The system validates user input, detects negative reactions, blocks unsafe content when necessary, logs triggered rules, and validates generated output against retrieved chunks.
+
+The guardrail model is broader than generic content moderation. It is concerned with things a university chatbot actually needs to watch: PII exposure, academic integrity issues, prompt-injection attempts, unsupported claims, negative user frustration, and factual consistency. Guardrail events are stored so the system can be audited later instead of disappearing into runtime logs.
+
+There is also an empathetic branch for high-severity negative reactions. If the user seems frustrated or confused, the chat endpoint can stream a response that acknowledges the reaction and tries to reset the interaction rather than blindly continuing a retrieval flow.
+
+## Evaluation
+
+Weaver’s evaluation system is one of its defining features. The component-level evaluator implements RAGAS-style metrics such as faithfulness, answer relevancy, context precision, context recall, context relevancy, answer correctness, hallucination rate, factual consistency, source attribution, contradiction score, retrieval NDCG, MRR, precision, latency, and token throughput.
+
+Those metrics are stored per evaluation question alongside the RAG answer, non-RAG answer, retrieved contexts, relevant chunk ids, category, difficulty, language, retrieval method, reranker strategy, agent steps used, guardrails triggered, and latency breakdown. This gives the research layer enough detail to compare not only “RAG versus non-RAG,” but also the behavior of different retrieval and reranking configurations.
+
+Ablation studies are built into the schema as first-class experiments. Weaver can store configurations, results, generated reports, and statistical analyses. That is important because agentic RAG introduces complexity. The project needs to answer whether hybrid retrieval, reranking, agentic reasoning, chunking strategy, or guardrails actually improve measurable outcomes enough to justify their cost.
+
+## Simulated Users
+
+The simulated-user framework fills a gap that ordinary RAG evaluation leaves open. A single QA pair can tell you whether an answer is faithful. It cannot tell you whether a new student, a lecturer, a staff member, or a prospective student can complete a task through a realistic conversation.
+
+Weaver defines personas, scenarios, a user simulator, a conversation runner, and an evaluator. The runner creates a real chat session, generates user turns, calls the actual chat API, parses streamed responses, tracks retrieved chunks, evaluates responses, and continues until a goal is met or the turn limit is reached.
+
+The framework measures task completion, conversation coherence, context retention, information coverage, perceived usability, error rate, and latency. It is not meant to replace human evaluation forever, but it gives the project a reproducible system-level test harness. That matters for a research claim about implementation: the software must work as a product-shaped system, not only as a retrieval function.
+
+## Interface
+
+The visible app has three major surfaces: chat, document management, and evaluation. The chat UI supports session selection, streaming responses, source collapsibles, agent-step collapsibles, mode controls, retrieval strategy controls, reranker controls, guardrail toggles, and persisted conversations.
+
+The management surface handles documents: upload, status, retry, statistics, and processing visibility. The evaluation dashboard handles experiment creation, charts, annotations, correlation views, exports, hallucination summaries, imported question sets, and run results.
+
+This split keeps the system honest. Users need a clean chat interface, operators need to understand what is in the knowledge base, and researchers need to inspect whether the architecture performs better than its baselines.
+
+## Developer Experience
+
+Weaver is a Bun-first Next.js application using the App Router, React 19, AI SDK, Azure OpenAI, Drizzle ORM, PostgreSQL with `pgvector`, Tailwind CSS, Radix UI, Recharts, Zustand, SWR, Hugging Face Transformers, `unpdf`, Mammoth, Biome, and TypeScript.
+
+The project includes scripts for local development, database migration, model checks, simulated-user testing, stress testing, and blackbox testing. The repository also includes methodology guides, academic writing guides, testing reports, implementation summaries, evaluation reports, and paper-oriented artifacts.
+
+The implementation is verbose in a deliberate way. Many files explain why each piece exists, what research claim it supports, and what failure mode it addresses. In a normal product codebase that might feel excessive. In a thesis-oriented system, that commentary becomes useful documentation for future reviewers, collaborators, and evaluators.
+
+## Engineering Notes
+
+The interesting engineering in Weaver is the way the system treats RAG as an observable pipeline instead of an invisible prompt trick. Retrieval results carry their scores and methods. Agent steps are persisted. Guardrail checks are logged. Evaluation runs store enough metadata to be reproduced. Simulated conversations call the same API path a user would call. Document processing is staged and inspectable.
+
+The codebase also shows a strong bias toward comparison. Many choices have an explicit baseline:
+
+- direct LLM versus standard RAG versus agentic RAG;
+- vector retrieval versus keyword retrieval versus hybrid retrieval;
+- no reranker versus cross-encoder versus LLM reranking versus ensemble reranking;
+- recursive chunking versus semantic, sentence-window, and hierarchical chunking;
+- component-level RAGAS metrics versus system-level simulated-user testing.
+
+That comparative shape is what makes Weaver feel like research software rather than a feature demo. It does not only implement an approach. It keeps the machinery needed to ask whether the approach helped.
+
+## Reflection
+
+Weaver is ambitious because it tries to hold two jobs at once. It wants to be useful as a university information chatbot, but it also wants to be credible as an academic research artifact. Those goals pull in different directions. A product wants smoothness. A paper wants measurement, ablation, reproducibility, and explanation.
+
+The strongest part of Weaver is that it does not hide that tension. It builds the chat surface, then surrounds it with retrieval traces, guardrails, evaluation metrics, ablation records, statistical tests, simulated users, and reports. It accepts that if the system claims to reduce hallucination and improve academic QA, the implementation has to leave evidence behind.
+
+That is the shape I like most: not just an answer generator, but a woven system of documents, retrieval, reasoning, citations, testing, and evaluation. The software is doing the work, and it is also keeping the receipts.
