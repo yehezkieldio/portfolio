@@ -148,7 +148,10 @@ function sortProjects(a: Project, b: Project) {
     return b.projectSortDate.localeCompare(a.projectSortDate) || a.title.localeCompare(b.title);
 }
 
-const projects = projectDocs.map(withProjectRuntimeFields).sort(sortProjects);
+const projects = projectDocs
+    .filter((project) => !project.hidden)
+    .map(withProjectRuntimeFields)
+    .sort(sortProjects);
 
 const projectsBySlug = new Map(projects.filter((project) => project.hasNote).map((project) => [project.slug, project]));
 

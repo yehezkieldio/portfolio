@@ -27,6 +27,7 @@ export const { docs: projects, meta: projectsMeta } = defineDocs({
             external: z.array(projectLinkSchema).default([]),
             github: z.url().optional(),
             gitlab: z.url().optional(),
+            hidden: z.boolean().default(false),
             note: z.boolean().default(true),
             projectStartedAt: z.iso.date(),
             projectSortDate: z.iso.date().optional(),
