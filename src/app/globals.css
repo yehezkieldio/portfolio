@@ -556,34 +556,6 @@
         var(--duration-move) var(--ease-ui-move) both slide;
 }
 
-::view-transition-old(.project-next) {
-    --slide-offset: -18px;
-    animation:
-        140ms var(--ease-ui-soft) both fade reverse,
-        260ms var(--ease-ui-move) both slide reverse;
-}
-
-::view-transition-new(.project-next) {
-    --slide-offset: 14px;
-    animation:
-        220ms var(--ease-ui) 45ms both fade,
-        300ms var(--ease-ui-move) both slide;
-}
-
-::view-transition-old(.project-previous) {
-    --slide-offset: 18px;
-    animation:
-        140ms var(--ease-ui-soft) both fade reverse,
-        260ms var(--ease-ui-move) both slide reverse;
-}
-
-::view-transition-new(.project-previous) {
-    --slide-offset: -14px;
-    animation:
-        220ms var(--ease-ui) 45ms both fade,
-        300ms var(--ease-ui-move) both slide;
-}
-
 ::view-transition-group(persistent-nav),
 ::view-transition-group(persistent-contact) {
     z-index: 100;

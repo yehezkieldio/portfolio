@@ -3,7 +3,6 @@
 import { useDeferredValue, useMemo, useState } from "react";
 import type { ProjectListItem } from "./project-types";
 
-const PAGE_SIZE = 5;
 const ALL_TAGS_VALUE = "all";
 
 function uniqueTags(projects: ProjectListItem[]) {
@@ -25,22 +24,9 @@ function matchesProject(project: ProjectListItem, query: string, tag: string) {
     );
 }
 
-function paginate<T>(items: T[], page: number) {
-    const pageCount = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
-    const currentPage = Math.min(page, pageCount);
-    const start = (currentPage - 1) * PAGE_SIZE;
-
-    return {
-        currentPage,
-        pageCount,
-        visibleItems: items.slice(start, start + PAGE_SIZE),
-    };
-}
-
 export function useProjectIndex(projects: ProjectListItem[]) {
     const [query, setQuery] = useState("");
     const [tag, setTag] = useState(ALL_TAGS_VALUE);
-    const [page, setPage] = useState(1);
     const deferredQuery = useDeferredValue(query);
     const normalizedQuery = normalizeQuery(deferredQuery);
 
@@ -49,22 +35,13 @@ export function useProjectIndex(projects: ProjectListItem[]) {
         () => projects.filter((project) => matchesProject(project, normalizedQuery, tag)),
         [normalizedQuery, projects, tag]
     );
-    const pagination = paginate(filteredProjects, page);
-
-    function resetPage() {
-        setPage(1);
-    }
 
     return {
-        ...pagination,
         filteredProjects,
-        pageSize: PAGE_SIZE,
         query,
-        setPage,
         setQuery,
         setTag,
         tag,
         tags,
-        resetPage,
     };
 }
