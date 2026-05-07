@@ -304,15 +304,6 @@
 .ambient-base {
     inset: 0;
     background-color: var(--background);
-    background-image:
-        radial-gradient(circle, color-mix(in oklch, var(--foreground) 4%, transparent) 0 0.55px, transparent 0.95px),
-        radial-gradient(circle, color-mix(in oklch, var(--foreground) 3%, transparent) 0 0.45px, transparent 0.8px);
-    background-position:
-        0 0,
-        17px 23px;
-    background-size:
-        31px 37px,
-        43px 47px;
     opacity: 1;
 }
 
@@ -348,28 +339,6 @@
     opacity: 0.18;
 }
 
-.ambient-orbit {
-    border: 1px solid color-mix(in oklch, var(--foreground) 8%, transparent);
-    border-radius: 999px;
-}
-
-.ambient-orbit-a {
-    top: 12%;
-    right: -14rem;
-    width: 25rem;
-    height: 25rem;
-    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--foreground) 5%, transparent);
-    opacity: 0.42;
-}
-
-.ambient-orbit-b {
-    bottom: -12rem;
-    left: -13rem;
-    width: 28rem;
-    height: 28rem;
-    opacity: 0.28;
-}
-
 .ambient-panel {
     border: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
     opacity: 0.22;
@@ -384,6 +353,18 @@
     background-size: 14px 14px;
 }
 
+.ambient-panel-right {
+    right: -3.5rem;
+    bottom: 17%;
+    width: 10rem;
+    height: 6rem;
+    background-image:
+        linear-gradient(color-mix(in oklch, var(--foreground) 9%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in oklch, var(--foreground) 8%, transparent) 1px, transparent 1px);
+    background-size: 18px 18px;
+    rotate: -8deg;
+}
+
 .ambient-scanline {
     top: 18%;
     right: 4%;
@@ -395,48 +376,71 @@
     rotate: 12deg;
 }
 
-.ambient-cross {
-    width: 1rem;
-    height: 1rem;
-    opacity: 0.32;
+.ambient-diamond {
+    width: 0.46rem;
+    height: 0.46rem;
+    border: 1px solid color-mix(in oklch, var(--foreground) 28%, transparent);
+    opacity: 0.28;
+    rotate: 45deg;
 }
 
-.ambient-cross::before,
-.ambient-cross::after {
+.ambient-diamond-a {
+    top: 46%;
+    right: 17%;
+}
+
+.ambient-diamond-b {
+    bottom: 18%;
+    left: 20%;
+    scale: 0.75;
+}
+
+.ambient-star {
+    width: 1.1rem;
+    height: 1.1rem;
+    opacity: 0.34;
+}
+
+.ambient-star::before,
+.ambient-star::after {
     position: absolute;
-    content: "";
-    background: color-mix(in oklch, var(--foreground) 28%, transparent);
-}
-
-.ambient-cross::before {
-    top: 50%;
-    left: 0;
+    inset: 50% auto auto 50%;
     width: 100%;
     height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--foreground) 34%, transparent) 18% 82%, transparent);
+    transform-origin: center;
 }
 
-.ambient-cross::after {
-    top: 0;
-    left: 50%;
-    width: 1px;
-    height: 100%;
+.ambient-star::before {
+    transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.ambient-cross-a {
+.ambient-star::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.ambient-star-a {
     top: 23%;
     left: 9%;
 }
 
-.ambient-cross-b {
+.ambient-star-b {
     right: 9%;
     bottom: 33%;
     scale: 0.75;
 }
 
-.ambient-cross-c {
+.ambient-star-c {
     top: 64%;
     left: 5%;
     scale: 0.55;
+}
+
+.ambient-star-d {
+    top: 42%;
+    right: 31%;
+    scale: 0.48;
 }
 
 .ambient-constellation {
@@ -498,18 +502,21 @@
 .ambient-grain {
     inset: 0;
     background-image:
-        radial-gradient(circle, color-mix(in oklch, var(--foreground) 14%, transparent) 0 0.38px, transparent 0.7px),
-        radial-gradient(circle, color-mix(in oklch, var(--foreground) 8%, transparent) 0 0.44px, transparent 0.82px),
-        radial-gradient(circle, color-mix(in oklch, black 22%, transparent) 0 0.5px, transparent 0.88px);
+        radial-gradient(circle at 18% 24%, color-mix(in oklch, var(--foreground) 7%, transparent) 0 0.3px, transparent 0.92px),
+        radial-gradient(circle at 72% 34%, color-mix(in oklch, var(--foreground) 4%, transparent) 0 0.34px, transparent 1px),
+        radial-gradient(circle at 38% 82%, color-mix(in oklch, black 14%, transparent) 0 0.38px, transparent 1.12px);
     background-position:
-        0 0,
-        13px 19px,
-        29px 7px;
+        31px 73px,
+        149px 29px,
+        67px 211px;
     background-size:
-        29px 31px,
-        37px 41px,
-        43px 47px;
-    opacity: 0.16;
+        251px 293px,
+        331px 307px,
+        389px 431px;
+    opacity: 0.035;
+    mask-image:
+        radial-gradient(ellipse at 48% 40%, transparent 0 34%, black 62%, transparent 86%),
+        linear-gradient(180deg, transparent 0 42%, black 68%, transparent 100%);
 }
 
 ::view-transition-old(.content-fade-out) {
@@ -611,35 +618,30 @@
         opacity: 0.14;
     }
 
-    .ambient-orbit-a {
-        top: 4%;
-        right: -20rem;
-        opacity: 0.18;
-    }
-
-    .ambient-orbit-b {
-        bottom: -18rem;
-        left: -20rem;
-        opacity: 0.16;
-    }
-
     .ambient-panel-left,
+    .ambient-panel-right,
     .ambient-scanline,
     .ambient-constellation {
         opacity: 0.1;
     }
 
-    .ambient-cross-a {
+    .ambient-diamond {
+        opacity: 0.12;
+    }
+
+    .ambient-star-a {
         top: 18%;
         left: 4%;
     }
 
-    .ambient-cross-b {
+    .ambient-star-b {
         right: 4%;
         bottom: 22%;
     }
 
-    .ambient-cross-c {
+    .ambient-star-c,
+    .ambient-star-d,
+    .ambient-diamond-b {
         opacity: 0;
     }
 }

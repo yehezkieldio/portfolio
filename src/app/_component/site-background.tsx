@@ -2,13 +2,15 @@ const backgroundLayers = [
     "ambient-base",
     "ambient-stars ambient-stars-a",
     "ambient-stars ambient-stars-b",
-    "ambient-orbit ambient-orbit-a",
-    "ambient-orbit ambient-orbit-b",
     "ambient-panel ambient-panel-left",
+    "ambient-panel ambient-panel-right",
     "ambient-scanline",
-    "ambient-cross ambient-cross-a",
-    "ambient-cross ambient-cross-b",
-    "ambient-cross ambient-cross-c",
+    "ambient-diamond ambient-diamond-a",
+    "ambient-diamond ambient-diamond-b",
+    "ambient-star ambient-star-a",
+    "ambient-star ambient-star-b",
+    "ambient-star ambient-star-c",
+    "ambient-star ambient-star-d",
 ] as const;
 
 export function SiteBackground() {
