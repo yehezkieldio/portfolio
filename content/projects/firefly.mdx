@@ -5,10 +5,132 @@ icon: TypeScript
 github: https://github.com/yehezkieldio/firefly
 year: "2025"
 tags:
-    - TypeScript
-    - CLI
-    - Release Automation
-    - npm
+  - TypeScript
+  - CLI
+  - Release Automation
+  - npm
 ---
 
-WIP
+## Why It Exists
+
+Firefly is a release automation CLI built around a simple frustration: the release process for small libraries and tools is often a sequence of tiny manual steps that are easy to forget, reorder, or perform slightly differently each time.
+
+The visible command is small:
+
+```sh
+firefly release
+```
+
+Behind that command, Firefly handles preflight checks, version selection, package metadata updates, changelog generation, Git commits, tags, remote pushes, and GitHub release creation. The point is not to make releasing feel magical. The point is to make the process repeatable enough that a release is not a little reinvention ritual every time.
+
+## Release Workflow
+
+Firefly models release as an explicit workflow rather than one long script. The release command builds a sequence of tasks that pass shared context through an orchestrator:
+
+- Validate the release environment.
+- Load and hydrate configuration.
+- Read the current version.
+- Resolve the next version.
+- Bump version metadata.
+- Generate a changelog.
+- Stage and commit release files.
+- Create and push a Git tag.
+- Push release commits.
+- Publish a GitHub release.
+
+That structure gives each step a clear boundary. Versioning logic does not need to know how GitHub releases are created. Changelog generation does not need to know how CLI options were parsed. Git tasks can be skipped without bending the rest of the workflow out of shape.
+
+## Configuration
+
+Firefly can run with minimal configuration, but it also supports a `firefly.config.ts` file for projects that need stable defaults. Configuration is loaded through `c12`, merged with CLI overrides, normalized, and validated with Zod.
+
+The CLI can infer common project details from the environment:
+
+- Repository from the Git remote.
+- Branch from the current Git checkout.
+- Project name and scope from `package.json`.
+- Rust package metadata from `Cargo.toml` when npm metadata is absent.
+- Changelog location from the project root.
+- Pre-release identifier from the current version when applicable.
+
+This matters for developer ergonomics. A release tool should be opinionated enough to run without ceremony, but explicit enough to be predictable in monorepos, scoped packages, and projects with custom tag or title templates.
+
+## Versioning
+
+Firefly is built around Semantic Versioning and Conventional Commits. In automatic mode, it reads commit history since the last tag and recommends the highest-impact bump:
+
+- Breaking changes become major releases.
+- `feat` or `feature` commits become minor releases.
+- `fix`, `perf`, `refactor`, `docs`, `test`, `build`, `ci`, `chore`, and similar maintenance commits become patch releases.
+- Scoped rules can elevate certain changes, such as API or breaking-change scopes.
+
+The analyzer does more than inspect the first word of a commit header. It checks headers, scopes, bodies, footers, `!` breaking markers, explicit breaking-change notes, revert-style commits, and pre-release transition language.
+
+Manual mode is still available when a release needs human judgment. Firefly can prompt for a release type or accept a direct `--release-type`, including standard bumps, pre-release bumps, prerelease continuation, and graduation from pre-release to stable.
+
+## Changelogs
+
+Firefly delegates changelog generation to `git-cliff`, then wraps it in project-aware configuration. It resolves the tag name from templates, passes GitHub repository metadata for richer links, supports release notes, prepends to the configured changelog path during real runs, and keeps dry-runs non-mutating.
+
+For monorepo-style projects, it can scope changelog generation to a base path so a package release does not accidentally summarize unrelated repository history.
+
+The GitHub release body goes through a post-processing step before publishing. Firefly extracts the actual change entries from the generated changelog and avoids publishing empty or header-only release notes when no meaningful entries exist.
+
+## Git And GitHub
+
+The Git side is split into services and tasks. Firefly has separate providers for repository state, branch validation, commit history, staging, commits, tags, pushes, remote parsing, and rollback behavior. That may sound heavier than a shell script, but it makes the release path auditable.
+
+The release tasks can be controlled with skip flags:
+
+- `--skip-bump`
+- `--skip-changelog`
+- `--skip-git`
+- `--skip-push`
+- `--skip-github-release`
+- `--skip-preflight-check`
+
+Publishing uses the GitHub CLI rather than custom REST plumbing. Firefly creates the release with a templated title, generated notes, the resolved tag, and release status flags for latest, draft, or pre-release publishing.
+
+## Safety
+
+Firefly’s preflight step is intentionally conservative. It checks for a `cliff.toml`, requires a clean working directory, ensures full Git history when the repository is shallow, and blocks releases when commits have not been pushed.
+
+Those checks are small, but they prevent the classic release-tool failure modes: changelogs generated from incomplete history, release commits created on top of local dirt, tags produced before source commits are safely available, and GitHub releases pointing at a state other people cannot fetch.
+
+Dry-run support also exists throughout the workflow. It is not only a display flag; downstream Git, changelog, and publishing calls receive dry-run intent so Firefly can simulate the release shape without mutating the project.
+
+## Orchestration
+
+The most interesting part of Firefly is the orchestration layer. Tasks declare ids, dependencies, conditional execution, skip-through behavior, and undo support. The orchestrator validates missing dependencies and circular dependency risks before execution, filters tasks through feature flags, and runs them through an execution strategy.
+
+Context is typed by command. The release workflow context carries the command name, base path, current version, next version, changelog content, hydrated config, execution id, and start time. That keeps task communication explicit instead of turning the whole CLI into a bag of globals.
+
+Rollback is a first-class service as well. Tasks that can undo themselves are pushed onto a rollback stack, and rollback can run in reverse order, through compensation tasks, through custom strategy, or not at all depending on configuration. The actual release command is still simple, but the underlying architecture assumes release automation can fail halfway through and should have a coherent answer when it does.
+
+## Developer Experience
+
+Firefly ships as a Bun-first TypeScript CLI with `firefly` and `ff` binaries. It builds through `tsdown`, exports its config types, generates a JSON schema for editor support, and uses Biome for formatting and linting.
+
+The public configuration surface is intentionally template-friendly. Commit messages, tag names, and release titles can use placeholders such as project name and version, which lets one workflow support different package naming conventions without branching the code.
+
+The shape is especially useful for projects that want a release command to be boring:
+
+- npm packages with `package.json` versioning.
+- Rust crates where `Cargo.toml` supplies package identity.
+- Scoped packages that need clean tag names.
+- Monorepos with package-local changelogs.
+- CI or local releases that need the same release semantics.
+
+## Engineering Notes
+
+Firefly is built with TypeScript, Bun, Commander, Zod, `neverthrow`, `git-cliff`, Git, GitHub CLI, and `semver`. The codebase is organized by modules rather than by command file: configuration, semver, changelog, Git, GitHub, orchestration, preflight, filesystem, and CLI platform concerns each have their own services and tasks.
+
+The important engineering choice is not any single dependency. It is the decision to make release steps composable and inspectable. A release tool spends most of its life touching irreversible-ish surfaces: commits, tags, changelogs, remotes, package versions, and public release pages. Firefly treats those actions as workflow tasks with context, validation, skip controls, and rollback hooks instead of as a single opaque command.
+
+## Reflection
+
+Firefly is small compared to Cubic or Azalea, but it sits close to a workflow that developers care about deeply. A bad release tool does not merely fail; it leaves behind awkward Git history, wrong tags, half-written changelogs, or published releases that need manual cleanup.
+
+What I like about Firefly is that it has the right amount of seriousness for that job. It does not try to become a full CI platform. It takes the release steps a developer was already doing, makes them explicit, and gives them a typed, configurable path from version decision to published GitHub release.
+
+The value is not spectacle. It is consistency: one command, one workflow, one release shape.
