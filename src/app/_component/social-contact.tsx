@@ -18,7 +18,7 @@ export function PageSocialContact({ delayIndex = 0, email, links }: PageSocialCo
     return (
         <section
             className="project-row-enter max-w-xl space-y-2.5 text-muted-foreground"
-            style={{ animationDelay: `${delayIndex * 45}ms` }}
+            style={{ animationDelay: `${delayIndex * 85}ms` }}
         >
             <p className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
                 <span>Find me on</span>

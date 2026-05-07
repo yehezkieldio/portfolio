@@ -21,7 +21,7 @@ export function MdxBody({ children }: { children: ReactNode }) {
     return (
         <div
             className="project-note project-row-enter min-w-0 space-y-5 overflow-hidden"
-            style={{ animationDelay: "55ms" }}
+            style={{ animationDelay: "110ms" }}
         >
             {children}
         </div>

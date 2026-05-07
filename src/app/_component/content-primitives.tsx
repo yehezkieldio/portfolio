@@ -60,7 +60,7 @@ export function PageIntro({ delayStart = 1, paragraphs }: PageIntroProps) {
                 <p
                     className="project-row-enter"
                     key={paragraph}
-                    style={{ animationDelay: `${(delayStart + index) * 45}ms` }}
+                    style={{ animationDelay: `${(delayStart + index) * 85}ms` }}
                 >
                     {paragraph}
                 </p>
@@ -84,7 +84,7 @@ export function ContentRow({ children, delayIndex = 0, withRule = true }: Conten
                 "project-row-enter motion-row space-y-2 transition-[transform] duration-200 ease-(--ease-ui)",
                 withRule && "border-border border-b py-6 sm:py-7"
             )}
-            style={{ animationDelay: `${delayIndex * 45}ms` }}
+            style={{ animationDelay: `${delayIndex * 85}ms` }}
         >
             {children}
         </article>

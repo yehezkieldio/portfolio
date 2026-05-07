@@ -11,7 +11,7 @@ export default function NotFound() {
                 </p>
             </header>
 
-            <div className="project-row-enter" style={{ animationDelay: "70ms" }}>
+            <div className="project-row-enter" style={{ animationDelay: "140ms" }}>
                 <Link
                     className="motion-link motion-press text-muted-foreground text-sm"
                     href="/"
