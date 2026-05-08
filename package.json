@@ -40,7 +40,7 @@
     "lefthook": "^2.1.6",
     "tailwindcss": "^4.2.4",
     "typescript": "^6.0.3",
-    "ultracite": "7.6.4"
+    "ultracite": "7.6.5"
   },
   "ignoreScripts": [
     "sharp",
