@@ -17,7 +17,7 @@ type PageSocialContactProps = {
 export function PageSocialContact({ delayIndex = 0, email, links }: PageSocialContactProps) {
     return (
         <section
-            className="project-row-enter max-w-xl space-y-2.5 text-muted-foreground"
+            className="project-row-enter max-w-xl space-y-2 text-[15px] text-muted-foreground leading-6 tracking-normal sm:space-y-2.5 sm:text-base"
             style={{ animationDelay: `${delayIndex * 85}ms` }}
         >
             <p className="flex flex-wrap items-center gap-x-2 gap-y-1.5">

@@ -24,14 +24,16 @@ export default function NotesPage() {
                 {notes.map((note, index) => (
                     <ContentRow delayIndex={index} key={note.slug}>
                         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-                            <h2 className="min-w-0 font-medium text-sm leading-tight">
+                            <h2 className="min-w-0 font-medium text-[13px] leading-[1.25] tracking-normal sm:text-sm sm:leading-tight">
                                 <ContentTitleLink href={`/writing/notes/${note.slug}`}>{note.title}</ContentTitleLink>
                             </h2>
                             {note.date ? <ContentMeta>{note.date}</ContentMeta> : null}
                         </div>
 
                         {note.description ? (
-                            <p className="max-w-xl text-muted-foreground text-sm leading-6">{note.description}</p>
+                            <p className="max-w-xl text-[13.5px] text-muted-foreground leading-[1.55] tracking-normal sm:text-sm sm:leading-6">
+                                {note.description}
+                            </p>
                         ) : null}
 
                         <ContentTags tags={note.tags} />

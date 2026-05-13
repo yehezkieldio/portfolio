@@ -61,13 +61,17 @@ function ProjectArticleHeader({ description, icons, links, tags, title, year }: 
                 <ProjectIconGroup icons={icons} />
             </div>
 
-            <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h1 className="text-balance font-semibold text-3xl leading-[1.05] sm:text-4xl">{title}</h1>
-                <p className="font-mono text-muted-foreground/70 text-xs">{year}</p>
+            <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1.5 sm:gap-y-1">
+                <h1 className="text-balance font-semibold text-[1.75rem] leading-[1.08] tracking-normal sm:text-4xl sm:leading-[1.05]">
+                    {title}
+                </h1>
+                <p className="font-mono text-[11px] text-muted-foreground/70 leading-none tracking-normal sm:text-xs">
+                    {year}
+                </p>
             </div>
 
             {description ? (
-                <p className="mt-5 max-w-[70ch] text-pretty text-muted-foreground/90 text-sm leading-7">
+                <p className="mt-5 max-w-[70ch] text-pretty text-[13.5px] text-muted-foreground/90 leading-[1.6] tracking-normal sm:text-sm sm:leading-7">
                     {description}
                 </p>
             ) : null}

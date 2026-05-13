@@ -102,7 +102,10 @@ function MdxH6({ children, ...props }: ComponentPropsWithoutRef<"h6">) {
 
 function MdxParagraph({ children, ...props }: ComponentPropsWithoutRef<"p">) {
     return (
-        <p className="wrap-anywhere max-w-[70ch] text-pretty text-muted-foreground/90 text-sm leading-7" {...props}>
+        <p
+            className="wrap-anywhere max-w-[70ch] text-pretty text-[13.5px] text-muted-foreground/90 leading-[1.62] tracking-normal sm:text-sm sm:leading-7"
+            {...props}
+        >
             {children}
         </p>
     );
@@ -127,7 +130,7 @@ function MdxStrong({ children, ...props }: ComponentPropsWithoutRef<"strong">) {
 function MdxUnorderedList({ children, ...props }: ComponentPropsWithoutRef<"ul">) {
     return (
         <ul
-            className="max-w-[70ch] list-disc space-y-1.5 text-pretty pl-4 text-muted-foreground/90 text-sm leading-7 marker:text-muted-foreground/55"
+            className="max-w-[70ch] list-disc space-y-1.5 text-pretty pl-4 text-[13.5px] text-muted-foreground/90 leading-[1.62] tracking-normal marker:text-muted-foreground/55 sm:text-sm sm:leading-7"
             {...props}
         >
             {children}
@@ -138,7 +141,7 @@ function MdxUnorderedList({ children, ...props }: ComponentPropsWithoutRef<"ul">
 function MdxOrderedList({ children, ...props }: ComponentPropsWithoutRef<"ol">) {
     return (
         <ol
-            className="max-w-[70ch] list-decimal space-y-1.5 text-pretty pl-4 text-muted-foreground/90 text-sm leading-7 marker:font-mono marker:text-[11px] marker:text-muted-foreground/55"
+            className="max-w-[70ch] list-decimal space-y-1.5 text-pretty pl-4 text-[13.5px] text-muted-foreground/90 leading-[1.62] tracking-normal marker:font-mono marker:text-[11px] marker:text-muted-foreground/55 sm:text-sm sm:leading-7"
             {...props}
         >
             {children}
@@ -157,7 +160,7 @@ function MdxListItem({ children, ...props }: ComponentPropsWithoutRef<"li">) {
 function MdxBlockquote({ children, ...props }: ComponentPropsWithoutRef<"blockquote">) {
     return (
         <blockquote
-            className="max-w-[80ch] border-border/55 border-l pl-4 text-muted-foreground/85 text-xs leading-6 [&_p]:max-w-none [&_p]:text-inherit [&_p]:text-xs [&_p]:leading-6"
+            className="max-w-[80ch] border-border/55 border-l pl-4 text-[11.5px] text-muted-foreground/85 leading-5 tracking-normal sm:text-xs sm:leading-6 [&_p]:max-w-none [&_p]:text-[11.5px] [&_p]:text-inherit [&_p]:leading-5 sm:[&_p]:text-xs sm:[&_p]:leading-6"
             {...props}
         >
             {children}
@@ -185,7 +188,7 @@ function MdxPre({ children, ...props }: ComponentPropsWithoutRef<"pre">) {
         <div className="max-w-full overflow-hidden border border-border/80 bg-foreground/2.5">
             <pre
                 className={cn(
-                    "tab-2 max-w-full overflow-x-auto p-4 font-mono text-xs leading-6 sm:p-5 [&_code]:grid [&_code]:min-w-max [&_code]:break-normal [&_code]:border-0 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit",
+                    "tab-2 max-w-full overflow-x-auto p-3.5 font-mono text-[11.5px] leading-5 tracking-normal sm:p-5 sm:text-xs sm:leading-6 [&_code]:grid [&_code]:min-w-max [&_code]:break-normal [&_code]:border-0 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit",
                     className
                 )}
                 style={style}

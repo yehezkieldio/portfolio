@@ -23,14 +23,18 @@ export function ProjectList({ projects }: ProjectListProps) {
 function ProjectRow({ project, revealIndex }: { project: ProjectListItem; revealIndex: number }) {
     return (
         <ContentRow delayIndex={revealIndex}>
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h2 className="min-w-0 font-medium text-sm leading-tight">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5 sm:gap-y-1">
+                <h2 className="min-w-0 font-medium text-[13px] leading-[1.25] tracking-normal sm:text-sm sm:leading-tight">
                     <ProjectTitle project={project} />
                 </h2>
-                <p className="shrink-0 font-mono text-muted-foreground/70 text-xs">{project.year}</p>
+                <p className="shrink-0 font-mono text-[11px] text-muted-foreground/70 leading-none tracking-normal sm:text-xs">
+                    {project.year}
+                </p>
             </div>
 
-            <p className="max-w-xl text-muted-foreground text-sm leading-6">{project.description}</p>
+            <p className="max-w-xl text-[13.5px] text-muted-foreground leading-[1.55] tracking-normal sm:text-sm sm:leading-6">
+                {project.description}
+            </p>
 
             <div className="flex flex-col gap-2 pt-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                 <ContentTags tags={project.tags} />
@@ -60,7 +64,7 @@ function ProjectTitle({ project }: { project: ProjectListItem }) {
 
 function ProjectLinks({ project }: { project: ProjectListItem }) {
     return (
-        <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs sm:justify-end">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11.5px] leading-5 tracking-normal sm:justify-end sm:text-xs">
             {project.hasNote ? (
                 <Link
                     className="group motion-link inline-flex items-center gap-1.5 font-medium text-foreground/82 transition-colors duration-200 ease-(--ease-ui) hover:text-foreground"

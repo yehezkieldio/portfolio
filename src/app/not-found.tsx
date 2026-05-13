@@ -7,7 +7,7 @@ export default function NotFound() {
             <header className="project-row-enter space-y-3">
                 <p className="font-mono text-muted-foreground text-sm">404</p>
                 <h1 className="font-semibold text-2xl leading-tight">Page not found</h1>
-                <p className="max-w-xl text-muted-foreground/95 leading-7">
+                <p className="max-w-xl text-[15px] text-muted-foreground/95 leading-6 tracking-normal sm:text-base sm:leading-7">
                     The page you are looking for does not exist, or it may have moved.
                 </p>
             </header>

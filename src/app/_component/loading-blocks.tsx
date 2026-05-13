@@ -4,8 +4,8 @@ type SkeletonRowsProps = {
 
 export function SkeletonHeader() {
     return (
-        <div className="space-y-3">
-            <div className="h-7 w-40 bg-muted" />
+        <div className="space-y-2.5 sm:space-y-3">
+            <div className="h-6 w-36 bg-muted sm:h-7 sm:w-40" />
             <div className="h-4 w-full max-w-xl bg-muted" />
         </div>
     );
@@ -16,7 +16,7 @@ export function SkeletonRows({ count = 3 }: SkeletonRowsProps) {
         <div className="border-border border-t">
             {Array.from({ length: count }, (_, index) => (
                 <article
-                    className="grid gap-4 border-border border-b py-6 sm:grid-cols-[3.5rem_1fr] sm:gap-5 sm:py-8"
+                    className="grid gap-3.5 border-border border-b py-5 sm:grid-cols-[3.5rem_1fr] sm:gap-5 sm:py-8"
                     key={index}
                 >
                     <div className="h-3 w-5 bg-muted" />

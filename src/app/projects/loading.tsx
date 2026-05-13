@@ -2,7 +2,7 @@ import { SkeletonHeader } from "../_component/loading-blocks";
 
 export default function ProjectsLoading() {
     return (
-        <section className="space-y-8">
+        <section className="space-y-7 sm:space-y-8">
             <SkeletonHeader />
             <ProjectSkeletonRows />
         </section>
@@ -13,7 +13,7 @@ function ProjectSkeletonRows() {
     return (
         <div>
             {Array.from({ length: 3 }, (_, index) => (
-                <article className="space-y-3 border-border border-b py-6 sm:py-7" key={index}>
+                <article className="space-y-2.5 border-border border-b py-5 sm:space-y-3 sm:py-7" key={index}>
                     <div className="flex items-baseline justify-between gap-4">
                         <div className="h-4 w-32 bg-muted sm:w-40" />
                         <div className="h-3 w-10 shrink-0 bg-muted" />
