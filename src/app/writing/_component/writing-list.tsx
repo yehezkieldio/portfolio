@@ -28,7 +28,7 @@ export function WritingList({ posts }: WritingListProps) {
             {posts.map((post, index) => (
                 <ContentRow delayIndex={index} key={post.link} withRule={false}>
                     <ContentMeta>{post.publishedLabel}</ContentMeta>
-                    <h2 className="font-medium text-[13px] leading-[1.25] tracking-normal sm:text-sm sm:leading-tight">
+                    <h2 className="font-medium text-[13px] leading-tight tracking-normal sm:text-sm sm:leading-tight">
                         <ContentTitleLink href={post.link} isExternal>
                             {post.title}
                         </ContentTitleLink>
@@ -36,7 +36,9 @@ export function WritingList({ posts }: WritingListProps) {
                     <p className="text-[13.5px] text-muted-foreground leading-[1.55] tracking-normal sm:text-sm sm:leading-6">
                         {post.excerpt}
                     </p>
-                    <ContentTags limit={4} tags={post.categories} />
+                    <div className="[&>p]:wrap-break-word min-w-0 [&>p]:whitespace-normal [&>p]:text-wrap [&>p]:text-[9.75px] [&>p]:leading-[1.7] sm:[&>p]:text-[11px] sm:[&>p]:leading-4">
+                        <ContentTags limit={4} tags={post.categories} />
+                    </div>
                 </ContentRow>
             ))}
         </ContentList>

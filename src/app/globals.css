@@ -522,11 +522,13 @@
         linear-gradient(180deg, transparent 0 42%, black 68%, transparent 100%);
 }
 
-.projects-page-surface {
+.projects-page-surface,
+.writing-page-surface {
     position: relative;
 }
 
-.projects-page-ambient {
+.projects-page-ambient,
+.writing-page-ambient {
     position: absolute;
     inset: -2rem -1.25rem auto;
     z-index: -1;
@@ -613,11 +615,13 @@
 }
 
 @media (width < 640px) {
-    body:has(.projects-page-surface) .portfolio-ambient {
+    body:has(.projects-page-surface) .portfolio-ambient,
+    body:has(.writing-page-surface) .portfolio-ambient {
         display: none;
     }
 
-    .projects-page-ambient {
+    .projects-page-ambient,
+    .writing-page-ambient {
         opacity: 1;
     }
 

@@ -7,16 +7,19 @@ export default async function WritingPage() {
     const posts = await getMediumPosts();
 
     return (
-        <PageSection>
-            <PageHeader
-                description={
-                    <>
-                        Pulled from my <MediumLink /> account.
-                    </>
-                }
-                title="Writing"
-            />
-            <WritingList posts={posts} />
-        </PageSection>
+        <div className="writing-page-surface">
+            <div aria-hidden="true" className="writing-page-ambient" />
+            <PageSection>
+                <PageHeader
+                    description={
+                        <>
+                            Pulled from my <MediumLink /> account.
+                        </>
+                    }
+                    title="Writing"
+                />
+                <WritingList posts={posts} />
+            </PageSection>
+        </div>
     );
 }
