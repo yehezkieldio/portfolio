@@ -24,7 +24,7 @@ function ProjectRow({ project, revealIndex }: { project: ProjectListItem; reveal
     return (
         <ContentRow delayIndex={revealIndex}>
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5 sm:gap-y-1">
-                <h2 className="min-w-0 font-medium text-[13px] leading-[1.25] tracking-normal sm:text-sm sm:leading-tight">
+                <h2 className="min-w-0 font-medium text-[13px] leading-tight tracking-normal sm:text-sm sm:leading-tight">
                     <ProjectTitle project={project} />
                 </h2>
                 <p className="shrink-0 font-mono text-[11px] text-muted-foreground/70 leading-none tracking-normal sm:text-xs">
