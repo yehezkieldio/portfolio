@@ -24,7 +24,9 @@ export default async function WritingPage() {
                     }
                     title="Writing"
                 />
-                <WritingList posts={posts} />
+                <div className="pt-5 sm:pt-6">
+                    <WritingList posts={posts} />
+                </div>
             </PageSection>
         </div>
     );
