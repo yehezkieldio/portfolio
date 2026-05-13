@@ -1,8 +1,10 @@
 "use client";
 
+import { GitHubDark } from "@ridemountainpig/svgl-react";
+import { ExternalLinkIcon, FileTextIcon } from "lucide-react";
 import Link from "next/link";
 import { ContentList, ContentRow, ContentTags, ContentTitleLink, EmptyLine } from "#/app/_component/content-primitives";
-import type { ProjectListItem } from "./project-types";
+import type { ProjectLink, ProjectListItem } from "./project-types";
 
 type ProjectListProps = {
     projects: ProjectListItem[];
@@ -21,11 +23,11 @@ export function ProjectList({ projects }: ProjectListProps) {
 function ProjectRow({ project, revealIndex }: { project: ProjectListItem; revealIndex: number }) {
     return (
         <ContentRow delayIndex={revealIndex}>
-            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                 <h2 className="min-w-0 font-medium text-sm leading-tight">
                     <ProjectTitle project={project} />
                 </h2>
-                <p className="font-mono text-muted-foreground text-xs">{project.year}</p>
+                <p className="font-mono text-muted-foreground/70 text-xs">{project.year}</p>
             </div>
 
             <p className="max-w-xl text-muted-foreground text-sm leading-6">{project.description}</p>
@@ -57,27 +59,71 @@ function ProjectTitle({ project }: { project: ProjectListItem }) {
 
 function ProjectLinks({ project }: { project: ProjectListItem }) {
     return (
-        <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5 pt-2 text-xs">
             {project.hasNote ? (
                 <Link
-                    className="motion-link text-muted-foreground/75 hover:underline"
+                    className="group motion-link inline-flex items-center gap-1.5 font-medium text-foreground/82 transition-colors duration-200 ease-(--ease-ui) hover:text-foreground"
                     href={`/projects/${project.slug}`}
                     transitionTypes={["nav-forward"]}
                 >
-                    read note
+                    <FileTextIcon aria-hidden="true" className="size-3.5 text-muted-foreground/80" />
+                    <span>Case Study</span>
+                    <ExternalLinkIcon
+                        aria-hidden="true"
+                        className="size-3 text-muted-foreground/70 transition-colors duration-200 ease-(--ease-ui) group-hover:text-foreground/90"
+                    />
                 </Link>
             ) : null}
             {project.links.map((link) => (
-                <a
-                    className="motion-link text-muted-foreground/75 hover:underline"
-                    href={link.href}
-                    key={`${link.kind}:${link.href}`}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                >
-                    {link.label}
-                </a>
+                <ProjectActionLink key={`${link.kind}:${link.href}`} link={link} />
             ))}
         </p>
     );
+}
+
+function ProjectActionLink({ link }: { link: ProjectLink }) {
+    return (
+        <a
+            className="group motion-link inline-flex items-center gap-1.5 font-medium text-foreground/82 transition-colors duration-200 ease-(--ease-ui) hover:text-foreground"
+            href={link.href}
+            rel="noopener noreferrer"
+            target="_blank"
+        >
+            <ProjectActionIcon kind={link.kind} />
+            <span>{getProjectLinkLabel(link)}</span>
+            <ExternalLinkIcon
+                aria-hidden="true"
+                className="size-3 text-muted-foreground/70 transition-colors duration-200 ease-(--ease-ui) group-hover:text-foreground/90"
+            />
+        </a>
+    );
+}
+
+function ProjectActionIcon({ kind }: { kind: ProjectLink["kind"] }) {
+    if (kind === "github") {
+        return (
+            <GitHubDark
+                aria-hidden="true"
+                className="size-3.5 opacity-80 brightness-0 grayscale invert transition-opacity duration-200 ease-(--ease-ui) group-hover:opacity-100"
+            />
+        );
+    }
+
+    return <ExternalLinkIcon aria-hidden="true" className="size-3.5 text-muted-foreground/80" />;
+}
+
+function getProjectLinkLabel(link: ProjectLink) {
+    if (link.kind === "github") {
+        return "GitHub";
+    }
+
+    if (link.kind === "gitlab") {
+        return "GitLab";
+    }
+
+    if (link.label === "site") {
+        return "Website";
+    }
+
+    return link.label;
 }
