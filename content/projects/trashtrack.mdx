@@ -1,11 +1,6 @@
 ---
 title: TrashTrack
 description: Smart waste monitoring and analytics system designed to optimize collection workflows through real-time tracking, operational insights, and sustainability-focused infrastructure management.
-icon: Nextjs
-icons:
-  - Nextjs
-  - Nx
-  - Capacitor
 github: https://github.com/trashtrackteam/trashtrack
 projectStartedAt: "2024-08-23"
 year: "2024"
@@ -16,53 +11,60 @@ tags:
   - Analytics
 ---
 
-TrashTrack started as a submission for a competition held by the Communication and Informatics Office of the City of Balikpapan. The project reached the finalist stage along with several other submissions, although we did not make it into the final winning top three.
+TrashTrack started as a submission for a competition. The project reached the finalist stage along with several other submissions, although we did not make it into the final winning top three.
 
 TrashTrack sits in a slightly strange place among my older projects. It is somewhat unique compared to most of the things I usually work on, although parts of it still feel very familiar in hindsight because it remained heavily centered around web technologies and application work.
 
-The project involved Internet of Things (IoT) systems, though I barely touched the IoT side during the project's short lifetime. Most of that work belonged to my friend, who handled the backend systems and the hardware side involving an Espressif ESP board, at least from what I remember.
+The project involved Internet of Things (IoT) systems, though I never touched the IoT side during the project's short lifetime. Most of that work belonged to my friend, who handled the backend systems and the hardware side involving an Espressif ESP board, at least from what I remember, and also the concept of the project itself.
 
 My side of the project was mostly centered around the TrashTrack mobile application.
 
-## Mobile Development and the Stack
+## Mobile Development
 
 Mobile development was never really my strongest area, and TrashTrack was built under fairly tight time pressure because we were chasing a competition deadline over the course of several weeks.
 
-I originally considered trying React Native with Expo, although that idea disappeared fairly quickly in favor of Capacitor. Looking back, Capacitor was probably the more realistic choice for the situation. It allowed us to stay mostly inside a web development workflow while still shipping an Android application.
 
-The application used React with Vite and Capacitor. Around that, we also used Ionic, shadcn/ui, TanStack Query, React Hook Form, Zod, OpenLayers, Recharts, and i18next.
+I originally considered trying React Native with Expo, although that idea disappeared fairly quickly in favor of Capacitor and lack of familiarity with the mobile development philosophy.
 
-The Ionic and shadcn/ui combination feels slightly cursed looking back now, although Ionic provided a lot of the mobile-oriented structure we needed quickly enough for the project timeline.
+I know of Capacitor for a long time, and experimenting with it felt more approachable than trying to learn the React Native ecosystem on the fly. Capacitor allowed us to stay mostly inside a web development workflow while still shipping an Android application, which was a good fit for the project timeline and my existing skill set.
 
-TrashTrack may or may not have been my first real venture into mobile development depending on how strictly that gets defined. It was definitely one of the earlier projects where I had to deal directly with things like camera access, image submission flows, Android packaging, and mobile interaction patterns instead of staying purely inside ordinary browser applications.
+The application used React with Vite and Capacitor. Around that, we also used:
 
-The mobile app itself was packaged as a web application synced into Android through Capacitor.
+- Ionic
+- shadcn/ui
+- TanStack Query
+- OpenLayers
+- i18next.
 
-## System Structure
+The Ionic and shadcn/ui combination feels slightly cursed looking back now, although Ionic provided a lot of the mobile components that I needed to build the application quickly.
 
-The project had two main audiences.
+TrashTrack may or may not have been my first real venture into mobile development. It was definitely one of the earlier projects where I had to deal directly with things like camera access, image submission flows, Android packaging, and mobile interaction patterns instead of staying purely inside ordinary browser applications.
+
+> Mobile development paradigms still feel fairly alien to me, I rather confuse myself with Rust rather than learning how screens and navigation work in mobile applications. Though both has hellish compile times, at least Rust is *blazingly fast*.
+
+## Structure
+
+Without going into too much detail, the application had two main sides: the user-facing mobile application and the operator dashboard. With two audiences in mind, I had to build out two different sets of features and flows for each of them.
 
 The first was residents or reporters using the mobile application. They could enter personal details, select a trash bin location, attach a photo, describe a problem, submit a report, and later inspect report history through NIK-based lookup.
 
 The second was operators managing the system itself. The operator side included dashboard charts, trash bin management, sub-bin management, fill history inspection, report processing, feedback creation, and user management.
 
-The system itself was fairly small overall, although the underlying model was more structured than a simple form submission system. Complaints were tied to location, status, reporters, assigned operators, and feedback history. Trash bins were not treated as simple map markers either. They contained sub-containers, capacity-related information, trash events, and historical samples.
+Fairly simple overall, although the operator side had a lot of different surfaces and flows that I had to build out.
 
-A lot of the project's behavior came from trying to preserve those relationships between infrastructure, reports, and operators rather than flattening everything into disconnected records.
-
-## My Work on the Project
+## Work
 
 My strongest ownership in TrashTrack was the mobile application itself.
 
-Most of my work revolved around screens, navigation, forms, local state management, API consumption, report flows, map displays, operator dashboard surfaces, camera integration, image submission flows, and general application behavior.
+Most of my work revolved around screens, navigation, API consumption, report flows, map displays, dashboard surfaces, camera integration, general application behavior, and all that good stuff.
 
 OpenLayers handled most of the mapping work, while Recharts was used for dashboard visualizations and charts.
 
 The project also used a monorepo setup where everything lived inside a single repository managed through Nx. That choice mostly came from me. My friend simply went along with it, I think.
 
-My opinion on monorepos today is far more mixed than it was back then. They solve certain coordination problems fairly well, although the ecosystem around them still feels somewhat unresolved even with tooling like Bazel and Turborepo existing now. TrashTrack was still built during the period where I was heavily enthusiastic about Nx-based workspaces and centralized repository structures.
+My opinion on monorepos today is far more mixed than it was back then. They solve certain coordination problems fairly well, although the ecosystem around them still feels somewhat unresolved.
 
-## CI/CD and Automation
+## Automation
 
 One part of the project I still feel fairly proud of is the CI/CD setup.
 
@@ -74,10 +76,14 @@ That experience ended up sticking with me more strongly than the mobile developm
 
 ## Looking Back
 
-TrashTrack is an old project by current standards. The project was built during the Node.js 21 period, which already feels fairly distant compared to how I structure projects now in 2026.
+TrashTrack was a honestly not a fun project to work on, despite the fact it is a project I am still fairly proud of in terms of what we built and the technical work that went into it.
 
-There are many things I would approach differently today, although I still find the project interesting to revisit because it captures a fairly specific stage of how I worked at the time. The stack choices, the monorepo setup, the mobile architecture decisions, and even the way the operator flows were structured all reflect that period fairly clearly.
+Mobile development was a nightmare to deal with and enduring it under tight time pressure was not a good experience. The project also ended up being a bit of a mess in terms of code quality and structure, which is something I am not particularly fond of, though I don't think it was really avoidable given the circumstances.
 
-I am still grateful to my friend for inviting me into the project despite the fact that we lost the competition. I still jokingly complain about it from time to time.
+It is a bit of a poor reflection on the project that the most enjoyable part of it was the CI/CD setup, which is not really what I wanted to be the highlight of the project. I would have preferred to have a better experience building the application itself, but that was not really in the cards for me at the time.
 
-The project also left me slightly traumatized by mobile development, which is probably part of why I still remember it so clearly.
+What I learned from TrashTrack is that mobile development is not really my thing, and I don't have a lot of interest in pursuing it further unless work requires it. That said, I am still glad I got to experiment with it and build something functional, even if the experience was a bit rough.
+
+Ultimately, I am still grateful to my friend for inviting me into the project despite the fact that we lost the competition. I would still jokingly complain about it from time to time.
+
+Also, the project left me slightly traumatized by mobile development.

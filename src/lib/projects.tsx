@@ -220,7 +220,11 @@ function projectLinks(project: (typeof projectDocs)[number]) {
 }
 
 function projectIconNames(project: (typeof projectDocs)[number]) {
-    return project.icons && project.icons.length > 0 ? project.icons : [project.icon];
+    if (project.icons && project.icons.length > 0) {
+        return project.icons;
+    }
+
+    return project.icon ? [project.icon] : [];
 }
 
 function normalizeTag(tag: string) {
@@ -239,8 +243,8 @@ function withProjectRuntimeFields(project: (typeof projectDocs)[number]) {
         links: projectLinks(project),
         projectSortDate: project.projectSortDate ?? project.projectStartedAt,
         slug: projectSlug(project.info.path),
-        Icon: getProjectIcon(project.icon),
-        iconTree: projectIconTree(project.icon, "h-5 w-5 opacity-80"),
+        Icon: project.icon ? getProjectIcon(project.icon) : null,
+        iconTree: project.icon ? projectIconTree(project.icon, "h-5 w-5 opacity-80") : null,
         tags: project.tags.map(normalizeTag),
     };
 }

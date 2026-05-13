@@ -102,7 +102,7 @@ function MdxH6({ children, ...props }: ComponentPropsWithoutRef<"h6">) {
 
 function MdxParagraph({ children, ...props }: ComponentPropsWithoutRef<"p">) {
     return (
-        <p className="wrap-anywhere max-w-[72ch] text-muted-foreground/90 text-sm leading-7" {...props}>
+        <p className="wrap-anywhere max-w-[70ch] text-pretty text-muted-foreground/90 text-sm leading-7" {...props}>
             {children}
         </p>
     );
@@ -127,7 +127,7 @@ function MdxStrong({ children, ...props }: ComponentPropsWithoutRef<"strong">) {
 function MdxUnorderedList({ children, ...props }: ComponentPropsWithoutRef<"ul">) {
     return (
         <ul
-            className="max-w-[72ch] list-disc space-y-1.5 pl-4 text-muted-foreground/90 text-sm leading-7 marker:text-muted-foreground/55"
+            className="max-w-[70ch] list-disc space-y-1.5 text-pretty pl-4 text-muted-foreground/90 text-sm leading-7 marker:text-muted-foreground/55"
             {...props}
         >
             {children}
@@ -138,7 +138,7 @@ function MdxUnorderedList({ children, ...props }: ComponentPropsWithoutRef<"ul">
 function MdxOrderedList({ children, ...props }: ComponentPropsWithoutRef<"ol">) {
     return (
         <ol
-            className="max-w-[72ch] list-decimal space-y-1.5 pl-4 text-muted-foreground/90 text-sm leading-7 marker:font-mono marker:text-[11px] marker:text-muted-foreground/55"
+            className="max-w-[70ch] list-decimal space-y-1.5 text-pretty pl-4 text-muted-foreground/90 text-sm leading-7 marker:font-mono marker:text-[11px] marker:text-muted-foreground/55"
             {...props}
         >
             {children}
@@ -157,7 +157,7 @@ function MdxListItem({ children, ...props }: ComponentPropsWithoutRef<"li">) {
 function MdxBlockquote({ children, ...props }: ComponentPropsWithoutRef<"blockquote">) {
     return (
         <blockquote
-            className="max-w-[72ch] border-border border-l pl-4 text-muted-foreground/85 text-sm leading-7"
+            className="max-w-[80ch] border-border/55 border-l pl-4 text-muted-foreground/85 text-xs leading-6 [&_p]:max-w-none [&_p]:text-inherit [&_p]:text-xs [&_p]:leading-6"
             {...props}
         >
             {children}
@@ -199,7 +199,7 @@ function MdxPre({ children, ...props }: ComponentPropsWithoutRef<"pre">) {
 
 function MdxDivider(props: ComponentPropsWithoutRef<"hr">) {
     return (
-        <div className="max-w-[72ch] py-4 sm:py-4">
+        <div className="max-w-[70ch] py-4 sm:py-4">
             <hr className="h-px border-0 bg-border/80" {...props} />
         </div>
     );

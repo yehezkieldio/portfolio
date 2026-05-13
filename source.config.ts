@@ -11,7 +11,7 @@ export const { docs: projects, meta: projectsMeta } = defineDocs({
     dir: "content/projects",
     docs: {
         schema: pageSchema.extend({
-            icon: z.string().min(1),
+            icon: z.string().min(1).optional(),
             icons: z.array(z.string().min(1)).optional(),
             external: z.array(projectLinkSchema).default([]),
             github: z.url().optional(),

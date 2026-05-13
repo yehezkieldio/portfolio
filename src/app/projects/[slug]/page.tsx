@@ -82,7 +82,9 @@ function ProjectArticleHeader({ description, icons, links, tags, title, year }: 
             </div>
 
             {description ? (
-                <p className="mt-5 max-w-[90ch] text-muted-foreground/90 text-sm leading-7">{description}</p>
+                <p className="mt-5 max-w-[70ch] text-pretty text-muted-foreground/90 text-sm leading-7">
+                    {description}
+                </p>
             ) : null}
 
             <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
