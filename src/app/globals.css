@@ -522,6 +522,31 @@
         linear-gradient(180deg, transparent 0 42%, black 68%, transparent 100%);
 }
 
+.projects-page-surface {
+    position: relative;
+}
+
+.projects-page-ambient {
+    position: absolute;
+    inset: -2rem -1.25rem auto;
+    z-index: -1;
+    height: min(36rem, 100%);
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 16% 18%, rgb(255 255 255 / 0.18) 0 1px, transparent 1.25px),
+        radial-gradient(circle at 78% 24%, rgb(255 255 255 / 0.11) 0 1px, transparent 1.2px),
+        radial-gradient(circle at 38% 70%, rgb(255 255 255 / 0.08) 0 0.35px, transparent 0.95px);
+    background-position:
+        0 0,
+        37px 51px,
+        19px 83px;
+    background-size:
+        137px 149px,
+        211px 197px,
+        251px 293px;
+    opacity: 0;
+}
+
 ::view-transition-old(.content-fade-out) {
     animation: var(--duration-exit) var(--ease-ui-soft) fade reverse;
 }
@@ -588,6 +613,14 @@
 }
 
 @media (width < 640px) {
+    body:has(.projects-page-surface) .portfolio-ambient {
+        display: none;
+    }
+
+    .projects-page-ambient {
+        opacity: 1;
+    }
+
     .portfolio-ambient {
         position: absolute;
         min-height: 100%;

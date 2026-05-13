@@ -22,9 +22,12 @@ export default async function ProjectsPage() {
     }));
 
     return (
-        <PageSection>
-            <PageHeader description="A collection of my personal and professional projects." title="Projects" />
-            <ProjectIndex projects={projects} />
-        </PageSection>
+        <div className="projects-page-surface">
+            <div aria-hidden="true" className="projects-page-ambient" />
+            <PageSection>
+                <PageHeader description="A collection of my personal and professional projects." title="Projects" />
+                <ProjectIndex projects={projects} />
+            </PageSection>
+        </div>
     );
 }
