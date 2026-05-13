@@ -36,8 +36,10 @@ function ProjectRow({ project, revealIndex }: { project: ProjectListItem; reveal
                 {project.description}
             </p>
 
-            <div className="flex flex-col gap-2 pt-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-                <ContentTags tags={project.tags} />
+            <div className="flex items-center justify-between gap-3 pt-1 sm:gap-4">
+                <div className="min-w-0 flex-1 overflow-hidden [&>p]:overflow-hidden [&>p]:text-ellipsis [&>p]:text-nowrap [&>p]:text-[9.5px] sm:[&>p]:text-[11px]">
+                    <ContentTags tags={project.tags} />
+                </div>
                 <ProjectLinks project={project} />
             </div>
         </ContentRow>
@@ -64,7 +66,7 @@ function ProjectTitle({ project }: { project: ProjectListItem }) {
 
 function ProjectLinks({ project }: { project: ProjectListItem }) {
     return (
-        <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11.5px] leading-5 tracking-normal sm:justify-end sm:text-xs">
+        <p className="flex shrink-0 flex-wrap items-center justify-end gap-x-3 gap-y-1.5 text-[11px] leading-5 tracking-normal sm:text-xs">
             {project.hasNote ? (
                 <Link
                     className="group motion-link inline-flex items-center gap-1.5 font-medium text-foreground/82 transition-colors duration-200 ease-(--ease-ui) hover:text-foreground"
