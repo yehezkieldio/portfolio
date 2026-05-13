@@ -23,18 +23,19 @@ export function ProjectList({ projects }: ProjectListProps) {
 function ProjectRow({ project, revealIndex }: { project: ProjectListItem; revealIndex: number }) {
     return (
         <ContentRow delayIndex={revealIndex}>
-            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h2 className="min-w-0 font-medium text-sm leading-tight">
                     <ProjectTitle project={project} />
                 </h2>
-                <p className="font-mono text-muted-foreground/70 text-xs">{project.year}</p>
+                <p className="shrink-0 font-mono text-muted-foreground/70 text-xs">{project.year}</p>
             </div>
 
             <p className="max-w-xl text-muted-foreground text-sm leading-6">{project.description}</p>
 
-            <ContentTags tags={project.tags} />
-
-            <ProjectLinks project={project} />
+            <div className="flex flex-col gap-2 pt-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                <ContentTags tags={project.tags} />
+                <ProjectLinks project={project} />
+            </div>
         </ContentRow>
     );
 }
@@ -59,7 +60,7 @@ function ProjectTitle({ project }: { project: ProjectListItem }) {
 
 function ProjectLinks({ project }: { project: ProjectListItem }) {
     return (
-        <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5 pt-2 text-xs">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs sm:justify-end">
             {project.hasNote ? (
                 <Link
                     className="group motion-link inline-flex items-center gap-1.5 font-medium text-foreground/82 transition-colors duration-200 ease-(--ease-ui) hover:text-foreground"
