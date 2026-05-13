@@ -24,15 +24,17 @@ export function WritingList({ posts }: WritingListProps) {
     }
 
     return (
-        <ContentList withTopRule>
+        <ContentList className="space-y-9 sm:space-y-10" withTopRule>
             {posts.map((post, index) => (
                 <ContentRow delayIndex={index} key={post.link} withRule={false}>
-                    <ContentMeta>{post.publishedLabel}</ContentMeta>
-                    <h2 className="font-medium text-[13px] leading-tight tracking-normal sm:text-sm sm:leading-tight">
-                        <ContentTitleLink href={post.link} isExternal>
-                            {post.title}
-                        </ContentTitleLink>
-                    </h2>
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                        <h2 className="min-w-0 font-medium text-[13px] leading-tight tracking-normal sm:text-sm sm:leading-tight">
+                            <ContentTitleLink href={post.link} isExternal>
+                                {post.title}
+                            </ContentTitleLink>
+                        </h2>
+                        <ContentMeta>{post.publishedLabel}</ContentMeta>
+                    </div>
                     <p className="text-[13.5px] text-muted-foreground leading-[1.55] tracking-normal sm:text-sm sm:leading-6">
                         {post.excerpt}
                     </p>

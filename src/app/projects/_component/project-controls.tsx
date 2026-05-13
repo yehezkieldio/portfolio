@@ -29,7 +29,7 @@ export function ProjectControls({ onQueryChange, onTagChange, query, tag, tags }
                     event.preventDefault();
                     onQueryChange("");
                 }}
-                placeholder="search title, stack, notes..."
+                placeholder="search title, stack, description..."
                 value={query}
             />
 

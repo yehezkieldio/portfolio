@@ -21,6 +21,7 @@ type PageIntroProps = {
 
 type ContentListProps = {
     children: ReactNode;
+    className?: string;
     empty?: ReactNode;
     isEmpty?: boolean;
     withTopRule?: boolean;
@@ -80,12 +81,12 @@ export function PageIntro({ delayStart = 1, paragraphs }: PageIntroProps) {
     );
 }
 
-export function ContentList({ children, empty, isEmpty = false, withTopRule = false }: ContentListProps) {
+export function ContentList({ children, className, empty, isEmpty = false, withTopRule = false }: ContentListProps) {
     if (isEmpty) {
         return empty ?? null;
     }
 
-    return <div className={withTopRule ? "space-y-7 border-border border-t pt-6" : undefined}>{children}</div>;
+    return <div className={cn(withTopRule && "space-y-7 border-border border-t pt-6", className)}>{children}</div>;
 }
 
 export function ContentRow({ children, delayIndex = 0, withRule = true }: ContentRowProps) {
@@ -120,7 +121,7 @@ export function ContentTitleLink({ children, href, isExternal = false }: Content
 
 export function ContentMeta({ children }: { children: ReactNode }) {
     return (
-        <p className="font-mono text-[11px] text-muted-foreground leading-none tracking-normal sm:text-xs">
+        <p className="font-mono text-[11px] text-muted-foreground/70 leading-none tracking-normal sm:text-xs">
             {children}
         </p>
     );
@@ -139,5 +140,5 @@ export function ContentTags({ tags, limit = 5 }: { tags: string[]; limit?: numbe
 }
 
 export function EmptyLine({ children }: { children: ReactNode }) {
-    return <p className="border-border border-b py-8 text-muted-foreground text-sm">{children}</p>;
+    return <p className="py-8 text-muted-foreground text-sm">{children}</p>;
 }

@@ -17,16 +17,16 @@ export default function NotesPage() {
         <div className="writing-page-surface">
             <div aria-hidden="true" className="writing-page-ambient" />
             <PageSection>
-                <PageHeader description="Shorter technical notes, sketches, and working thoughts." title="Notes" />
+                <PageHeader description="References, quick notes, and snippets." title="Notes" />
 
                 <ContentList
-                    empty={<EmptyLine>Notes will show up here once they are added.</EmptyLine>}
+                    empty={<EmptyLine>Notes will show up here once they are added, eventually.</EmptyLine>}
                     isEmpty={notes.length === 0}
                 >
                     {notes.map((note, index) => (
                         <ContentRow delayIndex={index} key={note.slug}>
                             <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-                                <h2 className="min-w-0 font-medium text-[13px] leading-[1.25] tracking-normal sm:text-sm sm:leading-tight">
+                                <h2 className="min-w-0 font-medium text-[13px] leading-tight tracking-normal sm:text-sm sm:leading-tight">
                                     <ContentTitleLink href={`/writing/notes/${note.slug}`}>
                                         {note.title}
                                     </ContentTitleLink>

@@ -79,7 +79,6 @@
 
     html,
     body {
-        overscroll-behavior-y: none;
         @apply bg-background;
     }
 
@@ -313,33 +312,35 @@
 .ambient-stars {
     inset: -10%;
     background-repeat: repeat;
-    mask-image: radial-gradient(ellipse at center, transparent 0 28%, black 54%, black 100%);
+    mask-image:
+        radial-gradient(ellipse at 12% 24%, black 0 15%, transparent 34%), radial-gradient(ellipse at 88% 62%, black 0 18%, transparent 40%),
+        radial-gradient(ellipse at 48% 92%, black 0 12%, transparent 32%);
 }
 
 .ambient-stars-a {
     background-image:
-        radial-gradient(circle, color-mix(in oklch, var(--foreground) 34%, transparent) 0 1px, transparent 1.4px),
-        radial-gradient(circle, color-mix(in oklch, var(--foreground) 18%, transparent) 0 1px, transparent 1.2px);
+        radial-gradient(circle, color-mix(in oklch, var(--foreground) 28%, transparent) 0 0.8px, transparent 1.35px),
+        radial-gradient(circle, color-mix(in oklch, var(--foreground) 16%, transparent) 0 0.7px, transparent 1.2px);
     background-position:
-        0 0,
-        37px 53px;
+        19px 31px,
+        93px 57px;
     background-size:
-        137px 149px,
-        211px 197px;
-    opacity: 0.26;
+        179px 211px,
+        283px 251px;
+    opacity: 0.22;
 }
 
 .ambient-stars-b {
     background-image:
-        radial-gradient(circle, color-mix(in oklch, var(--foreground) 18%, transparent) 0 1px, transparent 1.5px),
-        radial-gradient(circle, color-mix(in oklch, var(--foreground) 12%, transparent) 0 1px, transparent 1.4px);
+        radial-gradient(circle, color-mix(in oklch, var(--foreground) 16%, transparent) 0 0.75px, transparent 1.45px),
+        radial-gradient(circle, color-mix(in oklch, var(--foreground) 10%, transparent) 0 0.7px, transparent 1.35px);
     background-position:
         83px 29px,
         11px 97px;
     background-size:
-        263px 241px,
-        319px 293px;
-    opacity: 0.18;
+        307px 281px,
+        389px 337px;
+    opacity: 0.14;
 }
 
 .ambient-panel {
@@ -547,6 +548,9 @@
         211px 197px,
         251px 293px;
     opacity: 0;
+    mask-image:
+        radial-gradient(ellipse at 8% 18%, black 0 18%, transparent 42%), radial-gradient(ellipse at 92% 56%, black 0 16%, transparent 38%),
+        linear-gradient(180deg, black 0 54%, transparent 100%);
 }
 
 ::view-transition-old(.content-fade-out) {
@@ -622,7 +626,20 @@
 
     .projects-page-ambient,
     .writing-page-ambient {
+        height: 24rem;
+        background-image:
+            radial-gradient(circle at 7% 14%, rgb(255 255 255 / 0.2) 0 0.9px, transparent 1.3px),
+            radial-gradient(circle at 18% 9%, rgb(255 255 255 / 0.12) 0 0.7px, transparent 1.15px),
+            radial-gradient(circle at 23% 24%, rgb(255 255 255 / 0.14) 0 0.8px, transparent 1.2px),
+            radial-gradient(circle at 76% 18%, rgb(255 255 255 / 0.13) 0 0.8px, transparent 1.25px),
+            radial-gradient(circle at 91% 31%, rgb(255 255 255 / 0.18) 0 0.9px, transparent 1.35px),
+            radial-gradient(circle at 84% 46%, rgb(255 255 255 / 0.1) 0 0.7px, transparent 1.15px),
+            radial-gradient(circle at 14% 72%, rgb(255 255 255 / 0.08) 0 0.65px, transparent 1.1px);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: 100% 100%;
         opacity: 1;
+        mask-image: linear-gradient(180deg, black 0 62%, transparent 100%);
     }
 
     .portfolio-ambient {
@@ -633,9 +650,21 @@
     .ambient-stars {
         inset: -18%;
         background-image:
-            radial-gradient(circle, rgb(255 255 255 / 0.34) 0 1px, transparent 1.35px),
-            radial-gradient(circle, rgb(255 255 255 / 0.18) 0 1px, transparent 1.2px);
-        opacity: 0.2;
+            radial-gradient(circle at 8% 13%, rgb(255 255 255 / 0.28) 0 0.85px, transparent 1.3px),
+            radial-gradient(circle at 19% 22%, rgb(255 255 255 / 0.16) 0 0.7px, transparent 1.15px),
+            radial-gradient(circle at 84% 17%, rgb(255 255 255 / 0.18) 0 0.8px, transparent 1.25px),
+            radial-gradient(circle at 93% 43%, rgb(255 255 255 / 0.22) 0 0.85px, transparent 1.3px),
+            radial-gradient(circle at 74% 69%, rgb(255 255 255 / 0.12) 0 0.65px, transparent 1.1px),
+            radial-gradient(circle at 12% 79%, rgb(255 255 255 / 0.1) 0 0.65px, transparent 1.1px);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: 100% 100%;
+        opacity: 0.18;
+        mask-image: none;
+    }
+
+    .ambient-stars-b {
+        opacity: 0;
     }
 
     .ambient-panel-left,
@@ -643,8 +672,7 @@
     .ambient-scanline,
     .ambient-constellation,
     .ambient-diamond,
-    .ambient-star-a,
-    .ambient-star-b,
+    .ambient-star,
     .ambient-star-c,
     .ambient-star-d,
     .ambient-diamond-b {
@@ -668,21 +696,9 @@
         opacity: 0.18;
     }
 
-    .ambient-star-a {
-        top: 15%;
-        left: 5%;
-        opacity: 0.28;
-    }
-
-    .ambient-star-b {
-        right: 5%;
-        bottom: 19%;
-        opacity: 0.22;
-    }
-
     .ambient-star::before,
     .ambient-star::after {
-        background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.5) 18% 82%, transparent);
+        content: none;
     }
 
     .ambient-grain {
