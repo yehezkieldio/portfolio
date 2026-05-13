@@ -79,6 +79,7 @@
 
     html,
     body {
+        overscroll-behavior-y: none;
         @apply bg-background;
     }
 
@@ -587,6 +588,11 @@
 }
 
 @media (width < 640px) {
+    .portfolio-ambient {
+        position: absolute;
+        min-height: 100%;
+    }
+
     .ambient-stars {
         inset: -18%;
         background-image:

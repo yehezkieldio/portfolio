@@ -8,7 +8,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             <SiteBackground />
             <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-2xl flex-col px-5 py-7 sm:px-6 sm:py-20">
                 <header
-                    className="mb-10 flex flex-wrap justify-start gap-x-5 gap-y-3 text-sm leading-none sm:mb-16 sm:justify-end"
+                    className="mb-10 flex flex-wrap justify-end gap-x-5 gap-y-3 text-sm leading-none sm:mb-16"
                     style={{ viewTransitionName: "persistent-nav" }}
                 >
                     <SiteNav />
