@@ -1,4 +1,3 @@
-import type { SvglComponentName } from "@ridemountainpig/svgl-react";
 import { pageSchema } from "fumadocs-core/source/schema";
 import { defineConfig, defineDocs } from "fumadocs-mdx/config";
 import { z } from "zod";
@@ -12,18 +11,8 @@ export const { docs: projects, meta: projectsMeta } = defineDocs({
     dir: "content/projects",
     docs: {
         schema: pageSchema.extend({
-            icon: z
-                .string()
-                .min(1)
-                .transform((icon) => icon as SvglComponentName),
-            icons: z
-                .array(
-                    z
-                        .string()
-                        .min(1)
-                        .transform((icon) => icon as SvglComponentName)
-                )
-                .optional(),
+            icon: z.string().min(1),
+            icons: z.array(z.string().min(1)).optional(),
             external: z.array(projectLinkSchema).default([]),
             github: z.url().optional(),
             gitlab: z.url().optional(),

@@ -20,7 +20,7 @@ export function ArticleHeader({ description, meta, tags = [], title }: ArticleHe
 export function MdxBody({ children }: { children: ReactNode }) {
     return (
         <div
-            className="project-note project-row-enter min-w-0 space-y-5 overflow-hidden"
+            className="project-note project-row-enter min-w-0 overflow-hidden [&>*+*]:mt-4 [&>ol]:mt-2.5 [&>p+ol]:mt-1.5 [&>p+ul]:mt-1.5 [&>ul]:mt-2.5"
             style={{ animationDelay: "110ms" }}
         >
             {children}
@@ -54,7 +54,7 @@ export const mdxComponents = {
 
 function MdxH1({ children, ...props }: ComponentPropsWithoutRef<"h1">) {
     return (
-        <h1 className="font-semibold text-2xl leading-tight [&:not(:first-child)]:mt-12" {...props}>
+        <h1 className="not-first:mt-10 text-balance font-semibold text-2xl leading-tight" {...props}>
             {children}
         </h1>
     );
@@ -62,10 +62,7 @@ function MdxH1({ children, ...props }: ComponentPropsWithoutRef<"h1">) {
 
 function MdxH2({ children, ...props }: ComponentPropsWithoutRef<"h2">) {
     return (
-        <h2
-            className="border-border border-t pt-7 font-semibold text-xl leading-tight [&:not(:first-child)]:mt-12"
-            {...props}
-        >
+        <h2 className="not-first:mt-10 text-balance font-semibold text-xl leading-tight" {...props}>
             {children}
         </h2>
     );
@@ -73,7 +70,7 @@ function MdxH2({ children, ...props }: ComponentPropsWithoutRef<"h2">) {
 
 function MdxH3({ children, ...props }: ComponentPropsWithoutRef<"h3">) {
     return (
-        <h3 className="font-medium text-base leading-tight [&:not(:first-child)]:mt-9" {...props}>
+        <h3 className="not-first:mt-8 text-balance font-medium text-base leading-tight" {...props}>
             {children}
         </h3>
     );
@@ -81,7 +78,7 @@ function MdxH3({ children, ...props }: ComponentPropsWithoutRef<"h3">) {
 
 function MdxH4({ children, ...props }: ComponentPropsWithoutRef<"h4">) {
     return (
-        <h4 className="font-medium text-sm leading-tight [&:not(:first-child)]:mt-8" {...props}>
+        <h4 className="not-first:mt-7 text-balance font-medium text-sm leading-tight" {...props}>
             {children}
         </h4>
     );
@@ -89,10 +86,7 @@ function MdxH4({ children, ...props }: ComponentPropsWithoutRef<"h4">) {
 
 function MdxH5({ children, ...props }: ComponentPropsWithoutRef<"h5">) {
     return (
-        <h5
-            className="font-mono font-normal text-muted-foreground text-xs uppercase [&:not(:first-child)]:mt-7"
-            {...props}
-        >
+        <h5 className="not-first:mt-7 font-mono font-normal text-muted-foreground text-xs uppercase" {...props}>
             {children}
         </h5>
     );
@@ -100,10 +94,7 @@ function MdxH5({ children, ...props }: ComponentPropsWithoutRef<"h5">) {
 
 function MdxH6({ children, ...props }: ComponentPropsWithoutRef<"h6">) {
     return (
-        <h6
-            className="font-mono font-normal text-[11px] text-muted-foreground/70 uppercase [&:not(:first-child)]:mt-6"
-            {...props}
-        >
+        <h6 className="not-first:mt-6 font-mono font-normal text-[11px] text-muted-foreground/70 uppercase" {...props}>
             {children}
         </h6>
     );
@@ -111,7 +102,7 @@ function MdxH6({ children, ...props }: ComponentPropsWithoutRef<"h6">) {
 
 function MdxParagraph({ children, ...props }: ComponentPropsWithoutRef<"p">) {
     return (
-        <p className="max-w-2xl text-muted-foreground text-sm leading-7 [overflow-wrap:anywhere]" {...props}>
+        <p className="wrap-anywhere max-w-[72ch] text-muted-foreground/90 text-sm leading-7" {...props}>
             {children}
         </p>
     );
@@ -136,7 +127,7 @@ function MdxStrong({ children, ...props }: ComponentPropsWithoutRef<"strong">) {
 function MdxUnorderedList({ children, ...props }: ComponentPropsWithoutRef<"ul">) {
     return (
         <ul
-            className="max-w-2xl list-disc space-y-2 pl-5 text-muted-foreground text-sm leading-7 marker:text-muted-foreground/55"
+            className="max-w-[72ch] list-disc space-y-1.5 pl-4 text-muted-foreground/90 text-sm leading-7 marker:text-muted-foreground/55"
             {...props}
         >
             {children}
@@ -147,7 +138,7 @@ function MdxUnorderedList({ children, ...props }: ComponentPropsWithoutRef<"ul">
 function MdxOrderedList({ children, ...props }: ComponentPropsWithoutRef<"ol">) {
     return (
         <ol
-            className="max-w-2xl list-decimal space-y-2 pl-5 text-muted-foreground text-sm leading-7 marker:font-mono marker:text-[11px] marker:text-muted-foreground/55"
+            className="max-w-[72ch] list-decimal space-y-1.5 pl-4 text-muted-foreground/90 text-sm leading-7 marker:font-mono marker:text-[11px] marker:text-muted-foreground/55"
             {...props}
         >
             {children}
@@ -157,7 +148,7 @@ function MdxOrderedList({ children, ...props }: ComponentPropsWithoutRef<"ol">) 
 
 function MdxListItem({ children, ...props }: ComponentPropsWithoutRef<"li">) {
     return (
-        <li className="pl-1 [&>ol]:mt-2 [&>ol]:space-y-1.5 [&>ul]:mt-2 [&>ul]:space-y-1.5 [&>ul]:pl-4" {...props}>
+        <li className="[&>ol]:mt-2 [&>ol]:space-y-1.5 [&>ul]:mt-2 [&>ul]:space-y-1.5 [&>ul]:pl-4" {...props}>
             {children}
         </li>
     );
@@ -166,7 +157,7 @@ function MdxListItem({ children, ...props }: ComponentPropsWithoutRef<"li">) {
 function MdxBlockquote({ children, ...props }: ComponentPropsWithoutRef<"blockquote">) {
     return (
         <blockquote
-            className="max-w-2xl border-border border-l pl-4 text-muted-foreground text-sm leading-7"
+            className="max-w-[72ch] border-border border-l pl-4 text-muted-foreground/85 text-sm leading-7"
             {...props}
         >
             {children}
@@ -179,12 +170,7 @@ function MdxCode({ children, ...props }: ComponentPropsWithoutRef<"code">) {
 
     return (
         <code
-            className={cn(
-                "font-mono",
-                className
-                    ? "text-[0.92em]"
-                    : "break-words border border-border/70 bg-foreground/[0.035] px-1 py-0.5 text-[0.85em] text-foreground"
-            )}
+            className={cn("font-mono", className ? "text-[0.92em]" : "wrap-break-word text-[0.85em] text-foreground")}
             {...rest}
         >
             {children}
@@ -196,10 +182,10 @@ function MdxPre({ children, ...props }: ComponentPropsWithoutRef<"pre">) {
     const { className, style, ...rest } = props;
 
     return (
-        <div className="max-w-full overflow-hidden border border-border/80 bg-foreground/[0.025]">
+        <div className="max-w-full overflow-hidden border border-border/80 bg-foreground/2.5">
             <pre
                 className={cn(
-                    "max-w-full overflow-x-auto p-4 font-mono text-xs leading-6 [tab-size:2] [&_code]:grid [&_code]:min-w-max [&_code]:break-normal [&_code]:border-0 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-[inherit]",
+                    "tab-2 max-w-full overflow-x-auto p-4 font-mono text-xs leading-6 sm:p-5 [&_code]:grid [&_code]:min-w-max [&_code]:break-normal [&_code]:border-0 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit",
                     className
                 )}
                 style={style}
@@ -212,13 +198,17 @@ function MdxPre({ children, ...props }: ComponentPropsWithoutRef<"pre">) {
 }
 
 function MdxDivider(props: ComponentPropsWithoutRef<"hr">) {
-    return <hr className="border-border" {...props} />;
+    return (
+        <div className="max-w-[72ch] py-4 sm:py-4">
+            <hr className="h-px border-0 bg-border/80" {...props} />
+        </div>
+    );
 }
 
 function MdxTable({ children, ...props }: ComponentPropsWithoutRef<"table">) {
     return (
         <div className="max-w-full overflow-x-auto border border-border/70">
-            <table className="w-full min-w-[34rem] border-collapse text-left text-sm sm:min-w-0" {...props}>
+            <table className="w-full min-w-136 border-collapse text-left text-sm sm:min-w-0" {...props}>
                 {children}
             </table>
         </div>
@@ -251,7 +241,7 @@ function MdxTableHeadCell({ children, ...props }: ComponentPropsWithoutRef<"th">
 
 function MdxTableCell({ children, ...props }: ComponentPropsWithoutRef<"td">) {
     return (
-        <td className="px-3 py-2 text-muted-foreground [overflow-wrap:anywhere]" {...props}>
+        <td className="wrap-anywhere px-3 py-2 text-muted-foreground" {...props}>
             {children}
         </td>
     );
