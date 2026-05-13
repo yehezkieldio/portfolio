@@ -2,6 +2,10 @@ type SkeletonRowsProps = {
     count?: number;
 };
 
+function skeletonRowKeys(count: number) {
+    return Array.from({ length: count }, (_, index) => `skeleton-row-${index + 1}`);
+}
+
 export function SkeletonHeader() {
     return (
         <div className="space-y-2.5 sm:space-y-3">
@@ -14,10 +18,10 @@ export function SkeletonHeader() {
 export function SkeletonRows({ count = 3 }: SkeletonRowsProps) {
     return (
         <div className="border-border border-t">
-            {Array.from({ length: count }, (_, index) => (
+            {skeletonRowKeys(count).map((key) => (
                 <article
                     className="grid gap-3.5 border-border border-b py-5 sm:grid-cols-[3.5rem_1fr] sm:gap-5 sm:py-8"
-                    key={index}
+                    key={key}
                 >
                     <div className="h-3 w-5 bg-muted" />
                     <div className="space-y-4">

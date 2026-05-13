@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { createElement } from "react";
 import { ContentTags } from "#/app/_component/content-primitives";
 import { MdxBody, mdxComponents } from "#/app/_component/mdx-content";
-import type { getProject, ProjectIconNode, ProjectIconTree } from "#/lib/projects";
+import type { getProject, ProjectIconTree } from "#/lib/projects";
 
 type Project = NonNullable<ReturnType<typeof getProject>>;
 
@@ -114,16 +114,19 @@ function ProjectIconGroup({ icons }: { icons: ProjectIconTree[] }) {
 
     return (
         <span className="flex flex-wrap items-center gap-2">
-            {icons.slice(0, 5).map((icon, index) => (
-                <span className="grid size-6 place-items-center text-muted-foreground/80 grayscale" key={index}>
-                    {renderIconTree(icon)}
+            {icons.slice(0, 5).map((icon) => (
+                <span
+                    className="grid size-6 place-items-center text-muted-foreground/80 grayscale"
+                    key={iconTreeKey(icon)}
+                >
+                    <IconTree tree={icon} />
                 </span>
             ))}
         </span>
     );
 }
 
-function renderIconTree(tree: ProjectIconTree): ReactNode {
+function IconTree({ tree }: { tree: ProjectIconTree }): ReactNode {
     if (typeof tree === "string") {
         return tree;
     }
@@ -131,12 +134,20 @@ function renderIconTree(tree: ProjectIconTree): ReactNode {
     return createElement(
         tree.type,
         tree.props,
-        ...tree.children.map((child, index) =>
-            typeof child === "string" ? child : createElement(IconTreeFragment, { key: index, node: child })
+        ...tree.children.map((child) =>
+            typeof child === "string" ? child : createElement(IconTree, { key: iconTreeKey(child), tree: child })
         )
     );
 }
 
-function IconTreeFragment({ node }: { node: ProjectIconNode }): ReactNode {
-    return renderIconTree(node);
+function iconTreeKey(tree: ProjectIconTree): string {
+    if (typeof tree === "string") {
+        return tree;
+    }
+
+    const propKey = Object.entries(tree.props)
+        .map(([key, value]) => `${key}:${String(value)}`)
+        .join("|");
+
+    return `${tree.type}:${propKey}:${tree.children.map(iconTreeKey).join("|")}`;
 }

@@ -8,10 +8,6 @@ import { cn } from "#/lib/utils";
 
 const Select = SelectPrimitive.Root;
 
-function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
-    return <SelectPrimitive.Group className={cn("p-1", className)} data-slot="select-group" {...props} />;
-}
-
 function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
     return (
         <SelectPrimitive.Value className={cn("flex flex-1 text-left", className)} data-slot="select-value" {...props} />
@@ -84,16 +80,6 @@ function SelectContent({
     );
 }
 
-function SelectLabel({ className, ...props }: SelectPrimitive.GroupLabel.Props) {
-    return (
-        <SelectPrimitive.GroupLabel
-            className={cn("px-2 py-1.5 font-mono text-[11px] text-muted-foreground uppercase", className)}
-            data-slot="select-label"
-            {...props}
-        />
-    );
-}
-
 function SelectItem({ children, className, ...props }: SelectPrimitive.Item.Props) {
     return (
         <SelectPrimitive.Item
@@ -115,16 +101,6 @@ function SelectItem({ children, className, ...props }: SelectPrimitive.Item.Prop
                 }
             />
         </SelectPrimitive.Item>
-    );
-}
-
-function SelectSeparator({ className, ...props }: SelectPrimitive.Separator.Props) {
-    return (
-        <SelectPrimitive.Separator
-            className={cn("pointer-events-none my-1 h-px bg-border", className)}
-            data-slot="select-separator"
-            {...props}
-        />
     );
 }
 
@@ -158,15 +134,4 @@ function SelectScrollDownButton({ className, ...props }: React.ComponentProps<ty
     );
 }
 
-export {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectScrollDownButton,
-    SelectScrollUpButton,
-    SelectSeparator,
-    SelectTrigger,
-    SelectValue,
-};
+export { Select, SelectContent, SelectItem, SelectTrigger, SelectValue };

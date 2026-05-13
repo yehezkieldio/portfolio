@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProject, getProjects } from "#/lib/projects";
 import { ProjectArticle } from "./_components/project-article";
@@ -9,9 +10,23 @@ type ProjectPageProps = {
 };
 
 export function generateStaticParams() {
-    return getProjects()
-        .filter((project) => project.hasNote)
-        .map((project) => ({ slug: project.slug }));
+    return getProjects().flatMap((project) => (project.hasNote ? [{ slug: project.slug }] : []));
+}
+
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const project = getProject(slug);
+
+    if (!project) {
+        return {
+            title: "Project",
+        };
+    }
+
+    return {
+        description: project.description,
+        title: project.title,
+    };
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {

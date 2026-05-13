@@ -1,5 +1,7 @@
 import { SkeletonHeader } from "../_component/loading-blocks";
 
+const PROJECT_SKELETON_ROWS = ["project-skeleton-1", "project-skeleton-2", "project-skeleton-3"];
+
 export default function ProjectsLoading() {
     return (
         <section className="space-y-7 sm:space-y-8">
@@ -12,8 +14,8 @@ export default function ProjectsLoading() {
 function ProjectSkeletonRows() {
     return (
         <div>
-            {Array.from({ length: 3 }, (_, index) => (
-                <article className="space-y-2.5 border-border border-b py-5 sm:space-y-3 sm:py-7" key={index}>
+            {PROJECT_SKELETON_ROWS.map((key) => (
+                <article className="space-y-2.5 border-border border-b py-5 sm:space-y-3 sm:py-7" key={key}>
                     <div className="flex items-baseline justify-between gap-4">
                         <div className="h-4 w-32 bg-muted sm:w-40" />
                         <div className="h-3 w-10 shrink-0 bg-muted" />

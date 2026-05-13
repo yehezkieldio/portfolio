@@ -50,5 +50,10 @@
   "trustedDependencies": [
     "sharp",
     "unrs-resolver"
-  ]
+  ],
+  "knip": {
+    "ignoreFiles": [
+      "source.config.ts"
+    ]
+  }
 }

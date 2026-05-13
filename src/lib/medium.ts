@@ -23,6 +23,8 @@ const WHITESPACE_REGEX = /\s+/g;
 const DATE_FORMATTER = new Intl.DateTimeFormat("en", {
     dateStyle: "medium",
 });
+const SENTENCE_SEGMENTER =
+    typeof Intl.Segmenter === "function" ? new Intl.Segmenter("en", { granularity: "sentence" }) : null;
 
 const mediumFeedParser = new XMLParser({
     ignoreAttributes: true,
@@ -51,8 +53,11 @@ function textBlocksFromHtml(value: string) {
         .replace(BLOCK_END_TAG_REGEX, "\n")
         .replace(HTML_TAG_REGEX, " ")
         .split("\n")
-        .map((block) => block.replace(WHITESPACE_REGEX, " ").trim())
-        .filter(Boolean);
+        .flatMap((block) => {
+            const text = block.replace(WHITESPACE_REGEX, " ").trim();
+
+            return text ? [text] : [];
+        });
 }
 
 function selectExcerptSource(value: string) {
@@ -63,23 +68,29 @@ function selectExcerptSource(value: string) {
 }
 
 function sentenceSegments(value: string) {
-    if (typeof Intl.Segmenter === "function") {
-        const segmenter = new Intl.Segmenter("en", { granularity: "sentence" });
+    if (SENTENCE_SEGMENTER) {
+        return Array.from(SENTENCE_SEGMENTER.segment(value)).flatMap(({ segment }) => {
+            const text = segment.trim();
 
-        return Array.from(segmenter.segment(value), ({ segment }) => segment.trim()).filter(Boolean);
+            return text ? [text] : [];
+        });
     }
 
     return value
         .replaceAll(SENTENCE_END_REGEX, (match) => `${match.trimEnd()}\n`)
         .split("\n")
-        .map((sentence) => sentence.trim())
-        .filter(Boolean);
+        .flatMap((sentence) => {
+            const text = sentence.trim();
+
+            return text ? [text] : [];
+        });
 }
 
 function completeSentenceExcerpt(text: string) {
     const sentences = sentenceSegments(text);
-    const candidates: string[] = [];
     let excerpt = "";
+    let bestExcerpt: string | null = null;
+    let bestDistance = Number.POSITIVE_INFINITY;
 
     for (const sentence of sentences) {
         const nextExcerpt = excerpt ? `${excerpt} ${sentence}` : sentence;
@@ -89,16 +100,18 @@ function completeSentenceExcerpt(text: string) {
         }
 
         excerpt = nextExcerpt;
-        candidates.push(excerpt);
+
+        if (excerpt.length >= EXCERPT_MIN_COMPLETE_LENGTH) {
+            const distance = Math.abs(excerpt.length - EXCERPT_TARGET_LENGTH);
+
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                bestExcerpt = excerpt;
+            }
+        }
     }
 
-    return (
-        candidates
-            .filter((candidate) => candidate.length >= EXCERPT_MIN_COMPLETE_LENGTH)
-            .sort(
-                (a, b) => Math.abs(a.length - EXCERPT_TARGET_LENGTH) - Math.abs(b.length - EXCERPT_TARGET_LENGTH)
-            )[0] ?? null
-    );
+    return bestExcerpt;
 }
 
 function wordBoundaryExcerpt(text: string) {
@@ -143,7 +156,7 @@ function formatPublishedDate(publishedAt: string) {
     return DATE_FORMATTER.format(date);
 }
 
-export function parseMediumFeed(xml: string): MediumPost[] {
+function parseMediumFeed(xml: string): MediumPost[] {
     const feed = mediumFeedParser.parse(xml) as ParsedMediumFeed;
     const items = feed.rss?.channel?.item ?? [];
 

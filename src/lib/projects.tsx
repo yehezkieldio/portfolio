@@ -37,15 +37,15 @@ const simpleIconComponents = Object.fromEntries(
 
 export type ProjectIconName = string;
 
-export type ProjectIconNode = {
-    children: ProjectIconTree[];
-    props: Record<string, ProjectIconProp>;
-    type: string;
-};
+type ProjectIconProp = boolean | number | string | Record<string, number | string>;
 
-export type ProjectIconProp = boolean | number | string | Record<string, number | string>;
-
-export type ProjectIconTree = ProjectIconNode | string;
+export type ProjectIconTree =
+    | {
+          children: ProjectIconTree[];
+          props: Record<string, ProjectIconProp>;
+          type: string;
+      }
+    | string;
 
 const iconAliases = {
     Nx: "NxDark",
@@ -182,10 +182,11 @@ function serializeIconNode(node: ReactNode): ProjectIconTree | null {
 }
 
 function serializeIconChildren(children: unknown): ProjectIconTree[] {
-    return [children]
-        .flat()
-        .map((child) => serializeIconNode(child as ReactNode))
-        .filter((child): child is ProjectIconTree => child !== null);
+    return [children].flat().flatMap((child) => {
+        const tree = serializeIconNode(child as ReactNode);
+
+        return tree === null ? [] : [tree];
+    });
 }
 
 function serializeIconProps(props: Record<string, unknown>): Record<string, ProjectIconProp> {
@@ -211,12 +212,29 @@ function isSerializableStyle(value: unknown): value is Record<string, number | s
 }
 
 function projectLinks(project: (typeof projectDocs)[number]) {
-    return [
-        project.github ? { href: project.github, kind: "github" as const, label: "github" } : null,
-        project.gitlab ? { href: project.gitlab, kind: "gitlab" as const, label: "gitlab" } : null,
-        project.website ? { href: project.website, kind: "external" as const, label: "site" } : null,
-        ...project.external.map((link) => ({ ...link, kind: "external" as const })),
-    ].filter((link) => link !== null);
+    const links: {
+        href: string;
+        kind: "external" | "github" | "gitlab";
+        label: string;
+    }[] = [];
+
+    if (project.github) {
+        links.push({ href: project.github, kind: "github", label: "github" });
+    }
+
+    if (project.gitlab) {
+        links.push({ href: project.gitlab, kind: "gitlab", label: "gitlab" });
+    }
+
+    if (project.website) {
+        links.push({ href: project.website, kind: "external", label: "site" });
+    }
+
+    for (const link of project.external) {
+        links.push({ ...link, kind: "external" });
+    }
+
+    return links;
 }
 
 function projectIconNames(project: (typeof projectDocs)[number]) {
@@ -256,11 +274,10 @@ function sortProjects(a: Project, b: Project) {
 }
 
 const projects = projectDocs
-    .filter((project) => !project.hidden)
-    .map(withProjectRuntimeFields)
+    .flatMap((project) => (project.hidden ? [] : [withProjectRuntimeFields(project)]))
     .sort(sortProjects);
 
-const projectsBySlug = new Map(projects.filter((project) => project.hasNote).map((project) => [project.slug, project]));
+const projectsBySlug = new Map(projects.flatMap((project) => (project.hasNote ? [[project.slug, project]] : [])));
 
 export function getProjects() {
     return projects;

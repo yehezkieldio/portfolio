@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
     ContentList,
     ContentMeta,
@@ -9,6 +10,11 @@ import {
     PageSection,
 } from "#/app/_component/content-primitives";
 import { getNotes } from "#/lib/notes";
+
+export const metadata: Metadata = {
+    description: "References, quick notes, and snippets by Yehezkiel Dio Sinolungan.",
+    title: "Notes",
+};
 
 export default function NotesPage() {
     const notes = getNotes();

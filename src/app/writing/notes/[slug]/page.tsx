@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContentMeta } from "#/app/_component/content-primitives";
 import { ArticleHeader, MdxBody, mdxComponents } from "#/app/_component/mdx-content";
@@ -11,6 +12,22 @@ type NotePageProps = {
 
 export function generateStaticParams() {
     return getNotes().map((note) => ({ slug: note.slug }));
+}
+
+export async function generateMetadata({ params }: NotePageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const note = getNote(slug);
+
+    if (!note) {
+        return {
+            title: "Note",
+        };
+    }
+
+    return {
+        description: note.description,
+        title: note.title,
+    };
 }
 
 export default async function NotePage({ params }: NotePageProps) {

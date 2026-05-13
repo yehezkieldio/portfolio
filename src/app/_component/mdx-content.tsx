@@ -9,7 +9,9 @@ type ArticleHeaderProps = {
     title: string;
 };
 
-export function ArticleHeader({ description, meta, tags = [], title }: ArticleHeaderProps) {
+const EMPTY_TAGS: string[] = [];
+
+export function ArticleHeader({ description, meta, tags = EMPTY_TAGS, title }: ArticleHeaderProps) {
     return (
         <PageHeader description={description} meta={meta} title={title} withRule>
             <ContentTags tags={tags} />

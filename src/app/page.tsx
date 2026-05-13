@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { PageHeader, PageIntro, PageSection } from "./_component/content-primitives";
 import type { PageSocialLink } from "./_component/social-contact";
 import { PageSocialContact } from "./_component/social-contact";
+
+export const metadata: Metadata = {
+    description: "Software engineer portfolio for Yehezkiel Dio Sinolungan.",
+    title: "Yehezkiel Dio Sinolungan",
+};
 
 const heading = {
     description: "Software Engineer",
