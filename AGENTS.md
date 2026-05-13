@@ -42,6 +42,8 @@ Warnings are errors. Fix them before marking work complete.
 
 Stay within the immediate task.
 
-Ignore unrelated changes, whether made by other agents or humans. Do not revert, modify, or investigate out-of-scope changes unless they directly block the requested task.
+Ignore unrelated changes, whether made by other agents or humans.
+
+DO NOT revert, modify, or investigate out-of-scope changes unless they directly block the requested task.
 
 When unexpected changes appear, continue working within the requested scope and avoid broad cleanup.
