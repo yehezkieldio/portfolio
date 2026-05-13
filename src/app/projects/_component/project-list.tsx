@@ -116,7 +116,7 @@ function ProjectActionIcon({ kind }: { kind: ProjectLink["kind"] }) {
         );
     }
 
-    return <ExternalLinkIcon aria-hidden="true" className="size-3.5 text-muted-foreground/80" />;
+    return <ExternalLinkIcon aria-hidden="true" className="size-3.5 text-muted-foreground/70" />;
 }
 
 function getProjectLinkLabel(link: ProjectLink) {
