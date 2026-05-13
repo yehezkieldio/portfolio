@@ -589,7 +589,10 @@
 @media (width < 640px) {
     .ambient-stars {
         inset: -18%;
-        opacity: 0.12;
+        background-image:
+            radial-gradient(circle, rgb(255 255 255 / 0.34) 0 1px, transparent 1.35px),
+            radial-gradient(circle, rgb(255 255 255 / 0.18) 0 1px, transparent 1.2px);
+        opacity: 0.2;
     }
 
     .ambient-panel-left,
@@ -606,31 +609,44 @@
     }
 
     .ambient-panel-left {
-        top: 8%;
-        left: -4.5rem;
-        opacity: 0.12;
+        top: 7%;
+        left: -3.75rem;
+        background-image: radial-gradient(circle, rgb(255 255 255 / 0.18) 0 1px, transparent 1.25px);
+        border-color: rgb(255 255 255 / 0.12);
+        opacity: 0.24;
     }
 
     .ambient-scanline {
         top: auto;
-        right: -5.5rem;
-        bottom: 9%;
-        opacity: 0.1;
+        right: -5rem;
+        bottom: 8%;
+        background-image: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.14) 0 1px, transparent 1px 8px);
+        border-color: rgb(255 255 255 / 0.1);
+        opacity: 0.18;
     }
 
     .ambient-star-a {
         top: 15%;
         left: 5%;
-        opacity: 0.16;
+        opacity: 0.28;
     }
 
     .ambient-star-b {
         right: 5%;
         bottom: 19%;
-        opacity: 0.12;
+        opacity: 0.22;
+    }
+
+    .ambient-star::before,
+    .ambient-star::after {
+        background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.5) 18% 82%, transparent);
     }
 
     .ambient-grain {
-        opacity: 0.05;
+        background-image:
+            radial-gradient(circle at 18% 24%, rgb(255 255 255 / 0.12) 0 0.35px, transparent 0.96px),
+            radial-gradient(circle at 72% 34%, rgb(255 255 255 / 0.08) 0 0.36px, transparent 1px),
+            radial-gradient(circle at 38% 82%, rgb(0 0 0 / 0.22) 0 0.4px, transparent 1.16px);
+        opacity: 0.08;
     }
 }
