@@ -60,5 +60,6 @@
     "**/app/**/{page,layout,route,template,loading}.{tsx,ts}": "${dirname}/${filename}.${extname}"
   },
   "js/ts.tsdk.path": "node_modules/typescript/lib",
-  "js/ts.experimental.useTsgo": true
+  "js/ts.experimental.useTsgo": true,
+  "typescript.native-preview.tsdk": "/home/yehezkieldio/Documents/Workspace/portfolio/node_modules/@typescript/native-preview"
 }

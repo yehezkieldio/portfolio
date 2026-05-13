@@ -37,10 +37,7 @@ export function PageSocialContact({ delayIndex = 0, email, links }: PageSocialCo
             </p>
             <p>
                 <span>or mail me at </span>
-                <a
-                    className="font-mono text-muted-foreground transition-[color,text-decoration-color,opacity] duration-200 ease-(--ease-ui) hover:text-foreground/78"
-                    href={`mailto:${email}`}
-                >
+                <a className="font-mono text-muted-foreground" href={`mailto:${email}`}>
                     {email}
                 </a>
             </p>
