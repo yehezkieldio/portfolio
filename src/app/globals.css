@@ -296,6 +296,7 @@
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
+    isolation: isolate;
 }
 
 .portfolio-ambient > * {
@@ -588,33 +589,48 @@
 @media (width < 640px) {
     .ambient-stars {
         inset: -18%;
-        opacity: 0.14;
+        opacity: 0.12;
     }
 
     .ambient-panel-left,
     .ambient-panel-right,
     .ambient-scanline,
-    .ambient-constellation {
-        opacity: 0.1;
-    }
-
-    .ambient-diamond {
-        opacity: 0.12;
-    }
-
-    .ambient-star-a {
-        top: 18%;
-        left: 4%;
-    }
-
-    .ambient-star-b {
-        right: 4%;
-        bottom: 22%;
-    }
-
+    .ambient-constellation,
+    .ambient-diamond,
+    .ambient-star-a,
+    .ambient-star-b,
     .ambient-star-c,
     .ambient-star-d,
     .ambient-diamond-b {
         opacity: 0;
+    }
+
+    .ambient-panel-left {
+        top: 8%;
+        left: -4.5rem;
+        opacity: 0.12;
+    }
+
+    .ambient-scanline {
+        top: auto;
+        right: -5.5rem;
+        bottom: 9%;
+        opacity: 0.1;
+    }
+
+    .ambient-star-a {
+        top: 15%;
+        left: 5%;
+        opacity: 0.16;
+    }
+
+    .ambient-star-b {
+        right: 5%;
+        bottom: 19%;
+        opacity: 0.12;
+    }
+
+    .ambient-grain {
+        opacity: 0.05;
     }
 }
