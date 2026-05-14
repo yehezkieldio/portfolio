@@ -14,15 +14,28 @@ export function ProjectList({ projects }: ProjectListProps) {
     return (
         <ContentList empty={<EmptyLine>No projects match that search.</EmptyLine>} isEmpty={projects.length === 0}>
             {projects.map((project, index) => (
-                <ProjectRow key={project.slug} project={project} revealIndex={index} />
+                <ProjectRow
+                    key={project.slug}
+                    project={project}
+                    revealIndex={index}
+                    withRule={index < projects.length - 1}
+                />
             ))}
         </ContentList>
     );
 }
 
-function ProjectRow({ project, revealIndex }: { project: ProjectListItem; revealIndex: number }) {
+function ProjectRow({
+    project,
+    revealIndex,
+    withRule,
+}: {
+    project: ProjectListItem;
+    revealIndex: number;
+    withRule: boolean;
+}) {
     return (
-        <ContentRow delayIndex={revealIndex}>
+        <ContentRow delayIndex={revealIndex} withRule={withRule} withSpacing>
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5 sm:gap-y-1">
                 <h2 className="min-w-0 font-medium text-[13px] leading-tight tracking-normal sm:text-sm sm:leading-tight">
                     <ProjectTitle project={project} />

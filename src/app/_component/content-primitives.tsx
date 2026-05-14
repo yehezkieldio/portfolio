@@ -30,6 +30,7 @@ type ContentListProps = {
 type ContentRowProps = {
     children: ReactNode;
     delayIndex?: number;
+    withSpacing?: boolean;
     withRule?: boolean;
 };
 
@@ -89,12 +90,13 @@ export function ContentList({ children, className, empty, isEmpty = false, withT
     return <div className={cn(withTopRule && "space-y-7 border-border border-t pt-6", className)}>{children}</div>;
 }
 
-export function ContentRow({ children, delayIndex = 0, withRule = true }: ContentRowProps) {
+export function ContentRow({ children, delayIndex = 0, withRule = true, withSpacing = withRule }: ContentRowProps) {
     return (
         <article
             className={cn(
                 "project-row-enter motion-row space-y-2 transition-[transform] duration-200 ease-(--ease-ui)",
-                withRule && "border-border border-b py-5 sm:py-7"
+                withSpacing && "py-5 sm:py-7",
+                withRule && "border-border border-b"
             )}
             style={{ animationDelay: `${delayIndex * 85}ms` }}
         >
@@ -119,9 +121,14 @@ export function ContentTitleLink({ children, href, isExternal = false }: Content
     );
 }
 
-export function ContentMeta({ children }: { children: ReactNode }) {
+export function ContentMeta({ children, className }: { children: ReactNode; className?: string }) {
     return (
-        <p className="font-mono text-[11px] text-muted-foreground/70 leading-none tracking-normal sm:text-xs">
+        <p
+            className={cn(
+                "font-mono text-[11px] text-muted-foreground/70 leading-none tracking-normal sm:text-xs",
+                className
+            )}
+        >
             {children}
         </p>
     );

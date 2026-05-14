@@ -28,7 +28,7 @@ export function WritingList({ posts }: WritingListProps) {
             {posts.map((post, index) => (
                 <ContentRow delayIndex={index} key={post.link} withRule={false}>
                     <div className="flex flex-col items-start justify-between gap-x-4 gap-y-1 sm:flex-row sm:items-baseline">
-                        <ContentMeta>{post.publishedLabel}</ContentMeta>
+                        <ContentMeta className="pb-1 sm:pb-0">{post.publishedLabel}</ContentMeta>
                         <h2 className="min-w-0 font-medium text-[12.5px] leading-tight tracking-normal sm:order-first sm:text-sm sm:leading-tight">
                             <ContentTitleLink href={post.link} isExternal>
                                 {post.title}

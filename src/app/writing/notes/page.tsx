@@ -33,7 +33,12 @@ export default function NotesPage() {
                         withTopRule
                     >
                         {notes.map((note, index) => (
-                            <ContentRow delayIndex={index} key={note.slug}>
+                            <ContentRow
+                                delayIndex={index}
+                                key={note.slug}
+                                withRule={index < notes.length - 1}
+                                withSpacing
+                            >
                                 <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
                                     <h2 className="min-w-0 font-medium text-[13px] leading-tight tracking-normal sm:text-sm sm:leading-tight">
                                         <ContentTitleLink href={`/writing/notes/${note.slug}`}>
