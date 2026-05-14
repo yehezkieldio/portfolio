@@ -27,7 +27,7 @@ export default function NotesPage() {
 
                 <div className="pt-5 sm:pt-6">
                     <ContentList
-                        className="pt-5 pb-100 sm:pt-7"
+                        className="pt-5 sm:pt-7"
                         empty={<EmptyLine>Notes will show up here once they are added, eventually.</EmptyLine>}
                         isEmpty={notes.length === 0}
                         withTopRule

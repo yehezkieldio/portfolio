@@ -24,7 +24,7 @@ export function WritingList({ posts }: WritingListProps) {
     }
 
     return (
-        <ContentList className="space-y-9 pt-10 pb-100 sm:space-y-10 sm:pt-12" withTopRule>
+        <ContentList className="space-y-9 pt-10 sm:space-y-10 sm:pt-12" withTopRule>
             {posts.map((post, index) => (
                 <ContentRow delayIndex={index} key={post.link} withRule={false}>
                     <div className="flex flex-col items-start justify-between gap-x-4 gap-y-1 sm:flex-row sm:items-baseline">
